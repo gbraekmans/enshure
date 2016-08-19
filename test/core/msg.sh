@@ -1,0 +1,115 @@
+test_msg_terminal_supports_unicode() {
+	# LANG is UTF8 -> true
+	LANG="en_US.UTF-8" __msg_terminal_supports_unicode
+	assertTrue "$?"
+	# LANG is not UTF8 -> false
+	LANG="en_GB.ISO-8859-1" __msg_terminal_supports_unicode
+	assertFalse "$?"
+}
+
+test_msg_terminal_supports_colors() {
+	# 2 colors -> false
+	(
+		tput() {
+			printf "2"
+		}
+  	__msg_terminal_supports_colors
+  )
+	assertFalse "$?"
+	# system has not got tput installed -> false
+	(
+		which() {
+			return 1
+		}
+  	__msg_terminal_supports_colors
+  )
+	assertFalse "$?"
+	# system has 8 or more colors and tput -> true
+	(
+		tput() {
+			printf "8"
+		}
+  	__msg_terminal_supports_colors
+  )
+	assertTrue "$?"
+}
+
+test_msg_format_heading() {
+	# Only support 10 cols
+	tput() {
+		printf "10"
+	}
+	RESULT=$(__msg_format_heading "TEST")
+	assertEquals "== TEST ==" "$RESULT"
+
+	# Only support 9 cols
+	tput() {
+		printf "9"
+	}
+	RESULT=$(__msg_format_heading "TEST")
+	assertEquals "= TEST ==" "$RESULT"
+
+	# Only support 3 cols
+	tput() {
+		printf "3"
+	}
+	RESULT=$(__msg_format_heading "TEST")
+	assertEquals "TES" "$RESULT"
+
+	# Tput isn't installed assume 80
+	which() {
+		return 1
+	}
+	RESULT=$(__msg_format_heading "TEST")
+	assertEquals "===================================== TEST =====================================" "$RESULT"
+
+	unset tput
+	unset which
+}
+
+
+test_msg() {
+	# invalid type -> false
+	RESULT=$(LANG="en_GB.ISO-8859-1" __msg "INVALID" "Testing")
+	assertFalse "returncode > 0" "$?"
+	assertEquals "ERROR: Unsupported message type: 'INVALID'" "$RESULT"
+	# test valid types -> true
+	for tp in $(printf "OK CHANGE ERROR WARNING INFO DEBUG" | tr ' ' "\n"); do
+		RESULT=$(LANG="en_GB.ISO-8859-1" __msg "$tp" "Testing")
+		assertTrue "$?"
+		assertEquals "$tp: Testing" "$RESULT"
+	done
+}
+
+test_msg_custom_functions() {
+	# return -> true
+	for tp in $(printf "OK CHANGE ERROR WARNING INFO DEBUG" | tr ' ' "\n"); do
+		SUFFIX=$(printf "$tp" | tr 'A-Z' 'a-z')
+		printf "  msg_$SUFFIX\n"
+		RESULT=$(LANG="en_GB.ISO-8859-1" msg_$SUFFIX "Testing")
+		assertTrue "$?"
+		assertEquals "$tp: Testing" "$RESULT"
+	done
+}
+
+test_msg_begin_end() {
+	return
+	# return -> true
+	for tp in $(printf "BEGIN END" | tr ' ' "\n"); do
+		SUFFIX=$(printf "$tp" | tr 'A-Z' 'a-z')
+		printf "  msg_$SUFFIX\n"
+		RESULT=$(LANG="en_GB.ISO-8859-1" msg_$SUFFIX)
+		assertTrue "$?"
+		assertEquals "$tp: enSHure $_VERSION" "$RESULT"
+	done
+}
+
+setUp() {
+	ENSHURE_LOG="/dev/null"
+}
+
+oneTimeSetUp() {
+	export _BASEDIR="$ENSHURE_SRC"
+	. "$ENSHURE_SRC/core/msg.sh"
+	. "$ENSHURE_SRC/core/version.sh"
+}

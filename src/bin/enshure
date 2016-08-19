@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# make the shell more strict
+set -o errexit
+set -o nounset
+
+# set pipefail if supported
+set -o | grep "^pipefail" > /dev/null && set -o pipefail
+
+# make zsh behave like every other shell
+set -o | grep "^posixargzero" > /dev/null && set -o posixargzero
+
+# Behave POSIX-like
+POSIXLY_CORRECT=0
+
+__expand_path() {
+	## replaces '.' and '..' in paths with their directories and
+	## prints the resulting path to STDOUT.
+
+	##$1 the path which should be expanded
+
+	##> $ cd /root/
+	##> $ expand_path "./.."
+	##> /
+
+	if [ ! -d "$1" ]; then
+		_dir=$(dirname -- "$1")
+	else
+		_dir="$1"
+	fi
+	printf "$(CDPATH= cd -- "${_dir}" && pwd)"
+}
+
+__main() {
+	## Main logic of enSHure.
+
+	# Set up global variables for file inclusion
+
+	##$_BINDIR The path to the binary
+	##$_BASEDIR The path where lib/ and modules/ reside
+
+	_BINDIR=$(__expand_path "$0")
+	if [ $(printf "$_BINDIR" | head -c 11) = "/usr/local/" ]; then
+		_BASEDIR="/usr/local/share/enshure/"
+	elif [ $(printf "$_BINDIR" | head -c 5) = "/usr/" ]; then
+		_BASEDIR="/usr/share/enshure/"
+	else
+		_BASEDIR=$(__expand_path "${_BINDIR}/../")
+	fi
+
+	. "$_BASEDIR"/core/main.sh
+	__main_execute "$@"
+}
+__main "$@"
+
+#ENSHURE_LOG="-" 
+
+#. "$_BASEDIR/core/msg.sh"
+#. "$_BASEDIR/core/log.sh"
+#msg_begin
+#msg_ok "Everything OK"
+#msg_change "System changed"
+#msg_error "Error occured"
+#msg_warning "Don't drink and drive"
+#msg_info "Please read the manual"
+#msg_debug "BINDIR=$_BINDIR"
+##__msg "TEST" "fails"
