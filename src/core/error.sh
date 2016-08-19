@@ -3,7 +3,7 @@
 die() {
 	## What happens if we can't exit cleanly on an error.
 	if [ -z "${1:-}" ]; then
-		_err=_E_GENERIC
+		_err=$_E_GENERIC
 	else
 		_err=$1
 	fi

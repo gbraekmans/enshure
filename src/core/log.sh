@@ -28,15 +28,14 @@ __log_entry() {
 	##$1 Type of the entry: one of the message types or EXEC_LOG
 	##$2 Optional. The message for the log entry.
 
-	if ! __log_is_writeable; then
-		die $_E_UNWRITEABLE_LOG "Could not write to log file '${ENSHURE_LOG:-/var/log/enshure.log}'."
-	fi
-
 	_entry="#$1|$(__log_date)|${_MODULE:-}|${_IDENTIFIER:-}|${_REQUESTED_STATE:-}|${2:-}\n"
 
 	if __log_should_write_to_stdout; then
 		printf "$_entry"
 	else
+		if ! __log_is_writeable; then
+			die $_E_UNWRITEABLE_LOG "Could not write to log file '${ENSHURE_LOG:-/var/log/enshure.log}'."
+		fi
 		printf "$_entry" >> "${ENSHURE_LOG:-/var/log/enshure.log}"
 	fi
 }

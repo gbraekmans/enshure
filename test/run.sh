@@ -36,7 +36,7 @@ for fil in $(find "$(dirname "$0")/core" -name '*.sh'); do
 	for shl in $(printf "bash:dash:mksh:ksh:posh:zsh" | tr ':' "\n"); do
 		# only if the shell is installed
 		if ! which "$shl" > /dev/null 2> /dev/null; then
-			printf "Skipping tests on $shl. Not installed.\n"
+			#printf "Skipping tests on $shl. Not installed.\n"
 			continue
 		fi
 

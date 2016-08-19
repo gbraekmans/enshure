@@ -110,7 +110,6 @@ __msg() {
 		printf "$1: $_msg\n"
 	fi
 	__log_entry "$1" "$2"
-	echo test
 }
 
 msg_ok() {
