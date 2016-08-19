@@ -1,3 +1,40 @@
+Defined in bin/enshure
+----------------------
+
+include()
+#########
+
+Defined in ``bin/enshure``.
+
+Makes sure source files are only included once. This prevents errors with
+circular dependencies.
+
+Arguments:
+
+- $1, one of "core" "lib" "type" "module", followed by /filename
+
+Example::
+
+  include core/main
+  include core/msg
+
+Implementation::
+
+  include() {
+  	# Don't do anything if already included
+  	if printf ":$_INCLUDED:" | grep ":$1:"; then
+  		return
+  	fi
+  	# Include the file
+  	. "$_BASEDIR/$1.sh"
+  	# Remember the file is already included
+  	if [ -z "$_INCLUDED" ]; then
+  		_INCLUDED="$1"
+  	else
+  		_INCLUDED="${_INCLUDED}:$1"
+  	fi
+  }
+
 Defined in core/error.sh
 ------------------------
 
@@ -12,7 +49,7 @@ Implementation::
 
   die() {
   	if [ -z "${1:-}" ]; then
-  		_err=_E_GENERIC
+  		_err=$_E_GENERIC
   	else
   		_err=$1
   	fi

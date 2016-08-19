@@ -2,11 +2,18 @@
 
 die() {
 	## What happens if we can't exit cleanly on an error.
+
+	##$1 Returncode.
+	##$2 Message to be printed on stderr.
+
+	# Use a generic error if none was given
 	if [ -z "${1:-}" ]; then
 		_err=$_E_GENERIC
 	else
 		_err=$1
 	fi
+
+	# Print a cryptic message if none was give
 	>&2 printf "CRITICAL FAILURE: ${2:-Something unknown went terribly wrong...}\n"
 	exit $_err
 }

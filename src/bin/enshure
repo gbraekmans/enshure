@@ -31,6 +31,31 @@ __expand_path() {
 	printf "$(CDPATH= cd -- "${_dir}" && pwd)"
 }
 
+include() {
+	## Makes sure source files are only included once. This prevents errors with
+	## circular dependencies.
+
+	##$1 one of "core" "lib" "type" "module", followed by /filename
+
+	##> include core/main
+	##> include core/msg
+
+	# Don't do anything if already included
+	if printf ":$_INCLUDED:" | grep ":$1:"; then
+		return
+	fi
+
+	# Include the file
+	. "$_BASEDIR/$1.sh"
+
+	# Remember the file is already included
+	if [ -z "$_INCLUDED" ]; then
+		_INCLUDED="$1"
+	else
+		_INCLUDED="${_INCLUDED}:$1"
+	fi
+}
+
 __main() {
 	## Main logic of enSHure.
 
@@ -38,7 +63,9 @@ __main() {
 
 	##$_BINDIR The path to the binary
 	##$_BASEDIR The path where lib/ and modules/ reside
+	##$_INCLUDED All the paths currently included in the script
 
+	_INCLUDED=
 	_BINDIR=$(__expand_path "$0")
 	if [ $(printf "$_BINDIR" | head -c 11) = "/usr/local/" ]; then
 		_BASEDIR="/usr/local/share/enshure/"
@@ -48,7 +75,7 @@ __main() {
 		_BASEDIR=$(__expand_path "${_BINDIR}/../")
 	fi
 
-	. "$_BASEDIR"/core/main.sh
+	include core/main
 	__main_execute "$@"
 }
 __main "$@"

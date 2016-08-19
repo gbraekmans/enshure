@@ -1,6 +1,7 @@
 
-. $_BASEDIR/core/error.sh
-. $_BASEDIR/core/help.sh
+include core/error
+include core/version
+include core/help
 
 __main_is_query_mode() {
 	## Checks wether the given arguments put enSHure in query or execution mode.

@@ -1,6 +1,6 @@
 test_die() {
 	RES=$(die 2>&1)
-	assertEquals "CRITICAL FAILURE: Something unknown went terribly wrong..." "$RES"
+	assertEquals 1 "CRITICAL FAILURE: Something unknown went terribly wrong..." "$RES"
 }
 
 oneTimeSetUp() {

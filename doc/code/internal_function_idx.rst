@@ -41,6 +41,7 @@ Implementation::
 
   __main() {
   	# Set up global variables for file inclusion
+  	_INCLUDED=
   	_BINDIR=$(__expand_path "$0")
   	if [ $(printf "$_BINDIR" | head -c 11) = "/usr/local/" ]; then
   		_BASEDIR="/usr/local/share/enshure/"
@@ -49,7 +50,7 @@ Implementation::
   	else
   		_BASEDIR=$(__expand_path "${_BINDIR}/../")
   	fi
-  	. "$_BASEDIR"/core/main.sh
+  	include core/main
   	__main_execute "$@"
   }
 
@@ -131,13 +132,13 @@ Arguments:
 Implementation::
 
   __log_entry() {
-  	if ! __log_is_writeable; then
-  		die $_E_UNWRITEABLE_LOG "Could not write to log file '${ENSHURE_LOG:-/var/log/enshure.log}'."
-  	fi
   	_entry="#$1|$(__log_date)|${_MODULE:-}|${_IDENTIFIER:-}|${_REQUESTED_STATE:-}|${2:-}\n"
   	if __log_should_write_to_stdout; then
   		printf "$_entry"
   	else
+  		if ! __log_is_writeable; then
+  			die $_E_UNWRITEABLE_LOG "Could not write to log file '${ENSHURE_LOG:-/var/log/enshure.log}'."
+  		fi
   		printf "$_entry" >> "${ENSHURE_LOG:-/var/log/enshure.log}"
   	fi
   }
@@ -297,7 +298,6 @@ Implementation::
   		printf "$1: $_msg\n"
   	fi
   	__log_entry "$1" "$2"
-  	echo test
   }
 
 __msg_format_heading()

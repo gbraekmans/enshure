@@ -1,7 +1,7 @@
 
 ##$ENSHURE_LOG the location of the enSHure log on the filesystem
 
-. "$_BASEDIR"/core/error.sh
+include core/error
 
 __log_date() {
 	## Return the current date in the log-compatible format

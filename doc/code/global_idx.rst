@@ -18,14 +18,17 @@ $_BASEDIR
 
 The path where lib/ and modules/ reside, defined in ``bin/enshure``.
 
-Referenced in: 
-
-- core/log.sh
 
 $_BINDIR
 ########
 
 The path to the binary, defined in ``bin/enshure``.
+
+
+$_INCLUDED
+##########
+
+All the paths currently included in the script, defined in ``bin/enshure``.
 
 
 Defined in core/error.sh
@@ -45,7 +48,6 @@ Errorcode indicating no arguments were given at the command line, defined in ``c
 Referenced in: 
 
 - core/main.sh
-- core/main_conflict-20160818-221608.sh
 
 $_E_UNKNOWN_MESSAGE_TYPE
 ########################
@@ -81,7 +83,6 @@ the current version of enSHure, defined in ``core/version.sh``.
 
 Referenced in: 
 
-- core/main.sh
 - core/msg.sh
-- core/main_conflict-20160818-221608.sh
+- core/main.sh
 

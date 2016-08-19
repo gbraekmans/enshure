@@ -3,9 +3,9 @@
 # http://stackoverflow.com/questions/27652458/whats-the-best-way-to-embed-a-unicode-character-in-a-posix-shell-script
 # But I think these days it should be possible to embed unicode in the source.
 
-. $_BASEDIR/core/error.sh
-. $_BASEDIR/core/log.sh
-. $_BASEDIR/core/version.sh
+include core/error
+include core/log
+include core/version
 
 __msg_terminal_supports_unicode() {
 	## Returns 0 if terminal supports UTF-8, if not it returns 1
