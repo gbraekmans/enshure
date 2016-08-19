@@ -93,14 +93,13 @@ test_msg_custom_functions() {
 }
 
 test_msg_begin_end() {
-	return
 	# return -> true
 	for tp in $(printf "BEGIN END" | tr ' ' "\n"); do
 		SUFFIX=$(printf "$tp" | tr 'A-Z' 'a-z')
-		printf "  msg_$SUFFIX\n"
-		RESULT=$(LANG="en_GB.ISO-8859-1" msg_$SUFFIX)
+		printf "  __msg_$SUFFIX\n"
+		RESULT=$(LANG="en_GB.ISO-8859-1" __msg_$SUFFIX)
 		assertTrue 1 "$?"
-		assertEquals 2 "$tp: enSHure $_VERSION" "$RESULT"
+		assertEquals 2 "$tp: enSHure $_VERSION: $tp TRANSACTION" "$RESULT"
 	done
 }
 
@@ -110,6 +109,8 @@ setUp() {
 
 oneTimeSetUp() {
 	export _BASEDIR="$ENSHURE_SRC"
-	. "$ENSHURE_SRC/core/msg.sh"
-	. "$ENSHURE_SRC/core/version.sh"
+	. "$ENSHURE_SRC/core/include.sh"
+	INCLUDED=
+	include core/msg
+	include core/version
 }

@@ -26,3 +26,7 @@ _E_NO_ARGUMENTS=2
 _E_UNKNOWN_MESSAGE_TYPE=3
 ##$_E_UNWRITEABLE_LOG errorcode if log is not writeable
 _E_UNWRITEABLE_LOG=4
+##$_E_ARGUMENT_MISSING errorcode if a required argument is missing
+_E_ARGUMENT_MISSING=5
+##$_E_INVALID_ENUM if the value does not match one of the enum's values
+_E_INVALID_ENUM=6

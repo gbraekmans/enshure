@@ -75,7 +75,7 @@ __msg() {
 	if __msg_terminal_supports_unicode && __msg_terminal_supports_colors; then
 		tput bold # bright colors
 		case "$1" in
-			"BEGIN")
+			"BEGIN"|"END")
 				tput setaf 7 # white
 				_msg=$(__msg_format_heading "$_msg")
 				;;
@@ -150,13 +150,13 @@ msg_debug() {
 	__msg "DEBUG" "$1"
 }
 
-msg_begin() {
+__msg_begin() {
 	## Indicates the begin of a enSHure run. Related ``__msg()``.
-	__msg "BEGIN" "enSHure $_VERSION"
+	__msg "BEGIN" "enSHure $_VERSION: BEGIN TRANSACTION"
 }
 
-msg_end() {
+__msg_end() {
 	## Indicates the end of a enSHure run. Related ``__msg()``.
-	:
+	__msg "END" "enSHure $_VERSION: END TRANSACTION"
 }
 

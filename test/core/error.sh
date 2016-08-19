@@ -5,5 +5,7 @@ test_die() {
 
 oneTimeSetUp() {
 	export _BASEDIR="$ENSHURE_SRC"
-	. "$ENSHURE_SRC/core/error.sh"
+	. "$ENSHURE_SRC/core/include.sh"
+	INCLUDED=
+	include core/error
 }

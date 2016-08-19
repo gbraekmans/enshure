@@ -26,5 +26,7 @@ test_log_entry() {
 
 oneTimeSetUp() {
 	export _BASEDIR="$ENSHURE_SRC"
-	. "$ENSHURE_SRC/core/log.sh"
+	. "$ENSHURE_SRC/core/include.sh"
+	INCLUDED=
+	include core/log
 }

@@ -14,5 +14,7 @@ test_help_generic() {
 
 oneTimeSetUp() {
 	export _BASEDIR="$ENSHURE_SRC"
-	. "$ENSHURE_SRC/core/help.sh"
+	. "$ENSHURE_SRC/core/include.sh"
+	INCLUDED=
+	include core/help
 }

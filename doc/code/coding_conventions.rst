@@ -129,6 +129,23 @@ enSHure script sets by default the following `shell options`_::
 
 .. _`shell options`: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
 
+Coding style
+------------
+
+It's easy to flaunt your knowledge of bash by using some of the more cryptic
+ways of doing things. Something like this is not encouraged::
+
+  [ -z $var ] && exit 1
+
+Instead type some more characters and end up with something like this::
+
+  if [ -z "$var" ]; then
+    exit 1
+  fi
+
+Try to be as verbose as possible in your programming. If I wanted something
+cryptic I would have chosen Perl instead of shell. ;)
+
 Testing
 -------
 
