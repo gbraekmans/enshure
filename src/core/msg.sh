@@ -9,13 +9,13 @@ include core/version
 
 __msg_terminal_supports_unicode() {
 	## Returns 0 if terminal supports UTF-8, if not it returns 1
-	[ "UTF-8" = $(printf "$LANG" | cut -d. -f2) ]
+	[ "UTF-8" = "$(printf '%s' "$LANG" | cut -d. -f2)" ]
 }
 
 __msg_terminal_supports_colors() {
 	## Returns 0 if terminal supports 8 or more colors, otherwise it returns 1
 	## Although the terminal might support colors, tput must be available.
-	( which tput > /dev/null && [ "8" -le $(tput colors) ] )
+	( which tput > /dev/null && [ "8" -le "$(tput colors)" ] )
 }
 
 # terminalcodes from: http://wiki.bash-hackers.org/scripting/terminalcodes
@@ -28,7 +28,7 @@ __msg_format_heading() {
 
 	# Chop the remainder of the message if larger than the terminal
 	_msg=$1
-	[ "${#_msg}" -gt "$_cols" ] && _msg=$(printf "$_msg" | head -c $_cols)
+	[ "${#_msg}" -gt "$_cols" ] && _msg=$(printf '%s' "$_msg" | head -c "$_cols")
 
 	# Create a string of "=" to fill before & after the message
 	_len=${#_msg}
@@ -43,9 +43,9 @@ __msg_format_heading() {
 
 	# Return result
 	if [ -n "$_filler" ]; then
-		printf "$_filler $_msg $_filler"
+		printf '%s' "$_filler $_msg $_filler"
 	else
-		printf "$_msg"
+		printf '%s' "$_msg"
 	fi
 	# Append an extra = if the msg or the terminal are uneven.
 	[ $(( _len % 2 )) -ne $(( _cols % 2 )) ] && printf "="
@@ -65,7 +65,7 @@ __msg() {
 			;;
 		*)
 			__msg 'ERROR' "Unsupported message type: '$1'"
-			return $_E_UNKNOWN_MESSAGE_TYPE
+			return "$_E_UNKNOWN_MESSAGE_TYPE"
 			;;
 	esac
 
@@ -104,10 +104,10 @@ __msg() {
 				_prefix=" ↳ "
 				;;
 		esac
-		printf "${_prefix}${_msg}\n"
+		printf '%s\n' "${_prefix}${_msg}"
 		tput sgr0 # reset colors
 	else
-		printf "$1: $_msg\n"
+		printf '%s: %s\n' "$1" "$_msg"
 	fi
 	__log_entry "$1" "$2"
 }

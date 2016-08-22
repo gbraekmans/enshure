@@ -11,3 +11,4 @@ Table of Contents:
 
    arguments
    logging
+   best_practices

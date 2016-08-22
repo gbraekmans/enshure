@@ -88,7 +88,14 @@ modules, private functions should only be called in the core.
 
   There is no such thing as a private function in shell scripts. The double
   underscores are just a means to discourage it's use. But nothing prevents
-  you from calling __this_is_a_private_function
+  you from calling __this_is_a_private_function.
+
+Linebreaks: 80 characters
+*************************
+
+Try **not** to go **over 80-characters**. This is not a rule, because splitting URL's is
+something what makes the code less readable. The aim is to make the code the
+readable, not conform a standard.
 
 Indentation: 2-space tabs
 *************************
@@ -97,13 +104,6 @@ All indentation should be done using **tabs** instead of spaces. This so heredoc
 can be easily removed of their indentation. The default tab
 **width** should be **2 spaces** (a quarter tab), in order to determine wether lines
 should be broken at 80 characters.
-
-Linebreaks: 80 characters
-*************************
-
-Try **not** to go **over 80-characters**. This is not a rule, because splitting URL's is
-something what makes the code less readable. The aim is to make the code the
-readable, not conform a standard.
 
 Commenting
 **********
@@ -124,34 +124,68 @@ enSHure script sets by default the following `shell options`_::
 
 .. note::
 
-	``set -o pipefail`` is not supported by all shells (dash for example), but
-	it's used is in shells that support it.
+  ``set -o pipefail`` is not supported by all shells (dash for example), but
+  it's used is in shells that support it.
 
 .. _`shell options`: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html#The-Set-Builtin
 
 Coding style
 ------------
 
-It's easy to flaunt your knowledge of bash by using some of the more cryptic
-ways of doing things. Something like this is not encouraged::
+It's easy to flaunt your knowledge of the shell by using some of the more cryptic
+ways of doing things. Better readable code is always preferred over concise code.
 
-  [ -z $var ] && exit 1
+.. note::
 
-Instead type some more characters and end up with something like this::
+  What about performance? In shell scripts we don't care about performance.
+  Avoiding notoriously slow operations is considered a bad practice, **subshells
+  are a good thing, and it's use is encouraged**.
 
-  if [ -z "$var" ]; then
-    exit 1
-  fi
-
-Try to be as verbose as possible in your programming. If I wanted something
-cryptic I would have chosen Perl instead of shell. ;)
+Complex tests should be abstracted into a function with a clear name. Doing so
+makes your code more readable. 
 
 Testing
 -------
+
+Before testing takes place the entire code is statically checked for errors
+using shellcheck_. If shellcheck returns any complaints, the test is considered
+failed.
+
+.. _shellcheck: http://www.shellcheck.net/
 
 There are unit tests for *every* function. These are done with the help of
 shunit2_, a POSIX-compliant testing framework. All the tests reside in the test
 directory of the project.
 
-.. _shunit2: https://github.com/kward/shunit2/
+.. _shunit2: https://github.com/kward/shunit2
+
+The shells which are tested against:
+
+- bash
+- zsh
+- ksh
+- mksh
+- dash
+
+Limitations of the shell
+------------------------
+
+Not everything can be solved by the shell in a clear and efficient manner. For \
+the more complex things, like parsing a yaml-file for example, it's
+perfectly fine to use ``python``. When doing things not in the shell you should
+turn to, in order of preference:
+
+1. ``sed`` and ``awk``, but try to avoid the GNU-extensions to these utilities.
+   We can assume these utilities to be available even on a minimal install.
+2. ``python`` since it's becoming the new perl and thus is usually installed
+   on most systems. Code should be in python3, and may be python2
+   compatible.
+3. Custom commands that solve your problem. Things like augeas_ or jq_ could be
+   usefull, but it requires a command that is not part of a default install.
+
+If at all possible try to make ``python`` and such not hard dependencies but optional which
+improve the experience if installed, but are not required for the core functionality.
+
+.. _augeas: http://augeas.net/
+.. _jq: https://stedolan.github.io/jq/
 

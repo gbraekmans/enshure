@@ -16,7 +16,10 @@ TMP=$(mktemp)
 
 # Clean up on exit
 on_exit() {
+	_exitstatus=$?
+	printf "Exited: %i\n" "$_exitstatus"
 	rm $TMP
+	exit "$_exitstatus"
 }
 trap on_exit EXIT
 
@@ -30,27 +33,41 @@ underline() {
 	printf "\n"
 }
 
+printf "Checking all source files using shellcheck\n"
+underline "Checking all source files using shellcheck"
+
+printf "shellcheck %s\n" "$(dirname "$0")/../src/bin/enshure"
+shellcheck -s sh "$(dirname "$0")/../src/bin/enshure"
+for src in $(find "$(dirname "$0")/../src" -name '*.sh' | sort); do
+	printf "shellcheck %s\n" "$src"
+	shellcheck -s sh "$src"
+done
+printf "\n"
+
+
 # Run all test files
-for fil in $(find "$(dirname "$0")/core" -name '*.sh'); do
+for fil in $(find "$(dirname "$0")/core" -name '*.sh' | sort); do
+		# Show info about current test run
+		line="Testing $fil"
+		printf "$line\n"
+		underline "$line"
+
 	# In all the these shells
-	for shl in $(printf "bash:dash:mksh:ksh:posh:zsh" | tr ':' "\n"); do
+	for shl in $(printf "bash:dash:ksh:mksh:zsh" | tr ':' "\n"); do
 		# only if the shell is installed
 		if ! which "$shl" > /dev/null 2> /dev/null; then
 			#printf "Skipping tests on $shl. Not installed.\n"
 			continue
 		fi
 
-		# Show info about current test run
-		line="Testing $fil with $shl"
-		printf "$line\n"
-		underline "$line"
+		printf 'With %s:\n' "$shl"
 
 		# Force ZSH to be POSIX-compatible enough
 		opt=
 		[ "$shl" = "zsh" ] && opt="-y -o posixbuiltins -o posixargzero -o posixaliases -o posixstrings -o posixidentifiers -o shfileexpansion"
 
 		# Run the the test
-		SHUNIT_PARENT=$0 ENSHURE_SRC="$DIR/../src" $shl $opt $DIR/shunit2 "$fil" 2> "$TMP"
+		SHUNIT_PARENT=$0 _BASEDIR="$DIR/../src" $shl $opt $DIR/shunit2 "$fil" 2> "$TMP"
 
 		# If there's output to stderr fail.
 		if [ "$(stat --printf "%s" "$TMP")" -gt "0" ]; then

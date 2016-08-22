@@ -85,7 +85,7 @@ test_msg_custom_functions() {
 	# return -> true
 	for tp in $(printf "OK CHANGE ERROR WARNING INFO DEBUG" | tr ' ' "\n"); do
 		SUFFIX=$(printf "$tp" | tr 'A-Z' 'a-z')
-		printf "  msg_$SUFFIX\n"
+		printf "    msg_$SUFFIX\n"
 		RESULT=$(LANG="en_GB.ISO-8859-1" msg_$SUFFIX "Testing")
 		assertTrue 1 "$?"
 		assertEquals 2 "$tp: Testing" "$RESULT"
@@ -108,9 +108,7 @@ setUp() {
 }
 
 oneTimeSetUp() {
-	export _BASEDIR="$ENSHURE_SRC"
-	. "$ENSHURE_SRC/core/include.sh"
-	INCLUDED=
+	. "$_BASEDIR/core/include.sh"
 	include core/msg
 	include core/version
 }

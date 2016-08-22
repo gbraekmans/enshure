@@ -1,10 +1,10 @@
 test_help_query_mode() {
-	assertEquals 1 "-h <module>, --help <module>:" "$(__help_query_mode | head -n 1)"
-	assertEquals 2 "	If no module is given, show a help message and exit. Otherwise" "$(__help_query_mode | head -n 2| tail -n 1)"
+	assertEquals 1 "-h [MODULE], --help [MODULE]:" "$(__help_query_mode | head -n 1)"
+	assertEquals 2 "	If MODULE is empty, show a help message and exit. Otherwise show" "$(__help_query_mode | head -n 2| tail -n 1)"
 	which() {
 		return 1
 	}
-	assertEquals 3 "If no module is given, show a help message and exit. Otherwise show the help for the module." "$(__help_query_mode | head -n 2| tail -n 1)"
+	assertEquals 3 "If MODULE is empty, show a help message and exit. Otherwise show help for the module MODULE." "$(__help_query_mode | head -n 2| tail -n 1)"
 	unset which
 }
 
@@ -13,8 +13,6 @@ test_help_generic() {
 }
 
 oneTimeSetUp() {
-	export _BASEDIR="$ENSHURE_SRC"
-	. "$ENSHURE_SRC/core/include.sh"
-	INCLUDED=
+	. "$_BASEDIR/core/include.sh"
 	include core/help
 }

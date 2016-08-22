@@ -23,34 +23,33 @@ __expand_path() {
 	##> $ expand_path "./.."
 	##> /
 
-	if [ ! -d "$1" ]; then
-		_dir=$(dirname -- "$1")
-	else
-		_dir="$1"
-	fi
-	printf "$(CDPATH= cd -- "${_dir}" && pwd)"
+	printf '%s' "$(CDPATH='' cd -- "$1" && pwd)"
 }
 
 __main() {
-	## Main logic of enSHure.
-
-	# Set up global variables for file inclusion
+	## Main logic of enSHure. Sets up global variables for file inclusion
+	## & loads all core functionality.
 
 	##$_BINDIR The path to the binary
 	##$_BASEDIR The path where lib/ and modules/ reside
-	##$_INCLUDED All the paths currently included in the script
 
-	_INCLUDED=
-	_BINDIR=$(__expand_path "$0")
-	if [ $(printf "$_BINDIR" | head -c 11) = "/usr/local/" ]; then
+	# Where is the binary?
+	_BINDIR="$(__expand_path "$(dirname -- "$0")")"
+	# If installed under /usr/local/bin set the basedir to /usr/local/share
+	if [ "$(printf '%s' "$_BINDIR" | head -c 11)" = "/usr/local/" ]; then
 		_BASEDIR="/usr/local/share/enshure/"
-	elif [ $(printf "$_BINDIR" | head -c 5) = "/usr/" ]; then
+	# If installed under /usr/bin/ set the basedir to /usr/share
+	elif [ "$(printf  '%s' "$_BINDIR" | head -c 5)" = "/usr/" ]; then
 		_BASEDIR="/usr/share/enshure/"
+	# Otherwise assume it's downloaded and use the layout of the source
 	else
 		_BASEDIR=$(__expand_path "${_BINDIR}/../")
 	fi
 
+	# Include core functionality
 	. "$_BASEDIR/core/include.sh"
+
+	# Start the main execution
 	include core/main
 	__main_execute "$@"
 }

@@ -15,9 +15,7 @@ test_main_query_mode_parse() {
 }
 
 oneTimeSetUp() {
-	export _BASEDIR="$ENSHURE_SRC"
-	. "$ENSHURE_SRC/core/include.sh"
-	INCLUDED=
+	. "$_BASEDIR/core/include.sh"
 	include core/main
 	include core/version
 }

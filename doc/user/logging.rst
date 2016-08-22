@@ -29,9 +29,9 @@ And excerpt from a log could be this::
 
   #BEGIN|2016-08-04 18:42:37||||
   #OK|2016-08-04 18:42:39|apt_pkg|zsh|installed|Package zsh is installed.
-  #EXECLOG|2016-08-04 18:42:39|file_stat|/root/.zshrc|present|/tmp/enshure-68548
   touch /home/user/.zshrc
-  #CHANGED|2016-08-04 18:42:39|file_stat|/root/.zshrc|present|File /root/.zshrc is present.
+  #RETCODE|2016-08-04 18:42:39|file|/root/.zshrc|present|0
+  #CHANGED|2016-08-04 18:42:39|file|/root/.zshrc|present|File /root/.zshrc is present.
   #END|2016-08-04 18:42:39||||
 
 .. note::
@@ -69,8 +69,8 @@ OK, CHANGE
 
 These messages indicate wether the state of the system has been changed.
 
-EXECLOG
-#######
+STDOUT, STDERR, RETCODE
+#######################
 
 The message holds the location of the file to where stderr and stdout have been
 written.

@@ -801,7 +801,7 @@ _shunit_execSuite()
     setUp
 
     # execute the test
-    echo "${_shunit_test_}"
+    echo "  ${_shunit_test_}"
     eval ${_shunit_test_}
 
     # execute the per-test tear-down function
@@ -826,6 +826,7 @@ _shunit_execSuite()
 #   string: the report of successful and failed tests, as well as totals.
 _shunit_generateReport()
 {
+
   _shunit_ok_=${SHUNIT_TRUE}
 
   # if no exit code was provided one, determine an appropriate one
@@ -833,12 +834,12 @@ _shunit_generateReport()
       -o ${__shunit_testSuccess} -eq ${SHUNIT_FALSE} ] \
           && _shunit_ok_=${SHUNIT_FALSE}
 
-  echo
-  if [ ${__shunit_testsTotal} -eq 1 ]; then
-    echo "Ran ${__shunit_testsTotal} test."
-  else
-    echo "Ran ${__shunit_testsTotal} tests."
-  fi
+  #echo
+  #if [ ${__shunit_testsTotal} -eq 1 ]; then
+  #  echo "Ran ${__shunit_testsTotal} test."
+  #else
+  #  echo "Ran ${__shunit_testsTotal} tests."
+  #fi
 
   _shunit_failures_=''
   _shunit_skipped_=''
@@ -858,8 +859,8 @@ _shunit_generateReport()
     _shunit_msg_="${_shunit_msg_})"
   fi
 
-  echo
-  echo ${_shunit_msg_}
+#  echo
+#  echo ${_shunit_msg_}
   __shunit_reportGenerated=${SHUNIT_TRUE}
 
   unset _shunit_failures_ _shunit_msg_ _shunit_ok_ _shunit_skipped_
