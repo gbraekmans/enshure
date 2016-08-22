@@ -223,17 +223,21 @@ def main():
       parse(tokens, fil, prefix_len)
 
   # Generate output
-  sources = set([token.source for token in tokens.values()])
-  for source in sorted(sources):
-    if source:
-      title = "Defined in %s" % source
-    else:
-      title = "Unknown definitions"
-    title += '\n' + '-' * len(title) +"\n"
-    print(title)
-    for key in sorted(tokens.keys()):
-      if tokens[key].source == source:
-        print(tokens[key].to_rst())
+  for key in sorted(tokens.keys()):
+    print(tokens[key].to_rst())
+
+#  # Generate output using source/function
+#  sources = set([token.source for token in tokens.values()])
+#  for source in sorted(sources):
+#    if source:
+#      title = "Defined in %s" % source
+#    else:
+#      title = "Unknown definitions"
+#    title += '\n' + '-' * len(title) +"\n"
+#    print(title)
+#    for key in sorted(tokens.keys()):
+#      if tokens[key].source == source:
+#        print(tokens[key].to_rst())
 
 if __name__ == '__main__':
   main()

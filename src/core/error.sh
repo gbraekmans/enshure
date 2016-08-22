@@ -21,7 +21,7 @@ die() {
 }
 
 # shellcheck disable=SC2034
-# SC2034 = $VARIABLE appears unused. Verify it or export it.
+# SC2034 = VARIABLE appears unused. Verify it or export it.
 {
 ##$_E_GENERIC A generic errorcode
 _E_GENERIC=1

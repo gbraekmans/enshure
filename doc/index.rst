@@ -10,7 +10,6 @@ Table of Contents:
 
 .. toctree::
    :maxdepth: 2
-   :numbered:
 
    quickstart/index
    user/index

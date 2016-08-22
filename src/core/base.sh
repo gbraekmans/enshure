@@ -66,7 +66,7 @@ require() {
 	if is_available "$1"; then
 		return 0
 	else
-		error "${MODULE:-enSHure} requires '$1' to be installed."
+		error "${_MODULE:-enSHure} requires '$1' to be installed."
 		return "$_E_UNMET_REQUIREMENT"
 	fi
 }
