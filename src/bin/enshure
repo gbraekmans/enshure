@@ -47,7 +47,7 @@ __main() {
 	fi
 
 	# Include core functionality
-	. "$_BASEDIR/core/include.sh"
+	. "$_BASEDIR/core/base.sh"
 
 	# Start the main execution
 	include core/main
