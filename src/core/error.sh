@@ -1,10 +1,12 @@
 # NOTE: These should be readonly BUT zsh doesn't seem to like this.
 
 die() {
-	## What happens if we can't exit cleanly on an error.
-
-	##$1 Message to be printed on stderr.
-	##$2 Returncode.
+	## What happens if we can't exit cleanly on an error. Be hesitant to use
+	## this function, see error().
+	##$1 message to be printed on stderr.
+	##$2 returncode.
+	##> $ die
+	##> CRITICAL FAILURE: Something unknown went terribly wrong...
 
 	# Use a generic error if none was given
 	if [ -z "${2:-}" ]; then

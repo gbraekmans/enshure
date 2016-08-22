@@ -13,8 +13,8 @@ set -o | grep "^posixargzero" > /dev/null && set -o posixargzero
 # Behave POSIX-like
 POSIXLY_CORRECT=0
 
-__expand_path() {
-	## replaces '.' and '..' in paths with their directories and
+expand_path() {
+	## Replaces '.' and '..' in paths with their directories and
 	## prints the resulting path to STDOUT.
 
 	##$1 the path which should be expanded
@@ -34,7 +34,7 @@ __main() {
 	##$_BASEDIR The path where lib/ and modules/ reside
 
 	# Where is the binary?
-	_BINDIR="$(__expand_path "$(dirname -- "$0")")"
+	_BINDIR="$(expand_path "$(dirname -- "$0")")"
 	# If installed under /usr/local/bin set the basedir to /usr/local/share
 	if [ "$(printf '%s' "$_BINDIR" | head -c 11)" = "/usr/local/" ]; then
 		_BASEDIR="/usr/local/share/enshure/"
@@ -43,7 +43,7 @@ __main() {
 		_BASEDIR="/usr/share/enshure/"
 	# Otherwise assume it's downloaded and use the layout of the source
 	else
-		_BASEDIR=$(__expand_path "${_BINDIR}/../")
+		_BASEDIR=$(expand_path "${_BINDIR}/../")
 	fi
 
 	# Include core functionality
