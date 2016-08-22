@@ -25,6 +25,6 @@ test_log_entry() {
 }
 
 oneTimeSetUp() {
-	. "$_BASEDIR/core/include.sh"
+	. "$_BASEDIR/core/base.sh"
 	include core/log
 }

@@ -15,7 +15,7 @@ test_main_query_mode_parse() {
 }
 
 oneTimeSetUp() {
-	. "$_BASEDIR/core/include.sh"
+	. "$_BASEDIR/core/base.sh"
 	include core/main
 	include core/version
 }

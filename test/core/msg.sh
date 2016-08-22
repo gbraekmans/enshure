@@ -108,7 +108,7 @@ setUp() {
 }
 
 oneTimeSetUp() {
-	. "$_BASEDIR/core/include.sh"
+	. "$_BASEDIR/core/base.sh"
 	include core/msg
 	include core/version
 }

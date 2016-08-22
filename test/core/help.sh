@@ -13,6 +13,6 @@ test_help_generic() {
 }
 
 oneTimeSetUp() {
-	. "$_BASEDIR/core/include.sh"
+	. "$_BASEDIR/core/base.sh"
 	include core/help
 }
