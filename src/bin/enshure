@@ -54,16 +54,3 @@ __main() {
 	__main_execute "$@"
 }
 __main "$@"
-
-#ENSHURE_LOG="-" 
-
-#. "$_BASEDIR/core/msg.sh"
-#. "$_BASEDIR/core/log.sh"
-#msg_begin
-#msg_ok "Everything OK"
-#msg_change "System changed"
-#msg_error "Error occured"
-#msg_warning "Don't drink and drive"
-#msg_info "Please read the manual"
-#msg_debug "BINDIR=$_BINDIR"
-##__msg "TEST" "fails"
