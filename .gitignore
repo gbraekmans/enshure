@@ -1,1 +1,3 @@
 doc/_*
+doc/code/*_idx.rst
+doc/user/help_query_mode.rst
