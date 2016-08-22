@@ -12,13 +12,13 @@ POSIXLY_CORRECT=0
 
 # Some useful aliases
 DIR=$(dirname "$0")
-TMP=$(mktemp)
+TMP_ERR_DIR=$(mktemp)
 
 # Clean up on exit
 on_exit() {
 	_exitstatus=$?
 	printf "Exited: %i\n" "$_exitstatus"
-	rm $TMP
+	rm $TMP_ERR_DIR
 	exit "$_exitstatus"
 }
 trap on_exit EXIT
@@ -67,11 +67,11 @@ for fil in $(find "$(dirname "$0")/core" -name '*.sh' | sort); do
 		[ "$shl" = "zsh" ] && opt="-y -o posixbuiltins -o posixargzero -o posixaliases -o posixstrings -o posixidentifiers -o shfileexpansion"
 
 		# Run the the test
-		SHUNIT_PARENT=$0 _BASEDIR="$DIR/../src" $shl $opt $DIR/shunit2 "$fil" 2> "$TMP"
+		SHUNIT_PARENT=$0 _BASEDIR="$DIR/../src" $shl $opt $DIR/shunit2 "$fil" 2> "$TMP_ERR_DIR"
 
 		# If there's output to stderr fail.
-		if [ "$(stat --printf "%s" "$TMP")" -gt "0" ]; then
-			cat $TMP
+		if [ "$(stat --printf "%s" "$TMP_ERR_DIR")" -gt "0" ]; then
+			cat "$TMP_ERR_DIR"
 			printf "Errors in script. Exiting.\n"
 			exit 1
 		fi

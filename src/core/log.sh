@@ -19,11 +19,6 @@ __log_should_write_to_stdout() {
 	[ "${ENSHURE_LOG:-}" = "-" ]
 }
 
-__log_is_writeable() {
-	## Test if the log is writeable
-	[ -w "${ENSHURE_LOG:-/var/log/enshure.log}" ]
-}
-
 __log_entry() {
 	## Creates an entry in the log
 	##$1 Type of the entry: one of the message types or EXEC_LOG
@@ -34,9 +29,9 @@ __log_entry() {
 	if __log_should_write_to_stdout; then
 		printf '%s\n' "$_entry"
 	else
-		if ! __log_is_writeable; then
-			die "$_E_UNWRITEABLE_LOG" "Could not write to log file '${ENSHURE_LOG:-/var/log/enshure.log}'."
-		fi
+		[ -w "${ENSHURE_LOG:-/var/log/enshure.log}" ] || die \
+			"Could not write to log file '${ENSHURE_LOG:-/var/log/enshure.log}'."\
+			"$_E_UNWRITEABLE_LOG"
 		printf '%s\n' "$_entry" >> "${ENSHURE_LOG:-/var/log/enshure.log}"
 	fi
 }

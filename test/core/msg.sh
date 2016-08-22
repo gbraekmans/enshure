@@ -67,40 +67,19 @@ test_msg_format_heading() {
 	unset which
 }
 
-
 test_msg() {
-	# invalid type -> false
-	RESULT=$(LANG="en_GB.ISO-8859-1" __msg "INVALID" "Testing")
-	assertFalse 1 "$?"
-	assertEquals 2 "ERROR: Unsupported message type: 'INVALID'" "$RESULT"
-	# test valid types -> true
 	for tp in $(printf "OK CHANGE ERROR WARNING INFO DEBUG" | tr ' ' "\n"); do
 		RESULT=$(LANG="en_GB.ISO-8859-1" __msg "$tp" "Testing")
-		assertTrue 3 "$?"
-		assertEquals 4 "$tp: Testing" "$RESULT"
-	done
-}
-
-test_msg_custom_functions() {
-	# return -> true
-	for tp in $(printf "OK CHANGE ERROR WARNING INFO DEBUG" | tr ' ' "\n"); do
-		SUFFIX=$(printf "$tp" | tr 'A-Z' 'a-z')
-		printf "    msg_$SUFFIX\n"
-		RESULT=$(LANG="en_GB.ISO-8859-1" msg_$SUFFIX "Testing")
 		assertTrue 1 "$?"
 		assertEquals 2 "$tp: Testing" "$RESULT"
 	done
 }
 
-test_msg_begin_end() {
-	# return -> true
-	for tp in $(printf "BEGIN END" | tr ' ' "\n"); do
-		SUFFIX=$(printf "$tp" | tr 'A-Z' 'a-z')
-		printf "  __msg_$SUFFIX\n"
-		RESULT=$(LANG="en_GB.ISO-8859-1" __msg_$SUFFIX)
-		assertTrue 1 "$?"
-		assertEquals 2 "$tp: enSHure $_VERSION: $tp TRANSACTION" "$RESULT"
-	done
+test_msg_heading() {
+	RESULT=$(LANG="en_GB.ISO-8859-1" __msg "HEADING" "Testing")
+	VALID=$(printf '%s\n%s' "Testing" "=======")
+	assertTrue 1 "$?"
+	assertEquals 2 "$VALID" "$RESULT"
 }
 
 setUp() {
@@ -110,5 +89,4 @@ setUp() {
 oneTimeSetUp() {
 	. "$_BASEDIR/core/base.sh"
 	include core/msg
-	include core/version
 }

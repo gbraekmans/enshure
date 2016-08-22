@@ -3,8 +3,6 @@ include core/version
 include core/help
 include core/msg
 
-require tst
-
 __main_is_query_mode() {
 	## Checks wether the given arguments put enSHure in query or execution mode.
 	##$1 The first argument given at the command line.

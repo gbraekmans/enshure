@@ -20,8 +20,15 @@ test_log_entry() {
 	_MODULE=RPM_PACKAGE
 	_IDENTIFIER=bash
 	_REQUESTED_STATE=installed
-	ENSHURE_LOG="-"
 	assertEquals 2 "#INFO|$(date '+%Y-%m-%d %H:%M:%S')|RPM_PACKAGE|bash|installed|Will not refresh metadata." "$(__log_entry 'INFO' 'Will not refresh metadata.')"
+	TMP=$(mktemp)
+	chmod 444 "$TMP"
+	ENSHURE_LOG="$TMP"
+	assertEquals 3 "CRITICAL FAILURE: Could not write to log file '$TMP'." "$(__log_entry 'INFO' 'Will not refresh metadata.' 2>&1)"
+	chmod 666 "$TMP"
+	__log_entry 'INFO' 'Will not refresh metadata.'
+	assertEquals 4 "#INFO|$(date '+%Y-%m-%d %H:%M:%S')|RPM_PACKAGE|bash|installed|Will not refresh metadata." "$(cat "$TMP")"
+	rm -rf "$TMP"
 }
 
 oneTimeSetUp() {
