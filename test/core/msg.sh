@@ -146,6 +146,11 @@ test_msg_meets_verbosity_level() {
 	__msg_meets_verbosity_level HEADING
 	assertTrue 22 "$?"
 
+	# Don't error on invalid verbosity but inform the user
+	ENSHURE_VERBOSITY="WHATEVER"
+	RESULT=$(__msg_meets_verbosity_level ERROR)
+	assertTrue 23 "$?"
+	assertEquals 24 "WARNING: Verbosity level 'WHATEVER' unknown, assuming 'INFO'." "$RESULT"
 }
 
 setUp() {

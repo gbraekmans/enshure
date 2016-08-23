@@ -14,17 +14,6 @@ enSHure requires at least one argument to run succesfully.
 
 **TODO: REF TO EXIT STATUS**
 
-Environment variables
----------------------
-
-Before explaining what enSHure can do, it's important to know which
-environment variables influence the behaviour of the program.
-
-- ``$ENSHURE_LOG``: this is the path to the where the log file should
-  be placed.
-- ``$ENSHURE_VERBOSITY``: which messages shall be displayed to the user.
-  The value should be one of: ``ERROR``, ``WARNING``, ``INFO`` or ``DEBUG``
-
 
 Query mode
 ----------
@@ -48,3 +37,12 @@ It's possible to have more options following the statement. These are not requir
 and implemented by the module. For example::
 
   $ enshure user apache present with_home /var/www
+
+Environment variables
+---------------------
+
+The following environment variables affect the behaviour of enshure:
+
+- ``$ENSHURE_LOG``sets the path to the log file.
+- ``$ENSHURE_VERBOSITY`` determines which messages shall be displayed to the user.
+  The value should be one of: ``ERROR``, ``WARNING``, ``INFO`` or ``DEBUG``
