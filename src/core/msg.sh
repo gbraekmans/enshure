@@ -3,6 +3,8 @@
 # http://stackoverflow.com/questions/27652458/whats-the-best-way-to-embed-a-unicode-character-in-a-posix-shell-script
 # But I think these days it should be possible to embed unicode in the source.
 
+##$ENSHURE_VERBOSITY what should be printed to the stdout and what not
+
 __msg_terminal_writes_to_stdout() {
 	## Checks wether we are outputting to stdout or a file.
 	## Returns 0 if we're connected to the stdout
@@ -21,7 +23,52 @@ __msg_terminal_supports_colors() {
 	( which tput > /dev/null && [ "8" -le "$(tput colors)" ] )
 }
 
-# terminalcodes from: http://wiki.bash-hackers.org/scripting/terminalcodes
+__msg_meets_verbosity_level() {
+	## Returns 0 if the message should be printed at the current
+	## verbosity level.
+	##$1 The message type of the message
+	
+	# Check if the verbosity level is valid. If not warn and set to INFO
+	ENSHURE_VERBOSITY=${ENSHURE_VERBOSITY:-INFO}
+	case "$ENSHURE_VERBOSITY" in
+		"ERROR"|"WARNING"|"INFO"|"DEBUG")
+			true
+			;;
+		*)
+			__old_verbosity=$ENSHURE_VERBOSITY
+			ENSHURE_VERBOSITY="INFO"
+			warning "Verbosity level '${__old_verbosity}' unknown, assuming 'INFO'."
+			;;
+	esac
+
+	case "$1" in
+		"ERROR")
+			return 0
+			;;
+		"WARNING")
+			if [ "$ENSHURE_VERBOSITY" = "ERROR" ]; then
+				return 1
+			else
+				return 0
+			fi
+			;;
+		"INFO"|"OK"|"CHANGE"|"HEADING")
+			if [ "$ENSHURE_VERBOSITY" = "ERROR" ] \
+			|| [ "$ENSHURE_VERBOSITY" = "WARNING" ]; then
+				return 1
+			else
+				return 0
+			fi
+			;;
+		"DEBUG")
+			if [ ! "$ENSHURE_VERBOSITY" = "DEBUG" ]; then
+				return 1
+			else
+				return 0
+			fi
+			;;
+	esac
+}
 
 __msg_format_heading() {
 	## Displays a heading to the user
@@ -61,6 +108,11 @@ __msg() {
 	##$2 The message displayed to the user
 	##> $ msg "INFO" "Hello world!"
 	##> INFO: Hello world!
+	
+	# Check if we should print the message
+	if ! __msg_meets_verbosity_level "$1"; then
+		return 0
+	fi
 
 	_msg="$2"
 	_prefix=
@@ -70,6 +122,9 @@ __msg() {
 	&& __msg_terminal_supports_colors \
 	&& __msg_terminal_writes_to_stdout; then
 		tput bold # & bright colors
+		
+		# terminalcodes from: http://wiki.bash-hackers.org/scripting/terminalcodes
+		
 		case "$1" in
 			"HEADING")
 				tput setaf 7 # white

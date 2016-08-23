@@ -35,10 +35,20 @@ test_info() {
 }
 
 test_debug() {
+	# Loglevel DEBUG, should log and print
+	ENSHURE_VERBOSITY="DEBUG"
 	RESULT=$(debug "test")
 	assertTrue 1 "$?"
 	assertEquals 2 "DEBUG: test" "$RESULT"
 	assertEquals 3 "#DEBUG|$(__log_date)||||test" "$(cat "$ENSHURE_LOG")"
+	unset ENSHURE_VERBOSITY
+	printf '' > "$ENSHURE_LOG"
+
+	# Loglevel INFO, should log but not print
+	RESULT=$(debug "test2")
+	assertTrue 4 "$?"
+	assertEquals 5 "" "$RESULT"
+	assertEquals 6 "#DEBUG|$(__log_date)||||test2" "$(cat "$ENSHURE_LOG")"
 }
 
 test_include() {

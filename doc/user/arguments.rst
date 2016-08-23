@@ -3,10 +3,6 @@ Invoking enSHure
 
 .. program:: enshure
 
-To invoke enSHure simply type this into the terminal::
-
-  $ enshure
-
 There are 2 modes in which you can invoke enSHure:
 
 #. Query mode, enSHure queries or alters it's own state.
@@ -17,6 +13,18 @@ enSHure will run in query mode, otherwise it will run in execution mode.
 enSHure requires at least one argument to run succesfully.
 
 **TODO: REF TO EXIT STATUS**
+
+Environment variables
+---------------------
+
+Before explaining what enSHure can do, it's important to know which
+environment variables influence the behaviour of the program.
+
+- ``$ENSHURE_LOG``: this is the path to the where the log file should
+  be placed.
+- ``$ENSHURE_VERBOSITY``: which messages shall be displayed to the user.
+  The value should be one of: ``ERROR``, ``WARNING``, ``INFO`` or ``DEBUG``
+
 
 Query mode
 ----------

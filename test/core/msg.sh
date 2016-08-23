@@ -89,7 +89,67 @@ test_msg_heading() {
 	assertEquals 2 "$VALID" "$RESULT"
 }
 
+test_msg_meets_verbosity_level() {
+	ENSHURE_VERBOSITY="ERROR"
+	__msg_meets_verbosity_level ERROR
+	assertTrue 1 "$?"
+	#__msg_meets_verbosity_level WARNING
+	#assertFalse 2 "$?"
+	__msg_meets_verbosity_level INFO
+	assertFalse 3 "$?"
+	__msg_meets_verbosity_level DEBUG
+	assertFalse 4 "$?"
+
+	ENSHURE_VERBOSITY="WARNING"
+	__msg_meets_verbosity_level ERROR
+	assertTrue 5 "$?"
+	__msg_meets_verbosity_level WARNING
+	assertTrue 6 "$?"
+	__msg_meets_verbosity_level INFO
+	assertFalse 7 "$?"
+	__msg_meets_verbosity_level DEBUG
+	assertFalse 8 "$?"
+
+	ENSHURE_VERBOSITY="INFO"
+	__msg_meets_verbosity_level ERROR
+	assertTrue 9 "$?"
+	__msg_meets_verbosity_level WARNING
+	assertTrue 10 "$?"
+	__msg_meets_verbosity_level INFO
+	assertTrue 11 "$?"
+	__msg_meets_verbosity_level DEBUG
+	assertFalse 12 "$?"
+
+	ENSHURE_VERBOSITY="DEBUG"
+	__msg_meets_verbosity_level ERROR
+	assertTrue 13 "$?"
+	__msg_meets_verbosity_level WARNING
+	assertTrue 14 "$?"
+	__msg_meets_verbosity_level INFO
+	assertTrue 15 "$?"
+	__msg_meets_verbosity_level DEBUG
+	assertTrue 16 "$?"
+
+	ENSHURE_VERBOSITY="WARNING"
+	__msg_meets_verbosity_level OK
+	assertFalse 17 "$?"
+	__msg_meets_verbosity_level CHANGE
+	assertFalse 18 "$?"
+	__msg_meets_verbosity_level HEADING
+	assertFalse 19 "$?"
+
+	ENSHURE_VERBOSITY="INFO"
+	__msg_meets_verbosity_level OK
+	assertTrue 20 "$?"
+	__msg_meets_verbosity_level CHANGE
+	assertTrue 21 "$?"
+	__msg_meets_verbosity_level HEADING
+	assertTrue 22 "$?"
+
+}
+
 setUp() {
+	ENSHURE_VERBOSITY="DEBUG"
 	ENSHURE_LOG="/dev/null"
 }
 
