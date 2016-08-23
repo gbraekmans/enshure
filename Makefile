@@ -14,7 +14,7 @@ clean:
 	rm -rf $(DOC_DIR)/_*
 
 todo:
-	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}'
+	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}' | sed 's|^\s*#\s*||g'
 
 doc:
 	mkdir -p  $(DOC_DIR)/_templates
