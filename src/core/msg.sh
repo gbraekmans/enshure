@@ -65,10 +65,11 @@ __msg() {
 	_msg="$2"
 	_prefix=
 
+	# If we can pretty-print
 	if __msg_terminal_supports_unicode \
 	&& __msg_terminal_supports_colors \
 	&& __msg_terminal_writes_to_stdout; then
-		tput bold # bright colors
+		tput bold # & bright colors
 		case "$1" in
 			"HEADING")
 				tput setaf 7 # white
@@ -101,11 +102,13 @@ __msg() {
 		esac
 		printf '%s\n' "${_prefix}${_msg}"
 		tput sgr0 # reset colors
-	else # does not support unicode or color
+	else # we can't pretty print
+		# If it's a heading underline the message
 		if [ "$1" = "HEADING" ]; then
 			printf '%s\n' "$_msg"
-			printf '%s' "$_msg" | tr -c '_' '[=*]'
-		else
+			_lines=$(printf '%s' "$_msg" | tr -c '_' '[=*]')
+			printf '%s\n\n' "$_lines"
+		else # Just print the message and it's type
 			printf '%s: %s\n' "$1" "$_msg"
 		fi
 	fi
