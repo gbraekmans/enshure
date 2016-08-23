@@ -7,10 +7,14 @@ HELPER_DIR = helpers
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  doc        to make HTML documentation in $(DOC_DIR)/_build/html"
+	@echo "  todo       to show a list of all todo's in the code"
 	@echo "  clean      to reset the project in the initial state"
 
 clean:
 	rm -rf $(DOC_DIR)/_*
+
+todo:
+	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}'
 
 doc:
 	mkdir -p  $(DOC_DIR)/_templates
