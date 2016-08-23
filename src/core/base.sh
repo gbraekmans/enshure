@@ -6,7 +6,7 @@ include() {
 	##> include core/msg
 
 	##$_INCLUDED All the paths currently included in the script
-	_INCLUDED=${_INCLUDED:-}
+	_INCLUDED=${_INCLUDED:-core/base}
 
 	# Don't do anything if already included
 	if printf '%s' ":$_INCLUDED:" | grep ":$1:" > /dev/null 2>&1; then
@@ -29,13 +29,48 @@ include core/msg
 include core/log
 
 error() {
-	## Displays and logs an error message.
+	## Displays and logs an error message. Returns 0. If you need
+	## an exit at that moment please use die().
 	##$1 message to be displayed and recorded in the log
 	##> $ error "test"
 	##> ERROR: test
+	##> $ echo $?
+	##> 0
 
 	__msg ERROR "$1"
 	__log_entry ERROR "$1"
+}
+
+warning() {
+	## Displays and logs a warning message. Returns 0.
+	##$1 message to be displayed and recorded in the log
+	##> $ warning "test"
+	##> WARNING: test
+
+	__msg WARNING "$1"
+	__log_entry WARNING "$1"
+}
+
+info() {
+	## Displays and logs an info message. Returns 0.
+	##$1 message to be displayed and recorded in the log
+	##> $ info "test"
+	##> INFO: test
+
+	__msg INFO "$1"
+	__log_entry INFO "$1"
+}
+
+debug() {
+	## Displays and logs a debug message. Returns 0.
+	##$1 message to be displayed and recorded in the log
+	##> $ error "test"
+	##> ERROR: test
+	##> $ echo $?
+	##> 0
+
+	__msg DEBUG "$1"
+	__log_entry DEBUG "$1"
 }
 
 is_available() {
