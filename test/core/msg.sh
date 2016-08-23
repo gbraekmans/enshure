@@ -93,8 +93,8 @@ test_msg_meets_verbosity_level() {
 	ENSHURE_VERBOSITY="ERROR"
 	__msg_meets_verbosity_level ERROR
 	assertTrue 1 "$?"
-	#__msg_meets_verbosity_level WARNING
-	#assertFalse 2 "$?"
+	__msg_meets_verbosity_level WARNING
+	assertFalse 2 "$?"
 	__msg_meets_verbosity_level INFO
 	assertFalse 3 "$?"
 	__msg_meets_verbosity_level DEBUG
