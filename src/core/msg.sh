@@ -3,9 +3,16 @@
 # http://stackoverflow.com/questions/27652458/whats-the-best-way-to-embed-a-unicode-character-in-a-posix-shell-script
 # But I think these days it should be possible to embed unicode in the source.
 
+__msg_terminal_writes_to_stdout() {
+	## Checks wether we are outputting to stdout or a file.
+	## Returns 0 if we're connected to the stdout
+	# see: http://tldp.org/LDP/abs/html/fto.html#TERMTEST
+	[ -t 1 ]
+}
+
 __msg_terminal_supports_unicode() {
 	## Returns 0 if terminal supports UTF-8, if not it returns 1
-	[ "UTF-8" = "$(printf '%s' "$LANG" | cut -d. -f2)" ]
+	[ "UTF-8" = "${LANG##*.}" ]
 }
 
 __msg_terminal_supports_colors() {
@@ -58,7 +65,9 @@ __msg() {
 	_msg="$2"
 	_prefix=
 
-	if __msg_terminal_supports_unicode && __msg_terminal_supports_colors; then
+	if __msg_terminal_supports_unicode \
+	&& __msg_terminal_supports_colors \
+	&& __msg_terminal_writes_to_stdout; then
 		tput bold # bright colors
 		case "$1" in
 			"HEADING")

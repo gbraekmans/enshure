@@ -7,6 +7,13 @@ test_msg_terminal_supports_unicode() {
 	assertFalse 2 "$?"
 }
 
+test_msg_terminal_writes_to_stdout() {
+	__msg_terminal_writes_to_stdout
+	assertTrue 1 "$?"
+	__msg_terminal_writes_to_stdout > /dev/null
+	assertFalse 2 "$?"
+}
+
 test_msg_terminal_supports_colors() {
 	# 2 colors -> false
 	(
