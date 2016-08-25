@@ -21,6 +21,7 @@ setUp() {
 	include core/help
 	include core/main
 	include core/version
+	include core/task
 }
 
 tearDown() {

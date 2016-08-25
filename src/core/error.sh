@@ -25,14 +25,15 @@ die() {
 {
 ##$_E_GENERIC A generic errorcode
 _E_GENERIC=1
-##$_E_NO_ARGUMENTS Errorcode indicating no arguments were given at the command line
+##$_E_NO_ARGUMENTS errorcode indicating no arguments were given at the command line
 _E_NO_ARGUMENTS=2
-
+##$_E_INVALID_TASK_NAME if the name your giving to the task is invalid
+_E_INVALID_TASK_NAME=3
 ##$_E_UNWRITEABLE_LOG errorcode if log is not writeable
 _E_UNWRITEABLE_LOG=4
 ##$_E_ARGUMENT_MISSING errorcode if a required argument is missing
 _E_ARGUMENT_MISSING=5
-##$_E_INVALID_ENUM if the value does not match one of the enum's values
+##$_E_INVALID_ENUM if a value does not match one of the pre-defined values
 _E_INVALID_ENUM=6
 ##$_E_UNMET_REQUIREMENT error if a require stmt fails
 _E_UNMET_REQUIREMENT=7

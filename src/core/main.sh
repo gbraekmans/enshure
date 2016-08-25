@@ -28,14 +28,14 @@ __main_query_task() {
 				error "No name for the task specified."
 				exit "$_E_ARGUMENT_MISSING"
 			fi
-			task_begin "$2"
+			__task_begin "$2"
 			;;
 		"end")
 			if [ -n "${2:-}" ]; then
 				error "A name for an ending task is given. This is not supported."
 				exit "$_E_ARGUMENT_MISSING"
 			fi
-			task_end
+			__task_end
 			;;
 		*)
 			error "--task '$1' is invalid: must be 'begin' or 'end'."
