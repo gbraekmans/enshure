@@ -85,8 +85,8 @@ on every operating system.
 .. _dash: http://git.kernel.org/cgit/utils/dash/dash.git
 __ http://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html
 
-Reliable
---------
+Reliable: 100% tested
+---------------------
 
 All the work done by enSHure is logged. Every modification to the system
 should be traceable to a time, date and user.
@@ -97,15 +97,18 @@ failed.
 
 There are unit tests for every function. These are done with the help of
 shunit2_, a POSIX-compliant testing framework. All the tests reside in the test
-directory of the project.
+directory of the project. You could run the tests using kcov_ and verify
+yourself that every function is tested.
 
 .. _shunit2: https://github.com/kward/shunit2
+.. _ShellCheck: http://www.shellcheck.net/
+.. _kcov: https://github.com/SimonKagstrom/kcov
 
 The shells which are tested against:
 
 - bash (OS X and Linux)
 - zsh (OS X and Linux)
-- ksh (BSD's)
+- ksh (BSD)
 - mksh (Android, BSD)
 - dash (Debian-based distro's)
 
