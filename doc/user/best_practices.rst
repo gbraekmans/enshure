@@ -39,9 +39,9 @@ clear seperation of what's been done. For example::
 
   Because you cannot start a new task when the old one is still in progress,
   means that enSHure won't continue to alter the state if a previous run with
-  a cronjob failed. Maybe not exactly what you want, but it still provides with
-  the peace of mind that a misconfigured enSHure won't continue filling your
-  partitions with tar-archives for backup.
+  a cronjob failed. Maybe this is not what you want, but it still provides with
+  the peace of mind knowing that a misconfigured enSHure won't continue
+  filling your backup-partition with tar-archives.
 
 Keep your sources together
 --------------------------
@@ -59,3 +59,22 @@ Use multiple logs
 If two scripts can run independent of one another there's no reason why they
 should log to the same file. Keeping your logs short won't hurt performance and
 are easier scan through when debugging a failure.
+
+Define common configuraton only once
+------------------------------------
+
+Try to split up configuration which is shared between hosts.
+You might do something like this::
+
+  ROLE=webserver
+  enshure --task begin "$ROLE"
+  
+  . "$(dirname "$0")/tasks/ntp.sh"
+  
+  enshure --task end
+
+with ``tasks/ntp.sh`` looking something like this::
+
+  enshure --task begin "${ROLE}::ntp"
+  ...
+  enshure --task end

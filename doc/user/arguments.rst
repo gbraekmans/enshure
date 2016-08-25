@@ -22,6 +22,43 @@ These are all the options available in query mode:
 
 .. include:: help_query_mode.rst
 
+Tasks
+#####
+
+Tasks group a sequence of enshure statements. These are usefull for a
+lot of things:
+
+1. Generating summaries of how many changes were made
+2. Making sure the same script doesn't run twice
+3. Self-documenting your scripts
+4. Pretty printing a header
+
+A task can be any alphanumeric name you give it. For example::
+
+  # A simple task for grouping all mysql related things
+  $ enshure --task begin "mysql"
+  ...
+  $ enshure --task end
+  
+  # But they can be nested using the ::-operator
+  $ enshure --task begin "mysql"
+  $ enshure --task begin "mysql::my.cnf"
+  ...
+  $ enshure --task end
+  $ enshure --task begin "mysql::backup"
+  ...
+  $ enshure --task end
+  $ enshure --task end
+
+.. warning::
+
+  You cannot begin another task while the current one is not ended.
+  This may seem frustrating for scripts that tend to fail or
+  while developing. But if you use a trap-statement_ it's easy
+  enough to clean up.
+
+.. _trap-statement: http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html
+
 Execution mode
 --------------
 
