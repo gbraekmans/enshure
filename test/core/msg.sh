@@ -44,6 +44,22 @@ test_msg_terminal_supports_colors() {
 	assertTrue 3 "$?"
 }
 
+test_msg_pretty_print() {
+	__msg_terminal_supports_unicode() { return 0; }
+	__msg_terminal_supports_colors() { return 0; }
+	__msg_terminal_writes_to_stdout() { return 0; }
+	
+	__msg_pretty_print
+	assertTrue 1 "$?"
+	
+	__msg_terminal_supports_unicode() { return 1; }
+	__msg_terminal_supports_colors() { return 0; }
+	__msg_terminal_writes_to_stdout() { return 0; }
+
+	__msg_pretty_print
+	assertFalse 2 "$?"	
+}
+
 test_msg_format_heading() {
 	# Only support 10 cols
 	tput() {

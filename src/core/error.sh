@@ -35,6 +35,8 @@ _E_UNWRITEABLE_LOG=4
 _E_ARGUMENT_MISSING=5
 ##$_E_INVALID_ENUM if a value does not match one of the pre-defined values
 _E_INVALID_ENUM=6
-##$_E_UNMET_REQUIREMENT error if a require stmt fails
+##$_E_UNMET_REQUIREMENT error if a require statement fails
 _E_UNMET_REQUIREMENT=7
+##$_E_NOT_IN_A_TASK you need to be in a task to use this feature
+_E_NOT_IN_A_TASK=8
 }

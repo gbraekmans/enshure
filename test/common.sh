@@ -17,8 +17,13 @@ setUp() {
 	ENSHURE_LOG=$(mktemp)
 	ENSHURE_VERBOSITY=
 	
-	# Include all source files
+	# Reset important test variables
 	_INCLUDED=
+	_MODULE=
+	_IDENTIFIER=
+	_REQUESTED_STATE=
+
+	# Include all source files
 	_BASEDIR="$(dirname -- "$0")/../src"
 	. "$_BASEDIR/core/base.sh"
 	include core/log

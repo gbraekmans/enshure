@@ -78,6 +78,8 @@ always available as proof the command did execute.
 STDOUT, STDERR
 ###############
 
+TODO: Explain difference uuencode/base64
+
 These entries store the base64 encoded gzipped string of
 the output to the file descriptor.
 Not every command has these entries, if there was **no output on the file

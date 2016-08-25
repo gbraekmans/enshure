@@ -23,6 +23,11 @@ __msg_terminal_supports_colors() {
 	( is_available tput && [ "8" -le "$(tput colors)" ] )
 }
 
+__msg_pretty_print() {
+	## Returns 0 if all conditions to pretty print are met.
+	__msg_terminal_supports_unicode && __msg_terminal_supports_colors && __msg_terminal_writes_to_stdout
+}
+
 __msg_meets_verbosity_level() {
 	## Returns 0 if the message should be printed at the current
 	## verbosity level.
@@ -117,8 +122,7 @@ __msg() {
 	_msg="$2"
 	_prefix=
 
-	# If we can pretty-print
-	if __msg_terminal_supports_unicode && __msg_terminal_supports_colors && __msg_terminal_writes_to_stdout; then
+	if __msg_pretty_print; then
 		tput bold # & bright colors
 		
 		# terminalcodes from: http://wiki.bash-hackers.org/scripting/terminalcodes
