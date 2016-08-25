@@ -13,7 +13,10 @@ did eventually.
 Table of Contents:
 
 .. toctree::
+   :maxdepth: 2
 
+
+   upgrading
    arguments
    logging
    best_practices

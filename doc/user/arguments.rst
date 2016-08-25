@@ -1,5 +1,5 @@
-Invoking enSHure
-================
+Options and arguments
+=====================
 
 .. program:: enshure
 

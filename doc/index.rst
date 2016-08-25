@@ -14,4 +14,5 @@ Table of Contents:
    quickstart/index
    user/index
    code/index
+   reference/index
 

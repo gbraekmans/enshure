@@ -1,5 +1,5 @@
-Logging
-=======
+Understanding the log
+=====================
 
 Log location
 ------------
