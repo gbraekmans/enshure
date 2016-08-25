@@ -20,7 +20,7 @@ __msg_terminal_supports_unicode() {
 __msg_terminal_supports_colors() {
 	## Returns 0 if terminal supports 8 or more colors, otherwise it returns 1
 	## Although the terminal might support colors, tput must be available.
-	( which tput > /dev/null && [ "8" -le "$(tput colors)" ] )
+	( is_available tput && [ "8" -le "$(tput colors)" ] )
 }
 
 __msg_meets_verbosity_level() {
@@ -118,9 +118,7 @@ __msg() {
 	_prefix=
 
 	# If we can pretty-print
-	if __msg_terminal_supports_unicode \
-	&& __msg_terminal_supports_colors \
-	&& __msg_terminal_writes_to_stdout; then
+	if __msg_terminal_supports_unicode && __msg_terminal_supports_colors && __msg_terminal_writes_to_stdout; then
 		tput bold # & bright colors
 		
 		# terminalcodes from: http://wiki.bash-hackers.org/scripting/terminalcodes
@@ -157,13 +155,15 @@ __msg() {
 		esac
 		printf '%s\n' "${_prefix}${_msg}"
 		tput sgr0 # reset colors
-	else # we can't pretty print
+	else 
+		# we can't pretty print
 		# If it's a heading underline the message
 		if [ "$1" = "HEADING" ]; then
 			printf '%s\n' "$_msg"
 			_lines=$(printf '%s' "$_msg" | tr -c '_' '[=*]')
 			printf '%s\n\n' "$_lines"
-		else # Just print the message and it's type
+		else
+			# Just print the message and it's type
 			printf '%s: %s\n' "$1" "$_msg"
 		fi
 	fi

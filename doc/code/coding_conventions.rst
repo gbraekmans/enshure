@@ -1,53 +1,6 @@
 Design decisions
 ================
 
-.. _POSIX: https://en.wikipedia.org/wiki/POSIX
-.. _GNU: https://en.wikipedia.org/wiki/GNU
-
-Using the shell
----------------
-
-Writing any program which consists of more than 100 lines of code in a shell
-script is, in general, a bad idea. You shoud seriously consider another language
-if you want write anything large.
-The only thing the shell, as a programming language, has going for it is it's
-ubiquitous. Every \*NIX system has one available. This brings two advantages
-over other languages:
-
-1. Portable: run your code everywhere, just like Java, Python or Ruby.
-2. Dependencyless: no need to install a runtime or a compiler.
-
-POSIX-compliance, or why not bash?
-----------------------------------
-
-To opt out of POSIX_-compliance and allowing bashisms and the extensions the
-GNU_ tools offer would certainly make things *a lot* easier. Using bash would, however,
-make the code less portable. Using bash and GNU tools would be choosing for most
-of the drawbacks of the shell and ignore it's omnipresence.
-There are a huge amount of users running on outdated or non-GNU tools
-(looking at you OS X and BSD-users).
-
-If the code runs in dash_, consider it POSIX-compliant enough to run in every other
-posix-compliant shell. Running with bash with -posix option will also catch most
-bashisms.
-Only the `utilities listed by the POSIX-standard`__ are assumed to be available
-on every operating system.
-
-.. _dash: http://git.kernel.org/cgit/utils/dash/dash.git
-__ http://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html
-
-.. note::
-
-  The local keyword is supported by most (all?) shells these days. It is, however, not
-  in the POSIX-standard. This means portable shell scripts have a significant
-  amount of globals in them.
-
-.. note::
-
-  The lack of support for arrays is one of the biggest problems one faces when
-  writing portable shell scripts. Most of these can be solved using functions and
-  using the arguments as arrays, but I must admit it would have been nice to have.
-
 Coding conventions
 ------------------
 
@@ -81,6 +34,12 @@ Example::
   # A private function
   __this_is_a_private_function() { : }
 
+.. note::
+
+  The local keyword is supported by most (all?) shells these days. It is, however, not
+  in the POSIX-standard. This means enSHure has a significant
+  amount of globals in it.
+
 Public functions are functions which can be used from within the types and the
 modules, private functions should only be called in the core.
 
@@ -90,21 +49,17 @@ modules, private functions should only be called in the core.
   underscores are just a means to discourage it's use. But nothing prevents
   you from calling __this_is_a_private_function.
 
-Linebreaks: 80 characters
-*************************
+Linebreaks
+**********
 
-Try **not** to go **over 80-characters**. This is not a rule, because splitting URL's is
-something what makes the code less readable. The aim is to make the code the
-readable, not conform a standard.
+Try not to break up lines. This isn't as readable, but the code coverage
+scanner doesn't handle custom linebreaks that well.
 
-Indentation: 2-space tabs
-*************************
+Indentation: tabs
+*****************
 
 All indentation should be done using **tabs** instead of spaces. This so heredocs
-can be easily removed of their indentation. The default tab
-**width** should be **2 spaces** (a quarter tab), in order to determine wether lines
-should be broken at 80 characters.
-
+can be easily removed of their indentation.
 Commenting
 **********
 
@@ -143,29 +98,6 @@ ways of doing things. Better readable code is always preferred over concise code
 
 Complex tests should be abstracted into a function with a clear name. Doing so
 makes your code more readable. 
-
-Testing
--------
-
-Before testing takes place the entire code is statically checked for errors
-using shellcheck_. If shellcheck returns any complaints, the test is considered
-failed.
-
-.. _shellcheck: http://www.shellcheck.net/
-
-There are unit tests for *every* function. These are done with the help of
-shunit2_, a POSIX-compliant testing framework. All the tests reside in the test
-directory of the project.
-
-.. _shunit2: https://github.com/kward/shunit2
-
-The shells which are tested against:
-
-- bash
-- zsh
-- ksh
-- mksh
-- dash
 
 Limitations of the shell
 ------------------------

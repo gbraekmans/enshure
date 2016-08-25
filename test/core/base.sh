@@ -1,3 +1,5 @@
+#!/bin/sh
+
 test_is_available() {
 	is_available ls
 	assertTrue 1 "$?"
@@ -54,8 +56,9 @@ test_debug() {
 test_include() {
 	# Reset included, don't do this if not testing ;)
 	_INCLUDED=
+	_VERSION=
 	test -n "$_VERSION"
-	assertFalse 1 "$?"
+	assertFalse 5 "$?"
 	include core/version
 	assertEquals 1 "core/base:core/version" "$_INCLUDED"
 	test -n "$_VERSION"
@@ -64,25 +67,4 @@ test_include() {
 	assertEquals 3 "core/base:core/version" "$_INCLUDED"
 	include core/error
 	assertEquals 4 "core/base:core/version:core/error" "$_INCLUDED"
-}
-
-setUp() {
-	# Freeze time for logs
-	date() {
-		if [ '+%Y-%m-%d %H:%M:%S' = "$1" ]; then
-			printf '1970-01-01 00:00:00'
-		else
-			/usr/bin/date "$@"
-		fi
-	}
-	ENSHURE_LOG=$(mktemp)
-}
-
-tearDown() {
-	rm -rf "$ENSHURE_LOG"
-}
-
-oneTimeSetUp() {
-	. "$_BASEDIR/core/base.sh"
-	include core/log
 }

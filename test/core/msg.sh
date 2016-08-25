@@ -8,36 +8,39 @@ test_msg_terminal_supports_unicode() {
 }
 
 test_msg_terminal_writes_to_stdout() {
-	__msg_terminal_writes_to_stdout
-	assertTrue 1 "$?"
+	if [ -t 1 ]; then
+		__msg_terminal_writes_to_stdout
+		assertTrue 1 "$?"
+	else
+		printf "SKIP 1: Not printing to stdout.\n"
+	fi
 	__msg_terminal_writes_to_stdout > /dev/null
 	assertFalse 2 "$?"
 }
 
 test_msg_terminal_supports_colors() {
 	# 2 colors -> false
-	(
-		tput() {
-			printf "2"
-		}
+	tput() {
+		printf "2"
+	}
   	__msg_terminal_supports_colors
-  )
-	assertFalse 1 "$?"
+ 	assertFalse 1 "$?"
+  	unset tput
+ 
 	# system has not got tput installed -> false
-	(
-		which() {
-			return 1
-		}
+	is_available() {
+		return 1
+	}
   	__msg_terminal_supports_colors
-  )
 	assertFalse 2 "$?"
+	. "$_BASEDIR/core/base.sh"
+
 	# system has 8 or more colors and tput -> true
-	(
-		tput() {
-			printf "8"
-		}
+	tput() {
+		printf "8"
+	}
   	__msg_terminal_supports_colors
-  )
+  	unset tput
 	assertTrue 3 "$?"
 }
 
@@ -75,11 +78,54 @@ test_msg_format_heading() {
 }
 
 test_msg() {
+	ENSHURE_VERBOSITY='DEBUG'
 	for tp in $(printf "OK CHANGE ERROR WARNING INFO DEBUG" | tr ' ' "\n"); do
 		RESULT=$(LANG="en_GB.ISO-8859-1" __msg "$tp" "Testing")
 		assertTrue 1 "$?"
 		assertEquals 2 "$tp: Testing" "$RESULT"
 	done
+	
+	__msg_terminal_supports_unicode() { return 0; }
+	__msg_terminal_supports_colors() { return 0; }
+	__msg_terminal_writes_to_stdout() { return 0; }
+	
+	# Note to verify the base64, append the command without the pipe
+	# and inspect the output yourself.
+	
+	RESULT=$(__msg ERROR test)
+	assertTrue 3 "$?"
+	printf "$RESULT" | grep " ✗ test" > /dev/null
+	assertTrue 4 "$?"
+
+	RESULT=$(__msg WARNING test)
+	assertTrue 5 "$?"
+	printf "$RESULT" | grep " ⚠ test" > /dev/null
+	assertTrue 6 "$?"
+
+	RESULT=$(__msg OK test)
+	assertTrue 7 "$?"
+	printf "$RESULT" | grep " ✓ test" > /dev/null
+	assertTrue 8 "$?"
+
+	RESULT=$(__msg CHANGE test)
+	assertTrue 9 "$?"
+	printf "$RESULT" | grep " ✎ test" > /dev/null
+	assertTrue 10 "$?"
+
+	RESULT=$(__msg INFO test)
+	assertTrue 11 "$?"
+	printf "$RESULT" | grep " ℹ test" > /dev/null
+	assertTrue 12 "$?"
+
+	RESULT=$(__msg DEBUG test)
+	assertTrue 13 "$?"
+	printf "$RESULT" | grep " ↳ test" > /dev/null
+	assertTrue 14 "$?"
+
+	RESULT=$(__msg HEADING test)
+	assertTrue 15 "$?"
+	printf "$RESULT" | grep "= test =" > /dev/null
+	assertTrue 16 "$?"
 }
 
 test_msg_heading() {
@@ -151,14 +197,4 @@ test_msg_meets_verbosity_level() {
 	RESULT=$(__msg_meets_verbosity_level ERROR)
 	assertTrue 23 "$?"
 	assertEquals 24 "WARNING: Verbosity level 'WHATEVER' unknown, assuming 'INFO'." "$RESULT"
-}
-
-setUp() {
-	ENSHURE_VERBOSITY="DEBUG"
-	ENSHURE_LOG="/dev/null"
-}
-
-oneTimeSetUp() {
-	. "$_BASEDIR/core/base.sh"
-	include core/msg
 }

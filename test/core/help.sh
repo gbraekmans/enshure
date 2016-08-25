@@ -16,8 +16,3 @@ test_help_query_mode() {
 test_help_generic() {
 	assertEquals 1 "Usage: enshure QUERY [ARGUMENT]" "$(__help_generic | head -n 1)"
 }
-
-oneTimeSetUp() {
-	. "$_BASEDIR/core/base.sh"
-	include core/help
-}

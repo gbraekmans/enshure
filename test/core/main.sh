@@ -13,9 +13,3 @@ test_main_query_mode_parse() {
 	assertTrue 3 "__main_query_mode_parse -h | head -n 1 | grep ^Usage:"
 	assertEquals 4 "$(__main_query_mode_parse -h)" "$(__main_query_mode_parse --help)"
 }
-
-oneTimeSetUp() {
-	. "$_BASEDIR/core/base.sh"
-	include core/main
-	include core/version
-}

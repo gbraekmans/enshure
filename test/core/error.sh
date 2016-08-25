@@ -9,8 +9,3 @@ test_die() {
 	assertEquals 5 "5" "$?"
 	assertEquals 6 "CRITICAL FAILURE: Test Case" "$RES"
 }
-
-oneTimeSetUp() {
-	. "$_BASEDIR/core/base.sh"
-	include core/error
-}

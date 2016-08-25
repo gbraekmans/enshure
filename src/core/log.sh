@@ -2,6 +2,8 @@
 
 ##$ENSHURE_LOG the location of the enSHure log on the filesystem
 
+# TODO: Include username in log
+
 include core/error
 
 __log_date() {
@@ -29,9 +31,9 @@ __log_entry() {
 	if __log_should_write_to_stdout; then
 		printf '%s\n' "$_entry"
 	else
-		[ -w "${ENSHURE_LOG:-/var/log/enshure.log}" ] || die \
-			"Could not write to log file '${ENSHURE_LOG:-/var/log/enshure.log}'."\
-			"$_E_UNWRITEABLE_LOG"
+		if [ ! -w "${ENSHURE_LOG:-/var/log/enshure.log}" ]; then
+			die "Could not write to log file '${ENSHURE_LOG:-/var/log/enshure.log}'." "$_E_UNWRITEABLE_LOG"
+		fi
 		printf '%s\n' "$_entry" >> "${ENSHURE_LOG:-/var/log/enshure.log}"
 	fi
 }

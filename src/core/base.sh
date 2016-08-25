@@ -17,11 +17,7 @@ include() {
 	. "$_BASEDIR/$1.sh"
 
 	# Remember the file is already included
-	if [ -z "$_INCLUDED" ]; then
-		_INCLUDED="$1"
-	else
-		_INCLUDED="${_INCLUDED}:$1"
-	fi
+	_INCLUDED="${_INCLUDED}:$1"
 }
 
 include core/error

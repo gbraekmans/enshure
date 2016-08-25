@@ -30,15 +30,3 @@ test_log_entry() {
 	assertEquals 4 "#INFO|$(__log_date)|RPM_PACKAGE|bash|installed|Will not refresh metadata." "$(cat "$TMP")"
 	rm -rf "$TMP"
 }
-
-setUp() {
-	# Freeze time
-	date() {
-		printf '1970-01-01 00:00:00'
-	}
-}
-
-oneTimeSetUp() {
-	. "$_BASEDIR/core/base.sh"
-	include core/log
-}

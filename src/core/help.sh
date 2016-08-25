@@ -2,7 +2,8 @@ include core/base
 
 __help_query_mode() {
 	## Parses core/help.txt into a readable format.
-	while read _line; do
+	cat "$_BASEDIR/core/help.txt" | \
+	while read -r _line; do
 		_help_text="$(printf '%s' "$_line" | cut -d'|' -f4)"
 		# if fmt is installed (part of coreutils but not of posix std), use it.
 		if is_available fmt; then
@@ -11,7 +12,7 @@ __help_query_mode() {
 		printf "%s, %s:\n" "$(printf '%s' "$_line" | cut -d'|' -f2)" \
 			"$(printf '%s' "$_line" | cut -d'|' -f3)"
 		printf '%s\n' "$_help_text"
-	done < "$_BASEDIR/core/help.txt"
+	done 
 }
 
 __help_generic() {

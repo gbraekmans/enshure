@@ -16,6 +16,7 @@ Table of Contents:
    principles
    coding_conventions
    architecture
+   types
    writing_modules
    function_index
    internal_function_index
