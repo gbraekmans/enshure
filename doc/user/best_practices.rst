@@ -1,8 +1,8 @@
 Best practices
 ==============
 
-Still in the shell: ERREXIT & NOUNSET
--------------------------------------
+Don't forget your in the shell
+------------------------------
 
 It's easy to forget that your executing a shell script rather than
 writing a spec-file. There is no syntax-checking and a lot of things can
@@ -11,6 +11,8 @@ scripts with::
 
   set -o errexit
   set -o nounset
+  # if using bash
+  set -o pipefail
 
 Use tasks
 ---------
@@ -49,7 +51,7 @@ Preferably this directory is also managed by git or another version control
 system. The most obvious benefit is that you can use ``enshure-pack`` to
 compress all the configuration into a single executable file.
 
-**TODO: Write up enshure-pack**
+**TODO: Write enshure-pack**
 
 Use multiple logs
 -----------------

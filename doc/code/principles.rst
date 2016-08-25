@@ -1,9 +1,9 @@
 Project goals
 =============
 
-This page explains why the enSHure is designed the way it is. Nothing in
-here is really important if you want to contribute to the project.
-enSHure is designed with these principles in mind:
+This page explains why the enSHure is designed the way it is. Nothing on
+this page is critical if you just want to contribute to the project. It
+provides some background information for anyone who's interested.
 
 Hackable: Make it your own
 --------------------------
@@ -16,12 +16,13 @@ easy. Writing good shell scripts is hard.
 
 .. note::
 
-  It's hard to find a good balance between "magic" or "boilerplate". If you opt
+  It's hard to find a good balance between "automatic" or "boilerplate". If you opt
   for boilerplate code new contributors find it relatively easy to follow the
-  execution path and what is happening. If you lean towards magic (or convention
+  execution path and what is happening. If you lean towards automatic (or convention
   over configuration) you should have your stuff well-documented. Even then it's
-  sometimes hard to follow the execution path. enSHure's design leans towards
-  the latter and minimizes the amount of boilerplate code.
+  sometimes hard to follow the execution path. But it will be easier
+  for modules to stay up to date, because they don't need to conform to
+  a template. enSHure is closer to automatic than boilerplate.
 
 Portable: POSIX-compliant shell script
 --------------------------------------
@@ -39,57 +40,53 @@ It's perfectly fine for a module to work only on one operating system
 or linux-distro as long as it's documented.
 
 .. _POSIX: https://en.wikipedia.org/wiki/POSIX
-.. _GNU: https://en.wikipedia.org/wiki/GNU
 
 .. note::
 
-  If you're extending enSHure POSIX-compliant shell is still considered
-  the default. There should be a good reason why in that case another
+  If you're extending enSHure, POSIX-compliant shell is considered
+  the default. There should be a good reason why in your case another
   language was used to solve the problem.
 
 Why shell and not Python, Ruby or Go?
 #####################################
 
-Writing any program which consists of more than 100 lines of code in a shell
+Writing any program that consists of more than 100 lines of code in a shell
 script is, in general, a bad idea. You shoud seriously consider another language
-if you want write anything large.
+if you want write anything this large.
 The only thing the shell, as a programming language, has going for it is it's
-ubiquitous. Every \*NIX system has one available. This brings two advantages
-over other languages:
+ubiquity. Every \*NIX system has Bourne compatible shell available. This means it has two major advantages:
 
-1. Portable: run your code on every CPU architecture, just like Java, Python or Ruby.
-2. Dependencyless: no need to install a runtime or a compiler.
+1. Portable: run your code on any CPU architecture, just like Java, Python or Ruby.
+2. Dependencyless: no need to install a runtime or a compiler. Just plug & play.
 
 Why don't you use bash?
 #######################
 
-To opt out of POSIX_-compliance and allowing bashisms and the extensions the
-GNU_ tools offer would certainly make things *a lot* easier. Using bash would, however,
+To opt out of POSIX_-compliance, allowing bashisms and the extensions the
+GNU_ tools offer would certainly make things *a lot* easier. But using bash would
 make the code less portable. Using bash and GNU tools would be choosing for most
-of the drawbacks (Python is a lot nicer for programming) of the shell and ignore it's biggest advantage: omnipresence.
+of the drawbacks of the shell (Python is a lot nicer for programming) and ignore the biggest advantage: the omnipresence of the bourne shell.
 There are a huge amount of users running on outdated or non-GNU tools
 (looking at you OS X and BSD-users).
+
+.. _GNU: https://en.wikipedia.org/wiki/GNU
 
 .. note::
 
   The lack of support for arrays is one of the biggest problems one faces when
   writing portable shell scripts. Most of these can be solved using functions and
-  using the arguments as arrays, but I must admit it would have been nice to have.
+  using the arguments as arrays, but it would have been nice to have.
 
 If the code runs in dash_, consider it POSIX-compliant enough to run in every other
-posix-compliant shell. Running with bash with -posix option will not catch
+posix-compliant shell. Running with bash with -posix option is not enough and will not catch
 all bashisms.
-Only the `utilities listed by the POSIX-standard`__ are assumed to be available
-on every operating system.
+Only `utilities listed by the POSIX-standard`__ and the shell are assumed to be available on every operating system enSHure is invoked.
 
 .. _dash: http://git.kernel.org/cgit/utils/dash/dash.git
 __ http://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html
 
-Reliable: 100% tested
----------------------
-
-All the work done by enSHure is logged. Every modification to the system
-should be traceable to a time, date and user.
+Reliable: Not your average shell script
+---------------------------------------
 
 Before testing takes place the entire code is statically checked for errors
 using ShellCheck_. If shellcheck returns any complaints, the test is considered
@@ -112,15 +109,11 @@ The shells which are tested against:
 - mksh (Android, BSD)
 - dash (Debian-based distro's)
 
-Idempotent
-----------
+Traceable & idempotent
+----------------------
 
-The functions only run if needed to. This is pretty standard in every tool you
+All the changes made by enSHure are logged by default. Every modification
+to the system is logged with a time, date and user.
+
+Commands are only executed if they need to be. This is pretty standard in every tool you
 can use to manage your configuration.
-
-Standalone
-----------
-
-It's not written as a set of shell functions to include in your current setup
-scripts, but as executable script so that your own shell scripts stay clean
-of any pollution from running enSHure.

@@ -52,6 +52,15 @@ deb-package, enable a service, untar an archive...
 
 Running ``enshure --help`` will display a list of all available modules.
 
+Every module has a type, and there are 4 possible module types. The type
+of the module defines what states you can request of the module. These
+are the 4 module-types and their states:
+
+1. Simple: present
+2. Common: present or absent
+3. Package: present, absent or latest
+4. Service: present, absent, started, stopped, restarted, enabled or disabled
+
 Identifier
 ##########
 

@@ -1,18 +1,26 @@
 Module types
-------------
+============
 
 Module types implement the logic needed to go from a system in a state
 to the other state. They do not implement how it must be done, just
 what needs to be done. If your writing a module, much of what needs
 to be written is determined by it's module type.
 
-They also define the default requested state, if the user did not
+About states
+------------
+
+There are 2 kind of states for every module:
+
+1. Requested state: the one supplied on the command line or by the type.
+2. Actual state: the state the system is in.
+
+The module type also defines the default requested state, if the user did not
 explicitly give one.
 
 The following types, with their states, are available in enSHure:
 
-Simple
-######
+Type: Simple
+------------
 
 Used for modules where a simple check wether something should be done
 or not. An execute module would, for example, be a simple module. The
@@ -22,8 +30,8 @@ is present (all conditions satisfied) or obsolete (not all conditions satisfied)
 - Requested state: present.
 - Actual state: present or obsolete.
 
-Common
-######
+Type: Common
+------------
 
 Used for modules where a boolean check is requested. Something is either
 present or absent. The actual state cat be present
@@ -34,8 +42,8 @@ A user or file module would be common modules.
 - Requested state: present or absent.
 - Actual state: present, absent or obsolete.
 
-Package
-#######
+Type: Package
+-------------
 
 These kind of modules are only usefull when working with packages.
 Present would be if the package is installed on the sytem, absent means
@@ -46,8 +54,8 @@ Examples would be rpm, dnf, yum, apt, deb, pacman, portage, zypper,...
 - Requested state: present, latest or absent.
 - Actual state: present, latest or absent.
 
-Service
-#######
+Type: Service
+-------------
 
 These modules do everything service-related. Only usefull when working
 with the init system. Examples would be systemd, sysv, upstart, runit,

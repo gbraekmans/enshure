@@ -3,14 +3,6 @@ Writing modules
 
 TODO: Introduction
 
-About states
-------------
-
-There are 2 kind of states for every module:
-
-1. Requested state: the one supplied on the command line or by the type.
-2. Actual state: the state the system is in.
-
 A simple example module
 -----------------------
 
@@ -18,7 +10,7 @@ A simple example module
 
 A basic module looks something like this::
 
-  module_type boolean
+  module_type common
   module_description "A module which sets attributes of files."
   
   argument path string identifier "path to the file" "/root/bash_rc"

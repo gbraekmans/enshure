@@ -1,16 +1,26 @@
-Design decisions
-================
-
 Coding conventions
-------------------
+==================
 
-The `conventions at the bash wiki`__ are used throughout this project. There are
-some extra conventions:
+.. note::
+
+  Thes conventions do not apply for modules. As you can see in :doc:`Writing modules <writing_modules>`
+
+The `conventions at the bash wiki`__ are a good place to start. The rest
+of this page explains the modifications to this base.
 
 __ http://wiki.bash-hackers.org/scripting/style
 
+Format of source files
+----------------------
+
+All files not executable by the user should have a filename ending with
+'.sh'.
+
 Variable naming: globals uppercase, functions lowercase
 *******************************************************
+
+The following rules should be used for naming your variables and
+functions:
 
 - Words are seperated by an underscore.
 - Exported global variables are uppercase.
@@ -60,6 +70,7 @@ Indentation: tabs
 
 All indentation should be done using **tabs** instead of spaces. This so heredocs
 can be easily removed of their indentation.
+
 Commenting
 **********
 
