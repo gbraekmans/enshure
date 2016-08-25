@@ -1,4 +1,5 @@
 include core/msg
+include core/log
 include core/query
 
 # TODO: Add logging and querying
@@ -58,8 +59,10 @@ __task_begin() {
 
 	# Display the start of a new task
 	__msg HEADING "Task: $1"
+	__log_entry "BEGIN" "$1"
 }
 
 __task_end() {
 	__msg HEADING "Task done"
+	__log_entry "END"
 }

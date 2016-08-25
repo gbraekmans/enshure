@@ -8,6 +8,10 @@ setUp() {
 	date() {
 		printf '1970-01-01 00:00:00'
 	}
+	# Run as root for logs
+	id() {
+		printf '0'
+	}
 	
 	# Reset env variables
 	ENSHURE_LOG=$(mktemp)
