@@ -26,7 +26,7 @@ __log_entry() {
 	##$1 Type of the entry: one of the message types or EXEC_LOG
 	##$2 Optional. The message for the log entry.
 
-	_entry="#$1|$(__log_date)|${_MODULE:-}|${_IDENTIFIER:-}|${_REQUESTED_STATE:-}|${2:-}"
+	_entry="#$1|$(__log_date)|$(id -u)|${_MODULE:-}|${_IDENTIFIER:-}|${_REQUESTED_STATE:-}|${2:-}"
 
 	if __log_should_write_to_stdout; then
 		printf '%s\n' "$_entry"

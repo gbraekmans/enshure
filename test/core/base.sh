@@ -19,21 +19,21 @@ test_error() {
 	RESULT=$(error "test")
 	assertTrue 1 "$?"
 	assertEquals 2 "ERROR: test" "$RESULT"
-	assertEquals 3 "#ERROR|$(__log_date)||||test" "$(cat "$ENSHURE_LOG")"
+	assertEquals 3 "#ERROR|1970-01-01 00:00:00|0||||test" "$(cat "$ENSHURE_LOG")"
 }
 
 test_warning() {
 	RESULT=$(warning "test")
 	assertTrue 1 "$?"
 	assertEquals 2 "WARNING: test" "$RESULT"
-	assertEquals 3 "#WARNING|$(__log_date)||||test" "$(cat "$ENSHURE_LOG")"
+	assertEquals 3 "#WARNING|1970-01-01 00:00:00|0||||test" "$(cat "$ENSHURE_LOG")"
 }
 
 test_info() {
 	RESULT=$(info "test")
 	assertTrue 1 "$?"
 	assertEquals 2 "INFO: test" "$RESULT"
-	assertEquals 3 "#INFO|$(__log_date)||||test" "$(cat "$ENSHURE_LOG")"
+	assertEquals 3 "#INFO|1970-01-01 00:00:00|0||||test" "$(cat "$ENSHURE_LOG")"
 }
 
 test_debug() {
@@ -43,7 +43,7 @@ test_debug() {
 	RESULT=$(debug "test")
 	assertTrue 1 "$?"
 	assertEquals 2 "DEBUG: test" "$RESULT"
-	assertEquals 3 "#DEBUG|$(__log_date)||||test" "$(cat "$ENSHURE_LOG")"
+	assertEquals 3 "#DEBUG|1970-01-01 00:00:00|0||||test" "$(cat "$ENSHURE_LOG")"
 	unset ENSHURE_VERBOSITY
 	printf '' > "$ENSHURE_LOG"
 
@@ -51,7 +51,7 @@ test_debug() {
 	RESULT=$(debug "test2")
 	assertTrue 4 "$?"
 	assertEquals 5 "" "$RESULT"
-	assertEquals 6 "#DEBUG|$(__log_date)||||test2" "$(cat "$ENSHURE_LOG")"
+	assertEquals 6 "#DEBUG|1970-01-01 00:00:00|0||||test2" "$(cat "$ENSHURE_LOG")"
 }
 
 test_include() {
