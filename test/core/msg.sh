@@ -94,37 +94,37 @@ test_msg() {
 	
 	RESULT=$(__msg ERROR test)
 	assertTrue 3 "$?"
-	printf "$RESULT" | grep " ✗ test" > /dev/null
+	printf '%s' "$RESULT" | grep " ✗ test" > /dev/null
 	assertTrue 4 "$?"
 
 	RESULT=$(__msg WARNING test)
 	assertTrue 5 "$?"
-	printf "$RESULT" | grep " ⚠ test" > /dev/null
+	printf '%s' "$RESULT" | grep " ⚠ test" > /dev/null
 	assertTrue 6 "$?"
 
 	RESULT=$(__msg OK test)
 	assertTrue 7 "$?"
-	printf "$RESULT" | grep " ✓ test" > /dev/null
+	printf '%s' "$RESULT" | grep " ✓ test" > /dev/null
 	assertTrue 8 "$?"
 
 	RESULT=$(__msg CHANGE test)
 	assertTrue 9 "$?"
-	printf "$RESULT" | grep " ✎ test" > /dev/null
+	printf '%s' "$RESULT" | grep " ✎ test" > /dev/null
 	assertTrue 10 "$?"
 
 	RESULT=$(__msg INFO test)
 	assertTrue 11 "$?"
-	printf "$RESULT" | grep " ℹ test" > /dev/null
+	printf '%s' "$RESULT" | grep " ℹ test" > /dev/null
 	assertTrue 12 "$?"
 
 	RESULT=$(__msg DEBUG test)
 	assertTrue 13 "$?"
-	printf "$RESULT" | grep " ↳ test" > /dev/null
+	printf '%s' "$RESULT" | grep " ↳ test" > /dev/null
 	assertTrue 14 "$?"
 
 	RESULT=$(__msg HEADING test)
 	assertTrue 15 "$?"
-	printf "$RESULT" | grep "= test =" > /dev/null
+	printf '%s' "$RESULT" | grep "= test =" > /dev/null
 	assertTrue 16 "$?"
 }
 
@@ -193,6 +193,7 @@ test_msg_meets_verbosity_level() {
 	assertTrue 22 "$?"
 
 	# Don't error on invalid verbosity but inform the user
+	# shellcheck disable=SC2034
 	ENSHURE_VERBOSITY="WHATEVER"
 	RESULT=$(__msg_meets_verbosity_level ERROR)
 	assertTrue 23 "$?"

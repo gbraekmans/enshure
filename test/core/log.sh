@@ -3,7 +3,7 @@ test_log_should_write_stdout() {
 	ENSHURE_LOG="-" __log_should_write_to_stdout
 	assertTrue 1 "$?"
 	# ENSHURE_LOG is not - -> false
-	ENSHURE_LOG= __log_should_write_to_stdout
+	ENSHURE_LOG='' __log_should_write_to_stdout
 	assertFalse 2 "$?"
 }
 
@@ -11,6 +11,7 @@ test_log_date() {
 	assertEquals "$(date '+%Y-%m-%d %H:%M:%S')" "$(__log_date)"
 }
 
+# shellcheck disable=SC2034
 test_log_entry() {
 	_MODULE=
 	_IDENTIFIER=

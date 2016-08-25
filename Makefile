@@ -4,7 +4,7 @@ HELPER_DIR = helpers
 TEST_DIR = test
 TEST_FILENAME = all_tests.sh
 
-.PHONY: help clean doc test timings
+.PHONY: help clean doc test timings shellcheck
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -12,6 +12,7 @@ help:
 	@echo "  todo       to show a list of all todo's in the code"
 	@echo "  test       to run all tests in the code"
 	@echo "  timings    to show how long each shell tests the code"
+	@echo "  shellcheck to statically check all code using shellcheck"
 	@echo "  clean      to reset the project in the initial state"
 
 clean:
@@ -38,7 +39,7 @@ $(TEST_DIR)/$(TEST_FILENAME): $(TEST_DIR)/common.sh
 	cat "$(TEST_DIR)/common.sh" >> "$(TEST_DIR)/$(TEST_FILENAME)"
 	chmod +x "$(TEST_DIR)/$(TEST_FILENAME)"
 
-test: $(TEST_DIR)/$(TEST_FILENAME)
+test: shellcheck $(TEST_DIR)/$(TEST_FILENAME)
 	bash $(TEST_DIR)/$(TEST_FILENAME)
 	dash $(TEST_DIR)/$(TEST_FILENAME)
 	ksh  $(TEST_DIR)/$(TEST_FILENAME)
@@ -51,3 +52,7 @@ timings: $(TEST_DIR)/$(TEST_FILENAME)
 	@/usr/bin/time -f "ksh:  %e seconds, CPU %P, MEM %Mkb" ksh $(TEST_DIR)/$(TEST_FILENAME) > /dev/null
 	@/usr/bin/time -f "mksh: %e seconds, CPU %P, MEM %Mkb" mksh $(TEST_DIR)/$(TEST_FILENAME) > /dev/null
 	@SHUNIT_PARENT="$(TEST_DIR)/$(TEST_FILENAME)" /usr/bin/time -f "zsh:  %e seconds, CPU %P, MEM %Mkb" zsh -y "$(TEST_DIR)/$(TEST_FILENAME)" > /dev/null
+
+shellcheck: $(TEST_DIR)/$(TEST_FILENAME)
+	shellcheck -s sh src/bin/enshure
+	find -name '*.sh' | xargs shellcheck -s sh

@@ -38,6 +38,7 @@ test_info() {
 
 test_debug() {
 	# Loglevel DEBUG, should log and print
+	# shellcheck disable=SC2034
 	ENSHURE_VERBOSITY="DEBUG"
 	RESULT=$(debug "test")
 	assertTrue 1 "$?"

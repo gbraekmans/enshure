@@ -2,6 +2,10 @@ include core/base
 
 __help_query_mode() {
 	## Parses core/help.txt into a readable format.
+
+	# I know the cat is useless. kcov likes it.
+	# TODO: log this bug upstream.
+	# shellcheck disable=SC2002
 	cat "$_BASEDIR/core/help.txt" | \
 	while read -r _line; do
 		_help_text="$(printf '%s' "$_line" | cut -d'|' -f4)"

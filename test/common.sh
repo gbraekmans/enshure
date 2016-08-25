@@ -2,6 +2,7 @@
 
 set -o | grep "^posixargzero" > /dev/null && set -o posixargzero
 
+# shellcheck disable=SC2034
 setUp() {
 	# Freeze time for logs
 	date() {
