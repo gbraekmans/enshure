@@ -61,8 +61,8 @@ openrc, ...
 
 Posibble states:
 
-- Requested state: present, started, stopped, enabled, disabled, absent or restarted.
-- Actual state: present, started, enabled or absent
+- Requested state: always, started, stopped, enabled, disabled, never or restarted.
+- Actual state: always, started, enabled or never
 
 The **actual service states** are clearer when expained using this table:
 

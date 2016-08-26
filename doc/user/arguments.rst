@@ -152,7 +152,13 @@ The following environment variables affect the behaviour of enshure:
 
 - ``$ENSHURE_LOG`` sets the path to the log file.
 - ``$ENSHURE_VERBOSITY`` determines which messages shall be displayed to the user.
-  Should be: ``ERROR``, ``WARNING``, ``INFO`` or ``DEBUG``
+  Should be one of:
+
+  * ``ERROR``
+  * ``WARNING``
+  * ``INFO`` 
+  * ``DEBUG``
+
 - ``$ENSHURE_VALIDATE`` if this is set, then no actions will be run. enSHure
   will just validate all input given and then stop processing. Usefull if
   you want to make sure all your states and arguments are correct.
