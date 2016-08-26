@@ -36,7 +36,8 @@ Tasks
 
 .. option:: -t ACTION [NAME], --task ACTION [NAME]
 
-  begins or ends a task. ACTION is 'begin' or 'end'. NAME is required for a begin-action.
+  begins or ends a task. ACTION is 'begin' or 'end'. NAME is required for a begin-action,
+  but **may not** be given for an end-action.
 
 Tasks group a sequence of enshure statements. These are usefull for a
 lot of things:
