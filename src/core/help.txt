@@ -1,3 +1,0 @@
-|-h [MODULE]|--help [MODULE]|If MODULE is empty, show a help message and exit. Otherwise show help for the module MODULE.
-|-v|--version|Print the version of enSHure and exit.
-|-t ACTION [NAME]|--task ACTION [NAME]|begins or ends a task. ACTION is 'begin' or 'end'. NAME is required for a begin-action.

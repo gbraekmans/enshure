@@ -18,6 +18,11 @@ test_main_query_mode_parse() {
 	assertEquals 5 "Executed" "$(__main_query_mode_parse -t)"
 	assertEquals 6 "$(__main_query_mode_parse -t)" "$(__main_query_mode_parse --task)"
 
+	assertEquals 7 "ERROR: Unknown argument '--no-such-option'." "$(__main_query_mode_parse --no-such-option)"
+
+	__main_query_query() { printf 'Executed Query'; }
+	assertEquals 8 "Executed Query" "$(__main_query_mode_parse -q)"
+	assertEquals 9 "$(__main_query_mode_parse -q)" "$(__main_query_mode_parse --query)"
 }
 
 test_main_execute() {
@@ -56,4 +61,26 @@ test_main_query_task() {
 	RESULT=$(__main_query_task end webserver)
 	assertFalse 11 "$?"
 	assertEquals 12 "ERROR: A name for an ending task is given. This is not supported." "$RESULT"
+}
+
+test_main_query_query() {
+	__query_current_task() { return 0; }
+	__query_made_change() { return 0; }
+
+
+	RESULT=$(__main_query_query)
+	assertFalse 1 "$?"
+	assertEquals 2 "ERROR: No query specified. Use -h to get a list of all queries." "$RESULT"
+
+	RESULT=$(__main_query_query whatever)
+	assertFalse 3 "$?"
+	assertEquals 4 "ERROR: --query 'whatever' is invalid. Use -h to get a list of all queries." "$RESULT"
+
+	RESULT=$(__main_query_query current_task)
+	assertTrue 5 "$?"
+	assertEquals 6 "" "$RESULT"
+
+	RESULT=$(__main_query_query made_change)
+	assertTrue 7 "$?"
+	assertEquals 8 "" "$RESULT"
 }

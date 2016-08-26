@@ -1,3 +1,4 @@
+
 __query_current_task() {
 	## Prints the current task
 	awk -f "$_BASEDIR/core/query/current_task.awk" "$(__log_path)"
@@ -15,6 +16,8 @@ __query_made_change() {
 			return 1
 			;;
 		*)
+			# if something went wrong, or the log file is empty, assume
+			# no change has been made with the last action.
 			return 2
 			;;
 	esac

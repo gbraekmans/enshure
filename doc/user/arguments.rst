@@ -20,10 +20,23 @@ Query mode
 
 These are all the options available in query mode:
 
-.. include:: help_query_mode.rst
+General info
+############
+
+.. option:: -h [MODULE], --help [MODULE]
+
+  If MODULE is empty, show a help message and exit. Otherwise show help for the module MODULE.
+
+.. option:: -v, --version
+
+  Print the version of enSHure and exit.
 
 Tasks
 #####
+
+.. option:: -t ACTION [NAME], --task ACTION [NAME]
+
+  begins or ends a task. ACTION is 'begin' or 'end'. NAME is required for a begin-action.
 
 Tasks group a sequence of enshure statements. These are usefull for a
 lot of things:
@@ -58,6 +71,20 @@ A task can be any alphanumeric name you give it. For example::
   enough to clean up.
 
 .. _trap-statement: http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_12_02.html
+
+Queries
+#######
+
+.. option:: -q NAME [ARGS], --query NAME [ARGS]
+
+  Runs the query NAME with arguments ARGS.
+
+Currently these queries are supported
+
+- ``current_task``: Displays the current task.
+- ``made_change``: Returns 0, true, if the last enshure invocation made a
+  change. Returns 1 if everything was OK, 2 if we couldn't determine
+  wether a change had been made (the log file is empty for example).
 
 Execution mode
 --------------
@@ -108,10 +135,15 @@ Every module has a type, and there are 4 possible module types. The type
 of the module defines what states you can request of the module. These
 are the 4 module-types and their states:
 
-1. Simple: present
-2. Common: present or absent
-3. Package: present, absent or latest
-4. Service: present, absent, started, stopped, restarted, enabled or disabled
+1. Command: succeeds or fails
+2. Generic: present or absent
+3. Package: installed, removed or latest
+4. Service: always, never, started, stopped, restarted, enabled or disabled
+
+Custom arguments
+################
+
+TODO: write this
 
 Environment variables
 ---------------------

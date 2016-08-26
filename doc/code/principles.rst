@@ -109,6 +109,15 @@ The shells which are tested against:
 - mksh (Android, BSD)
 - dash (Debian-based distro's)
 
+Readable: Easy on the memory
+----------------------------
+
+Lots of programs require intimate knowledge of their options, switches
+and arguments. Not so with enSHure, everything follows a straightforward
+predictable rhythm.
+
+TODO: improve readable section.
+
 Traceable & idempotent
 ----------------------
 

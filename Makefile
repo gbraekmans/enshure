@@ -31,8 +31,6 @@ doc: clean
 	$(HELPER_DIR)/shelldoc.py -r '[a-z][a-z_]*' -p src functions src/bin/enshure src/*/*.sh > $(DOC_DIR)/reference/function_idx.rst
 	$(HELPER_DIR)/shelldoc.py -r '__[a-z_]+' -p src functions src/bin/enshure src/*/*.sh > $(DOC_DIR)/reference/internal_function_idx.rst
 	$(HELPER_DIR)/shelldoc.py -r '[A-Z_]+' -p src globals src/bin/enshure src/*/*.sh  > $(DOC_DIR)/reference/global_idx.rst
-	# Create help file
-	$(HELPER_DIR)/help_to_rst.py src/core/help.txt > $(DOC_DIR)/user/help_query_mode.rst
 	$(DOC_BUILDCMD) -b html $(DOC_DIR) $(DOC_DIR)/_build/html
 	@echo
 	@echo "The HTML documentation is in $(DOC_DIR)/_build/html."

@@ -3,6 +3,7 @@ include core/version
 include core/help
 include core/msg
 include core/task
+include core/query
 
 __main_is_query_mode() {
 	## Checks wether the given arguments put enSHure in query or execution mode.
@@ -44,8 +45,28 @@ __main_query_task() {
 	esac
 }
 
-__main_query_query () {
-	:
+# TODO: I realize this is very poorly named. Something like main_querymode_query is better...
+
+__main_query_query() {
+	# Check if argument is there
+	if [ -z "${1:-}" ]; then
+		error "No query specified. Use -h to get a list of all queries."
+		exit "$_E_ARGUMENT_MISSING"
+	fi
+
+	# Parse the argument
+	case "$1" in
+		"current_task")
+			__query_current_task
+			;;
+		"made_change")
+			__query_made_change
+			;;
+		*)
+			error "--query '$1' is invalid. Use -h to get a list of all queries."
+			exit "$_E_INVALID_ENUM"
+			;;
+	esac
 }
 
 __main_query_mode_parse() {
@@ -55,7 +76,7 @@ __main_query_mode_parse() {
 
 	case "$1" in
 		"-h"|"--help")
-			__help_generic
+			__help
 			;;
 		"-v"|"--version")
 			printf "%s\n" "$_VERSION"

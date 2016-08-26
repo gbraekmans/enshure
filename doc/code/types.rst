@@ -19,19 +19,17 @@ explicitly give one.
 
 The following types, with their states, are available in enSHure:
 
-Type: Simple
-------------
+Type: Command
+-------------
 
-Used for modules where a simple check wether something should be done
-or not. An execute module would, for example, be a simple module. The
-only requested state could be present (all conditions satisfied). The actual state
-is present (all conditions satisfied) or obsolete (not all conditions satisfied)
+Everything which could be a command. An action that does something and
+either fails or succeeds.
 
-- Requested state: present.
-- Actual state: present or obsolete.
+- Requested state: succeeds or fails.
+- Actual state: succeeds or fails.
 
-Type: Common
-------------
+Type: Generic
+-------------
 
 Used for modules where a boolean check is requested. Something is either
 present or absent. The actual state cat be present
@@ -71,9 +69,9 @@ The **actual service states** are clearer when expained using this table:
 +-------------+-------------+--------------+ 
 |             | **Enabled** | **Disabled** | 
 +-------------+-------------+--------------+ 
-| **Started** | present     | started      | 
+| **Started** | always      | started      | 
 +-------------+-------------+--------------+ 
-| **Stopped** | enabled     | absent       |
+| **Stopped** | enabled     | never        |
 +-------------+-------------+--------------+ 
 
 When the requested state is disabled, the module does not care wether
