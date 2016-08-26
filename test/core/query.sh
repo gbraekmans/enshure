@@ -34,3 +34,38 @@ test_query_current_task() {
 	assertTrue 13 "$?"
 	assertEquals 14 "" "$RESULT"
 }
+
+# shellcheck disable=SC2034
+test_query_made_change() {
+	_REQUESTED_STATE='present'
+	_MODULE='file'
+	_IDENTIFIER='/root/.zshrc'
+	_ACTUAL_STATE='absent'
+
+	__query_made_change
+	assertEquals 1 "2" "$?"
+
+	__log_ok > /dev/null
+	__query_made_change
+	assertEquals 2 "1" "$?"
+
+	__log_change  > /dev/null
+	__query_made_change
+	assertEquals 3 "0" "$?"
+	
+	info "test" > /dev/null
+	__query_made_change
+	assertEquals 4 "0" "$?"	
+
+	error "test" > /dev/null
+	__query_made_change
+	assertEquals 5 "2" "$?"
+
+	__log_change  > /dev/null
+	__query_made_change
+	assertEquals 6 "0" "$?"
+
+	__log_ok > /dev/null
+	__query_made_change
+	assertEquals 7 "1" "$?"
+}

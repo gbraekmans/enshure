@@ -22,10 +22,10 @@ __help_query_mode() {
 __help_generic() {
 	## Show the help message if no module is given.
 	cat <<-"EOF"
-	Usage: enshure QUERY [ARGUMENT]
+	Usage: enshure QUERY_TYPE [ARGUMENT] ...
 	   or: enshure MODULE IDENTIFIER REQUESTED_STATE
 	
-	QUERY:
+	QUERY_TYPE:
 	EOF
 	__help_query_mode
 }

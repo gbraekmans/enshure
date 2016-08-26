@@ -101,3 +101,33 @@ require() {
 		return "$_E_UNMET_REQUIREMENT"
 	fi
 }
+
+not_implemented() {
+	## Shows an error message to the user indicating the functionality
+	## is not implemented and returns a nonzero value
+	##> $ not_implemented 
+	##> This functionality is not yet implemented in the enSHure core.
+	##> $ echo "$?"
+	##> 9
+
+	if [ -n "$_MODULE" ]; then
+		error "$_MODULE does not implement a function needed to set the state '$_REQUESTED_STATE'."
+	else
+		error "This functionality is not yet implemented in the enSHure core."
+	fi
+	return "$_E_NOT_IMPLEMENTED"
+}
+
+initcap() {
+	## Converts the first letter of a string to uppercase, the rest are
+	## lowercase. Prints the result to stdout.
+	##$1 the string to be converted
+	##> $ initcap "what am i?"
+	##> What am i?
+	##> $ initcap "Me"
+	##> Me
+	
+	_first=$(printf '%s' "$1" | cut -c1 | tr '[:lower:]' '[:upper:]')
+	_rest=$(printf '%s' "$1" | cut -c2- | tr '[:upper:]' '[:lower:]')
+	printf '%s%s' "$_first" "$_rest"
+}

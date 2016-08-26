@@ -22,7 +22,7 @@ clean:
 todo:
 	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}' | sed 's|^\s*#\s*||g'
 
-doc:
+doc: clean
 	mkdir -p  $(DOC_DIR)/_templates
 	mkdir -p  $(DOC_DIR)/_static
 	# Set version
@@ -43,7 +43,7 @@ $(TEST_DIR)/$(TEST_FILENAME): $(TEST_DIR)/common.sh
 	cat "$(TEST_DIR)/common.sh" >> "$(TEST_DIR)/$(TEST_FILENAME)"
 	chmod +x "$(TEST_DIR)/$(TEST_FILENAME)"
 
-test: shellcheck $(TEST_DIR)/$(TEST_FILENAME)
+test: clean shellcheck $(TEST_DIR)/$(TEST_FILENAME)
 	bash $(TEST_DIR)/$(TEST_FILENAME)
 	dash $(TEST_DIR)/$(TEST_FILENAME)
 	ksh  $(TEST_DIR)/$(TEST_FILENAME)

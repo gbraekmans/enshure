@@ -29,10 +29,10 @@ Most of the entries in the log look like this::
 And this is an example excerpt::
 
   #BEGIN|0|2016-08-04 18:42:37||||zsh
-  #OK|0|2016-08-04 18:42:39|apt_pkg|zsh|installed|Package zsh is installed.
+  #OK|0|2016-08-04 18:42:39|apt_pkg|zsh|installed|Package zsh is present.
   touch /home/user/.zshrc
   #RETCODE|0|2016-08-04 18:42:39|file|/root/.zshrc|present|0
-  #CHANGED|0|2016-08-04 18:42:39|file|/root/.zshrc|present|File /root/.zshrc is present.
+  #CHANGE|0|2016-08-04 18:42:39|file|/root/.zshrc|present|File /root/.zshrc is present, was absent.
   #END|0|2016-08-04 18:42:39||||
 
 **The log is designed to be executable by the shell.** All commands which have

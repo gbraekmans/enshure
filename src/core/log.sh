@@ -2,9 +2,14 @@
 
 ##$ENSHURE_LOG the location of the enSHure log on the filesystem
 
-# TODO: Include username in log
+
+# TODO: Move the finding of the log path to a function.
 
 include core/error
+
+__log_path() {
+	printf '%s' "${ENSHURE_LOG:-/var/log/enshure.log}"
+}
 
 __log_date() {
 	## Return the current date in the log-compatible format
@@ -31,11 +36,33 @@ __log_entry() {
 	if __log_should_write_to_stdout; then
 		printf '%s\n' "$_entry"
 	else
-		if [ ! -w "${ENSHURE_LOG:-/var/log/enshure.log}" ]; then
-			die "Could not write to log file '${ENSHURE_LOG:-/var/log/enshure.log}'." "$_E_UNWRITEABLE_LOG"
+		if [ ! -w "$(__log_path)" ]; then
+			die "Could not write to log file '$(__log_path)'." "$_E_UNWRITEABLE_LOG"
 		fi
-		printf '%s\n' "$_entry" >> "${ENSHURE_LOG:-/var/log/enshure.log}"
+		printf '%s\n' "$_entry" >> "$(__log_path)"
 	fi
+}
+
+__log_can_write_module_functions() {
+	[ -n "$_MODULE" ] && [ -n "$_IDENTIFIER" ] && [ -n "$_REQUESTED_STATE" ] && [ -n "$_ACTUAL_STATE" ]
+}
+
+__log_change() {
+	if ! __log_can_write_module_functions; then
+		die "Can not signal CHANGE when no module is loaded." "$_E_NOT_IN_A_MODULE"
+	fi
+	_msg="$(initcap "$_MODULE") $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."
+	__msg "CHANGE" "$_msg"
+	__log_entry "CHANGE" "$_msg"
+}
+
+__log_ok() {
+	if ! __log_can_write_module_functions; then
+		die "Can not signal OK when no module is loaded." "$_E_NOT_IN_A_MODULE"
+	fi
+	_msg="$(initcap "$_MODULE") $_IDENTIFIER is $_REQUESTED_STATE."
+	__msg "OK" "$_msg"
+	__log_entry "OK" "$_msg"
 }
 
 # I'll probably implement date time differences as optional using something like this:

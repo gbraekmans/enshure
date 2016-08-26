@@ -69,3 +69,32 @@ test_include() {
 	include core/error
 	assertEquals 4 "core/base:core/version:core/error" "$_INCLUDED"
 }
+
+test_not_implemented() {
+	RESULT=$(not_implemented)
+	assertFalse 1 "$?"
+	assertEquals 2 "ERROR: This functionality is not yet implemented in the enSHure core." "$RESULT"
+	
+	# shellcheck disable=SC2034
+	{
+	_MODULE="apt_package"
+	_REQUESTED_STATE="present"
+	}
+	RESULT=$(not_implemented)
+	assertFalse 3 "$?"
+	assertEquals 4 "ERROR: apt_package does not implement a function needed to set the state 'present'." "$RESULT"
+}
+
+test_initcap() {
+	RESULT=$(initcap "test")
+	assertTrue 1 "$?"
+	assertEquals 2 "Test" "$RESULT"
+
+	RESULT=$(initcap "TEST")
+	assertTrue 3 "$?"
+	assertEquals 4 "Test" "$RESULT"
+
+	RESULT=$(initcap "tEST")
+	assertTrue 5 "$?"
+	assertEquals 6 "Test" "$RESULT"
+}

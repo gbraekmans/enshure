@@ -39,4 +39,10 @@ _E_INVALID_ENUM=6
 _E_UNMET_REQUIREMENT=7
 ##$_E_NOT_IN_A_TASK you need to be in a task to use this feature
 _E_NOT_IN_A_TASK=8
+##$_E_NOT_IMPLEMENTED the functionality is not implemented
+_E_NOT_IMPLEMENTED=9
+##$_E_NOT_IN_A_MODULE you need to be in a module to use this feature
+_E_NOT_IN_A_MODULE=10
+##$_E_UNKNOWN_ARGUMENT the argument specified is not supported
+_E_UNKNOWN_ARGUMENT=11
 }

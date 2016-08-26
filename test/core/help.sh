@@ -14,5 +14,5 @@ test_help_query_mode() {
 }
 
 test_help_generic() {
-	assertEquals 1 "Usage: enshure QUERY [ARGUMENT]" "$(__help_generic | head -n 1)"
+	assertEquals 1 "Usage: enshure QUERY_TYPE [ARGUMENT] ..." "$(__help_generic | head -n 1)"
 }

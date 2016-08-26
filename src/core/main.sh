@@ -44,8 +44,14 @@ __main_query_task() {
 	esac
 }
 
-__main_query_mode_parse() {
+__main_query_query () {
+	:
+}
 
+__main_query_mode_parse() {
+	## Parses the command if enSHure is started in query mode
+
+	# TODO: Implement facts
 
 	case "$1" in
 		"-h"|"--help")
@@ -57,14 +63,27 @@ __main_query_mode_parse() {
 		"-t"|"--task")
 			shift;
 			__main_query_task "$@"
+			;;
+		"-q"|"--query")
+			shift;
+			__main_query_query "$@"
+			;;
+		*)
+			error "Unknown argument '$1'."
+			return "$_E_UNKNOWN_ARGUMENT"
 	esac
 }
 
 __main_execute() {
+	## The main execution function. This is the function called
+	## from the main script.
+	
 	# Error if there are no arguments
 	if [ -z "${1:-}" ]; then
 		die "No arguments given. Use --help or -h for help" "$_E_NO_ARGUMENTS"
 	fi
+	
+	# If enSHure is in query mode, parse the arguments.
 	if __main_is_query_mode "$@"; then
 		__main_query_mode_parse "$@"
 	fi
