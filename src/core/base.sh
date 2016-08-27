@@ -98,7 +98,7 @@ require() {
 		return 0
 	else
 		error "${_MODULE:-enSHure} requires '$1' to be installed."
-		return "$_E_UNMET_REQUIREMENT"
+		exit "$_E_UNMET_REQUIREMENT"
 	fi
 }
 
