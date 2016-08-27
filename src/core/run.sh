@@ -1,4 +1,6 @@
 
+include core/base
+
 # Declare dependencies
 # uuencode, uudecode, compress & uncompress should be installed but 
 # aren't on most systems. Even though there in the POSIX standard.
@@ -80,6 +82,7 @@ __run_unserialize() {
 			_uncompress_cmd='uncompress -c'
 			;;
 		*)
+			error "The header '$_header' is unknown for unserialization."
 			return "$_E_INVALID_SERIALIZE_HEADER"
 			;;
 	esac

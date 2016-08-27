@@ -1,4 +1,41 @@
 
+test_run_sh_include() {
+	
+	RESULT=$(. "$_BASEDIR/core/run.sh")
+	assertTrue 1 "$?"
+	assertEquals 2 "" "$RESULT"
+	
+	is_available() { if [ "$1" = "compress" ] || [ "$1" = "gzip" ]; then return 1; fi; return 0; }
+	RESULT=$(. "$_BASEDIR/core/run.sh")
+	assertFalse 3 "$?"
+	assertEquals 4 "ERROR: enSHure requires 'compress' to be installed." "$RESULT"
+
+	is_available() { if [ "$1" = "compress" ]; then return 1; fi; return 0; }
+	RESULT=$(. "$_BASEDIR/core/run.sh")
+	assertTrue 5 "$?"
+	assertEquals 6 "" "$RESULT"
+
+	is_available() { if [ "$1" = "uuencode" ] || [ "$1" = "base64" ]; then return 1; fi; return 0; }
+	RESULT=$(. "$_BASEDIR/core/run.sh")
+	assertFalse 7 "$?"
+	assertEquals 8 "ERROR: enSHure requires 'uuencode' to be installed." "$RESULT"
+
+	is_available() { if [ "$1" = "uuencode" ]; then return 1; fi; return 0; }
+	RESULT=$(. "$_BASEDIR/core/run.sh")
+	assertTrue 9 "$?"
+	assertEquals 10 "" "$RESULT"
+
+	is_available() { if [ "$1" = "uudecode" ] || [ "$1" = "base64" ]; then return 1; fi; return 0; }
+	RESULT=$(. "$_BASEDIR/core/run.sh")
+	assertFalse 11 "$?"
+	assertEquals 12 "ERROR: enSHure requires 'uudecode' to be installed." "$RESULT"
+
+	is_available() { if [ "$1" = "uudecode" ]; then return 1; fi; return 0; }
+	RESULT=$(. "$_BASEDIR/core/run.sh")
+	assertTrue 13 "$?"
+	assertEquals 14 "" "$RESULT"
+}
+
 test_run_serialize() {
 	EXAMPLE=$(mktemp)
 
@@ -104,6 +141,15 @@ test_run_unserialize() {
 	RESULT=$(__run_unserialize "$EX_COMPRESS")
 	assertFalse 15 "$?"
 	assertEquals 16 "ERROR: enSHure requires 'uncompress' to be installed." "$RESULT"
+	
+	RESULT=$(__run_unserialize "XZ|whatever==")
+	assertFalse 17 "$?"
+	assertEquals 18 "ERROR: The header 'XZ' is unknown for unserialization." "$RESULT"
+
+	is_available() { if [ "$1" = "uudecode" ] || [ "$1" = "base64" ]; then return 1; fi; return 0; }
+	RESULT=$(__run_unserialize "$EX_COMPRESS" 2>&1)
+	assertFalse 19 "$?"
+	assertEquals 20 "CRITICAL FAILURE: Could not find a suitable base64 implementation." "$RESULT"
 
 	unset EXAMPLE
 	unset EX_COMPRESS
