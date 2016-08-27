@@ -7,6 +7,15 @@ will still work on 1.5.4.
 
 .. _`semantic versioning`: http://semver.org/
 
+Dependencies
+------------
+
+A POSIX-compliant operating system and shell is required.
+
+TODO: Document GZIP/COMPRESS-dependency
+TODO: Document UUENCODE/base64-dependency
+
+
 From source using git
 ---------------------
 

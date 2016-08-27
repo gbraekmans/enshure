@@ -80,6 +80,21 @@ STDOUT, STDERR
 
 TODO: Explain difference uuencode/base64
 
+A STDOUT field looks like this::
+
+  #STDOUT|0|1970-01-01 00:00:00|file|/root/.zshrc|present|POSIX|...
+  #STDOUT|0|1970-01-01 00:00:00|file|/root/.zshrc|present|GZIP|...
+
+By default the format of compression is POSIX-compatible: everything has
+been zipped with ``compress``
+
+.. note::
+
+  POSIX-compliance is fading from the default minimal installs of most
+  Linux-distributions. Therefore the second GZIP record has been created
+  because these distro's do not ship ``uuencode`` or ``compress``.
+  ``gzip`` and ``base64`` are shipped in most distributions.
+
 These entries store the base64 encoded gzipped string of
 the output to the file descriptor.
 Not every command has these entries, if there was **no output on the file
