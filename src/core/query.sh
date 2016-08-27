@@ -2,6 +2,7 @@
 __query_current_task() {
 	## Prints the current task
 	awk -f "$_BASEDIR/core/query/current_task.awk" "$(__log_path)"
+	# TODO: Add an argument to pretty print to stdout
 }
 
 __query_made_change() {
@@ -21,4 +22,11 @@ __query_made_change() {
 			return 2
 			;;
 	esac
+}
+
+__query_summary() {
+	## Prints a summary to the stdout of all changes.
+	##$1 A task to act as filter.
+
+	awk -f "$_BASEDIR/core/query/summary.awk" -v "filtered_task=${1:-}" "$(__log_path)"
 }
