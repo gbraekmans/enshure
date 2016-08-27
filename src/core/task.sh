@@ -2,8 +2,6 @@ include core/msg
 include core/log
 include core/query
 
-# TODO: Add logging and querying
-
 __task_is_nested() {
 	## Returns 0 if task is nested. 1 otherwise.
 	##$1 the name of the task
