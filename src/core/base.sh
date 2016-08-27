@@ -104,7 +104,7 @@ require() {
 
 not_implemented() {
 	## Shows an error message to the user indicating the functionality
-	## is not implemented and returns a nonzero value
+	## is not implemented and returns a nonzero value.
 	##> $ not_implemented 
 	##> This functionality is not yet implemented in the enSHure core.
 	##> $ echo "$?"

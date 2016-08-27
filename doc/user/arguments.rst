@@ -87,7 +87,16 @@ Currently these queries are supported
   change. Returns 1 if everything was OK, 2 if we couldn't determine
   wether a change had been made (the log file is empty for example).
 - ``summary``: Prints a summary of the changes on the system. You can,
-  optionally add a task to filter the results.
+  optionally add a task to filter the results. For example:
+  ``summary webserver`` or ``summary webserver::mysql``.
+
+.. note::
+
+  The output of the queries is not formatted, so that it can be used
+  in variables. If you want to print a query it might be better
+  to use the ``query`` or the ``message`` module.
+  
+TODO: Link to the corresponding modules.
 
 Execution mode
 --------------

@@ -42,14 +42,7 @@ $1 == "#CHANGE" {
 }
 # Display the results in human readable form
 END { 
-	prnt_changes = " changes"
-	if (changes == 1) {
-		prnt_changes = " change"
-	}
-	prnt_total = " statements"
-	if (total == 1) {
-		prnt_total = " statement"
-	}
-	print "Made " changes prnt_changes " of " total prnt_total "."
+	print "change:", changes
+	print "ok:", (total - changes)
+	print "total:", total
 }
-

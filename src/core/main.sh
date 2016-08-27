@@ -45,30 +45,6 @@ __main_query_task() {
 	esac
 }
 
-# TODO: I realize this is very poorly named. Something like main_querymode_query is better...
-
-__main_query_query() {
-	# Check if argument is there
-	if [ -z "${1:-}" ]; then
-		error "No query specified. Use -h to get a list of all queries."
-		exit "$_E_ARGUMENT_MISSING"
-	fi
-
-	# Parse the argument
-	case "$1" in
-		"current_task")
-			__query_current_task
-			;;
-		"made_change")
-			__query_made_change
-			;;
-		*)
-			error "--query '$1' is invalid. Use -h to get a list of all queries."
-			exit "$_E_INVALID_ENUM"
-			;;
-	esac
-}
-
 __main_query_mode_parse() {
 	## Parses the command if enSHure is started in query mode
 
@@ -87,7 +63,7 @@ __main_query_mode_parse() {
 			;;
 		"-q"|"--query")
 			shift;
-			__main_query_query "$@"
+			query "$@"
 			;;
 		*)
 			error "Unknown argument '$1'."
