@@ -45,4 +45,6 @@ _E_NOT_IMPLEMENTED=9
 _E_NOT_IN_A_MODULE=10
 ##$_E_UNKNOWN_ARGUMENT the argument specified is not supported
 _E_UNKNOWN_ARGUMENT=11
+##$_E_INVALID_SERIALIZE_HEADER the header of the serialized message is not known.
+_E_INVALID_SERIALIZE_HEADER=12
 }

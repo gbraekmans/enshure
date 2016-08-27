@@ -31,6 +31,8 @@ setUp() {
 	include core/main
 	include core/version
 	include core/task
+	include core/run
+	include core/query
 }
 
 tearDown() {
