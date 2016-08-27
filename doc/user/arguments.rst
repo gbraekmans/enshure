@@ -86,6 +86,8 @@ Currently these queries are supported
 - ``made_change``: Returns 0, true, if the last enshure invocation made a
   change. Returns 1 if everything was OK, 2 if we couldn't determine
   wether a change had been made (the log file is empty for example).
+- ``summary``: Prints a summary of the changes on the system. You can,
+  optionally add a task to filter the results.
 
 Execution mode
 --------------

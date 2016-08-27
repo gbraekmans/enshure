@@ -94,11 +94,14 @@ __task_end() {
 		return "$_E_NOT_IN_A_TASK"
 	fi
 
+	# Pretty-print the task
 	_display_task="$_task"
 	if __msg_pretty_print; then
 		# Replace '::' with ' → ' for pretty task names
 		_display_task=$(printf '%s' "$_task" | sed 's/::/ → /g')
 	fi
+
+	# TODO: print summary of operations done at task end
 
 	# Display the start of a new task
 	if __task_is_nested "$_task"; then

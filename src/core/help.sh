@@ -24,5 +24,6 @@ __help() {
 	    Valid queries are:
 	    - current_task
 	    - made_change
+	    - summary [TASK]
 	EOF
 }
