@@ -4,7 +4,7 @@ HELPER_DIR = helpers
 TEST_DIR = test
 TEST_FILENAME = all_tests.sh
 
-.PHONY: help clean doc test timings shellcheck
+.PHONY: help clean doc simpletest test timings shellcheck
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -13,16 +13,15 @@ help:
 	@echo "  test       to run all tests in the code"
 	@echo "  timings    to show how long each shell tests the code"
 	@echo "  shellcheck to statically check all code using shellcheck"
-	@echo "  clean      to reset the project in the initial state"
+	@echo "  clean      to remove all generated documentation"
 
 clean:
 	rm -rf $(DOC_DIR)/_*
-	rm -rf "$(TEST_DIR)/$(TEST_FILENAME)"
 
 todo:
 	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}' | sed 's|^\s*#\s*||g'
 
-doc: clean
+doc:
 	mkdir -p  $(DOC_DIR)/_templates
 	mkdir -p  $(DOC_DIR)/_static
 	# Set version
@@ -41,12 +40,20 @@ $(TEST_DIR)/$(TEST_FILENAME): $(TEST_DIR)/common.sh
 	cat "$(TEST_DIR)/common.sh" >> "$(TEST_DIR)/$(TEST_FILENAME)"
 	chmod +x "$(TEST_DIR)/$(TEST_FILENAME)"
 
-test: clean shellcheck $(TEST_DIR)/$(TEST_FILENAME)
+$(TEST_DIR)/shunit2:
+	([ -e "/usr/share/shunit2/shunit2" ] && ln -s "/usr/share/shunit2/shunit2" $(TEST_DIR)/shunit2) || (cd $(TEST_DIR) && wget -q "https://github.com/kward/shunit2/raw/master/source/2.1/src/shunit2")
+
+test: shellcheck $(TEST_DIR)/shunit2 $(TEST_DIR)/$(TEST_FILENAME)
 	bash $(TEST_DIR)/$(TEST_FILENAME)
 	dash $(TEST_DIR)/$(TEST_FILENAME)
 	ksh  $(TEST_DIR)/$(TEST_FILENAME)
 	mksh $(TEST_DIR)/$(TEST_FILENAME)
 	SHUNIT_PARENT="$(TEST_DIR)/$(TEST_FILENAME)" zsh -y "$(TEST_DIR)/$(TEST_FILENAME)"
+	rm -rf "$(TEST_DIR)/$(TEST_FILENAME)"
+
+simpletest: $(TEST_DIR)/shunit2 $(TEST_DIR)/$(TEST_FILENAME)
+	sh $(TEST_DIR)/$(TEST_FILENAME)
+	rm -rf "$(TEST_DIR)/$(TEST_FILENAME)"
 
 timings: $(TEST_DIR)/$(TEST_FILENAME)
 	@/usr/bin/time -f "bash: %e seconds, CPU %P, MEM %Mkb" bash $(TEST_DIR)/$(TEST_FILENAME) > /dev/null

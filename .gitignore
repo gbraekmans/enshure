@@ -2,3 +2,4 @@ doc/_*
 doc/reference/*_idx.rst
 doc/user/help_query_mode.rst
 test/all_tests.sh
+test/shunit2

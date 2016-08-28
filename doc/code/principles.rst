@@ -24,12 +24,12 @@ easy. Writing good shell scripts is hard.
   for modules to stay up to date, because they don't need to conform to
   a template. enSHure is closer to automatic than boilerplate.
 
-Portable: POSIX-compliant shell script
---------------------------------------
+POSIX-compliant: Runs everywhere
+--------------------------------
 
 The basic functionality should be available on every POSIX_-compliant
-operating system. This pretty much limits your choice to portable C or
-shell scripting. enSHure is a shell script because unix **admins have been
+operating system. This pretty much limits your choice of programming language to portable C or
+shell scripts. enSHure is a shell script because unix **admins have been
 using the shell for years to configure their systems**.
 
 This doesn't mean that enSHure should be limited to only what the lowest common
@@ -109,8 +109,12 @@ The shells which are tested against:
 - mksh (Android, BSD)
 - dash (Debian-based distro's)
 
-Readable: Easy on the memory
-----------------------------
+Easy on the eyes
+----------------
+
+TODO: Write about color output
+
+TODO: Write about command construction
 
 Lots of programs require intimate knowledge of their options, switches
 and arguments. Not so with enSHure, everything follows a straightforward
@@ -120,6 +124,8 @@ TODO: improve readable section.
 
 Traceable & idempotent
 ----------------------
+
+TODO: Improve this section
 
 All the changes made by enSHure are logged by default. Every modification
 to the system is logged with a time, date and user.

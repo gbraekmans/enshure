@@ -3,7 +3,7 @@
 set -o | grep "^posixargzero" > /dev/null && set -o posixargzero
 
 # shellcheck disable=SC2034
-setUp() {
+setUp() {	
 	# Freeze time for logs
 	date() {
 		printf '1970-01-01 00:00:00'
@@ -40,4 +40,4 @@ tearDown() {
 	rm -rf "$ENSHURE_LOG"
 }
 
-. "/usr/share/shunit2/shunit2"
+. "$(dirname "$0")/shunit2"

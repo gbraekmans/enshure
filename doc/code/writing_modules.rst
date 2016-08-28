@@ -1,5 +1,5 @@
-Writing modules
-===============
+Writing a module
+================
 
 TODO: Introduction
 

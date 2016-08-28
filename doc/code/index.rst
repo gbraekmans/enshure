@@ -20,3 +20,4 @@ Table of Contents:
    architecture
    types
    writing_modules
+   testing

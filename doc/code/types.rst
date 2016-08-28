@@ -55,6 +55,8 @@ Examples would be rpm, dnf, yum, apt, deb, pacman, portage, zypper,...
 Type: Service
 -------------
 
+TODO: Rename always & never to better alternatives. Present/absent, Persistent/dead, Available, unavailable
+
 These modules do everything service-related. Only usefull when working
 with the init system. Examples would be systemd, sysv, upstart, runit,
 openrc, ...
