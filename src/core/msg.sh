@@ -120,13 +120,12 @@ __msg() {
 	fi
 
 	_msg="$2"
-	_prefix=
-
 	if __msg_pretty_print; then
+		_prefix=
 		tput bold # & bright colors
 		
 		# terminalcodes from: http://wiki.bash-hackers.org/scripting/terminalcodes
-		
+		# Color & UTF-8 replace message
 		case "$1" in
 			"HEADING")
 				tput setaf 7 # white
@@ -157,7 +156,16 @@ __msg() {
 				_prefix=" ↳ "
 				;;
 		esac
-		printf '%s\n' "${_prefix}${_msg}"
+
+		# Print WARNING and ERROR to STDERR
+		case "$1" in
+			"ERROR"|"WARNING")
+				2>&1 printf '%s\n' "${_prefix}${_msg}"
+				;;
+			*)
+				printf '%s\n' "${_prefix}${_msg}"
+				;;
+		esac
 		tput sgr0 # reset colors
 	else 
 		# we can't pretty print
@@ -168,7 +176,14 @@ __msg() {
 			printf '%s\n\n' "$_lines"
 		else
 			# Just print the message and it's type
-			printf '%s: %s\n' "$1" "$_msg"
+			case "$1" in
+				"ERROR"|"WARNING")
+					2>&1 printf '%s: %s\n' "$1" "$_msg"
+					;;
+				*)
+					printf '%s: %s\n' "$1" "$_msg"
+					;;
+			esac
 		fi
 	fi
 }
