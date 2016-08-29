@@ -1,19 +1,21 @@
-DOC_BUILDCMD = sphinx-build-3
+DOC_BUILDCMD = sphinx-build
 DOC_DIR = doc
 HELPER_DIR = helpers
 TEST_DIR = test
-TEST_FILENAME = all_tests.sh
+KCOV_DIR = coverage
 
-.PHONY: help clean doc simpletest test timings shellcheck
+.PHONY: help clean doc simpletest test timings coverage shellcheck $(TEST_DIR)/unit.sh
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  doc        to make HTML documentation in $(DOC_DIR)/_build/html"
 	@echo "  todo       to show a list of all todo's in the code"
 	@echo "  test       to run all tests in the code"
+	@echo "  simpletest to run a quick test of the code"
 	@echo "  timings    to show how long each shell tests the code"
 	@echo "  shellcheck to statically check all code using shellcheck"
-	@echo "  clean      to remove all generated documentation"
+	@echo "  coverage   to generate a test coverage report in $(KCOV_DIR)/index.html"
+	@echo "  clean      to remove all generated documentation and coverage reports"
 
 clean:
 	rm -rf $(DOC_DIR)/_*
@@ -34,34 +36,36 @@ doc:
 	@echo
 	@echo "The HTML documentation is in $(DOC_DIR)/_build/html."
 
-$(TEST_DIR)/$(TEST_FILENAME): $(TEST_DIR)/common.sh
-	echo '#!/bin/sh' > "$(TEST_DIR)/$(TEST_FILENAME)"
-	find "$(TEST_DIR)/core" -name '*.sh' | sort | xargs cat >> "$(TEST_DIR)/$(TEST_FILENAME)"
-	cat "$(TEST_DIR)/common.sh" >> "$(TEST_DIR)/$(TEST_FILENAME)"
-	chmod +x "$(TEST_DIR)/$(TEST_FILENAME)"
+$(TEST_DIR)/unit.sh: $(TEST_DIR)/common.sh
+	@echo '#!/bin/sh' > "$(TEST_DIR)/unit.sh"
+	@find "$(TEST_DIR)/core" -name '*.sh' | sort | xargs cat >> "$(TEST_DIR)/unit.sh"
+	@cat "$(TEST_DIR)/common.sh" >> "$(TEST_DIR)/unit.sh"
+	@chmod +x "$(TEST_DIR)/unit.sh"
 
 $(TEST_DIR)/shunit2:
-	([ -e "/usr/share/shunit2/shunit2" ] && ln -s "/usr/share/shunit2/shunit2" $(TEST_DIR)/shunit2) || (cd $(TEST_DIR) && wget -q "https://github.com/kward/shunit2/raw/master/source/2.1/src/shunit2")
+	([ -e "/usr/share/shunit2/shunit2" ] && ln -s "/usr/share/shunit2/shunit2" $(TEST_DIR)/shunit2) || (cd $(TEST_DIR) && wget "https://github.com/kward/shunit2/raw/master/source/2.1/src/shunit2")
 
-test: shellcheck $(TEST_DIR)/shunit2 $(TEST_DIR)/$(TEST_FILENAME)
-	bash $(TEST_DIR)/$(TEST_FILENAME)
-	dash $(TEST_DIR)/$(TEST_FILENAME)
-	ksh  $(TEST_DIR)/$(TEST_FILENAME)
-	mksh $(TEST_DIR)/$(TEST_FILENAME)
-	SHUNIT_PARENT="$(TEST_DIR)/$(TEST_FILENAME)" zsh -y "$(TEST_DIR)/$(TEST_FILENAME)"
-	rm -rf "$(TEST_DIR)/$(TEST_FILENAME)"
+test: shellcheck $(TEST_DIR)/shunit2 $(TEST_DIR)/unit.sh
+	bash $(TEST_DIR)/unit.sh
+	dash $(TEST_DIR)/unit.sh
+	ksh  $(TEST_DIR)/unit.sh
+	mksh $(TEST_DIR)/unit.sh
+	SHUNIT_PARENT="$(TEST_DIR)/unit.sh" zsh -y "$(TEST_DIR)/unit.sh"
 
-simpletest: $(TEST_DIR)/shunit2 $(TEST_DIR)/$(TEST_FILENAME)
-	sh $(TEST_DIR)/$(TEST_FILENAME)
-	rm -rf "$(TEST_DIR)/$(TEST_FILENAME)"
+simpletest: $(TEST_DIR)/shunit2 $(TEST_DIR)/unit.sh
+	sh $(TEST_DIR)/unit.sh
 
-timings: $(TEST_DIR)/$(TEST_FILENAME)
-	@/usr/bin/time -f "bash: %e seconds, CPU %P, MEM %Mkb" bash $(TEST_DIR)/$(TEST_FILENAME) > /dev/null
-	@/usr/bin/time -f "dash: %e seconds, CPU %P, MEM %Mkb" dash $(TEST_DIR)/$(TEST_FILENAME) > /dev/null
-	@/usr/bin/time -f "ksh:  %e seconds, CPU %P, MEM %Mkb" ksh $(TEST_DIR)/$(TEST_FILENAME) > /dev/null
-	@/usr/bin/time -f "mksh: %e seconds, CPU %P, MEM %Mkb" mksh $(TEST_DIR)/$(TEST_FILENAME) > /dev/null
-	@SHUNIT_PARENT="$(TEST_DIR)/$(TEST_FILENAME)" /usr/bin/time -f "zsh:  %e seconds, CPU %P, MEM %Mkb" zsh -y "$(TEST_DIR)/$(TEST_FILENAME)" > /dev/null
+coverage: $(TEST_DIR)/unit.sh
+	rm -rf "$(KCOV_DIR)"
+	kcov --include-path=./src "./$(KCOV_DIR)" "$(TEST_DIR)/unit.sh"
+
+timings: $(TEST_DIR)/unit.sh
+	@/usr/bin/time -f "bash: %e seconds, CPU %P, MEM %Mkb" bash $(TEST_DIR)/unit.sh > /dev/null
+	@/usr/bin/time -f "dash: %e seconds, CPU %P, MEM %Mkb" dash $(TEST_DIR)/unit.sh > /dev/null
+	@/usr/bin/time -f "ksh:  %e seconds, CPU %P, MEM %Mkb" ksh $(TEST_DIR)/unit.sh > /dev/null
+	@/usr/bin/time -f "mksh: %e seconds, CPU %P, MEM %Mkb" mksh $(TEST_DIR)/unit.sh > /dev/null
+	@SHUNIT_PARENT="$(TEST_DIR)/unit.sh" /usr/bin/time -f "zsh:  %e seconds, CPU %P, MEM %Mkb" zsh -y "$(TEST_DIR)/unit.sh" > /dev/null
 
 shellcheck: $(TEST_DIR)/$(TEST_FILENAME)
 	shellcheck -s sh src/bin/enshure
-	find -name '*.sh' | xargs shellcheck -s sh
+	find src -name '*.sh' | xargs shellcheck -s sh
