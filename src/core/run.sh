@@ -21,6 +21,10 @@ if ! is_available compress && ! is_available gzip; then
 	require compress
 fi
 
+# TODO: Remove the absolute requirement of having mktemp installed
+# as it's not defined by the POSIX-standard.
+require mktemp
+
 __run_serialize() {
 	## Makes an entry for the message field of the log.
 	##$1 path to the file to serialize
@@ -101,4 +105,9 @@ __run_unserialize() {
 
 	# Unserialize the entry
 	printf '%s' "$_b64" | $_b64_cmd | $_uncompress_cmd
+}
+
+__run_current_shell() {
+	## Gets the current shell in which enSHure is being executed.
+	ps -p $$ -o comm=
 }

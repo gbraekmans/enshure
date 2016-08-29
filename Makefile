@@ -68,5 +68,4 @@ shellcheck:
 	find $(TEST_DIR) -name '*.sh' | xargs shellcheck -s sh
 
 dependencies:
-	# TODO: Filter dependencies... Move this to helpers.
-	strace -f -e execve test/core.sh 2>&1 | grep -o 'execve("[A-Z|a-z|/|0-9]*"' | cut -d'"' -f2 | sort | uniq
+	@strace -f -e execve test/core.sh 2>&1 | grep -o 'execve("[A-Z|a-z|/|0-9]*"' | cut -d'"' -f2 | sort | uniq

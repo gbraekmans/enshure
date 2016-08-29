@@ -34,6 +34,11 @@ test_run_sh_include() {
 	RESULT=$(. "$_BASEDIR/core/run.sh")
 	assertTrue 13 "$?"
 	assertEquals 14 "" "$RESULT"
+
+	is_available() { if [ "$1" = "mktemp" ]; then return 1; fi; return 0; }
+	RESULT=$(. "$_BASEDIR/core/run.sh")
+	assertFalse 15 "$?"
+	assertEquals 16 "ERROR: enSHure requires 'mktemp' to be installed." "$RESULT"
 }
 
 test_run_serialize() {
@@ -192,4 +197,10 @@ test_run_unserialize() {
 	unset EXAMPLE
 	unset EX_COMPRESS
 	unset EX_GZIP
+}
+
+test_run_current_shell() {
+	RESULT=$(__run_current_shell)
+	printf 'sh:bash:dash:ksh:mksh:zsh' | grep "$RESULT" > /dev/null
+	assertTrue 1 "$?"
 }
