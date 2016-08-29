@@ -70,11 +70,17 @@ test_task_begin() {
 	assertFalse 11 "$?"
 	assertEquals 12 "ERROR: 'webserver::apache' is not a valid name for a task. Current task is 'webserver::mysql'" "$(printf '%s' "$RESULT" | head -n1)"
 	
+	if ! command -v tput > /dev/null; then
+		startSkipping
+	fi
+	
 	__msg_pretty_print() { return 0; }
-	RESULT=$(__task_begin "webserver::mysql::my.cnf")
+	isSkipping || RESULT=$(__task_begin "webserver::mysql::my.cnf")
 	assertTrue 13 "$?"
 	printf '%s' "$RESULT" | grep 'ℹ Subtask: webserver → mysql → my.cnf' > /dev/null
 	assertTrue 14 "$?"
+
+	isSkipping && endSkipping
 }
 
 test_task_end() {
@@ -89,11 +95,16 @@ test_task_end() {
 	assertEquals 4 "Done: webserver" "$(printf '%s' "$RESULT" | head -n1)"
 	assertEquals 5 "#END|1970-01-01 00:00:00|0||||" "$(tail -n1 "$ENSHURE_LOG")"
 
+	if ! command -v tput > /dev/null; then
+		startSkipping
+	fi
 
 	__query_current_task() { printf "webserver::mysql"; }
 	__msg_pretty_print() { return 0; }
-	RESULT=$(__task_end)
+	isSkipping || RESULT=$(__task_end)
 	assertTrue 6 "$?"
 	printf '%s' "$RESULT" | grep 'ℹ Done: webserver → mysql' > /dev/null
 	assertTrue 7 "$?"
+
+	isSkipping && endSkipping
 }

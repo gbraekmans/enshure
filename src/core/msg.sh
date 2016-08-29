@@ -79,7 +79,7 @@ __msg_format_heading() {
 	## Displays a heading to the user
 	##$1 The message to format as a heading
 	_cols=80
-	which tput > /dev/null && _cols=$(tput cols)
+	is_available tput && _cols=$(tput cols)
 
 	# Chop the remainder of the message if larger than the terminal
 	_msg=$1

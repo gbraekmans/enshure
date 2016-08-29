@@ -4,7 +4,7 @@ HELPER_DIR = helpers
 TEST_DIR = test
 KCOV_DIR = coverage
 
-.PHONY: help clean doc simpletest test timings coverage shellcheck $(TEST_DIR)/unit.sh
+.PHONY: help clean doc simpletest test timings coverage shellcheck dependencies
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -19,6 +19,8 @@ help:
 
 clean:
 	rm -rf $(DOC_DIR)/_*
+	rm -rf $(KCOV_DIR)
+	rm -rf $(TEST_DIR)/shunit2
 
 todo:
 	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}' | sed 's|^\s*#\s*||g'
@@ -36,36 +38,35 @@ doc:
 	@echo
 	@echo "The HTML documentation is in $(DOC_DIR)/_build/html."
 
-$(TEST_DIR)/unit.sh: $(TEST_DIR)/common.sh
-	@echo '#!/bin/sh' > "$(TEST_DIR)/unit.sh"
-	@find "$(TEST_DIR)/core" -name '*.sh' | sort | xargs cat >> "$(TEST_DIR)/unit.sh"
-	@cat "$(TEST_DIR)/common.sh" >> "$(TEST_DIR)/unit.sh"
-	@chmod +x "$(TEST_DIR)/unit.sh"
-
 $(TEST_DIR)/shunit2:
 	([ -e "/usr/share/shunit2/shunit2" ] && ln -s "/usr/share/shunit2/shunit2" $(TEST_DIR)/shunit2) || (cd $(TEST_DIR) && wget "https://github.com/kward/shunit2/raw/master/source/2.1/src/shunit2")
 
-test: shellcheck $(TEST_DIR)/shunit2 $(TEST_DIR)/unit.sh
-	bash $(TEST_DIR)/unit.sh
-	dash $(TEST_DIR)/unit.sh
-	ksh  $(TEST_DIR)/unit.sh
-	mksh $(TEST_DIR)/unit.sh
-	SHUNIT_PARENT="$(TEST_DIR)/unit.sh" zsh -y "$(TEST_DIR)/unit.sh"
+test: shellcheck $(TEST_DIR)/shunit2
+	bash $(TEST_DIR)/core.sh
+	dash $(TEST_DIR)/core.sh
+	ksh  $(TEST_DIR)/core.sh
+	mksh $(TEST_DIR)/core.sh
+	SHUNIT_PARENT="$(TEST_DIR)/core.sh" zsh -y $(TEST_DIR)/core.sh
 
-simpletest: $(TEST_DIR)/shunit2 $(TEST_DIR)/unit.sh
-	sh $(TEST_DIR)/unit.sh
+simpletest: $(TEST_DIR)/shunit2
+	sh $(TEST_DIR)/core.sh
 
-coverage: $(TEST_DIR)/unit.sh
+coverage:
 	rm -rf "$(KCOV_DIR)"
-	kcov --include-path=./src "./$(KCOV_DIR)" "$(TEST_DIR)/unit.sh"
+	kcov --include-path=./src "./$(KCOV_DIR)" "$(TEST_DIR)/core.sh"
 
-timings: $(TEST_DIR)/unit.sh
-	@/usr/bin/time -f "bash: %e seconds, CPU %P, MEM %Mkb" bash $(TEST_DIR)/unit.sh > /dev/null
-	@/usr/bin/time -f "dash: %e seconds, CPU %P, MEM %Mkb" dash $(TEST_DIR)/unit.sh > /dev/null
-	@/usr/bin/time -f "ksh:  %e seconds, CPU %P, MEM %Mkb" ksh $(TEST_DIR)/unit.sh > /dev/null
-	@/usr/bin/time -f "mksh: %e seconds, CPU %P, MEM %Mkb" mksh $(TEST_DIR)/unit.sh > /dev/null
-	@SHUNIT_PARENT="$(TEST_DIR)/unit.sh" /usr/bin/time -f "zsh:  %e seconds, CPU %P, MEM %Mkb" zsh -y "$(TEST_DIR)/unit.sh" > /dev/null
+timings:
+	@/usr/bin/time -f "bash: %e seconds, CPU %P, MEM %Mkb" bash $(TEST_DIR)/core.sh > /dev/null
+	@/usr/bin/time -f "dash: %e seconds, CPU %P, MEM %Mkb" dash $(TEST_DIR)/core.sh > /dev/null
+	@/usr/bin/time -f "ksh:  %e seconds, CPU %P, MEM %Mkb" ksh $(TEST_DIR)/core.sh > /dev/null
+	@/usr/bin/time -f "mksh: %e seconds, CPU %P, MEM %Mkb" mksh $(TEST_DIR)/core.sh > /dev/null
+	@SHUNIT_PARENT="$(TEST_DIR)/core.sh" /usr/bin/time -f "zsh:  %e seconds, CPU %P, MEM %Mkb" zsh -y "$(TEST_DIR)/core.sh" > /dev/null
 
-shellcheck: $(TEST_DIR)/$(TEST_FILENAME)
+shellcheck:
 	shellcheck -s sh src/bin/enshure
 	find src -name '*.sh' | xargs shellcheck -s sh
+	find $(TEST_DIR) -name '*.sh' | xargs shellcheck -s sh
+
+dependencies:
+	# TODO: Filter dependencies... Move this to helpers.
+	strace -f -e execve test/core.sh 2>&1 | grep -o 'execve("[A-Z|a-z|/|0-9]*"' | cut -d'"' -f2 | sort | uniq

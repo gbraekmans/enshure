@@ -8,12 +8,16 @@ test_msg_terminal_supports_unicode() {
 }
 
 test_msg_terminal_writes_to_stdout() {
-	if [ -t 1 ]; then
-		__msg_terminal_writes_to_stdout
-		assertTrue 1 "$?"
-	else
-		printf "SKIP 1: Not printing to stdout.\n"
+	# Skip test if not writing to stdout
+	if [ ! -t 1 ]; then
+		startSkipping
 	fi
+	
+	isSkipping || __msg_terminal_writes_to_stdout
+	assertTrue 1 "$?"
+
+	isSkipping && endSkipping
+
 	__msg_terminal_writes_to_stdout > /dev/null
 	assertFalse 2 "$?"
 }
@@ -25,7 +29,7 @@ test_msg_terminal_supports_colors() {
 	}
   	__msg_terminal_supports_colors
  	assertFalse 1 "$?"
-  	unset tput
+  	unset -f tput
  
 	# system has not got tput installed -> false
 	is_available() {
@@ -40,7 +44,7 @@ test_msg_terminal_supports_colors() {
 		printf "8"
 	}
   	__msg_terminal_supports_colors
-  	unset tput
+  	unset -f tput
 	assertTrue 3 "$?"
 }
 
@@ -83,14 +87,13 @@ test_msg_format_heading() {
 	assertEquals 3 "TES" "$RESULT"
 
 	# Tput isn't installed assume 80
-	which() {
+	is_available() {
 		return 1
 	}
 	RESULT=$(__msg_format_heading "TEST")
 	assertEquals 4 "===================================== TEST =====================================" "$RESULT"
-
-	unset tput
-	unset which
+	
+	unset -f tput
 }
 
 test_msg() {
@@ -105,43 +108,47 @@ test_msg() {
 	__msg_terminal_supports_colors() { return 0; }
 	__msg_terminal_writes_to_stdout() { return 0; }
 	
-	# Note to verify the base64, append the command without the pipe
-	# and inspect the output yourself.
+	# Only execute if tput is insalled
+	if ! command -v tput > /dev/null; then
+		startSkipping
+	fi
 	
-	RESULT=$(__msg ERROR test)
+	isSkipping || RESULT=$(__msg ERROR test)
 	assertTrue 3 "$?"
 	printf '%s' "$RESULT" | grep " ✗ test" > /dev/null
 	assertTrue 4 "$?"
 
-	RESULT=$(__msg WARNING test)
+	isSkipping || RESULT=$(__msg WARNING test)
 	assertTrue 5 "$?"
 	printf '%s' "$RESULT" | grep " ⚠ test" > /dev/null
 	assertTrue 6 "$?"
 
-	RESULT=$(__msg OK test)
+	isSkipping || RESULT=$(__msg OK test)
 	assertTrue 7 "$?"
 	printf '%s' "$RESULT" | grep " ✓ test" > /dev/null
 	assertTrue 8 "$?"
 
-	RESULT=$(__msg CHANGE test)
+	isSkipping || RESULT=$(__msg CHANGE test)
 	assertTrue 9 "$?"
 	printf '%s' "$RESULT" | grep " ✎ test" > /dev/null
 	assertTrue 10 "$?"
 
-	RESULT=$(__msg INFO test)
+	isSkipping || RESULT=$(__msg INFO test)
 	assertTrue 11 "$?"
 	printf '%s' "$RESULT" | grep " ℹ test" > /dev/null
 	assertTrue 12 "$?"
 
-	RESULT=$(__msg DEBUG test)
+	isSkipping || RESULT=$(__msg DEBUG test)
 	assertTrue 13 "$?"
 	printf '%s' "$RESULT" | grep " ↳ test" > /dev/null
 	assertTrue 14 "$?"
 
-	RESULT=$(__msg HEADING test)
+	isSkipping || RESULT=$(__msg HEADING test)
 	assertTrue 15 "$?"
 	printf '%s' "$RESULT" | grep "= test =" > /dev/null
 	assertTrue 16 "$?"
+
+	isSkipping && endSkipping
 }
 
 test_msg_heading() {
