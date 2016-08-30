@@ -36,11 +36,12 @@ test_info() {
 	assertEquals 3 "#INFO|1970-01-01 00:00:00|0||||test" "$(cat "$ENSHURE_LOG")"
 }
 
+# shellcheck disable=SC2034
 test_debug() {
 	# Loglevel DEBUG, should log and print
 	# shellcheck disable=SC2034
 	ENSHURE_VERBOSITY="DEBUG"
-	RESULT=$(debug "test")
+	RESULT=$(debug "test" log)
 	assertTrue 1 "$?"
 	assertEquals 2 "DEBUG: test" "$RESULT"
 	assertEquals 3 "#DEBUG|1970-01-01 00:00:00|0||||test" "$(cat "$ENSHURE_LOG")"
@@ -48,10 +49,20 @@ test_debug() {
 	printf '' > "$ENSHURE_LOG"
 
 	# Loglevel INFO, should log but not print
-	RESULT=$(debug "test2")
+	RESULT=$(debug "test2" log)
 	assertTrue 4 "$?"
 	assertEquals 5 "" "$RESULT"
 	assertEquals 6 "#DEBUG|1970-01-01 00:00:00|0||||test2" "$(cat "$ENSHURE_LOG")"
+	printf '' > "$ENSHURE_LOG"
+
+	# Should print but not log
+	ENSHURE_VERBOSITY="DEBUG"
+	RESULT=$(debug "test3")
+	assertTrue 7 "$?"
+	assertEquals 8 "DEBUG: test3" "$RESULT"
+	assertEquals 9 "" "$(cat "$ENSHURE_LOG")"
+
+	unset ENSHURE_VERBOSITY
 }
 
 test_include() {

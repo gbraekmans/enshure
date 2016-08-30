@@ -201,6 +201,26 @@ test_run_unserialize() {
 
 test_run_current_shell() {
 	RESULT=$(__run_current_shell)
-	printf 'sh:bash:dash:ksh:mksh:zsh' | grep "$RESULT" > /dev/null
+	printf 'sh:bash:dash:ksh:mksh:zsh' | grep "${RESULT#/bin/}" > /dev/null
 	assertTrue 1 "$?"
+}
+
+test_run() {
+	run 'printf "This is a test"'
+	assertTrue 1 "$?"
+	assertEquals 2 "This is a test" "$(__run_unserialize "$(tail -n1 $ENSHURE_LOG | grep '^#STDOUT' | cut -d'|' -f7-)")"
+
+	run 'printf "This is a stderr test" >&2'
+	assertTrue 3 "$?"
+	assertEquals 4 "This is a stderr test" "$(__run_unserialize "$(tail -n1 $ENSHURE_LOG | grep '^#STDERR' | cut -d'|' -f7-)")"
+
+	run 'exit 45'
+	assertFalse 5 "$?"
+	assertEquals 6 "45" "$(tail -n1 $ENSHURE_LOG | grep '^#RETURN' | cut -d'|' -f7-)"
+
+	mktemp() { return 1; }
+	RESULT="$(run 'printf "This is a test"' 2>&1)"
+	assertFalse 7 "$?"
+	assertEquals 8 "CRITICAL FAILURE: Could not create temporary file." "$RESULT"
+	unset -f mktemp
 }

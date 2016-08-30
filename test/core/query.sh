@@ -197,3 +197,25 @@ test_query_summary() {
 	assertTrue 33 "$?"
 	assertEquals 34 "$(printf "change: 1\nok: 2\ntotal: 3\n" )" "$RESULT"	
 }
+
+test_query_command_output() {
+	run 'printf "test\n"'
+	run 'false'
+	info "filler" > /dev/null
+	run 'printf "An error!\n" && exit 4 >&2'
+
+	OUTPUT=$(cat <<-EOF
+	$ printf "test\n"
+	test
+	$ false
+	# Returned: 1
+	$ printf "An error!\n" && exit 4 >&2
+	An error!
+	# Returned: 4
+	EOF
+	)
+
+	RESULT=$(__query_command_output)
+	assertTrue 1 "$?"
+	assertEquals 2 "$OUTPUT" "$RESULT"
+}

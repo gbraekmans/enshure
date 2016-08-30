@@ -25,9 +25,52 @@ fi
 # as it's not defined by the POSIX-standard.
 require mktemp
 
+
+run() {
+	## Runs a command in the shell and logs it's execution.
+	##$1 The command to be executed
+
+	debug "Running '%s'."
+
+	# Create temp files for storing command output
+	_stdout=$(mktemp /tmp/enshure.stdout.XXXXXX) || die "Could not create temporary file." "$_E_FILE_CREATION_FAILED"
+	_stderr=$(mktemp /tmp/enshure.stderr.XXXXXX) || die "Could not create temporary file." "$_E_FILE_CREATION_FAILED"
+
+	# Log the run of the command
+	printf '%s\n' "$1" >> "$(__log_path)"
+
+	# Run the command
+	_retcode=0
+	"$(__run_current_shell)" -c "$1" > "$_stdout" 2> "$_stderr" || _retcode="$?"
+
+	# Only log stdout if there was any
+	if [ -s "$_stdout" ]; then
+		__log_entry STDOUT "$(__run_serialize "$_stdout")"
+	fi
+
+	# Only log stderr if there was any
+	if [ -s "$_stderr" ]; then
+		__log_entry STDERR "$(__run_serialize "$_stderr")"
+	fi
+
+	# only log the return code if it's unsuccesfull
+	if [ "0" -ne "$_retcode" ]; then
+		__log_entry RETURN "$_retcode"
+	fi
+
+	# Clean up tempfiles
+	rm -rf "$_stdout"
+	rm -rf "$_stderr"
+
+	return "$_retcode"
+}
+
 __run_serialize() {
 	## Makes an entry for the message field of the log.
 	##$1 path to the file to serialize
+
+	# TODO: Add xz-support
+	# TODO: Default order = xz,gzip,compress
 
 	# find out how to compress
 	_compress=''
@@ -109,5 +152,5 @@ __run_unserialize() {
 
 __run_current_shell() {
 	## Gets the current shell in which enSHure is being executed.
-	ps -p $$ -o comm=
+	ps -p $$ -o args= | cut -d' ' -f1
 }

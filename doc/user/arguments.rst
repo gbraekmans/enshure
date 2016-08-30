@@ -174,3 +174,5 @@ The following environment variables affect the behaviour of enshure:
 - ``$ENSHURE_VALIDATE`` if this is set, then no actions will be run. enSHure
   will just validate all input given and then stop processing. Usefull if
   you want to make sure all your states and arguments are correct.
+- ``$ENSHURE_MODULE_PATH`` A ``:``- seperated list of where to search
+  for extra modules.

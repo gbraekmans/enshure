@@ -30,6 +30,28 @@ __query_summary() {
 	awk -f "$_BASEDIR/core/query/summary.awk" -v "filtered_task=${1:-}" "$(__log_path)"
 }
 
+__query_command_output() {
+	## Prints all the output of a command to STDOUT.
+
+	cat "$ENSHURE_LOG" |
+	while read -r _line; do
+		_header=$(printf '%s' "$_line" | cut -d'|' -f1)
+		case "$_header" in
+			"#STDOUT"|"#STDERR")
+				__run_unserialize $(printf '%s\n' "$_line" | cut -d'|' -f7-)
+				;;
+			"#RETURN")
+				printf "# Returned: %i\n" $(printf '%s\n' "$_line" | cut -d'|' -f7)
+				;;
+			"#"*)
+				continue
+				;;
+			*)
+				printf '$ %s\n' "$_line"
+				;;
+		esac
+	done
+}
 
 query() {
 	## Runs a query against the log. Check the help for documentation
@@ -59,6 +81,9 @@ query() {
 			;;
 		"summary")
 			__query_summary "${2:-}"
+			;;
+		"command_output")
+			__query_command_output
 			;;
 		*)
 			error "--query '$1' is invalid. Use -h to get a list of all queries."

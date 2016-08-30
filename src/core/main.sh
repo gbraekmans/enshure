@@ -79,6 +79,9 @@ __main_execute() {
 	if [ -z "${1:-}" ]; then
 		die "No arguments given. Use --help or -h for help" "$_E_NO_ARGUMENTS"
 	fi
+
+	# Show some usefull information
+	debug "Logging to '$(__log_path)'"
 	
 	# If enSHure is in query mode, parse the arguments.
 	if __main_is_query_mode "$@"; then

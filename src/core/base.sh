@@ -58,15 +58,18 @@ info() {
 }
 
 debug() {
-	## Displays and logs a debug message. Returns 0.
-	##$1 message to be displayed and recorded in the log
+	## Displays a debug message. Returns 0.
+	##$1 message to be displayed
+	##$2 if this is set to 'log' the message will be logged
 	##> $ error "test"
 	##> ERROR: test
 	##> $ echo $?
 	##> 0
 
 	__msg DEBUG "$1"
+	if [ 'log' = "${2:-}" ]; then
 	__log_entry DEBUG "$1"
+	fi
 }
 
 is_available() {
