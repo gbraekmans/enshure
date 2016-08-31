@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-31 13:42+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/core/base.sh:130
+msgid "This functionality is not yet implemented in the enSHure core."
+msgstr ""
+
+#: src/core/query.sh:74
+msgid "No query specified. Use -h to get a list of all queries."
+msgstr ""
+
+#: src/core/log.sh:52
+msgid "Can not signal 'CHANGE' when no module is loaded."
+msgstr ""
+
+#: src/core/log.sh:64
+msgid "Can not signal 'OK' when no module is loaded."
+msgstr ""
+
+#: src/core/run.sh:38 src/core/run.sh:39
+msgid "Could not create temporary file."
+msgstr ""
+
+#: src/core/run.sh:89
+msgid "Could not find a supported compression command."
+msgstr ""
+
+#: src/core/run.sh:104 src/core/run.sh:150
+msgid "Could not find a suitable base64 implementation."
+msgstr ""
+
+#: src/core/main.sh:21
+msgid "No task specified. Add 'begin' or 'end'."
+msgstr ""
+
+#: src/core/main.sh:29
+msgid "No name for the task specified."
+msgstr ""
+
+#: src/core/main.sh:36
+msgid "A name for an ending task is given. This is not supported."
+msgstr ""
+
+#: src/core/main.sh:80
+msgid "No arguments given. Use --help or -h for help."
+msgstr ""
+
+#: src/core/task.sh:91
+msgid "Not in a task right now."
+msgstr ""

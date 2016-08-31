@@ -90,7 +90,8 @@ query() {
 			__query_command_output
 			;;
 		*)
-			error "$(translate "--query '$1' is invalid. Use -h to get a list of all queries.")"
+			_arg="$1"
+			error "$(translate "--query '\$_arg' is invalid. Use -h to get a list of all queries.")"
 			return "$_E_INVALID_ENUM"
 			;;
 	esac

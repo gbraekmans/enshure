@@ -22,6 +22,7 @@ clean:
 	rm -rf $(KCOV_DIR)
 	rm -rf $(TEST_DIR)/shunit2
 	rm -rf enSHure.pot
+	rm -rf src/locale
 
 todo:
 	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}' | sed 's|^\s*#\s*||g'
@@ -72,4 +73,8 @@ dependencies:
 	@strace -f -e execve test/core.sh 2>&1 | grep -o 'execve("[A-Z|a-z|/|0-9]*"' | cut -d'"' -f2 | sort | uniq
 
 i18n:
-	find src -name '*.sh' | xargs xgettext -o enSHure.pot  -L Shell --keyword --keyword=translate
+	find src -name '*.sh' | xargs xgettext --from-code utf-8 -o src/po/enSHure.pot  -L Shell --keyword --keyword=translate
+	mkdir -p src/locale/nl/LC_MESSAGES
+	cd src/po && msgmerge -U nl.po enSHure.pot
+	cd src/po && msgfmt -v  nl.po -o ../locale/nl/LC_MESSAGES/enSHure.mo
+

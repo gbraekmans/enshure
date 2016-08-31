@@ -1,0 +1,166 @@
+# Dutch translations for PACKAGE package.
+# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Geert Braekmans <geert.braekmans@gmail.com>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-31 15:29+0000\n"
+"PO-Revision-Date: 2016-08-31 13:33+0000\n"
+"Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
+"Language-Team: Dutch\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/core/error.sh:19
+msgid "Something unknown went terribly wrong..."
+msgstr "Iets onbekend ging helemaal fout..."
+
+#: src/core/error.sh:21
+#, sh-format
+msgid "CRITICAL FAILURE: $_msg"
+msgstr "KRITIEKE FOUT: $_msg"
+
+#: src/core/log.sh:41
+#, sh-format
+msgid "Could not write to log file '$_logfile'."
+msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
+
+#: src/core/log.sh:53
+msgid "Can not signal 'CHANGE' when no module is loaded."
+msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
+
+#: src/core/log.sh:57
+#, sh-format
+msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."
+msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."
+
+#: src/core/log.sh:65
+msgid "Can not signal 'OK' when no module is loaded."
+msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
+
+#: src/core/log.sh:70
+#, sh-format
+msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
+msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
+
+#: src/core/main.sh:21
+msgid "No task specified. Add 'begin' or 'end'."
+msgstr "Geen taak gespecifieerd. Voeg 'begin' of 'end' toe."
+
+#: src/core/main.sh:29
+msgid "No name for the task specified."
+msgstr "Geen naam voor de taak gespecifieerd."
+
+#: src/core/main.sh:36
+msgid "A name for an ending task is given. This is not supported."
+msgstr "Een naam de einde-taak is gegeven. Dit wordt niet ondersteund."
+
+#: src/core/main.sh:43
+#, sh-format
+msgid "--task '$_arg' is invalid: must be 'begin' or 'end'."
+msgstr "--task '$_arg' is fout: moet 'begin' of 'end' zijn."
+
+#: src/core/main.sh:71
+#, sh-format
+msgid "Unknown argument '$_arg'."
+msgstr "Onbekend argument '$_arg'."
+
+#: src/core/main.sh:82
+msgid "No arguments given. Use --help or -h for help."
+msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
+
+#: src/core/main.sh:87
+#, sh-format
+msgid "Logging to '$_logpath'"
+msgstr "Log naar '$_logpath'"
+
+#: src/core/msg.sh:45
+#, sh-format
+msgid "Verbosity level '${_old_verbosity}' unknown, assuming 'INFO'."
+msgstr "Luidheidsniveau '${_old_verbosity}' onbekend, gaan uit van 'INFO'."
+
+#: src/core/query.sh:74
+msgid "No query specified. Use -h to get a list of all queries."
+msgstr ""
+"Geen query gespecifieerd. Gebruik -h om een lijst te zien van alle queries."
+
+#: src/core/query.sh:94
+#, sh-format
+msgid "--query '$_arg' is invalid. Use -h to get a list of all queries."
+msgstr ""
+"--query '$_arg' is fout. Gebruik -h om een lijst te zien van alle queries."
+
+#: src/core/run.sh:36
+#, sh-format
+msgid "Running '$_cmd'."
+msgstr "Aan het uitvoeren: '$_cmd'."
+
+#: src/core/run.sh:39 src/core/run.sh:40
+msgid "Could not create temporary file."
+msgstr "Kon geen tijdelijk bestand aanmaken"
+
+#: src/core/run.sh:90
+msgid "Could not find a supported compression command."
+msgstr "Kon geen ondersteund compressie-commando vinden."
+
+#: src/core/run.sh:105 src/core/run.sh:151
+msgid "Could not find a suitable base64 implementation."
+msgstr "Kon geen bruikbare base64 implementatie vinden."
+
+#: src/core/run.sh:137
+#, sh-format
+msgid "The header '$_header' is unknown for unserialization."
+msgstr "Het begin '$_header' is onbekend voor onserialisatie."
+
+#: src/core/task.sh:65
+#, sh-format
+msgid ""
+"'$_task' is not a valid name for a task. Current task is '$_current_task'."
+msgstr ""
+"'$_task' is een foute naam voor een taak. Huidige taak is '$_current_task'."
+
+#: src/core/task.sh:67
+#, sh-format
+msgid "'$_task' is not a valid name for a task."
+msgstr "'$_task' is een foute naam voor een taak."
+
+#: src/core/task.sh:80
+#, sh-format
+msgid "Subtask: $_display_task"
+msgstr "Subtaak: $_display_task"
+
+#: src/core/task.sh:82
+#, sh-format
+msgid "Task: $_display_task"
+msgstr "Taak: $_display_task"
+
+#: src/core/task.sh:92
+msgid "Not in a task right now."
+msgstr "Nu niet in een taak."
+
+#: src/core/task.sh:107 src/core/task.sh:109
+#, sh-format
+msgid "Done: $_display_task"
+msgstr "Gedaan: $_display_task"
+
+#: src/core/base.sh:120
+msgid "${_MODULE:-enSHure} requires '$_prog' to be installed."
+msgstr "${_MODULE:-enSHure} heeft '$_prog' nodig om te werken."
+
+#: src/core/base.sh:134
+#, sh-format
+msgid ""
+"$_MODULE does not implement a function needed to set the state "
+"'$_REQUESTED_STATE'."
+msgstr ""
+"$_MODULE implementeert een functien die nodig is voor status "
+"'$_REQUESTED_STATE' niet."
+#: src/core/base.sh:136
+msgid "This functionality is not yet implemented in the enSHure core."
+msgstr "Deze functionaliteit is nog niet geimplementeerd in the enSHure kern."

@@ -8,7 +8,7 @@ include core/query
 __main_is_query_mode() {
 	## Checks wether the given arguments put enSHure in query or execution mode.
 	##$1 The first argument given at the command line.
-	[ "$(echo "$1" | head -c1)" = "-" ]
+	[ "$(printf '%s' "$1" | head -c1)" = "-" ]
 }
 
 __main_query_task() {
@@ -39,7 +39,8 @@ __main_query_task() {
 			__task_end
 			;;
 		*)
-			error "$(translate "--task '$1' is invalid: must be 'begin' or 'end'.")"
+			_arg="$1"
+			error "$(translate "--task '\$_arg' is invalid: must be 'begin' or 'end'.")"
 			exit "$_E_INVALID_ENUM"
 			;;
 	esac
@@ -49,7 +50,7 @@ __main_query_mode_parse() {
 	## Parses the command if enSHure is started in query mode
 
 	# TODO: Implement facts
-
+	
 	case "$1" in
 		"-h"|"--help")
 			__help
@@ -66,7 +67,8 @@ __main_query_mode_parse() {
 			query "$@"
 			;;
 		*)
-			error "$(translate "Unknown argument '$1'.")"
+			_arg=$1
+			error "$(translate "Unknown argument '\$_arg'.")"
 			return "$_E_UNKNOWN_ARGUMENT"
 	esac
 }
@@ -77,11 +79,12 @@ __main_execute() {
 	
 	# Error if there are no arguments
 	if [ -z "${1:-}" ]; then
-		die "$(translate "No arguments given. Use --help or -h for help" "$_E_NO_ARGUMENTS")"
+		die "$(translate "No arguments given. Use --help or -h for help." "$_E_NO_ARGUMENTS")"
 	fi
 
 	# Show some usefull information
-	debug "$(translate "Logging to '$(__log_path)'")"
+	_logpath="$(__log_path)"
+	debug "$(translate "Logging to '\$_logpath'")"
 	
 	# If enSHure is in query mode, parse the arguments.
 	if __main_is_query_mode "$@"; then

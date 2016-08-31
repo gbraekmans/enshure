@@ -29,7 +29,14 @@ translate() {
 	##$1 The string to be translated, in English
 
 	if is_available gettext; then
-		gettext 'enSHure' "$1"
+		##$_GETTEXT_INCLUDED a variable to indicate gettext has been loaded
+		if [ -z "${_GETTEXT_INCLUDED:-}" ]; then
+			. gettext.sh
+			_GETTEXT_INCLUDED='yes'
+		fi
+
+		# TODO: Fix locales if installed in /usr/share/
+		TEXTDOMAIN='enSHure' TEXTDOMAINDIR="${_BASEDIR}/locale" eval_gettext "$1"
 	else
 		printf '%s' "$1"
 	fi
@@ -111,7 +118,8 @@ require() {
 	if is_available "$1"; then
 		return 0
 	else
-		error "$(translate "${_MODULE:-enSHure} requires '$1' to be installed.")"
+		_prog="$1"
+		error "$(translate "\${_MODULE:-enSHure} requires '\$_prog' to be installed.")"
 		exit "$_E_UNMET_REQUIREMENT"
 	fi
 }
@@ -125,7 +133,7 @@ not_implemented() {
 	##> 9
 
 	if [ -n "$_MODULE" ]; then
-		error "$(translate "$_MODULE does not implement a function needed to set the state '$_REQUESTED_STATE'.")"
+		error "$(translate "\$_MODULE does not implement a function needed to set the state '\$_REQUESTED_STATE'.")"
 	else
 		error  "$(translate "This functionality is not yet implemented in the enSHure core.")"
 	fi

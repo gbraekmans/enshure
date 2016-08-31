@@ -32,7 +32,8 @@ run() {
 	## Runs a command in the shell and logs it's execution.
 	##$1 The command to be executed
 
-	debug "$(translate "Running '$1'.")"
+	_cmd="$1"
+	debug "$(translate "Running '\$_cmd'.")"
 
 	# Create temp files for storing command output
 	_stdout=$(mktemp /tmp/enshure.stdout.XXXXXX) || die "$(translate "Could not create temporary file.")" "$_E_FILE_CREATION_FAILED"
@@ -133,7 +134,7 @@ __run_unserialize() {
 			_uncompress_cmd='uncompress -c'
 			;;
 		*)
-			error "$(translate "The header '$_header' is unknown for unserialization.")"
+			error "$(translate "The header '\$_header' is unknown for unserialization.")"
 			return "$_E_INVALID_SERIALIZE_HEADER"
 			;;
 	esac

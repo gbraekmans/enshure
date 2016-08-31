@@ -60,10 +60,11 @@ __task_begin() {
 	# Error if the task name is not valid
 	_current_task=$(__query_current_task)
 	if ! __task_has_valid_name "$1"; then
+		_task="$1"
 		if [ -n "$_current_task" ]; then
-			error "$(translate "'$1' is not a valid name for a task. Current task is '$_current_task'")"
+			error "$(translate "'\$_task' is not a valid name for a task. Current task is '\$_current_task'.")"
 		else
-			error "$(translate "'$1' is not a valid name for a task.")"
+			error "$(translate "'\$_task' is not a valid name for a task.")"
 		fi
 		return "$_E_INVALID_TASK_NAME"
 	fi
@@ -76,9 +77,9 @@ __task_begin() {
 
 	# Display the start of a new task
 	if __task_is_nested "$1"; then
-		__msg INFO "$(translate "Subtask: $_display_task")"
+		__msg INFO "$(translate "Subtask: \$_display_task")"
 	else
-		__msg HEADING "$(translate "Task: $_display_task")"
+		__msg HEADING "$(translate "Task: \$_display_task")"
 	fi
 	__log_entry "BEGIN" "$1"
 }
@@ -88,7 +89,7 @@ __task_end() {
 
 	# Cannot end a task if there's no task
 	if [ -z "$_task" ]; then
-		error "$(translate "Not in a task right now")"
+		error "$(translate "Not in a task right now.")"
 		return "$_E_NOT_IN_A_TASK"
 	fi
 
@@ -103,9 +104,9 @@ __task_end() {
 
 	# Display the start of a new task
 	if __task_is_nested "$_task"; then
-		__msg INFO "$(translate "Done: $_display_task")"
+		__msg INFO "$(translate "Done: \$_display_task")"
 	else
-		__msg HEADING "$(translate "Done: $_display_task")"
+		__msg HEADING "$(translate "Done: \$_display_task")"
 	fi
 	__log_entry "END"
 }

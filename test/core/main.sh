@@ -22,6 +22,8 @@ test_main_query_mode_parse() {
 
 	assertEquals 8 "ERROR: No query specified. Use -h to get a list of all queries." "$(__main_query_mode_parse -q)"
 	assertEquals 9 "$(__main_query_mode_parse -q)" "$(__main_query_mode_parse --query)"
+
+	assertEquals 10 "ERROR: Unknown argument '-e'." "$(__main_query_mode_parse -e)"
 }
 
 test_main_execute() {

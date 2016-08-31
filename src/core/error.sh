@@ -16,8 +16,9 @@ die() {
 	fi
 
 	# Print a cryptic message if none was give
-	_msg="${1:-Something unknown went terribly wrong...}"
-	printf '%s\n' "$(translate "CRITICAL FAILURE: $_msg")" >&2
+	_generic_msg="$(translate "Something unknown went terribly wrong...")"
+	_msg="${1:-$_generic_msg}"
+	printf '%s\n' "$(translate "CRITICAL FAILURE: \$_msg")" >&2
 	exit "$_err"
 }
 
