@@ -97,6 +97,7 @@ __task_end() {
 	_display_task="$_task"
 	if __msg_pretty_print; then
 		# Replace '::' with ' → ' for pretty task names
+		# shellcheck disable=SC2034
 		_display_task=$(printf '%s' "$_task" | sed 's/::/ → /g')
 	fi
 

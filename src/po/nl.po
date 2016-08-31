@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-31 15:46+0000\n"
+"POT-Creation-Date: 2016-08-31 18:20+0000\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -49,52 +49,10 @@ msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
 msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
 msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
 
-#: src/core/main.sh:21
-msgid "No task specified. Add 'begin' or 'end'."
-msgstr "Geen taak gespecifieerd. Voeg 'begin' of 'end' toe."
-
-#: src/core/main.sh:29
-msgid "No name for the task specified."
-msgstr "Geen naam voor de taak gespecifieerd."
-
-#: src/core/main.sh:36
-msgid "A name for an ending task is given. This is not supported."
-msgstr "Een naam de einde-taak is gegeven. Dit wordt niet ondersteund."
-
-#: src/core/main.sh:43
-#, sh-format
-msgid "--task '$_arg' is invalid: must be 'begin' or 'end'."
-msgstr "--task '$_arg' is fout: moet 'begin' of 'end' zijn."
-
-#: src/core/main.sh:71
-#, sh-format
-msgid "Unknown argument '$_arg'."
-msgstr "Onbekend argument '$_arg'."
-
-#: src/core/main.sh:82
-msgid "No arguments given. Use --help or -h for help."
-msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
-
-#: src/core/main.sh:87
-#, sh-format
-msgid "Logging to '$_logpath'"
-msgstr "Log naar '$_logpath'"
-
 #: src/core/msg.sh:45
 #, sh-format
 msgid "Verbosity level '${_old_verbosity}' unknown, assuming 'INFO'."
 msgstr "Luidheidsniveau '${_old_verbosity}' onbekend, gaan uit van 'INFO'."
-
-#: src/core/query.sh:74
-msgid "No query specified. Use -h to get a list of all queries."
-msgstr ""
-"Geen query gespecifieerd. Gebruik -h om een lijst te zien van alle queries."
-
-#: src/core/query.sh:94
-#, sh-format
-msgid "--query '$_arg' is invalid. Use -h to get a list of all queries."
-msgstr ""
-"--query '$_arg' is fout. Gebruik -h om een lijst te zien van alle queries."
 
 #: src/core/run.sh:36
 #, sh-format
@@ -149,11 +107,55 @@ msgstr "Nu niet in een taak."
 msgid "Done: $_display_task"
 msgstr "Gedaan: $_display_task"
 
-#: src/core/base.sh:122
-msgid "${_MODULE:-enSHure} requires '$_prog' to be installed."
-msgstr "${_MODULE:-enSHure} heeft '$_prog' nodig om te werken."
+#: src/core/main.sh:21
+msgid "No task specified. Add 'begin' or 'end'."
+msgstr "Geen taak gespecifieerd. Voeg 'begin' of 'end' toe."
 
-#: src/core/base.sh:136
+#: src/core/main.sh:29
+msgid "No name for the task specified."
+msgstr "Geen naam voor de taak gespecifieerd."
+
+#: src/core/main.sh:36
+msgid "A name for an ending task is given. This is not supported."
+msgstr "Een naam de einde-taak is gegeven. Dit wordt niet ondersteund."
+
+#: src/core/main.sh:43
+#, sh-format
+msgid "Argument --task '$_arg' is invalid: must be 'begin' or 'end'."
+msgstr "Argument --task '$_arg' is fout: moet 'begin' of 'end' zijn."
+
+#: src/core/main.sh:71
+#, sh-format
+msgid "Unknown argument '$_arg'."
+msgstr "Onbekend argument '$_arg'."
+
+#: src/core/main.sh:82
+msgid "No arguments given. Use --help or -h for help."
+msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
+
+#: src/core/main.sh:87
+#, sh-format
+msgid "Logging to '$_logpath'"
+msgstr "Log naar '$_logpath'"
+
+#: src/core/query.sh:74
+msgid "No query specified. Use -h to get a list of all queries."
+msgstr ""
+"Geen query gespecifieerd. Gebruik -h om een lijst te zien van alle queries."
+
+#: src/core/query.sh:94
+#, sh-format
+msgid ""
+"Argument --query '$_arg' is invalid. Use -h to get a list of all queries."
+msgstr ""
+"Argument --query '$_arg' is fout. Gebruik -h om een lijst te zien van alle queries."
+
+#: src/core/base.sh:123
+#, sh-format
+msgid "$_module requires '$_prog' to be installed."
+msgstr "$_module heeft '$_prog' nodig om te werken."
+
+#: src/core/base.sh:137
 #, sh-format
 msgid ""
 "$_MODULE does not implement a function needed to set the state "
@@ -162,6 +164,6 @@ msgstr ""
 "$_MODULE implementeert een functien die nodig is voor status "
 "'$_REQUESTED_STATE' niet."
 
-#: src/core/base.sh:138
+#: src/core/base.sh:139
 msgid "This functionality is not yet implemented in the enSHure core."
 msgstr "Deze functionaliteit is nog niet geimplementeerd in the enSHure kern."

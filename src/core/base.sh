@@ -106,6 +106,7 @@ is_available() {
 	command -v "$1" > /dev/null 2>&1
 }
 
+# shellcheck disable=SC2034
 require() {
 	## Displays an error message if the command is not available on the system.
 	## Returns 0 if available, greater than 0 if not.
@@ -118,8 +119,9 @@ require() {
 	if is_available "$1"; then
 		return 0
 	else
+		_module=${_MODULE:-enSHure}
 		_prog="$1"
-		error "$(translate "\${_MODULE:-enSHure} requires '\$_prog' to be installed.")"
+		error "$(translate "\$_module requires '\$_prog' to be installed.")"
 		exit "$_E_UNMET_REQUIREMENT"
 	fi
 }

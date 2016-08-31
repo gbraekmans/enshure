@@ -29,7 +29,7 @@ test_main_query_mode_parse() {
 test_main_execute() {
 	RESULT=$(__main_execute 2>&1)
 	assertFalse 1 "$?"
-	assertEquals 2 "CRITICAL FAILURE: No arguments given. Use --help or -h for help" "$RESULT"
+	assertEquals 2 "CRITICAL FAILURE: No arguments given. Use --help or -h for help." "$RESULT"
 
 	RESULT=$(__main_execute -v)
 	assertTrue 3 "$?"
@@ -43,7 +43,7 @@ test_main_query_task() {
 
 	RESULT=$(__main_query_task whatever)
 	assertFalse 3 "$?"
-	assertEquals 4 "ERROR: --task 'whatever' is invalid: must be 'begin' or 'end'." "$RESULT"
+	assertEquals 4 "ERROR: Argument --task 'whatever' is invalid: must be 'begin' or 'end'." "$RESULT"
 
 	__task_end() { return 0; }
 	RESULT=$(__main_query_task end)

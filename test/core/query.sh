@@ -11,7 +11,7 @@ test_query() {
 
 	RESULT=$(query whatever)
 	assertFalse 3 "$?"
-	assertEquals 4 "ERROR: --query 'whatever' is invalid. Use -h to get a list of all queries." "$RESULT"
+	assertEquals 4 "ERROR: Argument --query 'whatever' is invalid. Use -h to get a list of all queries." "$RESULT"
 
 	RESULT=$(query current_task)
 	assertTrue 5 "$?"

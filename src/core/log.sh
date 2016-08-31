@@ -37,6 +37,7 @@ __log_entry() {
 		printf '%s\n' "$_entry"
 	else
 		if [ ! -w "$(__log_path)" ]; then
+			# shellcheck disable=SC2034
 			_logfile="$(__log_path)"
 			die "$(translate "Could not write to log file '\$_logfile'.")" "$_E_UNWRITEABLE_LOG"
 		fi

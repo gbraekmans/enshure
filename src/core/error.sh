@@ -17,6 +17,7 @@ die() {
 
 	# Print a cryptic message if none was give
 	_generic_msg="$(translate "Something unknown went terribly wrong...")"
+	# shellcheck disable=SC2034
 	_msg="${1:-$_generic_msg}"
 	printf '%s\n' "$(translate "CRITICAL FAILURE: \$_msg")" >&2
 	exit "$_err"

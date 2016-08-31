@@ -58,7 +58,7 @@ test_task_begin() {
 	__query_current_task() { printf "webserver"; }
 	RESULT=$(__task_begin "dbserver")
 	assertFalse 6 "$?"
-	assertEquals 7 "ERROR: 'dbserver' is not a valid name for a task. Current task is 'webserver'" "$(printf '%s' "$RESULT" | head -n1)"
+	assertEquals 7 "ERROR: 'dbserver' is not a valid name for a task. Current task is 'webserver'." "$(printf '%s' "$RESULT" | head -n1)"
 
 	RESULT=$(__task_begin "webserver::mysql")
 	assertTrue 8 "$?"
@@ -68,7 +68,7 @@ test_task_begin() {
 	__query_current_task() { printf "webserver::mysql"; }
 	RESULT=$(__task_begin "webserver::apache")
 	assertFalse 11 "$?"
-	assertEquals 12 "ERROR: 'webserver::apache' is not a valid name for a task. Current task is 'webserver::mysql'" "$(printf '%s' "$RESULT" | head -n1)"
+	assertEquals 12 "ERROR: 'webserver::apache' is not a valid name for a task. Current task is 'webserver::mysql'." "$(printf '%s' "$RESULT" | head -n1)"
 	
 	if ! command -v tput > /dev/null; then
 		startSkipping
@@ -87,7 +87,7 @@ test_task_end() {
 	__query_current_task() { printf ""; }
 	RESULT=$(__task_end)
 	assertFalse 1 "$?"
-	assertEquals 2 "ERROR: Not in a task right now" "$RESULT"
+	assertEquals 2 "ERROR: Not in a task right now." "$RESULT"
 
 	__query_current_task() { printf "webserver"; }
 	RESULT=$(__task_end)

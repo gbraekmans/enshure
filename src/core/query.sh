@@ -90,8 +90,9 @@ query() {
 			__query_command_output
 			;;
 		*)
+			# shellcheck disable=SC2034
 			_arg="$1"
-			error "$(translate "--query '\$_arg' is invalid. Use -h to get a list of all queries.")"
+			error "$(translate "Argument --query '\$_arg' is invalid. Use -h to get a list of all queries.")"
 			return "$_E_INVALID_ENUM"
 			;;
 	esac

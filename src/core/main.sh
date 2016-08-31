@@ -40,7 +40,7 @@ __main_query_task() {
 			;;
 		*)
 			_arg="$1"
-			error "$(translate "--task '\$_arg' is invalid: must be 'begin' or 'end'.")"
+			error "$(translate "Argument --task '\$_arg' is invalid: must be 'begin' or 'end'.")"
 			exit "$_E_INVALID_ENUM"
 			;;
 	esac
@@ -67,6 +67,7 @@ __main_query_mode_parse() {
 			query "$@"
 			;;
 		*)
+			# shellcheck disable=SC2034
 			_arg=$1
 			error "$(translate "Unknown argument '\$_arg'.")"
 			return "$_E_UNKNOWN_ARGUMENT"
@@ -83,6 +84,7 @@ __main_execute() {
 	fi
 
 	# Show some usefull information
+	# shellcheck disable=SC2034
 	_logpath="$(__log_path)"
 	debug "$(translate "Logging to '\$_logpath'")"
 	

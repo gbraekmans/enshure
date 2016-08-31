@@ -21,3 +21,4 @@ Table of Contents:
    types
    writing_modules
    testing
+   translating
