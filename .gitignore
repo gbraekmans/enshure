@@ -3,5 +3,6 @@ doc/reference/*_idx.rst
 doc/user/help_query_mode.rst
 test/shunit2
 coverage/
-enSHure.pot
+src/po/enSHure.pot
 src/locale
+*~
