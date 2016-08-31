@@ -12,8 +12,11 @@ The first argument given to enSHure sets the mode, if it starts with a ``-``
 enSHure will run in query mode, otherwise it will run in execution mode.
 enSHure requires at least one argument to run succesfully.
 
-**TODO: REF TO EXIT STATUS**
+.. note::
 
+  The exit status of enSHure is meaningfull, but mostly for debugging
+  purposes. See ``src/core/error.sh`` for a list of all possible
+  return codes and their meaning.
 
 Query mode
 ----------
@@ -155,7 +158,21 @@ are the 4 module-types and their states:
 Custom arguments
 ################
 
-TODO: write this
+All arguments supplied after the required first two, or the optional
+third (the state), are the custom arguments. These arguments always come
+in pairs. First the argument name, then the value.
+
+We'll take the symlink-module for example. The symlink module has an
+optional parameter ``target``, which is required if the requested state
+is ``present``. An example::
+
+	$ enshure symlink '/usr/src/linux' present target '/usr/src/linux-4.0.0'
+	...
+	$ enshure symlink '/usr/src/linux' absent force yes
+	...
+
+A list of all the custom arguments for a module can be found by running
+``enshure -h MODULE``.
 
 Environment variables
 ---------------------

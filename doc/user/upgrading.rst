@@ -2,8 +2,9 @@ Install or upgrade
 ==================
 
 enSHure uses `semantic versioning`_ for it's releases. Your scripts will
-keep working if the major version is equal. A script written for 1.0.0
-will still work on 1.5.4.
+keep working as long as your on a release with the same major version.
+A script written for 1.0.0 will still work on 1.1.0, but a script written
+for 1.1.0 may not work on 1.0.0. 
 
 .. _`semantic versioning`: http://semver.org/
 

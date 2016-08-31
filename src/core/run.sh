@@ -1,6 +1,8 @@
 
 include core/base
 
+# TODO: Add support for $ENSHURE_VALIDATE
+
 # Declare dependencies
 # uuencode, uudecode, compress & uncompress should be installed but 
 # aren't on most systems. Even though there in the POSIX standard.
