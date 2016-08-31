@@ -4,7 +4,7 @@ HELPER_DIR = helpers
 TEST_DIR = test
 KCOV_DIR = coverage
 
-.PHONY: help clean doc simpletest test timings coverage shellcheck dependencies
+.PHONY: help clean doc simpletest test timings coverage shellcheck dependencies po
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -21,6 +21,7 @@ clean:
 	rm -rf $(DOC_DIR)/_*
 	rm -rf $(KCOV_DIR)
 	rm -rf $(TEST_DIR)/shunit2
+	rm -rf enSHure.pot
 
 todo:
 	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}' | sed 's|^\s*#\s*||g'
@@ -69,3 +70,6 @@ shellcheck:
 
 dependencies:
 	@strace -f -e execve test/core.sh 2>&1 | grep -o 'execve("[A-Z|a-z|/|0-9]*"' | cut -d'"' -f2 | sort | uniq
+
+po:
+	find src -name '*.sh' | xargs xgettext -o enSHure.pot  -L Shell --keyword --keyword=translate
