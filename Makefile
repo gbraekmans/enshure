@@ -21,7 +21,7 @@ clean:
 	rm -rf $(DOC_DIR)/_*
 	rm -rf $(KCOV_DIR)
 	rm -rf $(TEST_DIR)/shunit2
-	rm -rf enSHure.pot
+	rm -rf src/po/enSHure.pot
 	rm -rf src/locale
 
 todo:
@@ -74,7 +74,5 @@ dependencies:
 
 i18n:
 	find src -name '*.sh' | xargs xgettext --from-code utf-8 -o src/po/enSHure.pot  -L Shell --keyword --keyword=translate
-	mkdir -p src/locale/nl/LC_MESSAGES
-	cd src/po && msgmerge -U nl.po enSHure.pot
-	cd src/po && msgfmt -v  nl.po -o ../locale/nl/LC_MESSAGES/enSHure.mo
+	helpers/translate.sh
 
