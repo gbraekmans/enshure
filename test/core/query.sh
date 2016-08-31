@@ -3,7 +3,7 @@ test_query() {
 	__query_current_task() { printf "current task"; return 0; }
 	__query_made_change() { printf "made change"; return 0; }
 	__query_summary() { printf "summary - %s" "$1"; return 0; }
-
+	__query_command_output() { printf "command output"; return 0; }
 
 	RESULT=$(query)
 	assertFalse 1 "$?"
@@ -25,10 +25,13 @@ test_query() {
 	assertTrue 9 "$?"
 	assertEquals 10 "summary - test::task" "$RESULT"
 
-
 	RESULT=$(query made_change)
 	assertTrue 11 "$?"
 	assertEquals 12 "made change" "$RESULT"
+
+	RESULT=$(query command_output)
+	assertTrue 13 "$?"
+	assertEquals 14 "command output" "$RESULT"
 }
 
 test_query_current_task() {

@@ -109,3 +109,30 @@ test_initcap() {
 	assertTrue 5 "$?"
 	assertEquals 6 "Test" "$RESULT"
 }
+
+test_translate() {
+	LANGUAGE='en'
+	LANG='en_US.UTF-8'
+
+	RESULT="$(translate "Something unknown went terribly wrong...")"
+	assertTrue 1 "$?"
+	assertEquals 2 "Something unknown went terribly wrong..." "$RESULT"
+
+	LANGUAGE='C'
+	LANG='C'
+	RESULT="$(translate "Something unknown went terribly wrong...")"
+	assertTrue 3 "$?"
+	assertEquals 4 "Something unknown went terribly wrong..." "$RESULT"
+
+	LANGUAGE='nl'
+	LANG='nl_NL.UTF-8'
+	RESULT="$(translate "Something unknown went terribly wrong...")"
+	assertTrue 5 "$?"
+	assertEquals 6 "Iets onbekend ging helemaal fout..." "$RESULT"
+
+	# gettext unavailable
+	is_available() { return 1; }
+	RESULT="$(translate "Something unknown went terribly wrong...")"
+	assertTrue 7 "$?"
+	assertEquals 8 "Something unknown went terribly wrong..." "$RESULT"
+}

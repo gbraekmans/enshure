@@ -33,7 +33,10 @@ setUp() {
 	# Reset env variables
 	ENSHURE_LOG=$(mktemp)
 	ENSHURE_VERBOSITY=
-	
+
+	LANGUAGE='C'
+	LANG='C'
+
 	# Reset important test variables
 	_INCLUDED=
 	_MODULE=
