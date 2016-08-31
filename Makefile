@@ -4,7 +4,7 @@ HELPER_DIR = helpers
 TEST_DIR = test
 KCOV_DIR = coverage
 
-.PHONY: help clean doc simpletest test timings coverage shellcheck dependencies po
+.PHONY: help clean doc simpletest test timings coverage shellcheck dependencies i18n
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -71,5 +71,5 @@ shellcheck:
 dependencies:
 	@strace -f -e execve test/core.sh 2>&1 | grep -o 'execve("[A-Z|a-z|/|0-9]*"' | cut -d'"' -f2 | sort | uniq
 
-po:
+i18n:
 	find src -name '*.sh' | xargs xgettext -o enSHure.pot  -L Shell --keyword --keyword=translate
