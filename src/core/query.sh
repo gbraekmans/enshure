@@ -1,4 +1,7 @@
 
+# NOTE: A query never returns I18n-supported strings. Parsing a query
+# should be the same regardless of the LANG-setting
+
 __query_current_task() {
 	## Prints the current task
 	awk -f "$_BASEDIR/core/query/current_task.awk" "$(__log_path)"
@@ -7,7 +10,7 @@ __query_current_task() {
 __query_made_change() {
 	## Returns 0 if last action made a change, 1 otherwise.
 	## If there was no reliable information return 2.
-	_last_action=$(awk -f "$_BASEDIR/core/query/last_action_status.awk" "$(__log_path)")
+	_last_action="$(awk -f "$_BASEDIR/core/query/last_action_status.awk" "$(__log_path)")"
 	case "$_last_action" in
 		"CHANGE")
 			return 0
@@ -33,15 +36,16 @@ __query_summary() {
 __query_command_output() {
 	## Prints all the output of a command to STDOUT.
 
+	# shellcheck disable=SC2002
 	cat "$ENSHURE_LOG" |
 	while read -r _line; do
 		_header=$(printf '%s' "$_line" | cut -d'|' -f1)
 		case "$_header" in
 			"#STDOUT"|"#STDERR")
-				__run_unserialize $(printf '%s\n' "$_line" | cut -d'|' -f7-)
+				__run_unserialize "$(printf '%s\n' "$_line" | cut -d'|' -f7-)"
 				;;
 			"#RETURN")
-				printf "# Returned: %i\n" $(printf '%s\n' "$_line" | cut -d'|' -f7)
+				printf "# Returned: %i\n" "$(printf '%s\n' "$_line" | cut -d'|' -f7)"
 				;;
 			"#"*)
 				continue
@@ -67,7 +71,7 @@ query() {
 	
 	# Check if argument is there
 	if [ -z "${1:-}" ]; then
-		error "No query specified. Use -h to get a list of all queries."
+		error "$(translate "No query specified. Use -h to get a list of all queries.")"
 		return "$_E_ARGUMENT_MISSING"
 	fi
 
@@ -86,7 +90,7 @@ query() {
 			__query_command_output
 			;;
 		*)
-			error "--query '$1' is invalid. Use -h to get a list of all queries."
+			error "$(translate "--query '$1' is invalid. Use -h to get a list of all queries.")"
 			return "$_E_INVALID_ENUM"
 			;;
 	esac

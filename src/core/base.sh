@@ -24,6 +24,17 @@ include core/error
 include core/msg
 include core/log
 
+translate() {
+	## A small wrapper around gettext to provide I18n.
+	##$1 The string to be translated, in English
+
+	if is_available gettext; then
+		gettext 'enSHure' "$1"
+	else
+		printf '%s' "$1"
+	fi
+}
+
 error() {
 	## Displays and logs an error message. Returns 0. If you need
 	## an exit at that moment please use die().
@@ -100,7 +111,7 @@ require() {
 	if is_available "$1"; then
 		return 0
 	else
-		error "${_MODULE:-enSHure} requires '$1' to be installed."
+		error "$(translate "${_MODULE:-enSHure} requires '$1' to be installed.")"
 		exit "$_E_UNMET_REQUIREMENT"
 	fi
 }
@@ -114,9 +125,9 @@ not_implemented() {
 	##> 9
 
 	if [ -n "$_MODULE" ]; then
-		error "$_MODULE does not implement a function needed to set the state '$_REQUESTED_STATE'."
+		error "$(translate "$_MODULE does not implement a function needed to set the state '$_REQUESTED_STATE'.")"
 	else
-		error "This functionality is not yet implemented in the enSHure core."
+		error  "$(translate "This functionality is not yet implemented in the enSHure core.")"
 	fi
 	return "$_E_NOT_IMPLEMENTED"
 }

@@ -37,7 +37,7 @@ __log_entry() {
 		printf '%s\n' "$_entry"
 	else
 		if [ ! -w "$(__log_path)" ]; then
-			die "Could not write to log file '$(__log_path)'." "$_E_UNWRITEABLE_LOG"
+			die "$(translate "Could not write to log file '$(__log_path)'.")" "$_E_UNWRITEABLE_LOG"
 		fi
 		printf '%s\n' "$_entry" >> "$(__log_path)"
 	fi
@@ -49,19 +49,26 @@ __log_can_write_module_functions() {
 
 __log_change() {
 	if ! __log_can_write_module_functions; then
-		die "Can not signal CHANGE when no module is loaded." "$_E_NOT_IN_A_MODULE"
+		die "$(translate "Can not signal 'CHANGE' when no module is loaded." "$_E_NOT_IN_A_MODULE")"
 	fi
-	_msg="$(initcap "$_MODULE") $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."
-	__msg "CHANGE" "$_msg"
+	_mod="$(initcap "$_MODULE")"
+	_msg="$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."
+	_tmsg="$(translate "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE.")"
+
+	__msg "CHANGE" "$_tmsg"
 	__log_entry "CHANGE" "$_msg"
 }
 
 __log_ok() {
 	if ! __log_can_write_module_functions; then
-		die "Can not signal OK when no module is loaded." "$_E_NOT_IN_A_MODULE"
+		die "$(translate "Can not signal 'OK' when no module is loaded.")" "$_E_NOT_IN_A_MODULE"
 	fi
-	_msg="$(initcap "$_MODULE") $_IDENTIFIER is $_REQUESTED_STATE."
-	__msg "OK" "$_msg"
+
+	_mod="$(initcap "$_MODULE")"
+	_msg="$_mod $_IDENTIFIER is $_REQUESTED_STATE."
+	_tmsg="$(translate "$_mod $_IDENTIFIER is $_REQUESTED_STATE.")"
+
+	__msg "OK" "$_tmsg"
 	__log_entry "OK" "$_msg"
 }
 

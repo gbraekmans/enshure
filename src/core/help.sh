@@ -1,5 +1,7 @@
 include core/base
 
+# TODO convert to gettext
+
 __help() {
 	## Show the help message if no module is given.
 	cat <<-"EOF"

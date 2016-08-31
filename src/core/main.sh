@@ -18,7 +18,7 @@ __main_query_task() {
 
 	# Check if argument is there
 	if [ -z "${1:-}" ]; then
-		error "No task specified. Add 'begin' or 'end'."
+		error "$(translate "No task specified. Add 'begin' or 'end'.")"
 		exit "$_E_ARGUMENT_MISSING"
 	fi
 
@@ -26,20 +26,20 @@ __main_query_task() {
 	case "$1" in
 		"begin")
 			if [ -z "${2:-}" ]; then
-				error "No name for the task specified."
+				error "$(translate "No name for the task specified.")"
 				exit "$_E_ARGUMENT_MISSING"
 			fi
 			__task_begin "$2"
 			;;
 		"end")
 			if [ -n "${2:-}" ]; then
-				error "A name for an ending task is given. This is not supported."
+				error "$(translate "A name for an ending task is given. This is not supported.")"
 				exit "$_E_ARGUMENT_MISSING"
 			fi
 			__task_end
 			;;
 		*)
-			error "--task '$1' is invalid: must be 'begin' or 'end'."
+			error "$(translate "--task '$1' is invalid: must be 'begin' or 'end'.")"
 			exit "$_E_INVALID_ENUM"
 			;;
 	esac
@@ -66,7 +66,7 @@ __main_query_mode_parse() {
 			query "$@"
 			;;
 		*)
-			error "Unknown argument '$1'."
+			error "$(translate "Unknown argument '$1'.")"
 			return "$_E_UNKNOWN_ARGUMENT"
 	esac
 }
@@ -77,11 +77,11 @@ __main_execute() {
 	
 	# Error if there are no arguments
 	if [ -z "${1:-}" ]; then
-		die "No arguments given. Use --help or -h for help" "$_E_NO_ARGUMENTS"
+		die "$(translate "No arguments given. Use --help or -h for help" "$_E_NO_ARGUMENTS")"
 	fi
 
 	# Show some usefull information
-	debug "Logging to '$(__log_path)'"
+	debug "$(translate "Logging to '$(__log_path)'")"
 	
 	# If enSHure is in query mode, parse the arguments.
 	if __main_is_query_mode "$@"; then

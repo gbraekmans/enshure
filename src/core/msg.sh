@@ -42,7 +42,7 @@ __msg_meets_verbosity_level() {
 		*)
 			__old_verbosity=$ENSHURE_VERBOSITY
 			ENSHURE_VERBOSITY="INFO"
-			warning "Verbosity level '${__old_verbosity}' unknown, assuming 'INFO'."
+			warning "$(translate "Verbosity level '${__old_verbosity}' unknown, assuming 'INFO'.")"
 			;;
 	esac
 

@@ -30,11 +30,11 @@ run() {
 	## Runs a command in the shell and logs it's execution.
 	##$1 The command to be executed
 
-	debug "Running '%s'."
+	debug "$(translate "Running '$1'.")"
 
 	# Create temp files for storing command output
-	_stdout=$(mktemp /tmp/enshure.stdout.XXXXXX) || die "Could not create temporary file." "$_E_FILE_CREATION_FAILED"
-	_stderr=$(mktemp /tmp/enshure.stderr.XXXXXX) || die "Could not create temporary file." "$_E_FILE_CREATION_FAILED"
+	_stdout=$(mktemp /tmp/enshure.stdout.XXXXXX) || die "$(translate "Could not create temporary file.")" "$_E_FILE_CREATION_FAILED"
+	_stderr=$(mktemp /tmp/enshure.stderr.XXXXXX) || die "$(translate "Could not create temporary file.")" "$_E_FILE_CREATION_FAILED"
 
 	# Log the run of the command
 	printf '%s\n' "$1" >> "$(__log_path)"
@@ -83,7 +83,8 @@ __run_serialize() {
 		_compress="GZIP"
 		_compress_cmd="gzip --no-name --stdout"
 	else
-		die "Could not find a supported compression command." "$_E_UNMET_REQUIREMENT"
+		# Although we never should get here, it's better to be clear
+		die "$(translate "Could not find a supported compression command.")" "$_E_UNMET_REQUIREMENT"
 	fi 
 
 	# find out how to convert to base64
@@ -97,7 +98,8 @@ __run_serialize() {
 		# use a pipe to tr instead of -w0 for OSX compatibility
 		_b64_cmd="base64 | tr -d '\n'"
 	else
-		die "Could not find a suitable base64 implementation." "$_E_UNMET_REQUIREMENT"
+		# Although we never should get here, it's better to be clear
+		die "$(translate "Could not find a suitable base64 implementation.")" "$_E_UNMET_REQUIREMENT"
 	fi
 	
 	# create the new command to serialize
@@ -129,7 +131,7 @@ __run_unserialize() {
 			_uncompress_cmd='uncompress -c'
 			;;
 		*)
-			error "The header '$_header' is unknown for unserialization."
+			error "$(translate "The header '$_header' is unknown for unserialization.")"
 			return "$_E_INVALID_SERIALIZE_HEADER"
 			;;
 	esac
@@ -143,7 +145,7 @@ __run_unserialize() {
 	elif is_available base64; then
 		_b64_cmd="base64  --decode"
 	else
-		die "Could not find a suitable base64 implementation." "$_E_UNMET_REQUIREMENT"
+		die "$(translate "Could not find a suitable base64 implementation.")" "$_E_UNMET_REQUIREMENT"
 	fi
 
 	# Unserialize the entry

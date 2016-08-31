@@ -73,14 +73,14 @@ test_log_change() {
 	_IDENTIFIER=''
 	RESULT=$(__log_change 2>&1)
 	assertFalse 1 "$?"
-	assertEquals 2 "CRITICAL FAILURE: Can not signal CHANGE when no module is loaded." "$RESULT"
+	assertEquals 2 "CRITICAL FAILURE: Can not signal 'CHANGE' when no module is loaded." "$RESULT"
 
 	_REQUESTED_STATE='present'
 	_MODULE='file'
 	_IDENTIFIER='/root/.zshrc'
 	RESULT=$(__log_change 2>&1)
 	assertFalse 3 "$?"
-	assertEquals 4 "CRITICAL FAILURE: Can not signal CHANGE when no module is loaded." "$RESULT"
+	assertEquals 4 "CRITICAL FAILURE: Can not signal 'CHANGE' when no module is loaded." "$RESULT"
 
 	_ACTUAL_STATE='absent'
 	RESULT=$(__log_change 2>&1)
@@ -97,14 +97,14 @@ test_log_ok() {
 	_IDENTIFIER=''
 	RESULT=$(__log_ok 2>&1)
 	assertFalse 1 "$?"
-	assertEquals 2 "CRITICAL FAILURE: Can not signal OK when no module is loaded." "$RESULT"
+	assertEquals 2 "CRITICAL FAILURE: Can not signal 'OK' when no module is loaded." "$RESULT"
 
 	_REQUESTED_STATE='present'
 	_MODULE='file'
 	_IDENTIFIER='/root/.zshrc'
 	RESULT=$(__log_ok 2>&1)
 	assertFalse 3 "$?"
-	assertEquals 4 "CRITICAL FAILURE: Can not signal OK when no module is loaded." "$RESULT"
+	assertEquals 4 "CRITICAL FAILURE: Can not signal 'OK' when no module is loaded." "$RESULT"
 
 	_ACTUAL_STATE='absent'
 	RESULT=$(__log_ok 2>&1)

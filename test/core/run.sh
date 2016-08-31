@@ -42,7 +42,7 @@ test_run_sh_include() {
 }
 
 test_run_serialize() {
-	EXAMPLE=$(mktemp)
+	EXAMPLE="$(mktemp)"
 
 	cat > "$EXAMPLE" <<-"EOF"
 	Accusamus soluta sit aut esse quis. Eius soluta accusantium placeat non sed. Sit aut qui amet fugiat quia architecto totam et. Est illo reprehenderit et dignissimos pariatur et magnam. Saepe aliquid corporis rerum animi fugit ea inventore. Soluta eos deleniti vel autem sit enim.
@@ -208,15 +208,15 @@ test_run_current_shell() {
 test_run() {
 	run 'printf "This is a test"'
 	assertTrue 1 "$?"
-	assertEquals 2 "This is a test" "$(__run_unserialize "$(tail -n1 $ENSHURE_LOG | grep '^#STDOUT' | cut -d'|' -f7-)")"
+	assertEquals 2 "This is a test" "$(__run_unserialize "$(tail -n1 "$ENSHURE_LOG" | grep '^#STDOUT' | cut -d'|' -f7-)")"
 
 	run 'printf "This is a stderr test" >&2'
 	assertTrue 3 "$?"
-	assertEquals 4 "This is a stderr test" "$(__run_unserialize "$(tail -n1 $ENSHURE_LOG | grep '^#STDERR' | cut -d'|' -f7-)")"
+	assertEquals 4 "This is a stderr test" "$(__run_unserialize "$(tail -n1 "$ENSHURE_LOG" | grep '^#STDERR' | cut -d'|' -f7-)")"
 
 	run 'exit 45'
 	assertFalse 5 "$?"
-	assertEquals 6 "45" "$(tail -n1 $ENSHURE_LOG | grep '^#RETURN' | cut -d'|' -f7-)"
+	assertEquals 6 "45" "$(tail -n1 "$ENSHURE_LOG" | grep '^#RETURN' | cut -d'|' -f7-)"
 
 	mktemp() { return 1; }
 	RESULT="$(run 'printf "This is a test"' 2>&1)"
