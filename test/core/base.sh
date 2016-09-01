@@ -110,6 +110,7 @@ test_initcap() {
 	assertEquals 6 "Test" "$RESULT"
 }
 
+# shellcheck disable=SC2034 disable=SC2016
 test_translate() {
 	LANGUAGE='en'
 	LANG='en_US.UTF-8'
@@ -130,9 +131,18 @@ test_translate() {
 	assertTrue 5 "$?"
 	assertEquals 6 "Iets onbekend ging helemaal fout..." "$RESULT"
 
+	_display_task='Test'
+	RESULT="$(translate 'Done: $_display_task')"
+	assertTrue 7 "$?"
+	assertEquals 8 "Gedaan: Test" "$RESULT"
+
 	# gettext unavailable
 	is_available() { return 1; }
 	RESULT="$(translate "Something unknown went terribly wrong...")"
-	assertTrue 7 "$?"
-	assertEquals 8 "Something unknown went terribly wrong..." "$RESULT"
+	assertTrue 9 "$?"
+	assertEquals 10 "Something unknown went terribly wrong..." "$RESULT"
+
+	RESULT="$(translate 'Done: $_display_task')"
+	assertTrue 11 "$?"
+	assertEquals 12 "Done: Test" "$RESULT"
 }

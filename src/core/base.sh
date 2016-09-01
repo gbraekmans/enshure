@@ -6,6 +6,7 @@ include() {
 	##> include core/msg
 
 	##$_INCLUDED All the paths currently included in the script
+	# This file must be included, by definition.
 	_INCLUDED=${_INCLUDED:-core/base}
 
 	# Don't do anything if already included
@@ -13,8 +14,12 @@ include() {
 		return
 	fi
 
-	# Include the file
-	. "$_BASEDIR/$1.sh"
+	if [ -f "$_BASEDIR/$1.sh" ]; then
+		# Include the file
+		. "$_BASEDIR/$1.sh"
+	else
+		return "$_E_FILE_NOT_EXISTS"
+	fi
 
 	# Remember the file is already included
 	_INCLUDED="${_INCLUDED}:$1"
@@ -28,17 +33,11 @@ translate() {
 	## A small wrapper around gettext to provide I18n.
 	##$1 The string to be translated, in English
 
-	if is_available gettext; then
-		##$_GETTEXT_INCLUDED a variable to indicate gettext has been loaded
-		if [ -z "${_GETTEXT_INCLUDED:-}" ]; then
-			. gettext.sh
-			_GETTEXT_INCLUDED='yes'
-		fi
-
+	if is_available gettext && is_available envsubst; then
+		TEXTDOMAIN='enSHure' TEXTDOMAINDIR="${_BASEDIR}/locale" gettext "$1" | (export PATH $(envsubst --variables "$1"); envsubst "$1")
 		# TODO: Fix locales if installed in /usr/share/
-		TEXTDOMAIN='enSHure' TEXTDOMAINDIR="${_BASEDIR}/locale" eval_gettext "$1"
 	else
-		printf '%s' "$1"
+		eval "printf '%s' \"$1\""
 	fi
 }
 

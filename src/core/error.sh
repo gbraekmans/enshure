@@ -59,9 +59,12 @@ _E_NOT_IN_A_MODULE=10
 ##$_E_UNKNOWN_ARGUMENT the argument specified is not supported
 _E_UNKNOWN_ARGUMENT=11
 
-##$_E_INVALID_SERIALIZE_HEADER the header of the serialized message is not known.
+##$_E_INVALID_SERIALIZE_HEADER the header of the serialized message is not known
 _E_INVALID_SERIALIZE_HEADER=12
 
 ##$_E_FILE_CREATION_FAILED the creation of a file failed
 _E_FILE_CREATION_FAILED=13
+
+##$_E_FILE_NOT_EXISTS a file does not exist
+_E_FILE_NOT_EXISTS=14
 }
