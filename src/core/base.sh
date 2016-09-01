@@ -34,6 +34,10 @@ translate() {
 	##$1 The string to be translated, in English
 
 	if is_available gettext && is_available envsubst; then
+		# Note: The following code is shamelessly copied from gettext.sh
+		# but including "gettext.sh" fails under dash and ksh to translate
+		# the strings. This solution seems to work even in zsh.
+
 		TEXTDOMAIN='enSHure' TEXTDOMAINDIR="${_BASEDIR}/locale" gettext "$1" | (export PATH $(envsubst --variables "$1"); envsubst "$1")
 		# TODO: Fix locales if installed in /usr/share/
 	else
