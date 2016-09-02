@@ -4,18 +4,19 @@ HELPER_DIR = helpers
 TEST_DIR = test
 KCOV_DIR = coverage
 
-.PHONY: help clean doc simpletest test timings coverage shellcheck dependencies i18n
+.PHONY: help clean doc simpletest test timings testcoverage shellcheck dependencies i18n
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  doc        to make HTML documentation in $(DOC_DIR)/_build/html"
-	@echo "  todo       to show a list of all todo's in the code"
-	@echo "  test       to run all tests in the code"
-	@echo "  simpletest to run a quick test of the code"
-	@echo "  timings    to show how long each shell tests the code"
-	@echo "  shellcheck to statically check all code using shellcheck"
-	@echo "  coverage   to generate a test coverage report in $(KCOV_DIR)/index.html"
-	@echo "  clean      to remove all generated documentation and coverage reports"
+	@echo "  doc          to make HTML documentation in $(DOC_DIR)/_build/html"
+	@echo "  todo         to show a list of all todo's in the code"
+	@echo "  test         to run all tests in the code"
+	@echo "  simpletest   to run a quick test of the code"
+	@echo "  timings      to show how long each shell tests the code"
+	@echo "  shellcheck   to statically check all code using shellcheck"
+	@echo "  testcoverage to generate a test coverage report in $(KCOV_DIR)/index.html"
+	@echo "  i18n         to generate all files needed for locale-support"
+	@echo "  clean        to remove all generated files"
 
 clean:
 	rm -rf $(DOC_DIR)/_*
@@ -53,7 +54,7 @@ test: shellcheck $(TEST_DIR)/shunit2
 simpletest: $(TEST_DIR)/shunit2
 	sh $(TEST_DIR)/core.sh
 
-coverage:
+testcoverage:
 	rm -rf "$(KCOV_DIR)"
 	kcov --include-path=./src "./$(KCOV_DIR)" "$(TEST_DIR)/core.sh"
 

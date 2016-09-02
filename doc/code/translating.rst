@@ -26,3 +26,14 @@ You can now edit the ``nl.po`` file.
 
 Updating a translation-file
 ---------------------------
+
+This is roughly the same as adding a new language::
+
+  $ make i18n
+
+And edit the .po-file for your language in the src/po directory.
+
+.. note::
+
+  Whenever you see a variable, this is a dollarsign followed by a word
+  (``$word`` for example), keep it as is and do not translate.

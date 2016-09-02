@@ -39,11 +39,11 @@ functional system.
 In addition you'll need these packages installed for testing purposes:
 
 - shunit2_: Should be available at "/usr/share/shunit2/shunit2", this
-  is the default for most distributions.
+  is the default for most distributions. Otherwise it will downloaded.
 - ShellCheck_: The binary must be available on the system and included
   in $PATH.
 - kcov_: Optionally, this is usefull to check if your tests cover all the
-  code paths. You must run this manually.
+  code paths. Only needed if you run ``make testcoverage``.
 
 All tests are ran using different shells. The following shells should be
 available on the system:

@@ -62,8 +62,10 @@ modules, private functions should only be called in the core.
 Linebreaks
 **********
 
-Try not to break up lines. This isn't as readable, but the code coverage
-scanner doesn't handle custom linebreaks that well.
+Don't worry about long lines. I hope everyone today has a decent editor that
+supports more than 80 characters. The reason for this is that strings that need
+to be translated can not be split up in an acceptable fashion to support a < 80
+characters rule. Use common sense to determine if it should be split up.
 
 Indentation: tabs
 *****************

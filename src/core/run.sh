@@ -36,8 +36,10 @@ run() {
 	debug "$(translate "Running '\$_cmd'.")"
 
 	# Create temp files for storing command output
-	_stdout=$(mktemp /tmp/enshure.stdout.XXXXXX) || die "$(translate "Could not create temporary file.")" "$_E_FILE_CREATION_FAILED"
-	_stderr=$(mktemp /tmp/enshure.stderr.XXXXXX) || die "$(translate "Could not create temporary file.")" "$_E_FILE_CREATION_FAILED"
+	_stdout=$(mktemp /tmp/enshure.stdout.XXXXXX) \
+		|| die "$(translate "Could not create temporary file.")" "$_E_FILE_CREATION_FAILED"
+	_stderr=$(mktemp /tmp/enshure.stderr.XXXXXX) \
+		|| die "$(translate "Could not create temporary file.")" "$_E_FILE_CREATION_FAILED"
 
 	# Log the run of the command
 	printf '%s\n' "$1" >> "$(__log_path)"

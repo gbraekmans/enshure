@@ -72,13 +72,17 @@ test_include() {
 	test -n "$_VERSION"
 	assertFalse 5 "$?"
 	include core/version
-	assertEquals 1 "core/base:core/version" "$_INCLUDED"
+	assertTrue 1 "$?"
+	assertEquals 2 "core/base:core/version" "$_INCLUDED"
 	test -n "$_VERSION"
-	assertTrue 2 "$?"
+	assertTrue 3 "$?"
 	include core/version
-	assertEquals 3 "core/base:core/version" "$_INCLUDED"
+	assertTrue 4 "$?"
+	assertEquals 5 "core/base:core/version" "$_INCLUDED"
 	include core/error
-	assertEquals 4 "core/base:core/version:core/error" "$_INCLUDED"
+	assertEquals 6 "core/base:core/version:core/error" "$_INCLUDED"
+	include whatever
+	assertFalse 7 "$?"
 }
 
 test_not_implemented() {
