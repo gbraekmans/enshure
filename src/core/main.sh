@@ -117,7 +117,7 @@ __main_execute_mode_parse() {
 	
 	##$ENSHURE_VALIDATE if this is set only a validation of the modules will occur
 	# If only validation was necessary exit here
-	if [ -n "$ENSHURE_VALIDATE" ]; then
+	if [ -n "${ENSHURE_VALIDATE:-}" ]; then
 		return 0
 	fi
 
