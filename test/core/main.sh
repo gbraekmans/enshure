@@ -34,6 +34,10 @@ test_main_execute() {
 	RESULT=$(__main_execute -v)
 	assertTrue 3 "$?"
 	assertEquals 4 "$_VERSION" "$RESULT"
+
+	RESULT=$(__main_execute whatever 2>&1)
+	assertFalse 3 "$?"
+	assertEquals 4 "ERROR: A module and identifier must be specified." "$RESULT"
 }
 
 test_main_query_task() {
@@ -83,4 +87,36 @@ test_main_execute_mode_parse_state() {
 	RESULT=$(__main_execute_mode_parse_state mod id test arg val)
 	assertTrue 7 "$?"
 	assertEquals 8 "test" "$RESULT"
+}
+
+# shellcheck disable=SC2034
+test_main_execute_mode_parse() {
+	# Stub out almost everything ;)
+	__module_load() { _MODULE="$1"; }
+	__module_is_valid_state() { return 0; }
+	is_state() { return 0; }
+	attain_state() { return 0; }
+	__module_parse() { return 0; }
+	__log_ok() { return 0; }
+	__log_change() { return 0; }
+
+	_DEFAULT_STATE='state'
+
+	__main_execute_mode_parse test this > /dev/null 2>&1
+	assertTrue 1 "$?"
+	assertEquals 2 "this" "$_IDENTIFIER"
+
+	__main_execute_mode_parse test thiss state > /dev/null 2>&1
+	assertTrue 3 "$?"
+	assertEquals 4 "thiss" "$_IDENTIFIER"
+
+	__module_is_valid_state() { return 1; }
+	RESULT=$(__main_execute_mode_parse test thiss state 2>&1)
+	assertFalse 5 "$?"
+	assertEquals 6 "ERROR: 'state' is not a valid state for module 'test'." "$RESULT"
+	__module_is_valid_state() { return 0; }
+
+	is_state() { return 1; }
+	RESULT=$(__main_execute_mode_parse test this state 2>&1)
+	assertTrue 7 "$?"
 }

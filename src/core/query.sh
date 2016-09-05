@@ -57,6 +57,10 @@ __query_command_output() {
 	done
 }
 
+##$_QUERIES all valid queries
+# shellcheck disable=SC2034
+_QUERIES="current_task made_change summary:[TASK] command_output"
+
 query() {
 	## Runs a query against the log. Check the help for documentation
 	## which queries can run and what the return values are.

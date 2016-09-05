@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-05 09:55+0000\n"
+"POT-Creation-Date: 2016-09-05 14:01+0000\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -53,19 +53,6 @@ msgstr "Nu niet in een taak."
 msgid "Done: $_display_task"
 msgstr "Gedaan: $_display_task"
 
-#: src/core/query.sh:74
-msgid "No query specified. Use -h to get a list of all queries."
-msgstr ""
-"Geen query gespecifieerd. Gebruik -h om een lijst te zien van alle queries."
-
-#: src/core/query.sh:95
-#, sh-format
-msgid ""
-"Argument --query '$_arg' is invalid. Use -h to get a list of all queries."
-msgstr ""
-"Argument --query '$_arg' is fout. Gebruik -h om een lijst te zien van alle "
-"queries."
-
 #: src/core/base.sh:128
 #, sh-format
 msgid "$_module requires '$_prog' to be installed."
@@ -92,64 +79,6 @@ msgstr "Iets onbekend ging helemaal fout..."
 #, sh-format
 msgid "CRITICAL FAILURE: $_msg"
 msgstr "KRITIEKE FOUT: $_msg"
-
-#: src/core/module.sh:14
-#, sh-format
-msgid "No such module-type: '$_module_type'"
-msgstr ""
-
-#: src/core/module.sh:31
-msgid "Can't add an argument before a module type is loaded"
-msgstr ""
-
-#: src/core/module.sh:45
-#, sh-format
-msgid "The enum '$_value_type' is of the wrong format."
-msgstr ""
-
-#: src/core/module.sh:52
-#, sh-format
-msgid "Argument has an invalid type for it's value: '$_value_type'."
-msgstr ""
-
-#: src/core/module.sh:64
-msgid "Argument identifier already defined."
-msgstr ""
-
-#: src/core/module.sh:71
-#, sh-format
-msgid "Argument has an invalid type: '$_argument_type'."
-msgstr ""
-
-#: src/core/module.sh:82 src/core/module.sh:200 src/core/module.sh:233
-#, sh-format
-msgid "The value '$_val' is not of type '$_valuetype'."
-msgstr ""
-
-#: src/core/module.sh:116
-#, fuzzy, sh-format
-msgid "Could not locate module '$_module'"
-msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
-
-#: src/core/module.sh:117
-#, sh-format
-msgid "Module path is '$_modpath'"
-msgstr ""
-
-#: src/core/module.sh:180
-#, sh-format
-msgid "Module '$_MODULE' does not define an identifier."
-msgstr ""
-
-#: src/core/module.sh:217
-#, fuzzy, sh-format
-msgid "No such argument: '$_name'"
-msgstr "Onbekend argument '$_arg'."
-
-#: src/core/module.sh:242
-#, sh-format
-msgid "The argument '$_name' is required, but not given."
-msgstr ""
 
 #: src/core/log.sh:47
 #, sh-format
@@ -236,16 +165,169 @@ msgstr "Kon geen bruikbare base64 implementatie vinden."
 msgid "The header '$_header' is unknown for unserialization."
 msgstr "Het begin '$_header' is onbekend voor onserialisatie."
 
+#: src/core/query.sh:78
+msgid "No query specified. Use -h to get a list of all queries."
+msgstr ""
+"Geen query gespecifieerd. Gebruik -h om een lijst te zien van alle queries."
+
+#: src/core/query.sh:99
+#, sh-format
+msgid ""
+"Argument --query '$_arg' is invalid. Use -h to get a list of all queries."
+msgstr ""
+"Argument --query '$_arg' is fout. Gebruik -h om een lijst te zien van alle "
+"queries."
+
+#: src/core/help.sh:28
+msgid "Valid states for this module:"
+msgstr ""
+
+#: src/core/help.sh:33
+#, sh-format
+msgid "With the default state being: '$_DEFAULT_STATE'."
+msgstr ""
+
+#: src/core/help.sh:37
+msgid "Arguments for this module:"
+msgstr ""
+
+#: src/core/help.sh:49
+msgid "Identifier"
+msgstr ""
+
+#: src/core/help.sh:52
+msgid "Required"
+msgstr ""
+
+#: src/core/help.sh:55
+msgid "Optional"
+msgstr ""
+
+#: src/core/help.sh:61
+msgid "string"
+msgstr ""
+
+#: src/core/help.sh:64
+msgid "integer"
+msgstr ""
+
+#: src/core/help.sh:68
+msgid "float"
+msgstr ""
+
+#: src/core/help.sh:71
+msgid "boolean"
+msgstr ""
+
+#: src/core/help.sh:74
+msgid "enumaration"
+msgstr ""
+
+#: src/core/help.sh:78 src/core/help.sh:89
+msgid "Example"
+msgstr ""
+
+#: src/core/help.sh:108
+msgid "Usage: enshure MODE [ARGUMENTS...]"
+msgstr ""
+
+#: src/core/help.sh:110
+msgid "MODE is either the name of a module or one of the following:"
+msgstr ""
+
+#: src/core/help.sh:112
+msgid ""
+"If MODULE is empty, show a help message and exit. Otherwise show help for "
+"the module MODULE."
+msgstr ""
+
+#: src/core/help.sh:114
+msgid "Print the version of enSHure and exit."
+msgstr ""
+
+#: src/core/help.sh:116
+msgid ""
+"To begin a task you MUST supply the NAME argument. To end a task you MAY NOT "
+"supply the name argument. Subtasks are named: task_name::subtask_name. "
+"Subtasks can have subtasks."
+msgstr ""
+
+#: src/core/help.sh:118
+msgid "Runs the query NAME with arguments ARGS. Valid queries are:"
+msgstr ""
+
+#: src/core/help.sh:123
+msgid "Or MODE is one of the following modules:"
+msgstr ""
+
+#: src/core/module.sh:14
+#, sh-format
+msgid "No such module-type: '$_module_type'"
+msgstr ""
+
+#: src/core/module.sh:31
+msgid "Can't add an argument before a module type is loaded"
+msgstr ""
+
+#: src/core/module.sh:45
+#, sh-format
+msgid "The enum '$_value_type' is of the wrong format."
+msgstr ""
+
+#: src/core/module.sh:52
+#, sh-format
+msgid "Argument has an invalid type for it's value: '$_value_type'."
+msgstr ""
+
+#: src/core/module.sh:64
+msgid "Argument identifier already defined."
+msgstr ""
+
+#: src/core/module.sh:71
+#, sh-format
+msgid "Argument has an invalid type: '$_argument_type'."
+msgstr ""
+
+#: src/core/module.sh:82 src/core/module.sh:217 src/core/module.sh:250
+#, sh-format
+msgid "The value '$_val' is not of type '$_valuetype'."
+msgstr ""
+
+#: src/core/module.sh:116
+#, fuzzy, sh-format
+msgid "Could not locate module '$_module'"
+msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
+
+#: src/core/module.sh:117
+#, sh-format
+msgid "Module path is '$_modpath'"
+msgstr ""
+
+#: src/core/module.sh:197
+#, sh-format
+msgid "Module '$_MODULE' does not define an identifier."
+msgstr ""
+
+#: src/core/module.sh:234
+#, fuzzy, sh-format
+msgid "No such argument: '$_name'"
+msgstr "Onbekend argument '$_arg'."
+
+#: src/core/module.sh:259
+#, sh-format
+msgid "The argument '$_name' is required, but not given."
+msgstr ""
+
 #: src/modules/command.sh:3
 msgid "Executes a command."
 msgstr ""
 
 #: src/modules/command.sh:5
-msgid "the statement to be executed"
+msgid "The statement to be executed."
 msgstr ""
 
 #: src/modules/command.sh:6
-msgid "the path to a file, link or directory created by the command"
+msgid "The path to a file, link or directory created by the command."
 msgstr ""
 
 #: src/modules/command.sh:19

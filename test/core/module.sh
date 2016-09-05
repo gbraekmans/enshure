@@ -62,6 +62,25 @@ test_module_load() {
 	rm -rf "$TMP"
 }
 
+# shellcheck disable=SC2034
+test_module_list() {
+	TMP=$(mktemp -d)
+	
+	touch "$TMP/test.sh"
+	mkdir "$TMP/testing"
+	touch "$TMP/testing/main.sh"
+
+	ENSHURE_MODULE_PATH="$TMP"
+
+	RESULT=$(__module_list 2>&1)
+	assertTrue 1 "$?"
+	assertEquals 2 "test-testing" "$(printf '%s' "$RESULT" | tr '\n' '-')"
+
+	unset ENSHURE_MODULE_PATH
+
+	rm -rf "$TMP"
+}
+
 test_argument() {
 	RESULT=$(argument name 2>&1)
 	assertFalse 1 "$?"

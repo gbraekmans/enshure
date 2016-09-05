@@ -39,7 +39,7 @@ test_log_entry() {
 	chmod 444 "$TMP"
 	ENSHURE_LOG="$TMP"
 	assertEquals 3 "CRITICAL FAILURE: Could not write to log file '$TMP'." "$(__log_entry 'INFO' 'Will not refresh metadata.' 2>&1)"
-	chmod 666 "$TMP"
+	rm -rf "$TMP"
 	__log_entry 'INFO' 'Will not refresh metadata.'
 	assertEquals 4 "#INFO|1970-01-01 00:00:00|0|RPM_PACKAGE|bash|installed|Will not refresh metadata." "$(cat "$TMP")"
 	rm -rf "$TMP"

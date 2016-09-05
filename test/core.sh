@@ -33,6 +33,8 @@ setUp() {
 	# Reset env variables
 	ENSHURE_LOG=$(mktemp)
 	ENSHURE_VERBOSITY=
+	ENSHURE_MODULE_PATH=
+	ENSHURE_VALIDATE=
 
 	LANGUAGE='C'
 	LANG='C'

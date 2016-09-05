@@ -122,6 +122,22 @@ __module_load() {
 	_MODULE="$_module"
 }
 
+__module_list() {
+	## Lists all available modules
+	##$1 prefix to prepend for each module
+
+	_modpath="${ENSHURE_MODULE_PATH:-$_BASEDIR/modules}"
+	# shellcheck disable=SC2012
+	# it doesn't like the ls for non-alnum filenames, but it's something we can control
+	# but improvements are always welcome
+	for _mod in $(ls "$_modpath/" | sort); do
+		_mod=${_mod%.sh}
+		if [ -n "$_mod" ]; then
+			printf '%s%s\n' "${1:-}" "$_mod"
+		fi
+	done
+}
+
 __module_is_valid_state() {
 	## Returns 0 if the state is valid
 	##$1 the state to check. Optional, if not given $_STATE is used
@@ -173,7 +189,8 @@ __module_is_valid_type() {
 }
 
 __module_parse() {
-	## Parses the commandline arguments and sets all the global variables.
+	## Parses the commandline arguments and sets the global variables for the
+	## modules.
 
 	# Check if there is an identifier
 	if ! printf '%s' "$_ARGUMENTS" | cut -d'|' -f3 | grep -q '^identifier'; then
@@ -212,7 +229,7 @@ __module_parse() {
 		shift
 
 		# Check if the name of the argument is valid
-		_argument="$(printf '%s' "$_ARGUMENTS" | grep "^${_name}|")" || argument=''
+		_argument="$(printf '%s' "$_ARGUMENTS" | grep "^${_name}|")" || _argument=''
 		if [ -z "$_argument" ]; then
 			error "$(translate "No such argument: '\$_name'")"
 			return "$_E_UNKNOWN_ARGUMENT"

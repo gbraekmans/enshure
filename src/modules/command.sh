@@ -2,8 +2,8 @@
 module_type command
 module_description "$(translate "Executes a command.")"
 
-argument statement string identifier "$(translate "the statement to be executed")" "touch $HOME/test"
-argument creates_file string optional "$(translate "the path to a file, link or directory created by the command")" "$HOME/test"
+argument statement string identifier "$(translate "The statement to be executed.")" "\"touch /root/test\""
+argument creates_file string optional "$(translate "The path to a file, link or directory created by the command.")" "/root/test"
 
 is_state_executed() {
 	if [ -n "$creates_file" ] && [ -e "$creates_file" ]; then
