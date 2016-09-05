@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-05 14:30+0000\n"
+"POT-Creation-Date: 2016-09-05 14:38+0000\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -313,11 +313,11 @@ msgstr "'$_task' is een foute naam voor een taak."
 msgid "Not all requirements are met."
 msgstr ""
 
-#: src/core/main.sh:146
+#: src/core/main.sh:150
 msgid "No arguments given. Use --help or -h for help."
 msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
 
-#: src/core/main.sh:152
+#: src/core/main.sh:156
 #, sh-format
 msgid "Logging to '$_logpath'"
 msgstr "Log naar '$_logpath'"

@@ -97,8 +97,8 @@ test_main_execute_mode_parse() {
 	is_state() { return 0; }
 	attain_state() { return 0; }
 	__module_parse() { return 0; }
-	__log_ok() { return 0; }
-	__log_change() { return 0; }
+	__log_ok() { printf 'OK'; }
+	__log_change() { printf 'CHANGE'; }
 	verify_requirements() { return 0; }
 
 	_DEFAULT_STATE='state'
@@ -125,4 +125,10 @@ test_main_execute_mode_parse() {
 	RESULT=$(__main_execute_mode_parse test this state 2>&1)
 	assertFalse 8 "$?"
 	assertEquals 9 "ERROR: Not all requirements are met." "$RESULT"
+
+	verify_requirements() { return 0; }
+	ENSHURE_VALIDATE=yes
+	RESULT=$(__main_execute_mode_parse test this state 2>&1)
+	assertTrue 10 "$?"
+	assertEquals 11 "" "$RESULT"
 }

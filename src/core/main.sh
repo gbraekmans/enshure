@@ -115,9 +115,13 @@ __main_execute_mode_parse() {
 		return "$_E_UNMET_REQUIREMENT"
 	fi
 	
-	# TODO: Enshur-validate
+	##$ENSHURE_VALIDATE if this is set only a validation of the modules will occur
+	# If only validation was necessary exit here
+	if [ -n "$ENSHURE_VALIDATE" ]; then
+		return 0
+	fi
 
-	# Let the types and modules figure out the state
+	# Let the types and modules figure out how to get/set the state
 	if is_state "$_STATE"; then
 		__log_ok
 	else
