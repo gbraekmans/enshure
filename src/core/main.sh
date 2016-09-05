@@ -109,7 +109,12 @@ __main_execute_mode_parse() {
 	# Parse the arguments
 	__module_parse "$@"
 	
-	# TODO: Module verification
+	# Verify the requirements
+	if ! verify_requirements; then
+		error "$(translate "Not all requirements are met.")"
+		return "$_E_UNMET_REQUIREMENT"
+	fi
+	
 	# TODO: Enshur-validate
 
 	# Let the types and modules figure out the state

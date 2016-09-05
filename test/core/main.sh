@@ -99,6 +99,7 @@ test_main_execute_mode_parse() {
 	__module_parse() { return 0; }
 	__log_ok() { return 0; }
 	__log_change() { return 0; }
+	verify_requirements() { return 0; }
 
 	_DEFAULT_STATE='state'
 
@@ -119,4 +120,9 @@ test_main_execute_mode_parse() {
 	is_state() { return 1; }
 	RESULT=$(__main_execute_mode_parse test this state 2>&1)
 	assertTrue 7 "$?"
+
+	verify_requirements() { return 1; }
+	RESULT=$(__main_execute_mode_parse test this state 2>&1)
+	assertFalse 8 "$?"
+	assertEquals 9 "ERROR: Not all requirements are met." "$RESULT"
 }
