@@ -143,8 +143,8 @@ To know what the identifier should be for a module, add the name of the
 module to the help command. To know what the identifier for the file
 module should be you'd run ``enshure --help file``.
 
-Requested state
-###############
+State
+#####
 
 Every module has a type, and the type determines what possible states a module
 can be in. The type can be for example 'service' or 'package'. For example

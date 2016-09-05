@@ -3,7 +3,7 @@ Coding conventions
 
 .. note::
 
-  Thes conventions do not apply for modules. As you can see in :doc:`Writing modules <writing_modules>`
+  These conventions do not apply for modules. As you can see in :doc:`Writing modules <writing_modules>`
 
 The `conventions at the bash wiki`__ are a good place to start. The rest
 of this page explains the modifications to this base.

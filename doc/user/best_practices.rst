@@ -48,10 +48,7 @@ Keep your sources together
 
 All your files for configuring a host should be in the same directory.
 Preferably this directory is also managed by git or another version control
-system. The most obvious benefit is that you can use ``enshure-pack`` to
-compress all the configuration into a single executable file.
-
-**TODO: Write enshure-pack**
+system.
 
 Use multiple logs
 -----------------

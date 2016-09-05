@@ -31,7 +31,7 @@ Core
 
 **Reusable functionality for every module** resides into the **core** script. This
 would be the main binary in the plugin analogy. The problems solved here are:
-"Notifying the user", "Determining the next action", "Writing to the log file", ...
+"Notifying the user", "Writing to the log file", "Querying the log", ...
 
 Library
 -------

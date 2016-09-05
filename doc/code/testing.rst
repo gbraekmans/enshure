@@ -1,7 +1,8 @@
 Testing a module
 ================
 
-TODO: Write this
+Before testing a module, it's best to make sure you can run all existing tests.
+This page describes how to get the tests into a working state.
 
 .. _shunit2: https://github.com/kward/shunit2
 .. _ShellCheck: http://www.shellcheck.net/
@@ -39,7 +40,7 @@ functional system.
 In addition you'll need these packages installed for testing purposes:
 
 - shunit2_: Should be available at "/usr/share/shunit2/shunit2", this
-  is the default for most distributions. Otherwise it will downloaded.
+  is the default for most distributions. Otherwise it will be downloaded.
 - ShellCheck_: The binary must be available on the system and included
   in $PATH.
 - kcov_: Optionally, this is usefull to check if your tests cover all the
@@ -53,3 +54,8 @@ available on the system:
 - ksh
 - mksh
 - zsh
+
+Writing tests
+-------------
+
+TODO: Write this code & doc.
