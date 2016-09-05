@@ -5,10 +5,10 @@ set -o errexit
 set -o nounset
 
 # set pipefail if supported
-set -o | grep "^pipefail" > /dev/null && set -o pipefail
+set -o | grep -q "^pipefail" && set -o pipefail
 
 # make zsh behave like every other shell
-set -o | grep "^posixargzero" > /dev/null && set -o posixargzero
+set -o | grep -q "^posixargzero" && set -o posixargzero
 
 # Behave POSIX-like
 POSIXLY_CORRECT=0

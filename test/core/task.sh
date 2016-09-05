@@ -77,7 +77,7 @@ test_task_begin() {
 	__msg_pretty_print() { return 0; }
 	isSkipping || RESULT=$(__task_begin "webserver::mysql::my.cnf")
 	assertTrue 13 "$?"
-	printf '%s' "$RESULT" | grep 'ℹ Subtask: webserver → mysql → my.cnf' > /dev/null
+	printf '%s' "$RESULT" | grep -q 'ℹ Subtask: webserver → mysql → my.cnf'
 	assertTrue 14 "$?"
 
 	isSkipping && endSkipping
@@ -103,7 +103,7 @@ test_task_end() {
 	__msg_pretty_print() { return 0; }
 	isSkipping || RESULT=$(__task_end)
 	assertTrue 6 "$?"
-	printf '%s' "$RESULT" | grep 'ℹ Done: webserver → mysql' > /dev/null
+	printf '%s' "$RESULT" | grep -q 'ℹ Done: webserver → mysql'
 	assertTrue 7 "$?"
 
 	isSkipping && endSkipping

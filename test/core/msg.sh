@@ -115,37 +115,37 @@ test_msg() {
 	
 	isSkipping || RESULT=$(__msg ERROR test)
 	assertTrue 3 "$?"
-	printf '%s' "$RESULT" | grep " ✗ test" > /dev/null
+	printf '%s' "$RESULT" | grep -q " ✗ test"
 	assertTrue 4 "$?"
 
 	isSkipping || RESULT=$(__msg WARNING test)
 	assertTrue 5 "$?"
-	printf '%s' "$RESULT" | grep " ⚠ test" > /dev/null
+	printf '%s' "$RESULT" | grep -q " ⚠ test"
 	assertTrue 6 "$?"
 
 	isSkipping || RESULT=$(__msg OK test)
 	assertTrue 7 "$?"
-	printf '%s' "$RESULT" | grep " ✓ test" > /dev/null
+	printf '%s' "$RESULT" | grep -q " ✓ test"
 	assertTrue 8 "$?"
 
 	isSkipping || RESULT=$(__msg CHANGE test)
 	assertTrue 9 "$?"
-	printf '%s' "$RESULT" | grep " ✎ test" > /dev/null
+	printf '%s' "$RESULT" | grep -q " ✎ test"
 	assertTrue 10 "$?"
 
 	isSkipping || RESULT=$(__msg INFO test)
 	assertTrue 11 "$?"
-	printf '%s' "$RESULT" | grep " ℹ test" > /dev/null
+	printf '%s' "$RESULT" | grep -q " ℹ test"
 	assertTrue 12 "$?"
 
 	isSkipping || RESULT=$(__msg DEBUG test)
 	assertTrue 13 "$?"
-	printf '%s' "$RESULT" | grep " ↳ test" > /dev/null
+	printf '%s' "$RESULT" | grep -q " ↳ test"
 	assertTrue 14 "$?"
 
 	isSkipping || RESULT=$(__msg HEADING test)
 	assertTrue 15 "$?"
-	printf '%s' "$RESULT" | grep "= test =" > /dev/null
+	printf '%s' "$RESULT" | grep -q "= test ="
 	assertTrue 16 "$?"
 
 	isSkipping && endSkipping

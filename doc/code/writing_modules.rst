@@ -3,6 +3,20 @@ Writing a module
 
 TODO: Introduction
 
+Argement types
+--------------
+
+There are five types for the arguments:
+
+1. ``string``
+2. ``integer``
+3. ``float``
+4. ``boolean``
+5. ``enum(...)``
+
+For an ``enum`` type there is a ``:``-seperated list that lists all the possible
+values. For example ``enum(md5:sha1:sha256)``
+ 
 A simple example module
 -----------------------
 

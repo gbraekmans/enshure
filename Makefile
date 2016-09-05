@@ -44,19 +44,19 @@ doc:
 $(TEST_DIR)/shunit2:
 	([ -e "/usr/share/shunit2/shunit2" ] && ln -s "/usr/share/shunit2/shunit2" $(TEST_DIR)/shunit2) || (cd $(TEST_DIR) && wget "https://github.com/kward/shunit2/raw/master/source/2.1/src/shunit2")
 
-test: shellcheck $(TEST_DIR)/shunit2
+test: shellcheck $(TEST_DIR)/shunit2 i18n
 	bash $(TEST_DIR)/core.sh
 	dash $(TEST_DIR)/core.sh
 	ksh  $(TEST_DIR)/core.sh
 	mksh $(TEST_DIR)/core.sh
 	SHUNIT_PARENT="$(TEST_DIR)/core.sh" zsh -y $(TEST_DIR)/core.sh
 
-simpletest: $(TEST_DIR)/shunit2
+simpletest: $(TEST_DIR)/shunit2 i18n
 	sh $(TEST_DIR)/core.sh
 
-testcoverage:
+testcoverage: $(TEST_DIR)/shunit2 i18n
 	rm -rf "$(KCOV_DIR)"
-	kcov --include-path=./src "./$(KCOV_DIR)" "$(TEST_DIR)/core.sh"
+	kcov --include-path=./src/core "./$(KCOV_DIR)" "$(TEST_DIR)/core.sh"
 
 timings:
 	@/usr/bin/time -f "bash: %e seconds, CPU %P, MEM %Mkb" bash $(TEST_DIR)/core.sh > /dev/null
@@ -67,7 +67,10 @@ timings:
 
 shellcheck:
 	shellcheck -s sh src/bin/enshure
-	find src -name '*.sh' | xargs shellcheck -s sh
+	shellcheck -s sh src/core/*.sh
+	#shellcheck -s sh src/lib/*.sh
+	shellcheck -s sh src/types/*.sh --exclude=SC2034
+	shellcheck -s sh src/modules/*.sh --exclude=SC2154
 	find $(TEST_DIR) -name '*.sh' | xargs shellcheck -s sh
 
 dependencies:

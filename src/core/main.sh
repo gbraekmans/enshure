@@ -4,6 +4,7 @@ include core/help
 include core/msg
 include core/task
 include core/query
+include core/run
 
 __main_is_query_mode() {
 	## Checks wether the given arguments put enSHure in query or execution mode.
@@ -53,17 +54,18 @@ __main_query_mode_parse() {
 	
 	case "$1" in
 		"-h"|"--help")
-			__help
+			shift
+			__help "$@"
 			;;
 		"-v"|"--version")
 			printf "%s\n" "$_VERSION"
 			;;
 		"-t"|"--task")
-			shift;
+			shift
 			__main_query_task "$@"
 			;;
 		"-q"|"--query")
-			shift;
+			shift
 			query "$@"
 			;;
 		*)
@@ -72,6 +74,62 @@ __main_query_mode_parse() {
 			error "$(translate "Unknown argument '\$_arg'.")"
 			return "$_E_UNKNOWN_ARGUMENT"
 	esac
+}
+
+__main_execute_mode_parse() {
+	## Parses the command if started in execute mode
+
+	# Check if required arguments are available
+	if [ -z "${1:-}" ] || [ -z "${2:-}" ]; then
+		error "$(translate "A module and identifier must be specified.")"
+		exit "$_E_ARGUMENT_MISSING"
+	fi
+	
+	# Load the module
+	__module_load "$1"
+
+	# Set the identifier
+	# shellcheck disable=SC2034
+	_IDENTIFIER="$2"
+
+	# Set the state
+	# shellcheck disable=SC2034
+	_STATE="$(__main_execute_mode_parse_state "$@")"
+	if ! __module_is_valid_state; then
+		error "$(translate "'\$_STATE' is not a valid state for module '\$_MODULE'.")"
+		return "$_E_INVALID_STATE"
+	fi
+
+	# Pop the two or three first arguments
+	shift && shift
+	if [ "$((${#@} % 2))" -eq "1" ]; then
+		shift
+	fi
+
+	# Parse the arguments
+	__module_parse "$@"
+	
+	# TODO: Module verification
+	# TODO: Enshur-validate
+
+	# Let the types and modules figure out the state
+	if is_state "$_STATE"; then
+		__log_ok
+	else
+		attain_state "$_STATE"
+		__log_change
+	fi
+}
+
+__main_execute_mode_parse_state() {
+	## Returns the correct state from a number of arguments
+
+	_even_amount_of_args=$((${#@} % 2))
+	if [ "$_even_amount_of_args" -eq 0 ]; then
+		printf '%s' "$_DEFAULT_STATE"
+	else
+		printf '%s' "$3"
+	fi
 }
 
 __main_execute() {
@@ -91,5 +149,7 @@ __main_execute() {
 	# If enSHure is in query mode, parse the arguments.
 	if __main_is_query_mode "$@"; then
 		__main_query_mode_parse "$@"
+	else
+		__main_execute_mode_parse "$@"
 	fi
 }

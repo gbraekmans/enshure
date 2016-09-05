@@ -72,10 +72,9 @@ test_query_current_task() {
 
 # shellcheck disable=SC2034
 test_query_made_change() {
-	_REQUESTED_STATE='present'
+	_STATE='present'
 	_MODULE='file'
 	_IDENTIFIER='/root/.zshrc'
-	_ACTUAL_STATE='absent'
 
 	__query_made_change
 	assertEquals 1 "2" "$?"
@@ -108,10 +107,9 @@ test_query_made_change() {
 # shellcheck disable=SC2034
 test_query_summary() {
 
-	_REQUESTED_STATE='present'
+	_STATE='present'
 	_MODULE='file'
 	_IDENTIFIER='/root/.zshrc'
-	_ACTUAL_STATE='absent'
 
 	RESULT=$(__query_summary)
 	assertTrue 1 "$?"

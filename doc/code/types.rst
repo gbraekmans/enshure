@@ -6,6 +6,8 @@ to the other state. They do not implement how it must be done, just
 what needs to be done. If your writing a module, much of what needs
 to be written is determined by it's module type.
 
+TODO: Add module type 'info'
+
 About states
 ------------
 

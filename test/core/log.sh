@@ -33,7 +33,7 @@ test_log_entry() {
 	assertEquals 1 "#WARNING|1970-01-01 00:00:00|0||||Will not refresh metadata." "$(__log_entry 'WARNING' 'Will not refresh metadata.')"
 	_MODULE=RPM_PACKAGE
 	_IDENTIFIER=bash
-	_REQUESTED_STATE=installed
+	_STATE=installed
 	assertEquals 2 "#INFO|1970-01-01 00:00:00|0|RPM_PACKAGE|bash|installed|Will not refresh metadata." "$(__log_entry 'INFO' 'Will not refresh metadata.')"
 	TMP=$(mktemp)
 	chmod 444 "$TMP"
@@ -47,68 +47,64 @@ test_log_entry() {
 
 # shellcheck disable=SC2034
 test_log_can_write_module_functions() {
-	_ACTUAL_STATE=''
-	_REQUESTED_STATE=''
+	_STATE=''
 	_MODULE=''
 	_IDENTIFIER=''
 	__log_can_write_module_functions
 	assertFalse 1 "$?"
 
-	_REQUESTED_STATE='present'
+	_STATE='present'
 	_MODULE='file'
 	_IDENTIFIER='/root/.zshrc'
 	__log_can_write_module_functions
-	assertFalse 2 "$?"
+	assertTrue 2 "$?"
 
-	_ACTUAL_STATE='absent'
+	_STATE='absent'
 	__log_can_write_module_functions
 	assertTrue 3 "$?"
 }
 
 # shellcheck disable=SC2034
 test_log_change() {
-	_ACTUAL_STATE=''
-	_REQUESTED_STATE=''
+	_STATE=''
 	_MODULE=''
 	_IDENTIFIER=''
 	RESULT=$(__log_change 2>&1)
 	assertFalse 1 "$?"
 	assertEquals 2 "CRITICAL FAILURE: Can not signal 'CHANGE' when no module is loaded." "$RESULT"
 
-	_REQUESTED_STATE='present'
+	_STATE='present'
 	_MODULE='file'
-	_IDENTIFIER='/root/.zshrc'
 	RESULT=$(__log_change 2>&1)
 	assertFalse 3 "$?"
 	assertEquals 4 "CRITICAL FAILURE: Can not signal 'CHANGE' when no module is loaded." "$RESULT"
 
-	_ACTUAL_STATE='absent'
+	_IDENTIFIER='/root/.zshrc'
+	_STATE='absent'
 	RESULT=$(__log_change 2>&1)
 	assertTrue 5 "$?"
-	assertEquals 6 "CHANGE: File /root/.zshrc is present, was absent." "$RESULT"
-	assertEquals 7 "#CHANGE|1970-01-01 00:00:00|0|file|/root/.zshrc|present|File /root/.zshrc is present, was absent." "$(tail -n1 "$ENSHURE_LOG")"
+	assertEquals 6 "CHANGE: File /root/.zshrc is now absent." "$RESULT"
+	assertEquals 7 "#CHANGE|1970-01-01 00:00:00|0|file|/root/.zshrc|absent|File /root/.zshrc is now absent." "$(tail -n1 "$ENSHURE_LOG")"
 }
 
 # shellcheck disable=SC2034
 test_log_ok() {
-	_ACTUAL_STATE=''
-	_REQUESTED_STATE=''
+	_STATE=''
 	_MODULE=''
 	_IDENTIFIER=''
 	RESULT=$(__log_ok 2>&1)
 	assertFalse 1 "$?"
 	assertEquals 2 "CRITICAL FAILURE: Can not signal 'OK' when no module is loaded." "$RESULT"
 
-	_REQUESTED_STATE='present'
-	_MODULE='file'
+	_STATE='present'
 	_IDENTIFIER='/root/.zshrc'
 	RESULT=$(__log_ok 2>&1)
 	assertFalse 3 "$?"
 	assertEquals 4 "CRITICAL FAILURE: Can not signal 'OK' when no module is loaded." "$RESULT"
 
-	_ACTUAL_STATE='absent'
+	_MODULE='file'
 	RESULT=$(__log_ok 2>&1)
 	assertTrue 5 "$?"
-	assertEquals 6 "OK: File /root/.zshrc is present." "$RESULT"
-	assertEquals 7 "#OK|1970-01-01 00:00:00|0|file|/root/.zshrc|present|File /root/.zshrc is present." "$(tail -n1 "$ENSHURE_LOG")"
+	assertEquals 6 "OK: File /root/.zshrc is already present." "$RESULT"
+	assertEquals 7 "#OK|1970-01-01 00:00:00|0|file|/root/.zshrc|present|File /root/.zshrc is already present." "$(tail -n1 "$ENSHURE_LOG")"
 }

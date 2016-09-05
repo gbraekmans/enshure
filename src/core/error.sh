@@ -67,4 +67,16 @@ _E_FILE_CREATION_FAILED=13
 
 ##$_E_FILE_NOT_EXISTS a file does not exist
 _E_FILE_NOT_EXISTS=14
+
+##$_E_MODULE_NOT_FOUND could not find a module
+_E_MODULE_NOT_FOUND=15
+
+##$_E_INVALID_STATE the given state is invalid
+_E_INVALID_STATE=16
+
+##_E_NO_IDENTIFIER_DEFINED the module does not define an identifier argument
+_E_NO_IDENTIFIER_DEFINED=17
+
+##$_E_INVALID_VALUE If the value of an argument is of the wrong type
+_E_INVALID_VALUE=18
 }

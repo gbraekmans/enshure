@@ -63,3 +63,24 @@ test_main_query_task() {
 	assertFalse 11 "$?"
 	assertEquals 12 "ERROR: A name for an ending task is given. This is not supported." "$RESULT"
 }
+
+# shellcheck disable=SC2034
+test_main_execute_mode_parse_state() {
+	_DEFAULT_STATE="default"
+	
+	RESULT=$(__main_execute_mode_parse_state mod id)
+	assertTrue 1 "$?"
+	assertEquals 2 "default" "$RESULT"
+
+	RESULT=$(__main_execute_mode_parse_state mod id test)
+	assertTrue 3 "$?"
+	assertEquals 4 "test" "$RESULT"
+
+	RESULT=$(__main_execute_mode_parse_state mod id arg val)
+	assertTrue 5 "$?"
+	assertEquals 6 "default" "$RESULT"
+
+	RESULT=$(__main_execute_mode_parse_state mod id test arg val)
+	assertTrue 7 "$?"
+	assertEquals 8 "test" "$RESULT"
+}

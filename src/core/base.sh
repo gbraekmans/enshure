@@ -10,7 +10,7 @@ include() {
 	_INCLUDED=${_INCLUDED:-core/base}
 
 	# Don't do anything if already included
-	if printf '%s' ":$_INCLUDED:" | grep ":$1:" > /dev/null 2>&1; then
+	if printf '%s' ":$_INCLUDED:" | grep -q ":$1:"; then
 		return
 	fi
 
@@ -31,7 +31,7 @@ include core/log
 
 translate() {
 	## A small wrapper around gettext to provide I18n.
-	##$1 The string to be translated, in English
+	##$1 the string to be translated, in English
 
 	if is_available gettext && is_available envsubst; then
 		# Note: The following code is shamelessly copied from gettext.sh
@@ -138,7 +138,7 @@ not_implemented() {
 	##> $ echo "$?"
 	##> 9
 
-	if [ -n "$_MODULE" ]; then
+	if [ -n "${_MODULE:-}" ]; then
 		error "$(translate "\$_MODULE does not implement a function needed to set the state '\$_REQUESTED_STATE'.")"
 	else
 		error  "$(translate "This functionality is not yet implemented in the enSHure core.")"

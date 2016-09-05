@@ -1,9 +1,45 @@
 include core/base
+include core/module
+
+__help() {
+	## Show the help message
+	##$1 the module to show the help for, optional.
+
+	if [ -z "${1:-}" ]; then
+		__help_generic
+	else
+		__help_module "$1"
+	fi
+}
 
 # TODO convert to gettext
 
-__help() {
+__help_module() {
+	## Show the help for a module
+	##$1 the name of the module.
+	
+	not_implemented
+	#~ _module="$1"
+	#~ (
+		#~ _args=''
+		#~ __module_load "$1"
+		#~ cat <<-EOF
+		#~ Module '$_module': $_module_desc
+
+		#~ States for all modules of type '$_MODULE_TYPE':
+		  #~ - $_STATES
+		
+		#~ With the default state being '$_DEFAULT_STATE'.
+
+		#~ Arguments for '$_module':
+		#~ $_args
+		#~ EOF
+	#~ )
+}
+
+__help_generic() {
 	## Show the help message if no module is given.
+
 	cat <<-"EOF"
 	Usage: enshure QUERY_MODE [ARGUMENT] ...
 	   or: enshure MODULE IDENTIFIER REQUESTED_STATE

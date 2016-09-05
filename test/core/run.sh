@@ -201,7 +201,7 @@ test_run_unserialize() {
 
 test_run_current_shell() {
 	RESULT=$(__run_current_shell)
-	printf 'sh:bash:dash:ksh:mksh:zsh' | grep "${RESULT#/bin/}" > /dev/null
+	printf 'sh:bash:dash:ksh:mksh:zsh' | grep -q "${RESULT#/bin/}"
 	assertTrue 1 "$?"
 }
 

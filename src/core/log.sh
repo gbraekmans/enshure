@@ -31,11 +31,16 @@ __log_entry() {
 	##$1 Type of the entry: one of the message types or EXEC_LOG
 	##$2 Optional. The message for the log entry.
 
-	_entry="#$1|$(__log_date)|$(id -u)|${_MODULE:-}|${_IDENTIFIER:-}|${_REQUESTED_STATE:-}|${2:-}"
+	_entry="#$1|$(__log_date)|$(id -u)|${_MODULE:-}|${_IDENTIFIER:-}|${_STATE:-}|${2:-}"
 
 	if __log_should_write_to_stdout; then
 		printf '%s\n' "$_entry"
 	else
+		# Create file if it does not exist
+		if [ ! -e "$(__log_path)" ]; then
+			printf '' > "$(__log_path)"
+		fi
+		# Only log if writeable
 		if [ ! -w "$(__log_path)" ]; then
 			# shellcheck disable=SC2034
 			_logfile="$(__log_path)"
@@ -46,7 +51,7 @@ __log_entry() {
 }
 
 __log_can_write_module_functions() {
-	[ -n "$_MODULE" ] && [ -n "$_IDENTIFIER" ] && [ -n "$_REQUESTED_STATE" ] && [ -n "$_ACTUAL_STATE" ]
+	[ -n "$_MODULE" ] && [ -n "$_IDENTIFIER" ] && [ -n "$_STATE" ]
 }
 
 __log_change() {
@@ -54,8 +59,8 @@ __log_change() {
 		die "$(translate "Can not signal 'CHANGE' when no module is loaded." "$_E_NOT_IN_A_MODULE")"
 	fi
 	_mod="$(initcap "$_MODULE")"
-	_msg="$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."
-	_tmsg="$(translate "\$_mod \$_IDENTIFIER is \$_REQUESTED_STATE, was \$_ACTUAL_STATE.")"
+	_msg="$_mod $_IDENTIFIER is now in $_STATE."
+	_tmsg="$(translate "\$_mod \$_IDENTIFIER is now \$_STATE.")"
 
 	__msg "CHANGE" "$_tmsg"
 	__log_entry "CHANGE" "$_msg"
@@ -67,8 +72,8 @@ __log_ok() {
 	fi
 
 	_mod="$(initcap "$_MODULE")"
-	_msg="$_mod $_IDENTIFIER is $_REQUESTED_STATE."
-	_tmsg="$(translate "\$_mod \$_IDENTIFIER is \$_REQUESTED_STATE.")"
+	_msg="$_mod $_IDENTIFIER is already in $_STATE."
+	_tmsg="$(translate "\$_mod \$_IDENTIFIER is already \$_STATE.")"
 
 	__msg "OK" "$_tmsg"
 	__log_entry "OK" "$_msg"

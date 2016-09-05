@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -o | grep "^posixargzero" > /dev/null && set -o posixargzero
+set -o | grep -q "^posixargzero" && set -o posixargzero
 
 
 # Import all the files
@@ -41,7 +41,7 @@ setUp() {
 	_INCLUDED=
 	_MODULE=
 	_IDENTIFIER=
-	_REQUESTED_STATE=
+	_STATE=
 
 	# Include all source files
 	_BASEDIR="$(dirname -- "$0")/../src"

@@ -146,14 +146,11 @@ module should be you'd run ``enshure --help file``.
 Requested state
 ###############
 
-Every module has a type, and there are 4 possible module types. The type
-of the module defines what states you can request of the module. These
-are the 4 module-types and their states:
-
-1. Command: succeeds or fails
-2. Generic: present or absent
-3. Package: installed, removed or latest
-4. Service: always, never, started, stopped, restarted, enabled or disabled
+Every module has a type, and the type determines what possible states a module
+can be in. The type can be for example 'service' or 'package'. For example
+the apt & dnf module both support installing packages, thus their states are
+the same because their type is the same. Both are package-modules. And these
+have the states: installed, latest and removed.
 
 Custom arguments
 ################
@@ -191,5 +188,5 @@ The following environment variables affect the behaviour of enshure:
 - ``$ENSHURE_VALIDATE`` if this is set, then no actions will be run. enSHure
   will just validate all input given and then stop processing. Usefull if
   you want to make sure all your states and arguments are correct.
-- ``$ENSHURE_MODULE_PATH`` A ``:``- seperated list of where to search
-  for extra modules.
+- ``$ENSHURE_MODULE_PATH`` lists where all the enSHure modules are located. You
+  probably don't need to set this unless you want to develop or test enSHure.

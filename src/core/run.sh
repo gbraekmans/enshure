@@ -111,7 +111,7 @@ __run_serialize() {
 	_cmd="${_compress_cmd} | ${_b64_cmd}"
 	
 	# serialize the file
-	_val=$(eval "$_cmd" < "$1")
+	_val=$(eval "$_cmd" < "$1") || true # TODO: Find out why this sometimes fails
 
 	# return output
 	printf '%s|%s' "$_compress" "$_val"
