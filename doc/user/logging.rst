@@ -78,8 +78,6 @@ always available as proof the command did execute.
 STDOUT, STDERR
 ###############
 
-TODO: Explain difference uuencode/base64
-
 A STDOUT field looks like this::
 
   #STDOUT|0|1970-01-01 00:00:00|file|/root/.zshrc|present|POSIX|...
@@ -99,7 +97,7 @@ These entries store the base64 encoded gzipped string of
 the output to the file descriptor.
 Not every command has these entries, if there was **no output on the file
 descriptor, no log entry** is created for that file descriptor.
-If the message is, for example ``H4sIABrNvFcAA8tIzcnJVyjPL8pJAQCFEUoNCwAAAA==`` then it could be
+If the message is, for example ``GZIP|H4sIABrNvFcAA8tIzcnJVyjPL8pJAQCFEUoNCwAAAA==`` then it could be
 decoded on linux systems using something like this::
 
   $ printf 'H4sIABrNvFcAA8tIzcnJVyjPL8pJAQCFEUoNCwAAAA==' | base64 -d | gunzip

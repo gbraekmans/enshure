@@ -10,7 +10,7 @@ Table of Contents:
 .. toctree::
    :maxdepth: 2
 
-
+   principles
    upgrading
    arguments
    logging

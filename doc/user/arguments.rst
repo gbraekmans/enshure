@@ -5,8 +5,8 @@ Options and arguments
 
 There are 2 modes in which you can invoke enSHure:
 
-#. Query mode, enSHure queries or alters it's own state.
-#. Execution mode, enSHure queries or alters the state of your operating system.
+1. Query mode, enSHure queries or alters it's own state.
+2. Execution mode, enSHure queries or alters the state of your operating system.
 
 The first argument given to enSHure sets the mode, if it starts with a ``-``
 enSHure will run in query mode, otherwise it will run in execution mode.
@@ -92,6 +92,8 @@ Currently these queries are supported
 - ``summary``: Prints a summary of the changes on the system. You can,
   optionally add a task to filter the results. For example:
   ``summary webserver`` or ``summary webserver::mysql``.
+- ``command_output`` displays the output of all commands ran by enSHure. Usefull
+  for debugging and determining the current system state.
 
 .. note::
 
@@ -131,6 +133,7 @@ deb-package, enable a service, untar an archive...
 
 Running ``enshure --help`` will display a list of all available modules.
 
+TODO: Add link to all modules
 
 Identifier
 ##########

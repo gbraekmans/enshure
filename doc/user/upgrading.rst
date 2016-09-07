@@ -11,10 +11,13 @@ for 1.1.0 may not work on 1.0.0.
 Dependencies
 ------------
 
-A POSIX-compliant operating system and shell is required.
+A POSIX-compliant operating system and shell is required. And there should be
+one of the following utilities available:
 
-TODO: Document GZIP/COMPRESS-dependency
-TODO: Document UUENCODE/base64-dependency
+- ``uuencode``, as defined in the POSIX-standard. Or ``base64`` installed by the
+  GNU coreutils.
+- ``compress``, again as defined by POSIX, but having ``gzip`` is enough for
+  enSHure.
 
 
 From source using git
@@ -40,6 +43,8 @@ And you can update using the git workflow::
   This is where all development occurs before a release. It might be
   stable enough for most uses, but stability can only be really expected
   from the 1.X.X releases or higher.
+
+TODO: Make install/uninstall
 
 The enSHure "binary" is found at ``src/bin/enshure``. If you want it to
 be available on the system for every user run:: 

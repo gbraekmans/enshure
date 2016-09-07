@@ -137,7 +137,7 @@ __msg() {
 				_prefix=" ✓ "
 				;;
 			"CHANGE")
-				tput setaf 4 # blue
+				tput setaf 6 # cyan
 				_prefix=" ✎ "
 				;;
 			"ERROR")

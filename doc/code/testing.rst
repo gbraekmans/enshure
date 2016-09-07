@@ -44,7 +44,7 @@ In addition you'll need these packages installed for testing purposes:
 - ShellCheck_: The binary must be available on the system and included
   in $PATH.
 - kcov_: Optionally, this is usefull to check if your tests cover all the
-  code paths. Only needed if you run ``make testcoverage``.
+  code paths. Only needed if you intend to run ``make testcoverage``.
 
 All tests are ran using different shells. The following shells should be
 available on the system:

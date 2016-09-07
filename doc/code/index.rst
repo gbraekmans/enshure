@@ -1,8 +1,6 @@
 Developer documentation
 =======================
 
-# TODO: add a make release target
-
 This chapter is only relevant if you'd like to contribute to the project. If you
 only intend to use it, you can **safely skip this chapter**. This chapter explains
 to the (future) developer why things are the way they are.
@@ -15,7 +13,6 @@ Table of Contents:
 .. toctree::
    :maxdepth: 2
 
-   principles
    coding_conventions
    architecture
    types
