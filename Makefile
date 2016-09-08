@@ -4,7 +4,7 @@ HELPER_DIR = helpers
 TEST_DIR = test
 KCOV_DIR = coverage
 
-.PHONY: help clean doc simpletest test timings testcoverage shellcheck dependencies i18n
+.PHONY: help clean doc simpletest test timings testcoverage shellcheck dependencies i18n indexes
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -28,7 +28,7 @@ clean:
 todo:
 	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}' | sed 's|^\s*#\s*||g'
 
-doc:
+indexes:
 	mkdir -p  $(DOC_DIR)/_templates
 	mkdir -p  $(DOC_DIR)/_static
 	# Set version
@@ -37,6 +37,9 @@ doc:
 	$(HELPER_DIR)/shelldoc.py -r '[a-z][a-z_]*' -p src functions src/bin/enshure src/core/*.sh > $(DOC_DIR)/reference/function_idx.rst
 	$(HELPER_DIR)/shelldoc.py -r '__[a-z_]+' -p src functions src/bin/enshure src/core/*.sh > $(DOC_DIR)/reference/internal_function_idx.rst
 	$(HELPER_DIR)/shelldoc.py -r '(?:(?!\_E\_)\_|ENSHURE)[A-Z_]+' -p src globals src/bin/enshure src/core/*.sh  > $(DOC_DIR)/reference/global_idx.rst
+	$(HELPER_DIR)/module_to_rst.sh $(DOC_DIR)/modules
+
+doc: indexes
 	$(DOC_BUILDCMD) -b html $(DOC_DIR) $(DOC_DIR)/_build/html
 	@echo
 	@echo "The HTML documentation is in $(DOC_DIR)/_build/html."

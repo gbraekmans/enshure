@@ -13,6 +13,7 @@ Table of Contents:
 
    quickstart/index
    user/index
+   modules/index
    code/index
    reference/index
 

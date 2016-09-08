@@ -222,3 +222,13 @@ test_msg_meets_verbosity_level() {
 	assertTrue 23 "$?"
 	assertEquals 24 "WARNING: Verbosity level 'WHATEVER' unknown, assuming 'INFO'." "$RESULT"
 }
+
+test_msg_underline() {
+	RESULT=$(__msg_underline 'test')
+	assertTrue 1 "$?"
+	assertEquals 2 "====" "$RESULT"
+
+	RESULT=$(__msg_underline 'test' '-')
+	assertTrue 1 "$?"
+	assertEquals 2 "----" "$RESULT"
+}

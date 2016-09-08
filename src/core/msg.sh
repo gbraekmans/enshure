@@ -173,7 +173,7 @@ __msg() {
 		# If it's a heading underline the message
 		if [ "$1" = "HEADING" ]; then
 			printf '%s\n' "$_msg"
-			_lines=$(printf '%s' "$_msg" | tr -c '_' '[=*]')
+			_lines=$(__msg_underline "$_msg")
 			printf '%s\n\n' "$_lines"
 		else
 			# Just print the message and it's type
@@ -187,4 +187,16 @@ __msg() {
 			esac
 		fi
 	fi
+}
+
+__msg_underline() {
+	## Underlines a message
+	##$1 The message to be underlined.
+	##$2 The character used for underlining, by default '='
+	##> $ __msg_underline 'test'
+	##> ====
+
+	_chr="${2:-=}"
+
+	printf '%s' "$1" | tr -c '_' "[${_chr}*]"
 }
