@@ -5,14 +5,14 @@ set -o | grep -q "^posixargzero" && set -o posixargzero
 
 # Import all the files
 # shellcheck disable=SC2044
-for src_file in $(dirname "$0")/core/*.sh; do
+for src_file in $(find "$(dirname "$0")/modules" -name '*.sh'); do
 	. "$src_file"
 done
 
 # Add all tests to the suite
 # shellcheck disable=SC2013,SC2044
 suite() {
-	for src_file in $(find "$(dirname "$0")/core" -name '*.sh' | sort); do
+	for src_file in $(find "$(dirname "$0")/modules" -name '*.sh' | sort); do
 		for tst in $(grep "test.*()" "$src_file" | cut -d'(' -f1); do
 			suite_addTest "$tst"
 		done
@@ -39,19 +39,10 @@ setUp() {
 	LANGUAGE='C'
 	LANG='C'
 
-	# Reset important test variables
-	_INCLUDED=
-	_MODULE=
-	_IDENTIFIER=
-	_STATE=
-
-	# Include all source files
-	_BASEDIR="$(dirname -- "$0")/../src"
-	. "$_BASEDIR/core/base.sh"
-	for fil in $(find "$_BASEDIR/core" -name '*.sh'); do
-		inc=${fil#$_BASEDIR/}
-		include "${inc%.sh}"
-	done
+	enshure() {
+		_BASEDIR="$(dirname -- "$0")/../src"
+		. "$_BASEDIR/bin/enshure"
+	}
 }
 
 tearDown() {
@@ -60,4 +51,5 @@ tearDown() {
 }
 
 . "$(dirname "$0")/shunit2"
+
 

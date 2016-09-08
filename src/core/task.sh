@@ -101,8 +101,6 @@ __task_end() {
 		_display_task=$(printf '%s' "$_task" | sed 's/::/ → /g')
 	fi
 
-	# TODO: print summary of operations done at task end
-
 	# Display the start of a new task
 	if __task_is_nested "$_task"; then
 		__msg INFO "$(translate "Done: \$_display_task")"

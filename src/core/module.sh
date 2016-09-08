@@ -1,6 +1,15 @@
 include core/base
 include core/error
 
+##$_DEFAULT_STATE The default state of the module-type
+##$_IDENTIFIER The value of the identifier argument
+##$_MODULE The currently loaded module
+##$_MODULE_DESCRIPTION A description for the currently loaded module
+##$_MODULE_TYPE The type of the current module
+##$_STATE The requested state for the module
+##$_STATES All valid states for the module
+
+
 module_type() {
 	## Loads the correct type for the module.
 	##$1 the name of the module type

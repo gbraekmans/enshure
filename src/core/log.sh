@@ -2,9 +2,6 @@
 
 ##$ENSHURE_LOG the location of the enSHure log on the filesystem
 
-
-# TODO: Move the finding of the log path to a function.
-
 include core/error
 
 __log_path() {

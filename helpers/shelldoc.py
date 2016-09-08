@@ -71,9 +71,9 @@ class Function(Token):
       r += self.indent(self.example)
 
     # Append code
-    if self.code:
-      r += "\nImplementation::\n\n"
-      r += self.indent(self.code)
+    #~ if self.code:
+      #~ r += "\nImplementation::\n\n"
+      #~ r += self.indent(self.code)
     return r
 
 class Global(Token):

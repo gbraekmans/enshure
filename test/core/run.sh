@@ -223,4 +223,8 @@ test_run() {
 	assertFalse 7 "$?"
 	assertEquals 8 "CRITICAL FAILURE: Could not create temporary file." "$RESULT"
 	unset -f mktemp
+
+	RESULT=$(ENSHURE_VALIDATE=yes run 'printf "test" && exit 45')
+	assertTrue 9 "$?"
+	assertEquals 10 "" "$RESULT"
 }

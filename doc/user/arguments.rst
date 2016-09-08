@@ -131,9 +131,8 @@ Module
 This argument determines what you want to do. Install an rpm-package,
 deb-package, enable a service, untar an archive...
 
-Running ``enshure --help`` will display a list of all available modules.
-
-TODO: Add link to all modules
+Running ``enshure --help`` will display a list of all available modules, but
+there also an :doc:`index available in the documentation <../modules/index>`.
 
 Identifier
 ##########

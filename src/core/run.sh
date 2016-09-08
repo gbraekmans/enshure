@@ -1,8 +1,6 @@
 
 include core/base
 
-# TODO: Add support for $ENSHURE_VALIDATE
-
 # Declare dependencies
 # uuencode, uudecode, compress & uncompress should be installed but 
 # aren't on most systems. Even though there in the POSIX standard.
@@ -31,6 +29,11 @@ require mktemp
 run() {
 	## Runs a command in the shell and logs it's execution.
 	##$1 The command to be executed
+
+	# Just to be safe don't run anything if ENSHURE_VALIDATE is set.
+	if [ -n "${ENSHURE_VALIDATE:-}" ]; then
+		return 0
+	fi
 
 	_cmd="$1"
 	debug "$(translate "Running '\$_cmd'.")"
