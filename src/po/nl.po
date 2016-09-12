@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-08 15:28+0000\n"
+"POT-Creation-Date: 2016-09-12 13:35+0000\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -144,108 +144,6 @@ msgstr ""
 msgid "Verbosity level '${_old_verbosity}' unknown, assuming 'INFO'."
 msgstr "Luidheidsniveau '${_old_verbosity}' onbekend, gaan uit van 'INFO'."
 
-#: src/core/main.sh:22
-msgid "No task specified. Add 'begin' or 'end'."
-msgstr "Geen taak gespecifieerd. Voeg 'begin' of 'end' toe."
-
-#: src/core/main.sh:30
-msgid "No name for the task specified."
-msgstr "Geen naam voor de taak gespecifieerd."
-
-#: src/core/main.sh:37
-msgid "A name for an ending task is given. This is not supported."
-msgstr "Een naam de einde-taak is gegeven. Dit wordt niet ondersteund."
-
-#: src/core/main.sh:44
-#, sh-format
-msgid "Argument --task '$_arg' is invalid: must be 'begin' or 'end'."
-msgstr "Argument --task '$_arg' is fout: moet 'begin' of 'end' zijn."
-
-#: src/core/main.sh:74
-#, sh-format
-msgid "Unknown argument '$_arg'."
-msgstr "Onbekend argument '$_arg'."
-
-#: src/core/main.sh:84
-msgid "A module and identifier must be specified."
-msgstr ""
-
-#: src/core/main.sh:99
-#, fuzzy, sh-format
-msgid "'$_STATE' is not a valid state for module '$_MODULE'."
-msgstr "'$_task' is een foute naam voor een taak."
-
-#: src/core/main.sh:114
-msgid "Not all requirements are met."
-msgstr ""
-
-#: src/core/main.sh:150
-msgid "No arguments given. Use --help or -h for help."
-msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
-
-#: src/core/main.sh:156
-#, sh-format
-msgid "Logging to '$_logpath'"
-msgstr "Log naar '$_logpath'"
-
-#: src/core/module.sh:23
-#, sh-format
-msgid "No such module-type: '$_module_type'"
-msgstr ""
-
-#: src/core/module.sh:40
-msgid "Can't add an argument before a module type is loaded"
-msgstr ""
-
-#: src/core/module.sh:54
-#, sh-format
-msgid "The enum '$_value_type' is of the wrong format."
-msgstr ""
-
-#: src/core/module.sh:61
-#, sh-format
-msgid "Argument has an invalid type for it's value: '$_value_type'."
-msgstr ""
-
-#: src/core/module.sh:73
-msgid "Argument identifier already defined."
-msgstr ""
-
-#: src/core/module.sh:80
-#, sh-format
-msgid "Argument has an invalid type: '$_argument_type'."
-msgstr ""
-
-#: src/core/module.sh:91 src/core/module.sh:226 src/core/module.sh:259
-#, sh-format
-msgid "The value '$_val' is not of type '$_valuetype'."
-msgstr ""
-
-#: src/core/module.sh:125
-#, fuzzy, sh-format
-msgid "Could not locate module '$_module'"
-msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
-
-#: src/core/module.sh:126
-#, sh-format
-msgid "Module path is '$_modpath'"
-msgstr ""
-
-#: src/core/module.sh:206
-#, sh-format
-msgid "Module '$_MODULE' does not define an identifier."
-msgstr ""
-
-#: src/core/module.sh:243
-#, fuzzy, sh-format
-msgid "No such argument: '$_name'"
-msgstr "Onbekend argument '$_arg'."
-
-#: src/core/module.sh:268
-#, sh-format
-msgid "The argument '$_name' is required, but not given."
-msgstr ""
-
 #: src/core/task.sh:65
 #, sh-format
 msgid ""
@@ -321,6 +219,108 @@ msgstr "Kon geen bruikbare base64 implementatie vinden."
 #, sh-format
 msgid "The header '$_header' is unknown for unserialization."
 msgstr "Het begin '$_header' is onbekend voor onserialisatie."
+
+#: src/core/module.sh:23
+#, sh-format
+msgid "No such module-type: '$_module_type'"
+msgstr ""
+
+#: src/core/module.sh:40
+msgid "Can't add an argument before a module type is loaded"
+msgstr ""
+
+#: src/core/module.sh:54
+#, sh-format
+msgid "The enum '$_value_type' is of the wrong format."
+msgstr ""
+
+#: src/core/module.sh:61
+#, sh-format
+msgid "Argument has an invalid type for it's value: '$_value_type'."
+msgstr ""
+
+#: src/core/module.sh:73
+msgid "Argument identifier already defined."
+msgstr ""
+
+#: src/core/module.sh:80
+#, sh-format
+msgid "Argument has an invalid type: '$_argument_type'."
+msgstr ""
+
+#: src/core/module.sh:91 src/core/module.sh:226 src/core/module.sh:261
+#, sh-format
+msgid "The value '$_val' is not of type '$_valuetype'."
+msgstr ""
+
+#: src/core/module.sh:125
+#, fuzzy, sh-format
+msgid "Could not locate module '$_module'"
+msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
+
+#: src/core/module.sh:126
+#, sh-format
+msgid "Module path is '$_modpath'"
+msgstr ""
+
+#: src/core/module.sh:206
+#, sh-format
+msgid "Module '$_MODULE' does not define an identifier."
+msgstr ""
+
+#: src/core/module.sh:245
+#, fuzzy, sh-format
+msgid "No such argument: '$_name'"
+msgstr "Onbekend argument '$_arg'."
+
+#: src/core/module.sh:271
+#, sh-format
+msgid "The argument '$_name' is required, but not given."
+msgstr ""
+
+#: src/core/main.sh:22
+msgid "No task specified. Add 'begin' or 'end'."
+msgstr "Geen taak gespecifieerd. Voeg 'begin' of 'end' toe."
+
+#: src/core/main.sh:30
+msgid "No name for the task specified."
+msgstr "Geen naam voor de taak gespecifieerd."
+
+#: src/core/main.sh:37
+msgid "A name for an ending task is given. This is not supported."
+msgstr "Een naam de einde-taak is gegeven. Dit wordt niet ondersteund."
+
+#: src/core/main.sh:44
+#, sh-format
+msgid "Argument --task '$_arg' is invalid: must be 'begin' or 'end'."
+msgstr "Argument --task '$_arg' is fout: moet 'begin' of 'end' zijn."
+
+#: src/core/main.sh:74
+#, sh-format
+msgid "Unknown argument '$_arg'."
+msgstr "Onbekend argument '$_arg'."
+
+#: src/core/main.sh:84
+msgid "A module and identifier must be specified."
+msgstr ""
+
+#: src/core/main.sh:99
+#, fuzzy, sh-format
+msgid "'$_STATE' is not a valid state for module '$_MODULE'."
+msgstr "'$_task' is een foute naam voor een taak."
+
+#: src/core/main.sh:114
+msgid "Not all requirements are met."
+msgstr ""
+
+#: src/core/main.sh:149
+msgid "No arguments given. Use --help or -h for help."
+msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
+
+#: src/core/main.sh:155
+#, sh-format
+msgid "Logging to '$_logpath'"
+msgstr "Log naar '$_logpath'"
 
 #: src/modules/command.sh:3
 msgid "Executes a command."

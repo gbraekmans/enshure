@@ -124,8 +124,8 @@ test_argument() {
 	assertFalse 16 "$?"
 	assertEquals 17 "ERROR: Argument identifier already defined." "$RESULT"
 
-	argument id string identifier "" ""
-	assertTrue 18 "$?"
+	argument id string identifier "" "" > /dev/null 2>&1
+	assertFalse 18 "$?"
 
 	RESULT=$(argument id integer optional "" "" "seven" 2>&1)
 	assertFalse 19 "$?"
@@ -145,6 +145,7 @@ test_module_parse() {
 
 	argument id string identifier "" ""
 	argument num integer required "" ""
+	argument str string optional "" ""
 
 	__module_parse num 1337
 	assertTrue 3 "$?"
@@ -164,7 +165,10 @@ test_module_parse() {
 	assertEquals 9 "test" "$id"
 	
 	RESULT=$(__module_parse num 3 2>&1)
-	assertEquals 13 "test" "$id"
+	assertEquals 14 "test" "$id"
+
+	__module_parse str "a quoted test" num 3
+	assertEquals 15 "a quoted test" "$str"
 
 	__module_is_valid_type() { return 1; }
 	RESULT=$(__module_parse num 3 2>&1)

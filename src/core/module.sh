@@ -41,7 +41,7 @@ argument() {
 	fi
 
 	# If there is already an argument with the same name delete it.
-	_ARGUMENTS=$(printf '%s' "${_ARGUMENTS:-}" | sed "s/${1}.*//g")
+	_ARGUMENTS=$(printf '%s' "${_ARGUMENTS:-}" | sed "s/^${1}|.*//g")
 
 	# Check if value type is valid
 	case "$2" in
@@ -227,7 +227,9 @@ __module_parse() {
 		return "$_E_INVALID_VALUE"
 	fi
 	
-	eval "${_id_name}=\"$_IDENTIFIER\""
+	# Fix quotations
+	_quoted_id=$(printf '%s' "$_IDENTIFIER" | sed 's/\"/\\\"/g')
+	eval "${_id_name}=\"$_quoted_id\""
 
 	# Loop over the arguments to override the given defaults
 	while [ "${#@}" -gt 0 ]; do
@@ -259,6 +261,7 @@ __module_parse() {
 			error "$(translate "The value '\$_val' is not of type '\$_valuetype'.")"
 			return "$_E_INVALID_VALUE"
 		fi
+		_val=$(printf '%s' "$_val" | sed 's/\"/\\\"/g')
 		eval "$_name=\"$_val\""
 	done
 

@@ -132,8 +132,7 @@ __main_execute_mode_parse() {
 
 __main_execute_mode_parse_state() {
 	## Returns the correct state from a number of arguments
-
-	_even_amount_of_args=$((${#@} % 2))
+	_even_amount_of_args=$((${#} % 2))
 	if [ "$_even_amount_of_args" -eq 0 ]; then
 		printf '%s' "$_DEFAULT_STATE"
 	else

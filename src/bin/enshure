@@ -43,9 +43,7 @@ __main() {
 		_BASEDIR="/usr/share/enshure/"
 	# Otherwise assume it's downloaded and use the layout of the source
 	else
-		if [ -z "$_BASEDIR" ]; then
-			_BASEDIR=$(expand_path "${_BINDIR}/../")
-		fi
+		_BASEDIR=$(expand_path "${_BINDIR}/../")
 	fi
 
 	# Include core functionality

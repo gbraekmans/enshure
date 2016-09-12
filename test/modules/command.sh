@@ -1,7 +1,7 @@
 test_command() {
-	RESULT=$(enshure -v)
-	assertEquals "" "$RESULT"
-	
 	enshure command 'echo test'
-	cat "$ENSHURE_LOG"
+	assertTrue "$?"
+	enshure command "echo \"quoted test\""
+	#~ cat $ENSHURE_LOG
+	enshure -q command_output
 }

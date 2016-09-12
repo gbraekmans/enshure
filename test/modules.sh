@@ -41,7 +41,9 @@ setUp() {
 
 	enshure() {
 		_BASEDIR="$(dirname -- "$0")/../src"
-		. "$_BASEDIR/bin/enshure"
+		. "$_BASEDIR/core/base.sh"
+		include core/main
+		__main_execute "$@"
 	}
 }
 
@@ -51,5 +53,3 @@ tearDown() {
 }
 
 . "$(dirname "$0")/shunit2"
-
-

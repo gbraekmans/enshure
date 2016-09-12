@@ -87,6 +87,10 @@ test_main_execute_mode_parse_state() {
 	RESULT=$(__main_execute_mode_parse_state mod id test arg val)
 	assertTrue 7 "$?"
 	assertEquals 8 "test" "$RESULT"
+
+	RESULT=$(__main_execute_mode_parse_state mod "id test")
+	assertTrue 9 "$?"
+	assertEquals 10 "default" "$RESULT"
 }
 
 # shellcheck disable=SC2034
@@ -110,6 +114,11 @@ test_main_execute_mode_parse() {
 	__main_execute_mode_parse test thiss state > /dev/null 2>&1
 	assertTrue 3 "$?"
 	assertEquals 4 "thiss" "$_IDENTIFIER"
+
+	__main_execute_mode_parse test "thiss states" > /dev/null 2>&1
+	assertTrue 12 "$?"
+	assertEquals 13 "thiss states" "$_IDENTIFIER"
+	assertEquals 14 "state" "$_STATE"
 
 	__module_is_valid_state() { return 1; }
 	RESULT=$(__main_execute_mode_parse test thiss state 2>&1)
