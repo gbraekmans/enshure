@@ -60,7 +60,7 @@ test: shellcheck $(TEST_DIR)/shunit2 i18n
 	SHUNIT_PARENT="$(TEST_DIR)/core.sh" zsh -y $(TEST_DIR)/modules.sh
 
 simpletest: $(TEST_DIR)/shunit2 i18n
-#~ 	sh $(TEST_DIR)/core.sh
+	sh $(TEST_DIR)/core.sh
 	sh $(TEST_DIR)/modules.sh
 
 testcoverage: $(TEST_DIR)/shunit2 i18n
