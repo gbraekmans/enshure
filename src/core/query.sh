@@ -37,7 +37,7 @@ __query_command_output() {
 	## Prints all the output of a command to STDOUT.
 
 	# shellcheck disable=SC2002
-	cat "$ENSHURE_LOG" |
+	cat "$(__log_path)" |
 	while read -r _line; do
 		_header=$(printf '%s' "$_line" | cut -d'|' -f1)
 		case "$_header" in

@@ -30,7 +30,7 @@ attain_state_executed() {
 }
 
 verify_requirements() {
-	## Placeholder for the attain_state_executed command in the module.
+	## Placeholder for the verify_requirements command in the module.
 	
 	return 0
 }

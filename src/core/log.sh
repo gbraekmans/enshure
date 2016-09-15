@@ -29,18 +29,18 @@ __log_entry() {
 	##$2 Optional. The message for the log entry.
 
 	_entry="#$1|$(__log_date)|$(id -u)|${_MODULE:-}|${_IDENTIFIER:-}|${_STATE:-}|${2:-}"
+	_logfile="$(__log_path)"
 
 	if __log_should_write_to_stdout; then
 		printf '%s\n' "$_entry"
 	else
 		# Create file if it does not exist
 		if [ ! -e "$(__log_path)" ]; then
-			printf '' > "$(__log_path)"
+			( printf '' > "$(__log_path)" ) 2> /dev/null || die "$(translate "Could not write to log file '\$_logfile'.")" "$_E_UNWRITEABLE_LOG"
 		fi
 		# Only log if writeable
 		if [ ! -w "$(__log_path)" ]; then
 			# shellcheck disable=SC2034
-			_logfile="$(__log_path)"
 			die "$(translate "Could not write to log file '\$_logfile'.")" "$_E_UNWRITEABLE_LOG"
 		fi
 		printf '%s\n' "$_entry" >> "$(__log_path)"
