@@ -81,7 +81,7 @@ shellcheck:
 	#shellcheck -s sh src/lib/*.sh
 	shellcheck -s sh src/types/*.sh --exclude=SC2034
 	shellcheck -s sh src/modules/*.sh --exclude=SC2154
-	find $(TEST_DIR) -name '*.sh' | xargs shellcheck -s sh
+	find $(TEST_DIR) -name '*.sh' | xargs shellcheck -s sh --exclude=SC1090
 
 dependencies:
 	@strace -f -e execve test/core.sh 2>&1 | grep -o 'execve("[A-Z|a-z|/|0-9]*"' | cut -d'"' -f2 | sort | uniq
@@ -89,4 +89,3 @@ dependencies:
 i18n:
 	find src -name '*.sh' | xargs xgettext --from-code utf-8 -o src/po/enSHure.pot  -L Shell --keyword --keyword=translate
 	helpers/translate.sh
-

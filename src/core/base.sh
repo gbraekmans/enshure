@@ -11,11 +11,12 @@ include() {
 
 	# Don't do anything if already included
 	if printf '%s' ":$_INCLUDED:" | grep -q ":$1:"; then
-		return
+		return 0
 	fi
 
 	if [ -f "$_BASEDIR/$1.sh" ]; then
 		# Include the file
+		# shellcheck disable=SC1090
 		. "$_BASEDIR/$1.sh"
 	else
 		return "$_E_FILE_NOT_EXISTS"
@@ -133,7 +134,7 @@ require() {
 not_implemented() {
 	## Shows an error message to the user indicating the functionality
 	## is not implemented and returns a nonzero value.
-	##> $ not_implemented 
+	##> $ not_implemented
 	##> This functionality is not yet implemented in the enSHure core.
 	##> $ echo "$?"
 	##> 9
@@ -154,7 +155,7 @@ initcap() {
 	##> What am i?
 	##> $ initcap "Me"
 	##> Me
-	
+
 	_first=$(printf '%s' "$1" | cut -c1 | tr '[:lower:]' '[:upper:]')
 	_rest=$(printf '%s' "$1" | cut -c2- | tr '[:upper:]' '[:lower:]')
 	printf '%s%s' "$_first" "$_rest"

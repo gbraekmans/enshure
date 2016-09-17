@@ -47,6 +47,7 @@ __main() {
 	fi
 
 	# Include core functionality
+	# shellcheck disable=SC1090
 	. "$_BASEDIR/core/base.sh"
 
 	# Start the main execution

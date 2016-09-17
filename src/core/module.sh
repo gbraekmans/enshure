@@ -18,6 +18,7 @@ module_type() {
 	_module_type="$1"
 	if [ -f "$_BASEDIR/types/${_module_type}.sh" ]; then
 		# Load the type
+		# shellcheck disable=SC1090
 		. "$_BASEDIR/types/${_module_type}.sh"
 	else
 		die "$(translate "No such module-type: '\$_module_type'")"
@@ -104,7 +105,7 @@ argument() {
 module_description() {
 	## Shows a description for the module in the help.
 	##$1 the description
-	
+
 	# shellcheck disable=SC2034
 	_MODULE_DESCRIPTION="$1"
 }
@@ -118,8 +119,10 @@ __module_load() {
 	_modpath="${ENSHURE_MODULE_PATH:-$_BASEDIR/modules}"
 
 	if [ -f "$_modpath/${_module}.sh" ]; then
+		# shellcheck disable=SC1090
 		. "$_modpath/${_module}.sh"
 	elif [ -f "$_modpath/$_module/main.sh" ]; then
+		# shellcheck disable=SC1090
 		. "$_modpath/$_module/main.sh"
 	else
 		error "$(translate "Could not locate module '\$_module'")"
@@ -217,7 +220,7 @@ __module_parse() {
 	_id_line=$(printf '%s' "$_ARGUMENTS" | grep '.*|.*|identifier|')
 	_id_name=$(printf '%s' "$_id_line" | cut -d'|' -f1)
 	_id_type=$(printf '%s' "$_id_line" | cut -d'|' -f2)
-	
+
 	_fails=0
 	__module_is_valid_type "$_id_type" "$_IDENTIFIER" || _fails="$?"
 	if [ "$_fails" -ne "0" ]; then
@@ -226,7 +229,7 @@ __module_parse() {
 		error "$(translate "The value '\$_val' is not of type '\$_valuetype'.")"
 		return "$_E_INVALID_VALUE"
 	fi
-	
+
 	# Fix quotations
 	_quoted_id=$(printf '%s' "$_IDENTIFIER" | sed 's/\"/\\\"/g')
 	eval "${_id_name}=\"$_quoted_id\""

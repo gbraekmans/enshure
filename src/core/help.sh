@@ -16,12 +16,12 @@ __help() {
 __help_module() {
 	## Show the help for a module
 	##$1 the name of the module.
-	
+
 	_module="$1"
 	__module_load "$_module"
 
 	# Print the header
-	translate "Module '$_module', of type '$_MODULE_TYPE'."
+	translate "Module '\$_module', of type '\$_MODULE_TYPE'."
 	printf '\n\n%s\n\n' "$_MODULE_DESCRIPTION"
 
 	# Print the states
@@ -43,7 +43,7 @@ __help_module() {
 		_argtype=$(printf '%s' "$_line" | cut -d'|' -f3)
 		_helpmsg=$(printf '%s' "$_line" | cut -d'|' -f4)
 		_example=$(printf '%s' "$_line" | cut -d'|' -f5)
-		
+
 		case "$_argtype" in
 			"identifier")
 				_targtype=$(translate "Identifier")
@@ -74,13 +74,13 @@ __help_module() {
 				_tvaltype=$(translate "enumaration")
 				;;
 		esac
-		
+
 		_texample=$(translate "Example")
 
 		printf '    - %s: %s, %s\n' "$_name" "$_targtype" "$_tvaltype"
 		__help_indent "$_helpmsg" "        "
 		__help_indent "$(printf '%s: %s' "$_texample" "$_example")" "        "
-		
+
 	done
 
 	# Print an example

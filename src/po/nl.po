@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-12 13:35+0000\n"
+"POT-Creation-Date: 2016-09-17 23:54+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/core/base.sh:128
+#: src/core/base.sh:129
 #, sh-format
 msgid "$_module requires '$_prog' to be installed."
 msgstr "$_module heeft '$_prog' nodig om te werken."
 
-#: src/core/base.sh:142
+#: src/core/base.sh:143
 #, sh-format
 msgid ""
 "$_MODULE does not implement a function needed to set the state "
@@ -31,7 +31,7 @@ msgstr ""
 "$_MODULE implementeert een functien die nodig is voor status "
 "'$_REQUESTED_STATE' niet."
 
-#: src/core/base.sh:144
+#: src/core/base.sh:145
 msgid "This functionality is not yet implemented in the enSHure core."
 msgstr "Deze functionaliteit is nog niet geimplementeerd in the enSHure kern."
 
@@ -43,6 +43,11 @@ msgstr "Iets onbekend ging helemaal fout..."
 #, sh-format
 msgid "CRITICAL FAILURE: $_msg"
 msgstr "KRITIEKE FOUT: $_msg"
+
+#: src/core/help.sh:24
+#, sh-format
+msgid "Module '$_module', of type '$_MODULE_TYPE'."
+msgstr ""
 
 #: src/core/help.sh:28
 msgid "Valid states for this module:"
@@ -126,19 +131,6 @@ msgstr ""
 msgid "Or MODE is one of the following modules:"
 msgstr ""
 
-#: src/core/query.sh:78
-msgid "No query specified. Use -h to get a list of all queries."
-msgstr ""
-"Geen query gespecifieerd. Gebruik -h om een lijst te zien van alle queries."
-
-#: src/core/query.sh:99
-#, sh-format
-msgid ""
-"Argument --query '$_arg' is invalid. Use -h to get a list of all queries."
-msgstr ""
-"Argument --query '$_arg' is fout. Gebruik -h om een lijst te zien van alle "
-"queries."
-
 #: src/core/msg.sh:46
 #, sh-format
 msgid "Verbosity level '${_old_verbosity}' unknown, assuming 'INFO'."
@@ -175,29 +167,6 @@ msgstr "Nu niet in een taak."
 msgid "Done: $_display_task"
 msgstr "Gedaan: $_display_task"
 
-#: src/core/log.sh:44
-#, sh-format
-msgid "Could not write to log file '$_logfile'."
-msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
-
-#: src/core/log.sh:56
-msgid "Can not signal 'CHANGE' when no module is loaded."
-msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
-
-#: src/core/log.sh:60
-#, fuzzy, sh-format
-msgid "$_mod $_IDENTIFIER is now $_STATE."
-msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
-
-#: src/core/log.sh:68
-msgid "Can not signal 'OK' when no module is loaded."
-msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
-
-#: src/core/log.sh:73
-#, fuzzy, sh-format
-msgid "$_mod $_IDENTIFIER is already $_STATE."
-msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
-
 #: src/core/run.sh:39
 #, sh-format
 msgid "Running '$_cmd'."
@@ -220,60 +189,60 @@ msgstr "Kon geen bruikbare base64 implementatie vinden."
 msgid "The header '$_header' is unknown for unserialization."
 msgstr "Het begin '$_header' is onbekend voor onserialisatie."
 
-#: src/core/module.sh:23
+#: src/core/module.sh:24
 #, sh-format
 msgid "No such module-type: '$_module_type'"
 msgstr ""
 
-#: src/core/module.sh:40
+#: src/core/module.sh:41
 msgid "Can't add an argument before a module type is loaded"
 msgstr ""
 
-#: src/core/module.sh:54
+#: src/core/module.sh:55
 #, sh-format
 msgid "The enum '$_value_type' is of the wrong format."
 msgstr ""
 
-#: src/core/module.sh:61
+#: src/core/module.sh:62
 #, sh-format
 msgid "Argument has an invalid type for it's value: '$_value_type'."
 msgstr ""
 
-#: src/core/module.sh:73
+#: src/core/module.sh:74
 msgid "Argument identifier already defined."
 msgstr ""
 
-#: src/core/module.sh:80
+#: src/core/module.sh:81
 #, sh-format
 msgid "Argument has an invalid type: '$_argument_type'."
 msgstr ""
 
-#: src/core/module.sh:91 src/core/module.sh:226 src/core/module.sh:261
+#: src/core/module.sh:92 src/core/module.sh:229 src/core/module.sh:264
 #, sh-format
 msgid "The value '$_val' is not of type '$_valuetype'."
 msgstr ""
 
-#: src/core/module.sh:125
+#: src/core/module.sh:128
 #, fuzzy, sh-format
 msgid "Could not locate module '$_module'"
 msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
 
-#: src/core/module.sh:126
+#: src/core/module.sh:129
 #, sh-format
 msgid "Module path is '$_modpath'"
 msgstr ""
 
-#: src/core/module.sh:206
+#: src/core/module.sh:209
 #, sh-format
 msgid "Module '$_MODULE' does not define an identifier."
 msgstr ""
 
-#: src/core/module.sh:245
+#: src/core/module.sh:248
 #, fuzzy, sh-format
 msgid "No such argument: '$_name'"
 msgstr "Onbekend argument '$_arg'."
 
-#: src/core/module.sh:271
+#: src/core/module.sh:274
 #, sh-format
 msgid "The argument '$_name' is required, but not given."
 msgstr ""
@@ -322,6 +291,42 @@ msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
 msgid "Logging to '$_logpath'"
 msgstr "Log naar '$_logpath'"
 
+#: src/core/log.sh:40 src/core/log.sh:44
+#, sh-format
+msgid "Could not write to log file '$_logfile'."
+msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
+
+#: src/core/log.sh:56
+msgid "Can not signal 'CHANGE' when no module is loaded."
+msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
+
+#: src/core/log.sh:60
+#, fuzzy, sh-format
+msgid "$_mod $_IDENTIFIER is now $_STATE."
+msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
+
+#: src/core/log.sh:68
+msgid "Can not signal 'OK' when no module is loaded."
+msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
+
+#: src/core/log.sh:73
+#, fuzzy, sh-format
+msgid "$_mod $_IDENTIFIER is already $_STATE."
+msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
+
+#: src/core/query.sh:78
+msgid "No query specified. Use -h to get a list of all queries."
+msgstr ""
+"Geen query gespecifieerd. Gebruik -h om een lijst te zien van alle queries."
+
+#: src/core/query.sh:99
+#, sh-format
+msgid ""
+"Argument --query '$_arg' is invalid. Use -h to get a list of all queries."
+msgstr ""
+"Argument --query '$_arg' is fout. Gebruik -h om een lijst te zien van alle "
+"queries."
+
 #: src/modules/command.sh:3
 msgid "Executes a command."
 msgstr ""
@@ -334,9 +339,38 @@ msgstr ""
 msgid "The path to a file, link or directory created by the command."
 msgstr ""
 
-#: src/modules/command.sh:19
+#: src/modules/command.sh:21
 #, sh-format
 msgid "The command '$statement' returned $retcode."
+msgstr ""
+
+#: src/modules/message.sh:2
+msgid "Displays a message to the user."
+msgstr ""
+
+#: src/modules/message.sh:4
+msgid "The message to be shown."
+msgstr ""
+
+#: src/modules/query.sh:2
+msgid "Displays the result of a query to the user."
+msgstr ""
+
+#: src/modules/query.sh:4
+msgid "The query to be shown."
+msgstr ""
+
+#: src/modules/query.sh:5
+msgid "If the query has an argument task, pass this value."
+msgstr ""
+
+#: src/modules/query.sh:31
+#, sh-format
+msgid "Query '$query' is unknown."
+msgstr ""
+
+#: src/modules/query.sh:36
+msgid "Can only supply the task argument with a summary query"
 msgstr ""
 
 #~ msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."

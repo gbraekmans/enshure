@@ -12,7 +12,7 @@ test_msg_terminal_writes_to_stdout() {
 	if [ ! -t 1 ]; then
 		startSkipping
 	fi
-	
+
 	isSkipping || __msg_terminal_writes_to_stdout
 	assertTrue 1 "$?"
 
@@ -27,24 +27,23 @@ test_msg_terminal_supports_colors() {
 	tput() {
 		printf "2"
 	}
-  	__msg_terminal_supports_colors
+	__msg_terminal_supports_colors
  	assertFalse 1 "$?"
-  	unset -f tput
- 
+	unset -f tput
+
 	# system has not got tput installed -> false
 	is_available() {
 		return 1
 	}
-  	__msg_terminal_supports_colors
+	__msg_terminal_supports_colors
 	assertFalse 2 "$?"
-	. "$_BASEDIR/core/base.sh"
 
 	# system has 8 or more colors and tput -> true
 	tput() {
 		printf "8"
 	}
-  	__msg_terminal_supports_colors
-  	unset -f tput
+	__msg_terminal_supports_colors
+	unset -f tput
 	assertTrue 3 "$?"
 }
 
@@ -52,16 +51,16 @@ test_msg_pretty_print() {
 	__msg_terminal_supports_unicode() { return 0; }
 	__msg_terminal_supports_colors() { return 0; }
 	__msg_terminal_writes_to_stdout() { return 0; }
-	
+
 	__msg_pretty_print
 	assertTrue 1 "$?"
-	
+
 	__msg_terminal_supports_unicode() { return 1; }
 	__msg_terminal_supports_colors() { return 0; }
 	__msg_terminal_writes_to_stdout() { return 0; }
 
 	__msg_pretty_print
-	assertFalse 2 "$?"	
+	assertFalse 2 "$?"
 }
 
 test_msg_format_heading() {
@@ -86,13 +85,27 @@ test_msg_format_heading() {
 	RESULT=$(__msg_format_heading "TEST")
 	assertEquals 3 "TES" "$RESULT"
 
+	# Only support 6 cols
+	tput() {
+		printf "6"
+	}
+	RESULT=$(__msg_format_heading "TEST")
+	assertEquals 4 "TEST" "$RESULT"
+
+	# Only support 8 cols
+	tput() {
+		printf "8"
+	}
+	RESULT=$(__msg_format_heading "TEST")
+	assertEquals 5 "= TEST =" "$RESULT"
+
 	# Tput isn't installed assume 80
 	is_available() {
 		return 1
 	}
 	RESULT=$(__msg_format_heading "TEST")
-	assertEquals 4 "===================================== TEST =====================================" "$RESULT"
-	
+	assertEquals 6 "===================================== TEST =====================================" "$RESULT"
+
 	unset -f tput
 }
 
@@ -103,16 +116,16 @@ test_msg() {
 		assertTrue 1 "$?"
 		assertEquals 2 "$tp: Testing" "$RESULT"
 	done
-	
+
 	__msg_terminal_supports_unicode() { return 0; }
 	__msg_terminal_supports_colors() { return 0; }
 	__msg_terminal_writes_to_stdout() { return 0; }
-	
+
 	# Only execute if tput is insalled
 	if ! command -v tput > /dev/null; then
 		startSkipping
 	fi
-	
+
 	isSkipping || RESULT=$(__msg ERROR test)
 	assertTrue 3 "$?"
 	printf '%s' "$RESULT" | grep -q " ✗ test"

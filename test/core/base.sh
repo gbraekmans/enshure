@@ -89,7 +89,7 @@ test_not_implemented() {
 	RESULT=$(not_implemented)
 	assertFalse 1 "$?"
 	assertEquals 2 "ERROR: This functionality is not yet implemented in the enSHure core." "$RESULT"
-	
+
 	# shellcheck disable=SC2034
 	{
 	_MODULE="apt_package"
@@ -129,6 +129,13 @@ test_translate() {
 	assertTrue 3 "$?"
 	assertEquals 4 "Something unknown went terribly wrong..." "$RESULT"
 
+	# These tests are only run when using systemd and the NL-locale is available
+	if command -v localectl > /dev/null; then
+		if ! localectl list-locales | grep -q 'nl_NL.utf8'; then
+			startSkipping
+		fi
+	fi
+
 	LANGUAGE='nl'
 	LANG='nl_NL.UTF-8'
 	RESULT="$(translate "Something unknown went terribly wrong...")"
@@ -139,6 +146,8 @@ test_translate() {
 	RESULT="$(translate 'Done: $_display_task')"
 	assertTrue 7 "$?"
 	assertEquals 8 "Gedaan: Test" "$RESULT"
+
+	isSkipping && endSkipping
 
 	# gettext unavailable
 	is_available() { return 1; }

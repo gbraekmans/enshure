@@ -32,7 +32,7 @@ __msg_meets_verbosity_level() {
 	## Returns 0 if the message should be printed at the current
 	## verbosity level.
 	##$1 The message type of the message
-	
+
 	# Check if the verbosity level is valid. If not warn and set to INFO
 	ENSHURE_VERBOSITY=${ENSHURE_VERBOSITY:-INFO}
 	case "$ENSHURE_VERBOSITY" in
@@ -88,14 +88,13 @@ __msg_format_heading() {
 
 	# Create a string of "=" to fill before & after the message
 	_len=${#_msg}
-	_fill=$((_cols - _len - 2))
-	_fill=$((_fill / 2))
-	_i=0
-	_filler=
-	while [ "$_i" -lt "$_fill" ]; do
-		_i=$((_i + 1))
-		_filler="$_filler="
-	done
+	_fill=$(( (_cols - _len - 2) / 2))
+	_filler=''
+
+	# This was a [ $_fill -gt 0 ], but some versions of ksh don't like it.
+	if ! printf '%s' "$_fill" | grep -q "^[-,0]"; then
+		_filler=$(printf "%${_fill}s" | tr " " "=")
+	fi
 
 	# Return result
 	if [ -n "$_filler" ]; then
@@ -114,7 +113,7 @@ __msg() {
 	##$2 The message displayed to the user
 	##> $ msg "INFO" "Hello world!"
 	##> INFO: Hello world!
-	
+
 	# Check if we should print the message
 	if ! __msg_meets_verbosity_level "$1"; then
 		return 0
@@ -124,7 +123,7 @@ __msg() {
 	if __msg_pretty_print; then
 		_prefix=
 		tput bold # & bright colors
-		
+
 		# terminalcodes from: http://wiki.bash-hackers.org/scripting/terminalcodes
 		# Color & UTF-8 replace message
 		case "$1" in
@@ -168,7 +167,7 @@ __msg() {
 				;;
 		esac
 		tput sgr0 # reset colors
-	else 
+	else
 		# we can't pretty print
 		# If it's a heading underline the message
 		if [ "$1" = "HEADING" ]; then

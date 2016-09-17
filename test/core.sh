@@ -20,7 +20,7 @@ suite() {
 }
 
 # shellcheck disable=SC2034,SC2044
-setUp() {	
+setUp() {
 	# Freeze time for logs
 	date() {
 		printf '1970-01-01 00:00:00'
@@ -60,4 +60,3 @@ tearDown() {
 }
 
 . "$(dirname "$0")/shunit2"
-

@@ -29,6 +29,7 @@ __log_entry() {
 	##$2 Optional. The message for the log entry.
 
 	_entry="#$1|$(__log_date)|$(id -u)|${_MODULE:-}|${_IDENTIFIER:-}|${_STATE:-}|${2:-}"
+	# shellcheck disable=SC2034
 	_logfile="$(__log_path)"
 
 	if __log_should_write_to_stdout; then
@@ -40,7 +41,6 @@ __log_entry() {
 		fi
 		# Only log if writeable
 		if [ ! -w "$(__log_path)" ]; then
-			# shellcheck disable=SC2034
 			die "$(translate "Could not write to log file '\$_logfile'.")" "$_E_UNWRITEABLE_LOG"
 		fi
 		printf '%s\n' "$_entry" >> "$(__log_path)"
@@ -107,4 +107,3 @@ __log_ok() {
 
 #print(human_time(seconds_between("2016-08-17 09:05:26", "2013-05-16 05:35:42")))
 #EOF
-
