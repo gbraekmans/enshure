@@ -1,10 +1,14 @@
 test_log_should_write_stdout() {
+	_OLD_LOG=$ENSHURE_LOG
+
 	# ENSHURE_LOG is - -> true
 	ENSHURE_LOG="-" __log_should_write_to_stdout
 	assertTrue 1 "$?"
 	# ENSHURE_LOG is not - -> false
 	ENSHURE_LOG='' __log_should_write_to_stdout
 	assertFalse 2 "$?"
+
+	ENSHURE_LOG=$_OLD_LOG
 }
 
 test_log_date() {
@@ -13,6 +17,9 @@ test_log_date() {
 
 # shellcheck disable=SC2034
 test_log_path() {
+	_OLD_LOG=$ENSHURE_LOG
+
+
 	ENSHURE_LOG="/tmp/test.log"
 	RESULT=$(__log_path)
 	assertTrue 1 "$?"
@@ -22,13 +29,16 @@ test_log_path() {
 	RESULT=$(__log_path)
 	assertTrue 3 "$?"
 	assertEquals 4 "/var/log/enshure.log" "$RESULT"
+
+	ENSHURE_LOG=$_OLD_LOG
 }
 
 # shellcheck disable=SC2034
 test_log_entry() {
 	_MODULE=
 	_IDENTIFIER=
-	_REQUESTED_STATE=
+	_STATE=
+	_OLD_LOG=$ENSHURE_LOG
 	ENSHURE_LOG="-"
 	assertEquals 1 "#WARNING|1970-01-01 00:00:00|0||||Will not refresh metadata." "$(__log_entry 'WARNING' 'Will not refresh metadata.')"
 	_MODULE=RPM_PACKAGE
@@ -43,6 +53,7 @@ test_log_entry() {
 	__log_entry 'INFO' 'Will not refresh metadata.'
 	assertEquals 4 "#INFO|1970-01-01 00:00:00|0|RPM_PACKAGE|bash|installed|Will not refresh metadata." "$(cat "$TMP")"
 	rm -rf "$TMP"
+	ENSHURE_LOG=$_OLD_LOG
 }
 
 # shellcheck disable=SC2034
