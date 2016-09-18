@@ -56,11 +56,17 @@ __log_change() {
 		die "$(translate "Can not signal 'CHANGE' when no module is loaded." "$_E_NOT_IN_A_MODULE")"
 	fi
 	_mod="$(initcap "$_MODULE")"
-	_msg="$_mod $_IDENTIFIER is now in $_STATE."
+	_msg="$_mod $_IDENTIFIER is now $_STATE."
 	_tmsg="$(translate "\$_mod \$_IDENTIFIER is now \$_STATE.")"
 
-	__msg "CHANGE" "$_tmsg"
-	__log_entry "CHANGE" "$_msg"
+	##$_DONT_PRINT_CHANGE if this is set, CHANGE and OK messages are not printed.
+	##$_DONT_LOG_CHANGE if this is set, CHANGE and OK messages are not logged.
+	if [ -z "${_DONT_PRINT_CHANGE:-}" ]; then
+		__msg "CHANGE" "$_tmsg"
+	fi
+	if [ -z "${_DONT_LOG_CHANGE:-}" ]; then
+		__log_entry "CHANGE" "$_msg"
+	fi
 }
 
 __log_ok() {
@@ -69,11 +75,15 @@ __log_ok() {
 	fi
 
 	_mod="$(initcap "$_MODULE")"
-	_msg="$_mod $_IDENTIFIER is already in $_STATE."
+	_msg="$_mod $_IDENTIFIER is already $_STATE."
 	_tmsg="$(translate "\$_mod \$_IDENTIFIER is already \$_STATE.")"
 
-	__msg "OK" "$_tmsg"
-	__log_entry "OK" "$_msg"
+	if [ -z "${_DONT_PRINT_CHANGE:-}" ]; then
+		__msg "OK" "$_tmsg"
+	fi
+	if [ -z "${_DONT_LOG_CHANGE:-}" ]; then
+		__log_entry "OK" "$_msg"
+	fi
 }
 
 # I'll probably implement date time differences as optional using something like this:

@@ -59,7 +59,7 @@ test_run_serialize() {
 	assertEquals 8 "GZIP|H4sIAAAAAAAAA12TS44bMQxE9z4FT9B3SAZZDBAEmCTInlbTNgH9RpSMOX6Kku04s2y1WCw+lr6EMIzTMLISR2cy7cSjk5gJvQ+1jb7pv9887+euI1GNHIQ75ZLJZN/o160WZcRJOp3GWXl+o7KFi3YJvVAvnRNJh7R10hgLNalNLpJ3aRBB6a7nrGaailHlBpnR/DzxOXNCL5YqxFEhvlMorZamBp0GZ5w16ewOLSbNV8m9NEHZGkOgukuUrF3pKtFtS5rD4yxtBzcGcbbJYDZW/GCq0k7SYBSnKPGuxwFIP7lryXK/Bk9aDVYGRgJMzPq6U+RjcX/PIlGP0gpsbvQVNFlWSW0sJgt0KjHCKD8sb/Q2YO1Zhu+dQ0mp7Lod3rAFhyOOmsrppAES4sRz0H1kePruhrTYXAdJ1LOrUQZt+7ST/wzxhybQfCnZ5H3M3fjibVjQissw0Ne0S3xtjUrKbhU3r9hD7QyCPktZBWGk9yF0YWfkRuGJ9zXJWuyDhCcEMIL7zF4G9Uf3T2H6CFLhENReVgM2kFPkYW6XBkD8ENQCyZMx/GNTd1ZoL3Fev6Xb1mkYsTKyAu4r845g5hKZHpjs9wy6v49HQKcSJrmtCRnK4vjGSt6t00Z/PBTzaZzwytqdysrk7L5gzreF8Bz+ApK8pbnKAwAA" "$RESULT"
 
 
-	if ! command -v uuencode > /dev/null; then
+	if ! (command -v uuencode > /dev/null && command -v compress > /dev/null); then
 		startSkipping
 	fi
 

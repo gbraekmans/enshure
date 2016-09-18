@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 23:54+0200\n"
+"POT-Creation-Date: 2016-09-18 13:16+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -305,11 +305,11 @@ msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
 msgid "$_mod $_IDENTIFIER is now $_STATE."
 msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
 
-#: src/core/log.sh:68
+#: src/core/log.sh:74
 msgid "Can not signal 'OK' when no module is loaded."
 msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
 
-#: src/core/log.sh:73
+#: src/core/log.sh:79
 #, fuzzy, sh-format
 msgid "$_mod $_IDENTIFIER is already $_STATE."
 msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
@@ -364,12 +364,28 @@ msgstr ""
 msgid "If the query has an argument task, pass this value."
 msgstr ""
 
-#: src/modules/query.sh:31
+#: src/modules/query.sh:11
+msgid "enSHure made a change."
+msgstr ""
+
+#: src/modules/query.sh:13
+msgid "No change made by enSHure."
+msgstr ""
+
+#: src/modules/query.sh:17
+msgid "Current task is: '%s'"
+msgstr ""
+
+#: src/modules/query.sh:23
+msgid "%s of %s statements required changes"
+msgstr ""
+
+#: src/modules/query.sh:33
 #, sh-format
 msgid "Query '$query' is unknown."
 msgstr ""
 
-#: src/modules/query.sh:36
+#: src/modules/query.sh:38
 msgid "Can only supply the task argument with a summary query"
 msgstr ""
 

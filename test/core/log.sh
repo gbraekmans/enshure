@@ -85,6 +85,30 @@ test_log_change() {
 	assertTrue 5 "$?"
 	assertEquals 6 "CHANGE: File /root/.zshrc is now absent." "$RESULT"
 	assertEquals 7 "#CHANGE|1970-01-01 00:00:00|0|file|/root/.zshrc|absent|File /root/.zshrc is now absent." "$(tail -n1 "$ENSHURE_LOG")"
+
+	printf '' > "$ENSHURE_LOG"
+	_DONT_PRINT_CHANGE="true"
+	RESULT=$(__log_change 2>&1)
+	assertTrue 8 "$?"
+	assertEquals 9 "" "$RESULT"
+	assertEquals 10 "#CHANGE|1970-01-01 00:00:00|0|file|/root/.zshrc|absent|File /root/.zshrc is now absent." "$(tail -n1 "$ENSHURE_LOG")"
+
+	printf '' > "$ENSHURE_LOG"
+	_DONT_LOG_CHANGE="true"
+	RESULT=$(__log_change 2>&1)
+	assertTrue 11 "$?"
+	assertEquals 12 "" "$RESULT"
+	assertEquals 13 "" "$(tail -n1 "$ENSHURE_LOG")"
+
+	unset _DONT_PRINT_CHANGE
+
+	printf '' > "$ENSHURE_LOG"
+	RESULT=$(__log_change 2>&1)
+	assertTrue 14 "$?"
+	assertEquals 15 "CHANGE: File /root/.zshrc is now absent." "$RESULT"
+	assertEquals 16 "" "$(tail -n1 "$ENSHURE_LOG")"
+
+	unset _DONT_LOG_CHANGE
 }
 
 # shellcheck disable=SC2034
@@ -107,4 +131,28 @@ test_log_ok() {
 	assertTrue 5 "$?"
 	assertEquals 6 "OK: File /root/.zshrc is already present." "$RESULT"
 	assertEquals 7 "#OK|1970-01-01 00:00:00|0|file|/root/.zshrc|present|File /root/.zshrc is already present." "$(tail -n1 "$ENSHURE_LOG")"
+
+	printf '' > "$ENSHURE_LOG"
+	_DONT_PRINT_CHANGE="true"
+	RESULT=$(__log_ok 2>&1)
+	assertTrue 8 "$?"
+	assertEquals 9 "" "$RESULT"
+	assertEquals 10 "#OK|1970-01-01 00:00:00|0|file|/root/.zshrc|present|File /root/.zshrc is already present." "$(tail -n1 "$ENSHURE_LOG")"
+
+	printf '' > "$ENSHURE_LOG"
+	_DONT_LOG_CHANGE="true"
+	RESULT=$(__log_ok 2>&1)
+	assertTrue 11 "$?"
+	assertEquals 12 "" "$RESULT"
+	assertEquals 13 "" "$(tail -n1 "$ENSHURE_LOG")"
+
+	unset _DONT_PRINT_CHANGE
+
+	printf '' > "$ENSHURE_LOG"
+	RESULT=$(__log_ok 2>&1)
+	assertTrue 14 "$?"
+	assertEquals 15 "OK: File /root/.zshrc is already present." "$RESULT"
+	assertEquals 16 "" "$(tail -n1 "$ENSHURE_LOG")"
+
+	unset _DONT_LOG_CHANGE
 }
