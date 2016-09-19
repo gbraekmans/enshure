@@ -86,10 +86,10 @@ test_query_made_change() {
 	__log_change  > /dev/null
 	__query_made_change
 	assertEquals 3 "0" "$?"
-	
+
 	info "test" > /dev/null
 	__query_made_change
-	assertEquals 4 "0" "$?"	
+	assertEquals 4 "0" "$?"
 
 	error "test" > /dev/null
 	__query_made_change
@@ -165,7 +165,7 @@ test_query_summary() {
 	RESULT=$(__query_summary "webserver")
 	assertTrue 21 "$?"
 	assertEquals 22 "$(printf "change: 1\nok: 1\ntotal: 2\n" )" "$RESULT"
-	
+
 	RESULT=$(__query_summary "webserver::apache")
 	assertTrue 23 "$?"
 	assertEquals 24 "$(printf "change: 1\nok: 0\ntotal: 1\n" )" "$RESULT"
@@ -196,17 +196,20 @@ test_query_summary() {
 
 	RESULT=$(__query_summary "webserver")
 	assertTrue 33 "$?"
-	assertEquals 34 "$(printf "change: 1\nok: 2\ntotal: 3\n" )" "$RESULT"	
+	assertEquals 34 "$(printf "change: 1\nok: 2\ntotal: 3\n" )" "$RESULT"
 }
 
 test_query_command_output() {
-	run 'printf "test\n"'
+	# Test multi-line statements
+	run 'printf "test
+"'
 	run 'false'
 	info "filler" > /dev/null
 	run 'printf "An error!\n" && exit 4 >&2'
 
 	OUTPUT=$(cat <<-EOF
-	$ printf "test\n"
+	$ printf "test
+	$ "
 	test
 	$ false
 	# Returned: 1
