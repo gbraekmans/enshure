@@ -19,5 +19,5 @@ test_message() {
 	ENSHURE_VERBOSITY="DEBUG"
 	RESULT=$(enshure message 'Hello world!' debug)
 	assertTrue 9 "$?"
-	assertEquals 10 "DEBUG: Hello world!" "$(printf '%s' "$RESULT" | tail -n1)"
+	assertEquals 10 "DEBUG: Hello world!" "$(printf '%s' "$RESULT" | grep 'Hello')"
 }
