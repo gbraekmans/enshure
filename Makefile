@@ -58,15 +58,23 @@ test: shellcheck $(TEST_DIR)/shunit2 i18n
 	ksh  $(TEST_DIR)/modules.sh
 	mksh $(TEST_DIR)/modules.sh
 	SHUNIT_PARENT="$(TEST_DIR)/core.sh" zsh -y $(TEST_DIR)/modules.sh
+	bash $(TEST_DIR)/lib.sh
+	dash $(TEST_DIR)/lib.sh
+	ksh  $(TEST_DIR)/lib.sh
+	mksh $(TEST_DIR)/lib.sh
+	SHUNIT_PARENT="$(TEST_DIR)/core.sh" zsh -y $(TEST_DIR)/lib.sh
 
 simpletest: $(TEST_DIR)/shunit2 i18n
 	sh $(TEST_DIR)/core.sh
 	sh $(TEST_DIR)/modules.sh
+	sh $(TEST_DIR)/lib.sh
 
 testcoverage: $(TEST_DIR)/shunit2 i18n
 	rm -rf "$(KCOV_DIR)"
 	kcov --include-path=./src/core "./$(KCOV_DIR)" "$(TEST_DIR)/core.sh"
 	kcov --include-path=./src/modules "./$(KCOV_DIR)" "$(TEST_DIR)/modules.sh"
+	kcov --include-path=./src/core "./$(KCOV_DIR)" "$(TEST_DIR)/lib.sh"
+
 
 timings:
 	@/usr/bin/time -f "bash: %e seconds, CPU %P, MEM %Mkb" bash $(TEST_DIR)/core.sh > /dev/null
@@ -78,7 +86,7 @@ timings:
 shellcheck:
 	shellcheck -s sh src/bin/enshure
 	shellcheck -s sh src/core/*.sh
-	#shellcheck -s sh src/lib/*.sh
+	shellcheck -s sh src/lib/*.sh
 	shellcheck -s sh src/types/*.sh --exclude=SC2034
 	shellcheck -s sh src/modules/*.sh --exclude=SC2154
 	find $(TEST_DIR) -name '*.sh' | xargs shellcheck -s sh --exclude=SC1090

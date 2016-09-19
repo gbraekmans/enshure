@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-18 13:16+0200\n"
+"POT-Creation-Date: 2016-09-19 13:32+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -16,24 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: src/core/base.sh:129
-#, sh-format
-msgid "$_module requires '$_prog' to be installed."
-msgstr "$_module heeft '$_prog' nodig om te werken."
-
-#: src/core/base.sh:143
-#, sh-format
-msgid ""
-"$_MODULE does not implement a function needed to set the state "
-"'$_REQUESTED_STATE'."
-msgstr ""
-"$_MODULE implementeert een functien die nodig is voor status "
-"'$_REQUESTED_STATE' niet."
-
-#: src/core/base.sh:145
-msgid "This functionality is not yet implemented in the enSHure core."
-msgstr "Deze functionaliteit is nog niet geimplementeerd in the enSHure kern."
 
 #: src/core/error.sh:19
 msgid "Something unknown went terribly wrong..."
@@ -327,6 +309,24 @@ msgstr ""
 "Argument --query '$_arg' is fout. Gebruik -h om een lijst te zien van alle "
 "queries."
 
+#: src/core/base.sh:129
+#, sh-format
+msgid "$_module requires '$_prog' to be installed."
+msgstr "$_module heeft '$_prog' nodig om te werken."
+
+#: src/core/base.sh:143
+#, sh-format
+msgid ""
+"$_MODULE does not implement a function needed to set the state "
+"'$_REQUESTED_STATE'."
+msgstr ""
+"$_MODULE implementeert een functien die nodig is voor status "
+"'$_REQUESTED_STATE' niet."
+
+#: src/core/base.sh:145
+msgid "This functionality is not yet implemented in the enSHure core."
+msgstr "Deze functionaliteit is nog niet geimplementeerd in the enSHure kern."
+
 #: src/modules/command.sh:3
 msgid "Executes a command."
 msgstr ""
@@ -372,20 +372,20 @@ msgstr ""
 msgid "No change made by enSHure."
 msgstr ""
 
-#: src/modules/query.sh:17
+#: src/modules/query.sh:18
 msgid "Current task is: '%s'"
 msgstr ""
 
-#: src/modules/query.sh:23
+#: src/modules/query.sh:25
 msgid "%s of %s statements required changes"
 msgstr ""
 
-#: src/modules/query.sh:33
+#: src/modules/query.sh:35
 #, sh-format
 msgid "Query '$query' is unknown."
 msgstr ""
 
-#: src/modules/query.sh:38
+#: src/modules/query.sh:40
 msgid "Can only supply the task argument with a summary query"
 msgstr ""
 
