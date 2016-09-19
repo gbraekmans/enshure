@@ -51,7 +51,7 @@ __main_query_mode_parse() {
 	## Parses the command if enSHure is started in query mode
 
 	# TODO: Implement facts
-	
+
 	case "$1" in
 		"-h"|"--help")
 			shift
@@ -84,7 +84,7 @@ __main_execute_mode_parse() {
 		error "$(translate "A module and identifier must be specified.")"
 		exit "$_E_ARGUMENT_MISSING"
 	fi
-	
+
 	# Load the module
 	__module_load "$1"
 
@@ -102,19 +102,19 @@ __main_execute_mode_parse() {
 
 	# Pop the two or three first arguments
 	shift && shift
-	if [ "$((${#@} % 2))" -eq "1" ]; then
+	if [ "$(($# % 2))" -eq "1" ]; then
 		shift
 	fi
 
 	# Parse the arguments
 	__module_parse "$@"
-	
+
 	# Verify the requirements
 	if ! verify_requirements; then
 		error "$(translate "Not all requirements are met.")"
 		return "$_E_UNMET_REQUIREMENT"
 	fi
-	
+
 	##$ENSHURE_VALIDATE if this is set only a validation of the modules will occur
 	# If only validation was necessary exit here
 	if [ -n "${ENSHURE_VALIDATE:-}" ]; then
@@ -143,7 +143,7 @@ __main_execute_mode_parse_state() {
 __main_execute() {
 	## The main execution function. This is the function called
 	## from the main script.
-	
+
 	# Error if there are no arguments
 	if [ -z "${1:-}" ]; then
 		die "$(translate "No arguments given. Use --help or -h for help." "$_E_NO_ARGUMENTS")"
@@ -153,7 +153,7 @@ __main_execute() {
 	# shellcheck disable=SC2034
 	_logpath="$(__log_path)"
 	debug "$(translate "Logging to '\$_logpath'")"
-	
+
 	# If enSHure is in query mode, parse the arguments.
 	if __main_is_query_mode "$@"; then
 		__main_query_mode_parse "$@"

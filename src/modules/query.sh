@@ -14,12 +14,14 @@ get_message() {
 			fi
 			;;
 		"current_task")
+			# shellcheck disable=SC2059
 			printf "$(translate "Current task is: '%s'")" "$(query current_task)"
 			;;
 		"summary")
 			summary="$(query summary "$task")"
 			change=$(printf '%s' "$summary" | grep 'change:' | cut -d' ' -f2)
 			total=$(printf '%s' "$summary" | grep 'total:' | cut -d' ' -f2)
+			# shellcheck disable=SC2059
 			printf "$(translate '%s of %s statements required changes')" "$change" "$total"
 			;;
 		*)
@@ -34,7 +36,7 @@ verify_requirements() {
 		return 1
 	fi
 
-	if [ -n "${task:-}" ] && [ "$query" != "summary" ]; then
+	if [ "$query" != "summary" ] && [ -n "${task:-}" ]; then
 		error "$(translate "Can only supply the task argument with a summary query")"
 		return 1
 	fi

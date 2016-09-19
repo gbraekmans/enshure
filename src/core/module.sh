@@ -235,7 +235,7 @@ __module_parse() {
 	eval "${_id_name}=\"$_quoted_id\""
 
 	# Loop over the arguments to override the given defaults
-	while [ "${#@}" -gt 0 ]; do
+	while [ "$#" -gt 0 ]; do
 		# Pop the first two arguments
 		_name=$1
 		_val=$2
