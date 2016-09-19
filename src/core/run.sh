@@ -2,7 +2,7 @@
 include core/base
 
 # Declare dependencies
-# uuencode, uudecode, compress & uncompress should be installed but 
+# uuencode, uudecode, compress & uncompress should be installed but
 # aren't on most systems. Even though there in the POSIX standard.
 # So error gracefully if there are no suitable alternatives.
 
@@ -35,7 +35,7 @@ run() {
 		return 0
 	fi
 
-	_cmd="$1"
+	_cmd="$*"
 	debug "$(translate "Running '\$_cmd'.")"
 
 	# Create temp files for storing command output
@@ -45,11 +45,11 @@ run() {
 		|| die "$(translate "Could not create temporary file.")" "$_E_FILE_CREATION_FAILED"
 
 	# Log the run of the command
-	printf '%s\n' "$1" >> "$(__log_path)"
+	printf '%s\n' "$_cmd" >> "$(__log_path)"
 
 	# Run the command
 	_retcode=0
-	"$(__run_current_shell)" -c "$1" > "$_stdout" 2> "$_stderr" || _retcode="$?"
+	"$(__run_current_shell)" -c "$_cmd" > "$_stdout" 2> "$_stderr" || _retcode="$?"
 
 	# Only log stdout if there was any
 	if [ -s "$_stdout" ]; then
@@ -93,7 +93,7 @@ __run_serialize() {
 	else
 		# Although we never should get here, it's better to be clear
 		die "$(translate "Could not find a supported compression command.")" "$_E_UNMET_REQUIREMENT"
-	fi 
+	fi
 
 	# find out how to convert to base64
 	_b64_cmd=''
@@ -109,10 +109,10 @@ __run_serialize() {
 		# Although we never should get here, it's better to be clear
 		die "$(translate "Could not find a suitable base64 implementation.")" "$_E_UNMET_REQUIREMENT"
 	fi
-	
+
 	# create the new command to serialize
 	_cmd="${_compress_cmd} | ${_b64_cmd}"
-	
+
 	# serialize the file
 	_val=$(eval "$_cmd" < "$1") || true # TODO: Find out why this sometimes fails
 
@@ -123,10 +123,10 @@ __run_serialize() {
 __run_unserialize() {
 	## Parses an entry in the message field of the log. Prints to STDOUT.
 	##$1 The serialized command, including the compression prefix.
-	
+
 	_b64=$(printf '%s' "$1" | cut -d'|' -f2)
 	_header=$(printf '%s' "$1" | cut -d'|' -f1)
-	
+
 	# find out how to uncompress
 	_uncompress_cmd=''
 	case "$_header" in
@@ -151,7 +151,7 @@ __run_unserialize() {
 		_b64=$(printf '%s\n%s\n%s\n' "begin-base64 664 /dev/stdout" "$_b64" "====")
 		_b64_cmd="uudecode"
 	elif is_available base64; then
-		_b64_cmd="base64  --decode"
+		_b64_cmd="base64 --decode"
 	else
 		die "$(translate "Could not find a suitable base64 implementation.")" "$_E_UNMET_REQUIREMENT"
 	fi
