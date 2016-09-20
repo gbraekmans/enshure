@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-20 16:21+0200\n"
+"POT-Creation-Date: 2016-09-20 21:44+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -148,28 +148,6 @@ msgstr "Nu niet in een taak."
 #, sh-format
 msgid "Done: $_display_task"
 msgstr "Gedaan: $_display_task"
-
-#: src/core/run.sh:63
-#, sh-format
-msgid "Running '$_cmd'."
-msgstr "Aan het uitvoeren: '$_cmd'."
-
-#: src/core/run.sh:67 src/core/run.sh:69
-msgid "Could not create temporary file."
-msgstr "Kon geen tijdelijk bestand aanmaken"
-
-#: src/core/run.sh:125
-msgid "Could not find a supported compression command."
-msgstr "Kon geen ondersteund compressie-commando vinden."
-
-#: src/core/run.sh:140 src/core/run.sh:186
-msgid "Could not find a suitable base64 implementation."
-msgstr "Kon geen bruikbare base64 implementatie vinden."
-
-#: src/core/run.sh:172
-#, sh-format
-msgid "The header '$_header' is unknown for unserialization."
-msgstr "Het begin '$_header' is onbekend voor onserialisatie."
 
 #: src/core/module.sh:24
 #, sh-format
@@ -331,6 +309,28 @@ msgstr ""
 #: src/core/base.sh:145
 msgid "This functionality is not yet implemented in the enSHure core."
 msgstr "Deze functionaliteit is nog niet geimplementeerd in the enSHure kern."
+
+#: src/core/run.sh:63
+#, sh-format
+msgid "Running '$_cmd'."
+msgstr "Aan het uitvoeren: '$_cmd'."
+
+#: src/core/run.sh:67 src/core/run.sh:69
+msgid "Could not create temporary file."
+msgstr "Kon geen tijdelijk bestand aanmaken"
+
+#: src/core/run.sh:125
+msgid "Could not find a supported compression command."
+msgstr "Kon geen ondersteund compressie-commando vinden."
+
+#: src/core/run.sh:140 src/core/run.sh:186
+msgid "Could not find a suitable base64 implementation."
+msgstr "Kon geen bruikbare base64 implementatie vinden."
+
+#: src/core/run.sh:172
+#, sh-format
+msgid "The header '$_header' is unknown for unserialization."
+msgstr "Het begin '$_header' is onbekend voor onserialisatie."
 
 #: src/modules/command.sh:3
 msgid "Executes a command."

@@ -83,17 +83,17 @@ A STDOUT field looks like this::
   #STDOUT|0|1970-01-01 00:00:00|file|/root/.zshrc|present|COMPRESS|...
   #STDOUT|0|1970-01-01 00:00:00|file|/root/.zshrc|present|GZIP|...
 
-TODO: update this with the XZ/GZIP update
 
-By default the format of compression is POSIX-compatible: everything has
-been zipped with ``compress``
+By default the format of compression is not POSIX-compatible: everything has
+been zipped with ``gzip``
 
 .. note::
 
-  POSIX-compliance is fading from the default minimal installs of most
+  POSIX-compliance is fading from the default minimal installs of
   Linux-distributions. Therefore the second GZIP record has been created
-  because these distro's do not ship ``uuencode`` or ``compress``.
-  ``gzip`` and ``base64`` are shipped in most distributions.
+  because most distro's do not ship ``uuencode`` or ``compress``, but
+  ``gzip`` and ``base64`` are shipped in most distributions. ``gzip`` is,
+  in practice, more portable than ``compress``.
 
 These entries store the base64 encoded gzipped string of
 the output to the file descriptor.
@@ -109,4 +109,5 @@ decoded on linux systems using something like this::
 
   As seen in the example above, gzipping the output does add some extra
   bytes if the ouput is small, but the real gains are to be made when
-  there is lots of output.
+  there is lots of output. For ``xz`` the amount of "padding" was too large
+  to justify it's use.

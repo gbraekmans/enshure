@@ -107,19 +107,19 @@ __run_serialize() {
 	## Makes an entry for the message field of the log.
 	##$1 path to the file to serialize
 
-	# TODO: Add xz-support
-	# TODO: Default order = xz,gzip,compress
+	# XZ compresses large output even better, but has an even larger minimal file.
+	# That's why XZ compression is not included
 
 	# find out how to compress
 	_compress=''
 	_compress_cmd='false'
-	if is_available compress; then
-		_compress="COMPRESS"
-		_compress_cmd="compress -c"
-	elif is_available gzip; then
+	if is_available gzip; then
 		# To make gzip deterministic see https://wiki.debian.org/ReproducibleBuilds/TimestampsInGzipHeaders
 		_compress="GZIP"
 		_compress_cmd="gzip --no-name --stdout"
+	elif is_available compress; then
+		_compress="COMPRESS"
+		_compress_cmd="compress -c"
 	else
 		# Although we never should get here, it's better to be clear
 		die "$(translate "Could not find a supported compression command.")" "$_E_UNMET_REQUIREMENT"
@@ -127,14 +127,14 @@ __run_serialize() {
 
 	# find out how to convert to base64
 	_b64_cmd=''
-	if is_available uuencode; then
-		# chop off the first and the last line (uuencode file information)
-		# and clear all newlines
-		_b64_cmd="uuencode -m /dev/stdout | awk '{ if (NR > 2) { b64 = b64 line; }; line = \$0;} END { print b64 }'"
-	elif is_available base64; then
+	if is_available base64; then
 		# clear all newlines in base64.
 		# use a pipe to tr instead of -w0 for OSX compatibility
 		_b64_cmd="base64 | tr -d '\n'"
+	elif is_available uuencode; then
+		# chop off the first and the last line (uuencode file information)
+		# and clear all newlines
+		_b64_cmd="uuencode -m /dev/stdout | awk '{ if (NR > 2) { b64 = b64 line; }; line = \$0;} END { print b64 }'"
 	else
 		# Although we never should get here, it's better to be clear
 		die "$(translate "Could not find a suitable base64 implementation.")" "$_E_UNMET_REQUIREMENT"
@@ -176,12 +176,12 @@ __run_unserialize() {
 
 	# find out how to convert from base64
 	_b64_cmd=''
-	if is_available uudecode; then
+	if is_available base64; then
+		_b64_cmd="base64 --decode"
+	elif is_available uudecode; then
 		# prepend the header & footer of uuencode and feed it to decode
 		_b64=$(printf '%s\n%s\n%s\n' "begin-base64 664 /dev/stdout" "$_b64" "====")
 		_b64_cmd="uudecode"
-	elif is_available base64; then
-		_b64_cmd="base64 --decode"
 	else
 		die "$(translate "Could not find a suitable base64 implementation.")" "$_E_UNMET_REQUIREMENT"
 	fi
