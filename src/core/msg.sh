@@ -197,5 +197,5 @@ __msg_underline() {
 
 	_chr="${2:-=}"
 
-	printf '%s' "$1" | tr -c '_' "[${_chr}*]"
+	printf '%s' "$1" | tr -c '|' "[${_chr}*]"
 }

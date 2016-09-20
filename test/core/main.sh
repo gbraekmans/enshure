@@ -10,10 +10,10 @@ test_main_is_query_mode() {
 test_main_query_mode_parse() {
 	assertEquals 1 "$_VERSION" "$(__main_query_mode_parse -v)"
 	assertEquals 2 "$(__main_query_mode_parse -v)" "$(__main_query_mode_parse --version)"
-	
+
 	assertTrue 3 "__main_query_mode_parse -h | head -n 1 | grep ^Usage:"
 	assertEquals 4 "$(__main_query_mode_parse -h)" "$(__main_query_mode_parse --help)"
-	
+
 	__main_query_task() { printf 'Executed'; }
 	assertEquals 5 "Executed" "$(__main_query_mode_parse -t)"
 	assertEquals 6 "$(__main_query_mode_parse -t)" "$(__main_query_mode_parse --task)"
@@ -71,7 +71,7 @@ test_main_query_task() {
 # shellcheck disable=SC2034
 test_main_execute_mode_parse_state() {
 	_DEFAULT_STATE="default"
-	
+
 	RESULT=$(__main_execute_mode_parse_state mod id)
 	assertTrue 1 "$?"
 	assertEquals 2 "default" "$RESULT"
@@ -140,4 +140,11 @@ test_main_execute_mode_parse() {
 	RESULT=$(__main_execute_mode_parse test this state 2>&1)
 	assertTrue 10 "$?"
 	assertEquals 11 "" "$RESULT"
+
+	verify_requirements() { return 0; }
+	attain_state() { return 1; }
+	ENSHURE_VALIDATE=''
+	RESULT=$(__main_execute_mode_parse test this state 2>&1)
+	assertFalse 12 "$?"
+	assertEquals 13 "CRITICAL FAILURE: The module returned 1." "$RESULT"
 }

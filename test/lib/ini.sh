@@ -84,3 +84,14 @@ test_ini_set_value() {
 
 	rm -rf "$TMP"
 }
+
+test_ini_create_section() {
+	TMP=$(mktemp)
+
+	create_ini_file "$TMP"
+
+	RESULT=$(ini_create_section "$TMP" "section test")
+	assertEquals 1 "10a11
+> [section test]" "$RESULT"
+	rm -rf "$TMP"
+}

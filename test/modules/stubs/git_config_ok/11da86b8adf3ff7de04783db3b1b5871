@@ -1,0 +1,3 @@
+$ git config --global --get user.email
+0
+jdoe@example.net

@@ -39,9 +39,13 @@ ini_create_section() {
 	##$1 the path to the file, required
 	##$2 name of the section, required
 
+	_tmp=$(mktemp)
 	if ! ini_has_section "$1" "$2"; then
-		printf '[%s]\n' "$2" >> "$1"
+		cp "$1" "$_tmp"
+		printf '[%s]\n' "$2" >> "$_tmp"
 	fi
+	diff "$1" "$_tmp"
+	rm -rf "$_tmp"
 }
 
 ini_delete() {
@@ -68,12 +72,6 @@ ini_set_value() {
 	##$4 name of the section, optional
 	##> $ ini_set "~/.gitconfig" "name" "John Doe" "user"
 
-	# Make sure the section exists
-	if [ -n "${4:-}" ]; then
-		ini_create_section "$1" "$4"
-	fi
-
-	# Set the option
 	_tmp=$(mktemp)
 	if [ -z "${4:-}" ]; then
 		awk -f "$_BASEDIR/lib/ini/ini_set.awk" -v option="$2" -v value="$3" "$1" > "$_tmp"

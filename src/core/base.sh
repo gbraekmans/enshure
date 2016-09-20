@@ -160,3 +160,11 @@ initcap() {
 	_rest=$(printf '%s' "$1" | cut -c2- | tr '[:upper:]' '[:lower:]')
 	printf '%s%s' "$_first" "$_rest"
 }
+
+escape() {
+	## Displays a string with escape sequences for "
+	##$1 The string to escape
+	##> $ escape 'test "'
+	##> test \"
+	printf '%s' "$1" | sed 's/\\/\\\\/g' | sed 's/"/\\"/g'
+}

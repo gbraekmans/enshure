@@ -159,3 +159,8 @@ test_translate() {
 	assertTrue 11 "$?"
 	assertEquals 12 "Done: Test" "$RESULT"
 }
+
+test_escape() {
+	RESULT=$(escape 'test "')
+	assertEquals 'test \"' "$RESULT"
+}

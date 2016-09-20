@@ -15,39 +15,39 @@ to_rst() {
 	## Converts a module to an RST file
 
 	# Heading 1
-	printf '%s\n' "Module: $_MODULE"
-	__msg_underline "Module: $_MODULE"
+	printf '%s\n' "$_MODULE"
+	__msg_underline "$_MODULE"
 	printf '\n\n'
-	
+
 	# Description
 	printf '%s\nExample::\n\n' "$_MODULE_DESCRIPTION"
 	printf '  $ enshure %s %s %s\n' "$_MODULE" "$(printf '%s' "$_ARGUMENTS" | grep '.*|.*|identifier|' | cut -d'|' -f5)" "$_DEFAULT_STATE"
-	printf '\n'	
-	
+	printf '\n'
+
 	# Valid states
 	printf '%s\n' "Type: $_MODULE_TYPE"
 	__msg_underline "Type: $_MODULE_TYPE" "-"
 	printf '\n\n'
 	printf 'States:\n\n'
-	
+
 	(
 		IFS=':'
 		for state in $_STATES; do
 			if [ "$state" = "$_DEFAULT_STATE" ]; then
-				printf '* %s (Default)\n' "$state"
+				printf '* %s (default)\n' "$state"
 			else
 				printf '* %s\n' "$state"
 			fi
 		done
 		printf '\n'
 	)
-	
+
 	# Arguments
 	printf 'Arguments\n'
 	__msg_underline "Arguments" '-'
 	printf '\n\n'
-	
-	
+
+
 	printf '%s\n' "$_ARGUMENTS" |
 	while IFS= read -r _line; do
 		_name=$(printf '%s' "$_line" | cut -d'|' -f1)
@@ -55,7 +55,7 @@ to_rst() {
 		_argtype=$(printf '%s' "$_line" | cut -d'|' -f3)
 		_helpmsg=$(printf '%s' "$_line" | cut -d'|' -f4)
 		_example=$(printf '%s' "$_line" | cut -d'|' -f5)
-	
+
 		printf '* | **%s**: %s. %s.\n' "$_name" "$(initcap "$_valtype")" "$(initcap "$_argtype")"
 		printf '  | %s\n  | Example: ``%s``\n' "$_helpmsg" "$_example"
 	done

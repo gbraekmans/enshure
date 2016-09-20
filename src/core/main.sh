@@ -110,13 +110,13 @@ __main_execute_mode_parse() {
 	__module_parse "$@"
 
 	# Verify the requirements
-	if ! verify_requirements; then
+	if [ "$?" -ne 0 ] || ! verify_requirements; then
 		error "$(translate "Not all requirements are met.")"
 		return "$_E_UNMET_REQUIREMENT"
 	fi
 
 	##$ENSHURE_VALIDATE if this is set only a validation of the modules will occur
-	# If only validation was necessary exit here
+	# If only validation was necessary exit here, unless we're testing
 	if [ -n "${ENSHURE_VALIDATE:-}" ]; then
 		return 0
 	fi
@@ -125,8 +125,13 @@ __main_execute_mode_parse() {
 	if is_state "$_STATE"; then
 		__log_ok
 	else
-		attain_state "$_STATE"
-		__log_change
+		_status=0
+		attain_state "$_STATE" || _status=$?
+		if [ "$_status" -ne 0 ]; then
+			die "$(translate "The module returned \$_status.")" "$_status"
+		else
+			__log_change
+		fi
 	fi
 }
 

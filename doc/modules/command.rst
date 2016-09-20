@@ -1,5 +1,5 @@
-Module: command
-===============
+command
+=======
 
 Executes a command.
 Example::
@@ -11,7 +11,7 @@ Type: command
 
 States:
 
-* executed (Default)
+* executed (default)
 
 Arguments
 ---------

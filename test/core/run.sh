@@ -213,6 +213,7 @@ test_run() {
 	run 'printf "This is a test"'
 	assertTrue 1 "$?"
 	assertEquals 2 "This is a test" "$(__run_unserialize "$(tail -n1 "$ENSHURE_LOG" | grep '^#STDOUT' | cut -d'|' -f7-)")"
+	assertEquals 11 'printf "This is a test"' "$(grep ^print "$ENSHURE_LOG")"
 
 	run 'printf "This is a stderr test" >&2'
 	assertTrue 3 "$?"
@@ -231,4 +232,30 @@ test_run() {
 	RESULT=$(ENSHURE_VALIDATE=yes run 'printf "test" && exit 45')
 	assertTrue 9 "$?"
 	assertEquals 10 "" "$RESULT"
+
+	__run_wrap_command_as_user() { printf '%s' "$1"; }
+	run "printf 'OK'" "whoever"
+	assertTrue 9 "$?"
+
+	RESULT=$(run "printf 'OK'" "whatever" no_log)
+	assertTrue 10 "$?"
+}
+
+test_run_wrap_command_as_user() {
+	id() { printf '1'; }
+	RESULT=$(__run_wrap_command_as_user "echo" "me")
+	assertEquals 1 "echo" "$RESULT"
+
+	id() { if [ -n "${2:-}" ]; then printf '1'; else printf '2'; fi }
+	RESULT=$(__run_wrap_command_as_user "echo" "me")
+	assertEquals 2 "su 'me' -c \"echo\"" "$RESULT"
+
+	is_available() { if [ "$1" = "su" ]; then return 1; fi; return 0; }
+	__run_current_shell() { printf 'sh'; }
+	RESULT=$(__run_wrap_command_as_user "echo" "me")
+	assertEquals 3 "sudo -u 'me' sh -c \"echo\"" "$RESULT"
+
+	is_available() { return 1; }
+	RESULT=$(__run_wrap_command_as_user "echo" "me")
+	assertEquals 4 "ERROR: enSHure requires 'su' to be installed." "$RESULT"
 }

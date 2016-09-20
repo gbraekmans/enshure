@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-19 13:32+0200\n"
+"POT-Creation-Date: 2016-09-20 16:21+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -149,24 +149,24 @@ msgstr "Nu niet in een taak."
 msgid "Done: $_display_task"
 msgstr "Gedaan: $_display_task"
 
-#: src/core/run.sh:39
+#: src/core/run.sh:63
 #, sh-format
 msgid "Running '$_cmd'."
 msgstr "Aan het uitvoeren: '$_cmd'."
 
-#: src/core/run.sh:43 src/core/run.sh:45
+#: src/core/run.sh:67 src/core/run.sh:69
 msgid "Could not create temporary file."
 msgstr "Kon geen tijdelijk bestand aanmaken"
 
-#: src/core/run.sh:95
+#: src/core/run.sh:125
 msgid "Could not find a supported compression command."
 msgstr "Kon geen ondersteund compressie-commando vinden."
 
-#: src/core/run.sh:110 src/core/run.sh:156
+#: src/core/run.sh:140 src/core/run.sh:186
 msgid "Could not find a suitable base64 implementation."
 msgstr "Kon geen bruikbare base64 implementatie vinden."
 
-#: src/core/run.sh:142
+#: src/core/run.sh:172
 #, sh-format
 msgid "The header '$_header' is unknown for unserialization."
 msgstr "Het begin '$_header' is onbekend voor onserialisatie."
@@ -224,7 +224,7 @@ msgstr ""
 msgid "No such argument: '$_name'"
 msgstr "Onbekend argument '$_arg'."
 
-#: src/core/module.sh:274
+#: src/core/module.sh:286
 #, sh-format
 msgid "The argument '$_name' is required, but not given."
 msgstr ""
@@ -264,11 +264,16 @@ msgstr "'$_task' is een foute naam voor een taak."
 msgid "Not all requirements are met."
 msgstr ""
 
-#: src/core/main.sh:149
+#: src/core/main.sh:131
+#, sh-format
+msgid "The module returned $_status."
+msgstr ""
+
+#: src/core/main.sh:154
 msgid "No arguments given. Use --help or -h for help."
 msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
 
-#: src/core/main.sh:155
+#: src/core/main.sh:160
 #, sh-format
 msgid "Logging to '$_logpath'"
 msgstr "Log naar '$_logpath'"
@@ -278,23 +283,23 @@ msgstr "Log naar '$_logpath'"
 msgid "Could not write to log file '$_logfile'."
 msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
 
-#: src/core/log.sh:56
-msgid "Can not signal 'CHANGE' when no module is loaded."
-msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
-
 #: src/core/log.sh:60
 #, fuzzy, sh-format
 msgid "$_mod $_IDENTIFIER is now $_STATE."
 msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
 
-#: src/core/log.sh:74
-msgid "Can not signal 'OK' when no module is loaded."
-msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
-
-#: src/core/log.sh:79
+#: src/core/log.sh:69
 #, fuzzy, sh-format
 msgid "$_mod $_IDENTIFIER is already $_STATE."
 msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
+
+#: src/core/log.sh:74
+msgid "Can not signal 'CHANGE' when no module is loaded."
+msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
+
+#: src/core/log.sh:88
+msgid "Can not signal 'OK' when no module is loaded."
+msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
 
 #: src/core/query.sh:78
 msgid "No query specified. Use -h to get a list of all queries."
@@ -387,6 +392,38 @@ msgstr ""
 
 #: src/modules/query.sh:40
 msgid "Can only supply the task argument with a summary query"
+msgstr ""
+
+#: src/modules/git_config.sh:2
+msgid "Sets values in the global git configuration file"
+msgstr ""
+
+#: src/modules/git_config.sh:6
+msgid "The username to set the gitconfig for."
+msgstr ""
+
+#: src/modules/git_config.sh:7
+msgid "The email of the user. Required for state present."
+msgstr ""
+
+#: src/modules/git_config.sh:8
+msgid "The name of the user. Required for state present."
+msgstr ""
+
+#: src/modules/git_config.sh:51
+msgid "Git configuration for user '%s' is now present."
+msgstr ""
+
+#: src/modules/git_config.sh:53
+msgid "Git configuration for user '%s' is now absent."
+msgstr ""
+
+#: src/modules/git_config.sh:60
+msgid "Git configuration for user '%s' is already present."
+msgstr ""
+
+#: src/modules/git_config.sh:62
+msgid "Git configuration for user '%s' is already absent."
 msgstr ""
 
 #~ msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."

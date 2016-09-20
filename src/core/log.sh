@@ -51,21 +51,35 @@ __log_can_write_module_functions() {
 	[ -n "$_MODULE" ] && [ -n "$_IDENTIFIER" ] && [ -n "$_STATE" ]
 }
 
+# shellcheck disable=SC2034
+message_change() {
+	## Displays the message to be printed on a change. Overrideable in a module.
+	##> $ change_message
+	##> MODULE IDENTIFIER is now STATE
+	_mod="$(initcap "$_MODULE")"
+	printf '%s' "$(translate "\$_mod \$_IDENTIFIER is now \$_STATE.")"
+}
+
+# shellcheck disable=SC2034
+message_ok() {
+	## Displays the message to be printed on OK. Overrideable in a module.
+	##> $ ok_message
+	##> MODULE IDENTIFIER is already STATE
+	_mod="$(initcap "$_MODULE")"
+	printf '%s' "$(translate "\$_mod \$_IDENTIFIER is already \$_STATE.")"
+}
+
 __log_change() {
 	if ! __log_can_write_module_functions; then
 		die "$(translate "Can not signal 'CHANGE' when no module is loaded." "$_E_NOT_IN_A_MODULE")"
 	fi
-	_mod="$(initcap "$_MODULE")"
-	_msg="$_mod $_IDENTIFIER is now $_STATE."
-	_tmsg="$(translate "\$_mod \$_IDENTIFIER is now \$_STATE.")"
-
-	##$_DONT_PRINT_CHANGE if this is set, CHANGE and OK messages are not printed.
-	##$_DONT_LOG_CHANGE if this is set, CHANGE and OK messages are not logged.
+	##$_DONT_PRINT_CHANGE if this is set, CHANGE and OK messages are not printed
+	##$_DONT_LOG_CHANGE if this is set, CHANGE and OK messages are not logged
 	if [ -z "${_DONT_PRINT_CHANGE:-}" ]; then
-		__msg "CHANGE" "$_tmsg"
+		__msg "CHANGE" "$(message_change)"
 	fi
 	if [ -z "${_DONT_LOG_CHANGE:-}" ]; then
-		__log_entry "CHANGE" "$_msg"
+		__log_entry "CHANGE" "$(LANG='C' message_change)"
 	fi
 }
 
@@ -74,15 +88,11 @@ __log_ok() {
 		die "$(translate "Can not signal 'OK' when no module is loaded.")" "$_E_NOT_IN_A_MODULE"
 	fi
 
-	_mod="$(initcap "$_MODULE")"
-	_msg="$_mod $_IDENTIFIER is already $_STATE."
-	_tmsg="$(translate "\$_mod \$_IDENTIFIER is already \$_STATE.")"
-
 	if [ -z "${_DONT_PRINT_CHANGE:-}" ]; then
-		__msg "OK" "$_tmsg"
+		__msg "OK" "$(message_ok)"
 	fi
 	if [ -z "${_DONT_LOG_CHANGE:-}" ]; then
-		__log_entry "OK" "$_msg"
+		__log_entry "OK" "$(LANG='C' message_ok)"
 	fi
 }
 

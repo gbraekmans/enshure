@@ -270,9 +270,20 @@ __module_parse() {
 
 	# Check if all required attributes are set
 	for _name in $(printf '%s' "$_ARGUMENTS" | grep '.*|.*|required|' | cut -d'|' -f1); do
-		if [ -z "$(eval "printf '%s' \"\$$_name\"")" ]; then
-			error "$(translate "The argument '\$_name' is required, but not given.")"
-			return "$_E_ARGUMENT_MISSING"
-		fi
+		require_argument "$_name"
 	done
+}
+
+require_argument() {
+	## Prints an error and returns a nonzero argument if a required argument is not
+	## is not set.
+	##$1 the argument that is required
+	##> $ require_argument test
+	##> The argument 'test' is required, but not given.
+	_name=$1
+	_val=$(eval "printf '%s' \"\$$_name\"")
+	if [ -z "${_val:-}" ]; then
+		error "$(translate "The argument '\$_name' is required, but not given.")"
+		return "$_E_ARGUMENT_MISSING"
+	fi
 }

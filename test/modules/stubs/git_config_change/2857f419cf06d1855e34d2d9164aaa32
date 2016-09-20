@@ -1,0 +1,3 @@
+$ git config --global --get user.name
+0
+Jane Doe

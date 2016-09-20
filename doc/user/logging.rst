@@ -80,8 +80,10 @@ STDOUT, STDERR
 
 A STDOUT field looks like this::
 
-  #STDOUT|0|1970-01-01 00:00:00|file|/root/.zshrc|present|POSIX|...
+  #STDOUT|0|1970-01-01 00:00:00|file|/root/.zshrc|present|COMPRESS|...
   #STDOUT|0|1970-01-01 00:00:00|file|/root/.zshrc|present|GZIP|...
+
+TODO: update this with the XZ/GZIP update
 
 By default the format of compression is POSIX-compatible: everything has
 been zipped with ``compress``

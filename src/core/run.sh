@@ -25,17 +25,41 @@ fi
 # as it's not defined by the POSIX-standard.
 require mktemp
 
+__run_wrap_command_as_user() {
+	if [ "$(id -u "$2")" != "$(id -u)" ] ; then
+		_cmd=$(escape "$1")
+		if is_available su; then
+			_cmd="su '$2' -c \"$_cmd\""
+		elif is_available sudo; then
+			_cmd="sudo -u '$2' $(__run_current_shell) -c \"$_cmd\""
+		else
+			require su
+		fi
+		printf '%s' "$_cmd"
+	else
+		printf '%s' "$1"
+	fi
+}
 
 run() {
 	## Runs a command in the shell and logs it's execution.
+	## Running as a user requires sudo or su
 	##$1 The command to be executed
+	##$2 The user to run the command as, optional.
+	##$3 If this is 'no_log' nothing will be logged
 
 	# Just to be safe don't run anything if ENSHURE_VALIDATE is set.
 	if [ -n "${ENSHURE_VALIDATE:-}" ]; then
 		return 0
 	fi
 
-	_cmd="$*"
+	_cmd="$1"
+	_shell=$(__run_current_shell)
+
+	# Make the command execute as another user if requested
+	if [ -n "${2:-}" ]; then
+		_cmd=$(__run_wrap_command_as_user "$_cmd" "$2")
+	fi
 	debug "$(translate "Running '\$_cmd'.")"
 
 	# Create temp files for storing command output
@@ -45,24 +69,30 @@ run() {
 		|| die "$(translate "Could not create temporary file.")" "$_E_FILE_CREATION_FAILED"
 
 	# Log the run of the command
-	printf '%s\n' "$_cmd" >> "$(__log_path)"
+	if [ "no_log" != "${3:-}" ]; then
+		printf '%s\n' "$_cmd" >> "$(__log_path)"
+	fi
 
 	# Run the command
 	_retcode=0
-	"$(__run_current_shell)" -c "$_cmd" > "$_stdout" 2> "$_stderr" || _retcode="$?"
+	if [ "no_log" != "${3:-}" ]; then
+		"$_shell" -c "$_cmd" > "$_stdout" 2> "$_stderr" || _retcode="$?"
+	else
+		"$_shell" -c "$_cmd" 2>&1 || _retcode="$?"
+	fi
 
 	# Only log stdout if there was any
-	if [ -s "$_stdout" ]; then
+	if [ -s "$_stdout" ] && [ "no_log" != "${3:-}" ]; then
 		__log_entry STDOUT "$(__run_serialize "$_stdout")"
 	fi
 
 	# Only log stderr if there was any
-	if [ -s "$_stderr" ]; then
+	if [ -s "$_stderr" ] && [ "no_log" != "${3:-}" ]; then
 		__log_entry STDERR "$(__run_serialize "$_stderr")"
 	fi
 
 	# only log the return code if it's unsuccesfull
-	if [ "0" -ne "$_retcode" ]; then
+	if [ "0" -ne "$_retcode" ] && [ "no_log" != "${3:-}" ]; then
 		__log_entry RETURN "$_retcode"
 	fi
 

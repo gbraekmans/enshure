@@ -1,5 +1,5 @@
-Module: query
-=============
+query
+=====
 
 Displays the result of a query to the user.
 Example::
@@ -13,7 +13,7 @@ States:
 
 * error
 * warning
-* info (Default)
+* info (default)
 * debug
 
 Arguments

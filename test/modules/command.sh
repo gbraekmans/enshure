@@ -1,4 +1,7 @@
 test_command() {
+	# shellcheck disable=SC2034
+	ENSHURE_VALIDATE=''
+
 	enshure command 'echo test' > /dev/null 2>&1
 	assertTrue 1 "$?"
 
