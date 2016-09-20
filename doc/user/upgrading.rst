@@ -4,7 +4,7 @@ Install or upgrade
 enSHure uses `semantic versioning`_ for it's releases. Your scripts will
 keep working as long as your on a release with the same major version.
 A script written for 1.0.0 will still work on 1.1.0, but a script written
-for 1.1.0 may not work on 1.0.0. 
+for 1.1.0 may not work on 1.0.0.
 
 .. _`semantic versioning`: http://semver.org/
 
@@ -19,6 +19,9 @@ one of the following utilities available:
 - ``compress``, again as defined by POSIX, but having ``gzip`` is enough for
   enSHure.
 
+The only utility which should be available and is not defined by POSIX is ``mktemp``.
+Since this utility is more widely available than for example uuencode this should
+not give you any practical problems.
 
 From source using git
 ---------------------
@@ -43,18 +46,3 @@ And you can update using the git workflow::
   This is where all development occurs before a release. It might be
   stable enough for most uses, but stability can only be really expected
   from the 1.X.X releases or higher.
-
-TODO: Make install/uninstall
-
-The enSHure "binary" is found at ``src/bin/enshure``. If you want it to
-be available on the system for every user run:: 
-
-  make install
-
-Uninstalling
-------------
-
-If you never ran ``make install`` then you should be fine with just
-deleting the source directory. Otherwise just run::
-
-  make uninstall
