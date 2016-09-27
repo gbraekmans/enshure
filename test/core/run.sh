@@ -131,8 +131,8 @@ test_run_unserialize() {
 		startSkipping
 	fi
 
-	# uudecode unavailable
-	is_available() { if [ "$1" = "uudecode" ]; then return 1; fi; return 0; }
+	# base64 unavailable
+	is_available() { if [ "$1" = "base64" ]; then return 1; fi; return 0; }
 
 	isSkipping || RESULT=$(__run_unserialize "$EX_GZIP")
 	assertTrue 5 "$?"
