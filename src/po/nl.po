@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 20:23+0200\n"
+"POT-Creation-Date: 2016-09-27 20:29+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -458,7 +458,7 @@ msgstr ""
 msgid "Use the content of a file available by URL."
 msgstr ""
 
-#: src/modules/file.sh:110
+#: src/modules/file.sh:111
 msgid "You can set only one of content, source_file or source_url"
 msgstr ""
 

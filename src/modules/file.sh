@@ -1,7 +1,8 @@
 module_type "generic"
 module_description "$(translate "Creates or removes a file.")"
 
-argument "path" string identifier "$(translate "The path to the file.")" "/root/.bashrc"
+# I just called this $path originally but, apperently it doen't matter for zsh if it's PATH or path ???
+argument "file_path" string identifier "$(translate "The path to the file.")" "/root/.bashrc"
 argument "user" string optional "$(translate "The owner of the file.")" "root"
 argument "group" string optional "$(translate "The group-ownership of the file.")" "root"
 argument "mode" integer optional "$(translate "The permissions of the file.")" "755"
@@ -13,13 +14,13 @@ require mktemp
 
 is_state_present() {
 
-	if [ ! -f "$path" ]; then
+	if [ ! -f "$file_path" ]; then
 		return 1
 	fi
 
 	# Don't know where I've found the statement, but it's pretty nifty.
 	# shellcheck disable=SC2012
-	ls=$(ls -l "$path" | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o ",k);print $3, $4}')
+	ls=$(ls -l "$file_path" | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o ",k);print $3, $4}')
 	file_owner=$(printf '%s' "$ls" | cut -d' ' -f2)
 	file_group=$(printf '%s' "$ls" | cut -d' ' -f3)
 	file_mode=$(printf '%s' "$ls" | cut -d' ' -f1)
@@ -41,11 +42,11 @@ is_state_present() {
 
 	# if permissions are given and equal, and if content is given and equal
 	result=1
-	if [ -f "$path" ] && \
+	if [ -f "$file_path" ] && \
 	([ -z "$user" ] || [ "$file_owner" = "$user" ]) && \
 	([ -z "$group" ] || [ "$file_group" = "$group" ]) && \
 	([ -z "$mode" ] || [ "$file_mode" = "$mode" ]) && \
-	([ -z "${tmp:-}" ] || diff "$tmp" "$path" > /dev/null ) then
+	([ -z "${tmp:-}" ] || diff "$tmp" "$file_path" > /dev/null ) then
 		result=0
 	fi
 
@@ -57,43 +58,44 @@ is_state_present() {
 }
 
 is_state_absent() {
-	[ ! -f "$path" ]
+	[ ! -f "$file_path" ]
 }
 
 attain_state_present() {
 	# Create the file
-	mkdir -p "$(dirname "$path")"
-	touch "$path"
+	mkdir -p "$(dirname "$file_path")"
+	touch "$file_path"
 
-	file_mode=$(ls -l "$path" | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o",k)}')
+	# shellcheck disable=SC2012
+	file_mode=$(ls -l "$file_path" | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o",k)}')
 
 	# Make the file writeable
-	chmod 600 "$path"
+	chmod 600 "$file_path"
 
 	# Get the correct content in the file
 	if [ -n "$content" ]; then
 
 		# shellcheck disable=SC2059
-		printf "$content" > "$path"
+		printf "$content" > "$file_path"
 	elif [ -n "$source_file" ]; then
-		cp "$source_file" "$path"
+		cp "$source_file" "$file_path"
 	elif [ -n "$source_url" ]; then
-		wget -q "$source_url" -O "$path"
+		wget -q "$source_url" -O "$file_path"
 	fi
 
 	# Restore original permissions
-	chmod "$file_mode" "$path"
+	chmod "$file_mode" "$file_path"
 
 	# Set permissions
-	[ -n "$mode" ] && chmod "$mode" "$path"
-	[ -n "$user" ] && chown "$user" "$path"
-	[ -n "$group" ] && chgrp "$group" "$path"
+	[ -n "$mode" ] && chmod "$mode" "$file_path"
+	[ -n "$user" ] && chown "$user" "$file_path"
+	[ -n "$group" ] && chgrp "$group" "$file_path"
 
 	return 0
 }
 
 attain_state_absent() {
-	rm -rf "$path"
+	rm -rf "$file_path"
 }
 
 verify_requirements() {
