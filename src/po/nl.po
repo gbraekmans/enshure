@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 20:29+0200\n"
+"POT-Creation-Date: 2016-09-27 20:40+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -430,35 +430,35 @@ msgstr ""
 msgid "Creates or removes a file."
 msgstr ""
 
-#: src/modules/file.sh:4
+#: src/modules/file.sh:5
 msgid "The path to the file."
 msgstr ""
 
-#: src/modules/file.sh:5
+#: src/modules/file.sh:6
 msgid "The owner of the file."
 msgstr ""
 
-#: src/modules/file.sh:6
+#: src/modules/file.sh:7
 msgid "The group-ownership of the file."
 msgstr ""
 
-#: src/modules/file.sh:7
+#: src/modules/file.sh:8
 msgid "The permissions of the file."
 msgstr ""
 
-#: src/modules/file.sh:8
+#: src/modules/file.sh:9
 msgid "The content of the file as printed by printf."
 msgstr ""
 
-#: src/modules/file.sh:9
+#: src/modules/file.sh:10
 msgid "Use the content of a local file."
 msgstr ""
 
-#: src/modules/file.sh:10
+#: src/modules/file.sh:11
 msgid "Use the content of a file available by URL."
 msgstr ""
 
-#: src/modules/file.sh:111
+#: src/modules/file.sh:112
 msgid "You can set only one of content, source_file or source_url"
 msgstr ""
 

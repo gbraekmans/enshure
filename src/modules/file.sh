@@ -1,7 +1,7 @@
 module_type "generic"
 module_description "$(translate "Creates or removes a file.")"
 
-# I just called this $path originally but, apperently it doen't matter for zsh if it's PATH or path ???
+# I just called this path originally but, apperently it doen't matter for zsh if it's $PATH or $path ???
 argument "file_path" string identifier "$(translate "The path to the file.")" "/root/.bashrc"
 argument "user" string optional "$(translate "The owner of the file.")" "root"
 argument "group" string optional "$(translate "The group-ownership of the file.")" "root"
