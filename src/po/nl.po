@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-20 21:44+0200\n"
+"POT-Creation-Date: 2016-09-27 20:23+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -424,6 +424,42 @@ msgstr ""
 
 #: src/modules/git_config.sh:62
 msgid "Git configuration for user '%s' is already absent."
+msgstr ""
+
+#: src/modules/file.sh:2
+msgid "Creates or removes a file."
+msgstr ""
+
+#: src/modules/file.sh:4
+msgid "The path to the file."
+msgstr ""
+
+#: src/modules/file.sh:5
+msgid "The owner of the file."
+msgstr ""
+
+#: src/modules/file.sh:6
+msgid "The group-ownership of the file."
+msgstr ""
+
+#: src/modules/file.sh:7
+msgid "The permissions of the file."
+msgstr ""
+
+#: src/modules/file.sh:8
+msgid "The content of the file as printed by printf."
+msgstr ""
+
+#: src/modules/file.sh:9
+msgid "Use the content of a local file."
+msgstr ""
+
+#: src/modules/file.sh:10
+msgid "Use the content of a file available by URL."
+msgstr ""
+
+#: src/modules/file.sh:110
+msgid "You can set only one of content, source_file or source_url"
 msgstr ""
 
 #~ msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."
