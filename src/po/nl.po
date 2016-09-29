@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-29 10:56+0200\n"
+"POT-Creation-Date: 2016-09-29 11:22+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -464,6 +464,26 @@ msgstr ""
 
 #: src/modules/pacman.sh:7
 msgid "If the repositories should be synced before testing for latest"
+msgstr ""
+
+#: src/modules/directory.sh:2
+msgid "Creates or removes a directory."
+msgstr ""
+
+#: src/modules/directory.sh:4
+msgid "The path to the directory."
+msgstr ""
+
+#: src/modules/directory.sh:5
+msgid "The owner of the directory."
+msgstr ""
+
+#: src/modules/directory.sh:6
+msgid "The group-ownership of the directory."
+msgstr ""
+
+#: src/modules/directory.sh:7
+msgid "The permissions of the directory."
 msgstr ""
 
 #: src/types/command.sh:4

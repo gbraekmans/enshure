@@ -42,8 +42,7 @@ is_state_present() {
 
 	# if permissions are given and equal, and if content is given and equal
 	result=1
-	if [ -f "$file_path" ] && \
-	([ -z "$user" ] || [ "$file_owner" = "$user" ]) && \
+	if ([ -z "$user" ] || [ "$file_owner" = "$user" ]) && \
 	([ -z "$group" ] || [ "$file_group" = "$group" ]) && \
 	([ -z "$mode" ] || [ "$file_mode" = "$mode" ]) && \
 	([ -z "${tmp:-}" ] || diff "$tmp" "$file_path" > /dev/null ) then
@@ -63,6 +62,7 @@ is_state_absent() {
 
 attain_state_present() {
 	# Create the file
+	run "rm -rf '$file_path'"
 	run "mkdir -p '$(dirname "$file_path")'"
 	run "touch '$file_path'"
 
