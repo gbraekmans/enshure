@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-29 11:22+0200\n"
+"POT-Creation-Date: 2016-09-29 11:57+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -484,6 +484,26 @@ msgstr ""
 
 #: src/modules/directory.sh:7
 msgid "The permissions of the directory."
+msgstr ""
+
+#: src/modules/symlink.sh:2
+msgid "Creates or removes a symlink."
+msgstr ""
+
+#: src/modules/symlink.sh:4
+msgid "The path to the symlink."
+msgstr ""
+
+#: src/modules/symlink.sh:5
+msgid "The owner of the symlink."
+msgstr ""
+
+#: src/modules/symlink.sh:6
+msgid "The group-ownership of the symlink."
+msgstr ""
+
+#: src/modules/symlink.sh:7
+msgid "The target of the symlink."
 msgstr ""
 
 #: src/types/command.sh:4
