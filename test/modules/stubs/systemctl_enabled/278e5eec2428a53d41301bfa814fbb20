@@ -1,0 +1,3 @@
+$ systemctl disable sshd
+0
+Removed /etc/systemd/system/multi-user.target.wants/sshd.service.

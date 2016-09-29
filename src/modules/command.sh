@@ -1,4 +1,3 @@
-
 module_type command
 module_description "$(translate "Executes a command.")"
 

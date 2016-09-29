@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-29 11:57+0200\n"
+"POT-Creation-Date: 2016-09-29 20:17+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -332,19 +332,19 @@ msgstr "Kon geen bruikbare base64 implementatie vinden."
 msgid "The header '$_header' is unknown for unserialization."
 msgstr "Het begin '$_header' is onbekend voor onserialisatie."
 
-#: src/modules/command.sh:3
+#: src/modules/command.sh:2
 msgid "Executes a command."
 msgstr ""
 
-#: src/modules/command.sh:5
+#: src/modules/command.sh:4
 msgid "The statement to be executed."
 msgstr ""
 
-#: src/modules/command.sh:6
+#: src/modules/command.sh:5
 msgid "The path to a file, link or directory created by the command."
 msgstr ""
 
-#: src/modules/command.sh:21
+#: src/modules/command.sh:20
 #, sh-format
 msgid "The command '$statement' returned $retcode."
 msgstr ""
@@ -506,6 +506,14 @@ msgstr ""
 msgid "The target of the symlink."
 msgstr ""
 
+#: src/modules/systemd.sh:2
+msgid "Manages systemd services."
+msgstr ""
+
+#: src/modules/systemd.sh:4
+msgid "The service to be managed."
+msgstr ""
+
 #: src/types/command.sh:4
 msgid "executed"
 msgstr ""
@@ -544,6 +552,34 @@ msgstr ""
 
 #: src/types/package.sh:4
 msgid "removed"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "available"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "started"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "stopped"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "enabled"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "disabled"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "restarted"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "unavailable"
 msgstr ""
 
 #~ msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."

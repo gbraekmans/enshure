@@ -1,0 +1,3 @@
+$ systemctl is-enabled sshd
+0
+enabled

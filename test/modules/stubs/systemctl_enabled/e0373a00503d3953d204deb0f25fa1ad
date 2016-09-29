@@ -1,0 +1,2 @@
+$ systemctl restart sshd
+0
