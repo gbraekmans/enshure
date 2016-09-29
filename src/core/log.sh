@@ -57,11 +57,9 @@ message_change() {
 	##> $ change_message
 	##> MODULE IDENTIFIER is now STATE
 
-	# TODO: Improve this support by replacing underscores with spaces & remove the override at git_config
-	# TODO: Translate state
-
-	_mod="$(initcap "$_MODULE")"
-	printf '%s' "$(translate "\$_mod \$_IDENTIFIER is now \$_STATE.")"
+	_mod="$(initcap "$_MODULE"  | sed 's/\_/ /g')"
+	_state="$(translated_state)"
+	printf '%s' "$(translate "\$_mod \$_IDENTIFIER is now \$_state.")"
 }
 
 # shellcheck disable=SC2034
@@ -69,8 +67,9 @@ message_ok() {
 	## Displays the message to be printed on OK. Overrideable in a module.
 	##> $ ok_message
 	##> MODULE IDENTIFIER is already STATE
-	_mod="$(initcap "$_MODULE")"
-	printf '%s' "$(translate "\$_mod \$_IDENTIFIER is already \$_STATE.")"
+	_mod="$(initcap "$_MODULE" | sed 's/_/ /g')"
+	_state="$(translated_state)"
+	printf '%s' "$(translate "\$_mod \$_IDENTIFIER is already \$_state.")"
 }
 
 __log_change() {

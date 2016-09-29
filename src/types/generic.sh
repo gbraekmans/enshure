@@ -1,6 +1,7 @@
 _MODULE_TYPE="generic"
 
 _STATES="present:absent"
+_TRANSLATED_STATES="$(translate "present"):$(translate "absent")"
 _DEFAULT_STATE="present"
 
 is_state() {

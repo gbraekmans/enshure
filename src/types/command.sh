@@ -1,6 +1,7 @@
 _MODULE_TYPE="command"
 
 _STATES="executed"
+_TRANSLATED_STATES="$(translate "executed")"
 _DEFAULT_STATE="executed"
 
 is_state() {
@@ -31,6 +32,6 @@ attain_state_executed() {
 
 verify_requirements() {
 	## Placeholder for the verify_requirements command in the module.
-	
+
 	return 0
 }

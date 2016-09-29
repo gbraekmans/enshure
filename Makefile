@@ -74,6 +74,7 @@ testcoverage: $(TEST_DIR)/shunit2 i18n
 	kcov --include-path=./src/core "./$(KCOV_DIR)" "$(TEST_DIR)/core.sh"
 	kcov --include-path=./src/modules "./$(KCOV_DIR)" "$(TEST_DIR)/modules.sh"
 	kcov --include-path=./src/lib "./$(KCOV_DIR)" "$(TEST_DIR)/lib.sh"
+	command -v xdg-open > /dev/null && xdg-open "$(KCOV_DIR)/index.html"
 
 
 timings:

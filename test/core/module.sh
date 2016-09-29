@@ -2,7 +2,7 @@ test_module_type() {
 	module_type command
 	assertTrue 1 "$?"
 	assertEquals 2 "command" "$_MODULE_TYPE"
-	
+
 	_MODULE_TYPE=''
 	RESULT=$(module_type whatever 2>&1)
 	assertFalse 3 "$?"
@@ -18,7 +18,7 @@ test_module_description() {
 # shellcheck disable=SC2034
 test_module_is_valid_state() {
 	_STATES="yes:no"
-	
+
 	__module_is_valid_state "yes"
 	assertTrue 1 "$?"
 
@@ -40,7 +40,7 @@ test_module_is_valid_state() {
 # shellcheck disable=SC2034
 test_module_load() {
 	TMP=$(mktemp -d)
-	
+
 	touch "$TMP/test.sh"
 	mkdir "$TMP/testing"
 	touch "$TMP/testing/main.sh"
@@ -65,7 +65,7 @@ test_module_load() {
 # shellcheck disable=SC2034
 test_module_list() {
 	TMP=$(mktemp -d)
-	
+
 	touch "$TMP/test.sh"
 	mkdir "$TMP/testing"
 	touch "$TMP/testing/main.sh"
@@ -163,7 +163,7 @@ test_module_parse() {
 	RESULT=$(__module_parse id whatever num 3 2>&1)
 	assertTrue 8 "$?"
 	assertEquals 9 "test" "$id"
-	
+
 	RESULT=$(__module_parse num 3 2>&1)
 	assertEquals 14 "test" "$id"
 
@@ -227,4 +227,26 @@ test_module_is_valid_type() {
 
 	__module_is_valid_type "enum(this:that)" "what"
 	assertFalse 14 "$?"
+}
+
+# shellcheck disable=SC2034
+test_module_translated_state() {
+	_STATES="present:absent"
+	_TRANSLATED_STATES="tpresent:tabsent"
+	_STATE="test"
+
+	RESULT=$(translated_state "present")
+	assertTrue 1 "$?"
+	assertEquals 2 "tpresent" "$RESULT"
+
+	RESULT=$(translated_state)
+	assertTrue 3 "$?"
+	assertEquals 4 "test" "$RESULT"
+
+	RESULT=$(translated_state "absent")
+	assertTrue 5 "$?"
+	assertEquals 6 "tabsent" "$RESULT"
+
+	unset _STATES
+	unset _TRANSLATED_STATES
 }

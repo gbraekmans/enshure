@@ -1,6 +1,7 @@
 _MODULE_TYPE="message"
 
 _STATES="error:warning:info:debug"
+_TRANSLATED_STATES="$(translate "error"):$(translate "warning"):$(translate "info"):$(translate "debug")"
 _DEFAULT_STATE="info"
 
 # Note: the message-type is not your average type.

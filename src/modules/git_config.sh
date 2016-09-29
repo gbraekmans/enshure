@@ -47,18 +47,10 @@ verify_requirements() {
 
 # shellcheck disable=SC2059
 message_change() {
-	if [ "$_STATE" = "present" ]; then
-		printf "$(translate "Git configuration for user '%s' is now present.")" "$user"
-	else
-		printf "$(translate "Git configuration for user '%s' is now absent.")" "$user"
-	fi
+	printf "$(translate "Git configuration for user '%s' is now %s.")" "$user" "$(translated_state)"
 }
 
 # shellcheck disable=SC2059
 message_ok() {
-	if [ "$_STATE" = "present" ]; then
-		printf "$(translate "Git configuration for user '%s' is already present.")" "$user"
-	else
-		printf "$(translate "Git configuration for user '%s' is already absent.")" "$user"
-	fi
+		printf "$(translate "Git configuration for user '%s' is already %s.")" "$user" "$(translated_state)"
 }

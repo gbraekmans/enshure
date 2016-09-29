@@ -274,6 +274,37 @@ __module_parse() {
 	done
 }
 
+translated_state() {
+	## Prints the translation of a state to the stdout.
+	##$1 the state to translate, optional.
+	##> $ translated_state present
+	##> aanwezig
+
+	##$_TRANSLATED_STATES All the possible states of the module, but translated.
+
+	_req_state=${1:-$_STATE}
+
+	# Find out how many states there are
+	_max=$(printf '%s' "$_STATES" | tr -dc ':' | wc -c)
+	_max=$(( _max + 1 ))
+
+	# Find where the requested state is in the array
+	_i=1
+	_state_at=$(printf '%s' "$_STATES" | cut -d: -f$_i)
+	while ! [ "$_state_at" = "$_req_state" ] && [ "$_i" -le "$_max" ]; do
+		_i=$(( _i + 1 ))
+		_state_at=$(printf '%s' "$_STATES" | cut -d: -f$_i)
+	done
+
+	if ! [ "$_state_at" = "$_req_state" ]; then
+		# If not found just print the requested state
+		printf '%s' "$_req_state"
+	else
+		# If found print the state in the translated array
+		printf '%s' "$(printf '%s' "$_TRANSLATED_STATES" | cut -d: -f$_i)"
+	fi
+}
+
 require_argument() {
 	## Prints an error and returns a nonzero argument if a required argument is not
 	## is not set.

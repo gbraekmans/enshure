@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-29 09:56+0200\n"
+"POT-Creation-Date: 2016-09-29 10:56+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -202,7 +202,7 @@ msgstr ""
 msgid "No such argument: '$_name'"
 msgstr "Onbekend argument '$_arg'."
 
-#: src/core/module.sh:286
+#: src/core/module.sh:317
 #, sh-format
 msgid "The argument '$_name' is required, but not given."
 msgstr ""
@@ -261,21 +261,21 @@ msgstr "Log naar '$_logpath'"
 msgid "Could not write to log file '$_logfile'."
 msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
 
-#: src/core/log.sh:64
+#: src/core/log.sh:62
 #, fuzzy, sh-format
-msgid "$_mod $_IDENTIFIER is now $_STATE."
+msgid "$_mod $_IDENTIFIER is now $_state."
 msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
 
-#: src/core/log.sh:73
+#: src/core/log.sh:72
 #, fuzzy, sh-format
-msgid "$_mod $_IDENTIFIER is already $_STATE."
+msgid "$_mod $_IDENTIFIER is already $_state."
 msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
 
-#: src/core/log.sh:78
+#: src/core/log.sh:77
 msgid "Can not signal 'CHANGE' when no module is loaded."
 msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
 
-#: src/core/log.sh:92
+#: src/core/log.sh:91
 msgid "Can not signal 'OK' when no module is loaded."
 msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
 
@@ -410,20 +410,12 @@ msgstr ""
 msgid "The name of the user. Required for state present."
 msgstr ""
 
-#: src/modules/git_config.sh:51
-msgid "Git configuration for user '%s' is now present."
+#: src/modules/git_config.sh:50
+msgid "Git configuration for user '%s' is now %s."
 msgstr ""
 
-#: src/modules/git_config.sh:53
-msgid "Git configuration for user '%s' is now absent."
-msgstr ""
-
-#: src/modules/git_config.sh:60
-msgid "Git configuration for user '%s' is already present."
-msgstr ""
-
-#: src/modules/git_config.sh:62
-msgid "Git configuration for user '%s' is already absent."
+#: src/modules/git_config.sh:55
+msgid "Git configuration for user '%s' is already %s."
 msgstr ""
 
 #: src/modules/file.sh:2
@@ -472,6 +464,46 @@ msgstr ""
 
 #: src/modules/pacman.sh:7
 msgid "If the repositories should be synced before testing for latest"
+msgstr ""
+
+#: src/types/command.sh:4
+msgid "executed"
+msgstr ""
+
+#: src/types/message.sh:4
+msgid "error"
+msgstr ""
+
+#: src/types/message.sh:4
+msgid "warning"
+msgstr ""
+
+#: src/types/message.sh:4
+msgid "info"
+msgstr ""
+
+#: src/types/message.sh:4
+msgid "debug"
+msgstr ""
+
+#: src/types/generic.sh:4
+msgid "present"
+msgstr ""
+
+#: src/types/generic.sh:4
+msgid "absent"
+msgstr ""
+
+#: src/types/package.sh:4
+msgid "latest"
+msgstr ""
+
+#: src/types/package.sh:4
+msgid "installed"
+msgstr ""
+
+#: src/types/package.sh:4
+msgid "removed"
 msgstr ""
 
 #~ msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."

@@ -1,6 +1,7 @@
 _MODULE_TYPE="package"
 
 _STATES="latest:installed:removed"
+_TRANSLATED_STATES="$(translate "latest"):$(translate "installed"):$(translate "removed")"
 _DEFAULT_STATE="installed"
 
 is_state() {
