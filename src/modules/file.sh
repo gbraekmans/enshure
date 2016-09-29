@@ -63,39 +63,38 @@ is_state_absent() {
 
 attain_state_present() {
 	# Create the file
-	mkdir -p "$(dirname "$file_path")"
-	touch "$file_path"
+	run "mkdir -p '$(dirname "$file_path")'"
+	run "touch '$file_path'"
 
 	# shellcheck disable=SC2012
 	file_mode=$(ls -l "$file_path" | awk '{k=0;for(i=0;i<=8;i++)k+=((substr($1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf("%0o",k)}')
 
 	# Make the file writeable
-	chmod 600 "$file_path"
+	run "chmod 600 '$file_path'"
 
 	# Get the correct content in the file
 	if [ -n "$content" ]; then
-
 		# shellcheck disable=SC2059
-		printf "$content" > "$file_path"
+		run "printf '$content' > '$file_path'"
 	elif [ -n "$source_file" ]; then
-		cp "$source_file" "$file_path"
+		run "cp '$source_file' '$file_path'"
 	elif [ -n "$source_url" ]; then
-		wget -q "$source_url" -O "$file_path"
+		run "wget -q '$source_url' -O '$file_path'"
 	fi
 
 	# Restore original permissions
-	chmod "$file_mode" "$file_path"
+	run "chmod '$file_mode' '$file_path'"
 
 	# Set permissions
-	[ -n "$mode" ] && chmod "$mode" "$file_path"
-	[ -n "$user" ] && chown "$user" "$file_path"
-	[ -n "$group" ] && chgrp "$group" "$file_path"
+	[ -n "$mode" ] && run "chmod '$mode' '$file_path'"
+	[ -n "$user" ] && run "chown '$user' '$file_path'"
+	[ -n "$group" ] && run "chgrp '$group' '$file_path'"
 
 	return 0
 }
 
 attain_state_absent() {
-	rm -rf "$file_path"
+	run "rm -rf '$file_path'"
 }
 
 verify_requirements() {
