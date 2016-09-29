@@ -119,8 +119,9 @@ logging required for the action.
 
 .. warning::
 
-  The ``run`` function does not print anything to the stdout. You should not
-  pipe the output into some other function.
+  The ``run`` function, by default, does not print anything to the stdout. You should not
+  pipe the output into some other function. If you want this, you should use
+  ``run "<statement>" "" no_log``.
 
 Step 5: Add some polish
 -----------------------

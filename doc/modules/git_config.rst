@@ -21,8 +21,8 @@ Arguments
   | The username to set the gitconfig for.
   | Example: ``jdoe``
 * | **email**: String. Optional.
-  | The email of the user.
+  | The email of the user. Required for state present.
   | Example: ``j.doe@example.net``
 * | **name**: String. Optional.
-  | The name of the user
+  | The name of the user. Required for state present.
   | Example: ``John Doe``

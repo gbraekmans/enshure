@@ -1,5 +1,13 @@
-Understanding the log
-=====================
+The enSHure log
+===============
+
+The log is where everything what happens to your system by enSHure gets written.
+You can find in the log:
+
+- All messages printed
+- All commands that have been executed
+- Return codes and output of the executed commands
+- All tasks
 
 Log location
 ------------
@@ -24,7 +32,7 @@ machines. This format is designed to be easily parsible using ``grep`` and ``cut
 
 Most of the entries in the log look like this::
 
-	#LOGTYPE|USER_ID|DATE|MODULE|IDENTIFIER|REQUESTED_STATE|MESSAGE
+	#LOGTYPE|USER_ID|DATE|MODULE|IDENTIFIER|STATE|MESSAGE
 
 And this is an example excerpt::
 
@@ -37,7 +45,7 @@ And this is an example excerpt::
 
 **The log is designed to be executable by the shell.** All commands which have
 altered the machine state are recorded in the log and simply calling
-``bash /var/log/enshure.log`` will replay all changes made to the system.
+``sh /var/log/enshure.log`` will replay all changes made to the system.
 This can be very useful for setting up clones, without wanting to install
 enSHure.
 

@@ -39,6 +39,8 @@ easy. Writing good shell scripts is hard.
 Well tested
 -----------
 
+**enSHure aims to keep it's test code coverage a 100%.**
+
 Before testing takes place the entire code is statically checked for errors
 using ShellCheck_. If shellcheck returns any complaints, the test is considered
 failed.
@@ -55,10 +57,15 @@ yourself that every function is tested.
 These shells are supported by enSHure:
 
 - bash (OS X and Linux)
+- dash (Debian-based distro's /bin/sh)
 - zsh (OS X and Linux)
 - ksh (BSD)
 - mksh (Android, BSD)
-- dash (Debian-based distro's)
+
+These shells are **not** supported by enSHure:
+
+- tcsh (default BSD shell, though not /bin/sh)
+- fish (not POSIX, uses a different syntax)
 
 Idempotent
 ----------

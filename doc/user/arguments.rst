@@ -100,8 +100,6 @@ Currently these queries are supported
   The output of the queries is not formatted, so that it can be used
   in variables. If you want to print a query it might be better
   to use the ``query`` or the ``message`` module.
-  
-TODO: Link to the corresponding modules.
 
 Execution mode
 --------------
