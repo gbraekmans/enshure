@@ -1,0 +1,11 @@
+$ pacman --noconfir -R zsh
+0
+checking dependencies...
+
+Packages (1) zsh-5.2-1
+
+Total Removed Size:  5.17 MiB
+
+:: Do you want to remove these packages? [Y/n] 
+:: Processing package changes...
+removing zsh...

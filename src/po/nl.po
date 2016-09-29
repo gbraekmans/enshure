@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 20:40+0200\n"
+"POT-Creation-Date: 2016-09-29 09:56+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -261,21 +261,21 @@ msgstr "Log naar '$_logpath'"
 msgid "Could not write to log file '$_logfile'."
 msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
 
-#: src/core/log.sh:60
+#: src/core/log.sh:64
 #, fuzzy, sh-format
 msgid "$_mod $_IDENTIFIER is now $_STATE."
 msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
 
-#: src/core/log.sh:69
+#: src/core/log.sh:73
 #, fuzzy, sh-format
 msgid "$_mod $_IDENTIFIER is already $_STATE."
 msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
 
-#: src/core/log.sh:74
+#: src/core/log.sh:78
 msgid "Can not signal 'CHANGE' when no module is loaded."
 msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
 
-#: src/core/log.sh:88
+#: src/core/log.sh:92
 msgid "Can not signal 'OK' when no module is loaded."
 msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
 
@@ -458,8 +458,20 @@ msgstr ""
 msgid "Use the content of a file available by URL."
 msgstr ""
 
-#: src/modules/file.sh:112
+#: src/modules/file.sh:111
 msgid "You can set only one of content, source_file or source_url"
+msgstr ""
+
+#: src/modules/pacman.sh:2
+msgid "Installs packages using 'pacman'."
+msgstr ""
+
+#: src/modules/pacman.sh:6
+msgid "The name of the package"
+msgstr ""
+
+#: src/modules/pacman.sh:7
+msgid "If the repositories should be synced before testing for latest"
 msgstr ""
 
 #~ msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."

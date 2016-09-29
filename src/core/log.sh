@@ -56,6 +56,10 @@ message_change() {
 	## Displays the message to be printed on a change. Overrideable in a module.
 	##> $ change_message
 	##> MODULE IDENTIFIER is now STATE
+
+	# TODO: Improve this support by replacing underscores with spaces & remove the override at git_config
+	# TODO: Translate state
+
 	_mod="$(initcap "$_MODULE")"
 	printf '%s' "$(translate "\$_mod \$_IDENTIFIER is now \$_STATE.")"
 }
