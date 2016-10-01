@@ -2,7 +2,7 @@ module_type generic
 module_description "$(translate "Creates or removes MySQL databases")"
 
 argument db string identifier "$(translate "The name of the database")" "wordpress"
-argument user string required "$(translate "Teh name of the user")" "wp" "root"
+argument user string required "$(translate "The name of the user")" "wp" "root"
 
 
 mysql='mysql --skip-column-names  --batch'
