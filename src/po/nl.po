@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-29 20:17+0200\n"
+"POT-Creation-Date: 2016-10-01 10:36+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -319,15 +319,15 @@ msgstr "Aan het uitvoeren: '$_cmd'."
 msgid "Could not create temporary file."
 msgstr "Kon geen tijdelijk bestand aanmaken"
 
-#: src/core/run.sh:125
+#: src/core/run.sh:128
 msgid "Could not find a supported compression command."
 msgstr "Kon geen ondersteund compressie-commando vinden."
 
-#: src/core/run.sh:140 src/core/run.sh:186
+#: src/core/run.sh:143 src/core/run.sh:189
 msgid "Could not find a suitable base64 implementation."
 msgstr "Kon geen bruikbare base64 implementatie vinden."
 
-#: src/core/run.sh:172
+#: src/core/run.sh:175
 #, sh-format
 msgid "The header '$_header' is unknown for unserialization."
 msgstr "Het begin '$_header' is onbekend voor onserialisatie."
@@ -512,6 +512,18 @@ msgstr ""
 
 #: src/modules/systemd.sh:4
 msgid "The service to be managed."
+msgstr ""
+
+#: src/modules/mysql_database.sh:2
+msgid "Creates or removes MySQL databases"
+msgstr ""
+
+#: src/modules/mysql_database.sh:4
+msgid "The name of the database"
+msgstr ""
+
+#: src/modules/mysql_database.sh:5
+msgid "Teh name of the user"
 msgstr ""
 
 #: src/types/command.sh:4

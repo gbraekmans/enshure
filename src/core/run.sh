@@ -74,12 +74,15 @@ run() {
 	fi
 
 	# Run the command
+	_script="$(mktemp)"
+	printf '%s\n' "$_cmd" > "$_script"
 	_retcode=0
 	if [ "no_log" != "${3:-}" ]; then
-		"$_shell" -c "$_cmd" > "$_stdout" 2> "$_stderr" || _retcode="$?"
+		"$_shell" "$_script" > "$_stdout" 2> "$_stderr" || _retcode="$?"
 	else
-		"$_shell" -c "$_cmd" 2>&1 || _retcode="$?"
+		"$_shell" "$_script" 2>&1 || _retcode="$?"
 	fi
+	rm -rf "$_script"
 
 	# Only log stdout if there was any
 	if [ -s "$_stdout" ] && [ "no_log" != "${3:-}" ]; then
