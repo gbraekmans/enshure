@@ -1,0 +1,6 @@
+$ mysql --skip-column-names --batch --user=root --execute=SHOW DATABASES;
+0
+information_schema
+mysql
+performance_schema
+test
