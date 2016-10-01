@@ -1,0 +1,2 @@
+$ mysql --skip-column-names --batch --user=root --execute=DROP USER tst@127.0.0.1;
+0
