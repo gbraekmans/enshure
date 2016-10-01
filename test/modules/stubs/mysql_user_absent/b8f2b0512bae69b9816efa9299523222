@@ -1,0 +1,2 @@
+$ mysql --skip-column-names --batch --user=root --execute=CREATE USER tst@localhost;
+0
