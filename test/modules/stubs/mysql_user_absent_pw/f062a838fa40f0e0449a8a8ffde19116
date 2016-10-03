@@ -1,0 +1,2 @@
+$ mysql --skip-column-names --batch --user=root --execute=SET PASSWORD FOR 'tst'@'localhost' = PASSWORD('tst');
+0

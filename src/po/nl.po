@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-01 10:36+0200\n"
+"POT-Creation-Date: 2016-10-03 09:51+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -522,8 +522,24 @@ msgstr ""
 msgid "The name of the database"
 msgstr ""
 
-#: src/modules/mysql_database.sh:5
-msgid "Teh name of the user"
+#: src/modules/mysql_database.sh:5 src/modules/mysql_user.sh:7
+msgid "The name of the login user"
+msgstr ""
+
+#: src/modules/mysql_user.sh:2
+msgid "Creates or removes MySQL users"
+msgstr ""
+
+#: src/modules/mysql_user.sh:4
+msgid "The name of the user"
+msgstr ""
+
+#: src/modules/mysql_user.sh:5
+msgid "The host of the user"
+msgstr ""
+
+#: src/modules/mysql_user.sh:6
+msgid "The password of the user"
 msgstr ""
 
 #: src/types/command.sh:4

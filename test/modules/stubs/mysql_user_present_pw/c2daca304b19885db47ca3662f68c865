@@ -1,0 +1,3 @@
+$ mysql --skip-column-names --batch --user=root --execute=SELECT 1 FROM mysql.user WHERE user = 'tst' AND  host = 'localhost' AND password = PASSWORD('tst') LIMIT 1;
+0
+1

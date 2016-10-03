@@ -1,3 +1,0 @@
-$ mysql --skip-column-names --batch --user=root --execute=SELECT 1 FROM dual WHERE EXISTS (SELECT * FROM mysql.user WHERE CONCAT(user, '@', host) = 'tst@localhost');
-0
-1
