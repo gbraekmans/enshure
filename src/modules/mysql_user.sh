@@ -1,10 +1,10 @@
 module_type generic
 module_description "$(translate "Creates or removes MySQL users")"
 
-argument username string identifier "$(translate "The name of the user")" "wp"
-argument host string required "$(translate "The host of the user")" "localhost" "127.0.0.1"
-argument password string optional "$(translate "The password of the user")" "s3cr3t"
-argument login string required "$(translate "The name of the login user")" "wp" "root"
+argument username string identifier "$(translate "The name of the user.")" "wp"
+argument host string required "$(translate "The host of the user.")" "localhost" "127.0.0.1"
+argument password string optional "$(translate "The password of the user.")" "s3cr3t"
+argument login string required "$(translate "The name of the login user.")" "wp" "root"
 
 mysql='mysql --skip-column-names  --batch'
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-03 09:51+0200\n"
+"POT-Creation-Date: 2016-10-03 12:31+0200\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -242,16 +242,16 @@ msgstr "'$_task' is een foute naam voor een taak."
 msgid "Not all requirements are met."
 msgstr ""
 
-#: src/core/main.sh:131
+#: src/core/main.sh:131 src/core/main.sh:132
 #, sh-format
 msgid "The module returned $_status."
 msgstr ""
 
-#: src/core/main.sh:154
+#: src/core/main.sh:155
 msgid "No arguments given. Use --help or -h for help."
 msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
 
-#: src/core/main.sh:160
+#: src/core/main.sh:161
 #, sh-format
 msgid "Logging to '$_logpath'"
 msgstr "Log naar '$_logpath'"
@@ -518,12 +518,14 @@ msgstr ""
 msgid "Creates or removes MySQL databases"
 msgstr ""
 
-#: src/modules/mysql_database.sh:4
-msgid "The name of the database"
-msgstr ""
+#: src/modules/mysql_database.sh:4 src/modules/mysql_grant.sh:7
+#, fuzzy
+msgid "The name of the database."
+msgstr "Geen naam voor de taak gespecifieerd."
 
 #: src/modules/mysql_database.sh:5 src/modules/mysql_user.sh:7
-msgid "The name of the login user"
+#: src/modules/mysql_grant.sh:6
+msgid "The name of the login user."
 msgstr ""
 
 #: src/modules/mysql_user.sh:2
@@ -531,15 +533,34 @@ msgid "Creates or removes MySQL users"
 msgstr ""
 
 #: src/modules/mysql_user.sh:4
-msgid "The name of the user"
+msgid "The name of the user."
 msgstr ""
 
-#: src/modules/mysql_user.sh:5
-msgid "The host of the user"
+#: src/modules/mysql_user.sh:5 src/modules/mysql_grant.sh:5
+msgid "The host of the user."
 msgstr ""
 
 #: src/modules/mysql_user.sh:6
-msgid "The password of the user"
+msgid "The password of the user."
+msgstr ""
+
+#: src/modules/mysql_grant.sh:2
+msgid "Manages permissions for users on databases"
+msgstr ""
+
+#: src/modules/mysql_grant.sh:4
+#, fuzzy
+msgid "The name for the user."
+msgstr "Geen naam voor de taak gespecifieerd."
+
+#: src/modules/mysql_grant.sh:8
+msgid ""
+"Which statements to grant, if state is present. If state is absent all "
+"permissions are removed."
+msgstr ""
+
+#: src/modules/mysql_grant.sh:9
+msgid "If the user can grant other users the same privileges."
 msgstr ""
 
 #: src/types/command.sh:4

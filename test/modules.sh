@@ -99,6 +99,8 @@ oneTimeSetUp() {
 tearDown() {
 	# Delete log
 	rm -rf "$ENSHURE_LOG"
+	# Remove stubs
+	rm -rf "${TMP_BIN:?}/*"
 }
 
 oneTimeTearDown() {

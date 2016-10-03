@@ -1,0 +1,2 @@
+$ mysql --skip-column-names --batch --user=root --execute=REVOKE ALL ON tst.* FROM 'tst'@'127.0.0.1';
+0

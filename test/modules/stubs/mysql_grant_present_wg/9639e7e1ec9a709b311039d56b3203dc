@@ -1,0 +1,4 @@
+$ mysql --skip-column-names --batch --user=root --execute=SHOW GRANTS FOR 'tst'@'127.0.0.1';
+0
+GRANT USAGE ON *.* TO 'tst'@'127.0.0.1'
+GRANT ALL PRIVILEGES ON `tst`.* TO 'tst'@'127.0.0.1' WITH GRANT OPTION

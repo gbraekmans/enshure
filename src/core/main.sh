@@ -128,6 +128,7 @@ __main_execute_mode_parse() {
 		_status=0
 		attain_state "$_STATE" || _status=$?
 		if [ "$_status" -ne 0 ]; then
+			debug "$(translate "The module returned \$_status.")" log
 			die "$(translate "The module returned \$_status.")" "$_status"
 		else
 			__log_change
