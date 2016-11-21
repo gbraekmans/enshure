@@ -13,8 +13,8 @@ You should be using enSHure because it's:
 - Logging all it's operations and every modification can be traced through the
   log file.
 
-Usage and Installation
-----------------------
+Usage
+-----
 
 enSHure is designed to be an add-on tool to your existing bash scripts. Let's
 say you want to enable autologin in GNOME3, and you add this to your homemade
@@ -44,6 +44,27 @@ if you use enSHure it would look something like this:
 Although it's more verbose, it also increases the readability of your script.
 If you ever need to change the file again it's a lot easier to write some
 enSHure lines than think up a new sed/awk expression.
+
+Installation
+------------
+
+This project can be installed by just cloning the git repositiory, and including
+the location in the PATH variable.
+
+On a **GNU/Linux** you should have the following the packages installed to be able
+to run a full test:
+
+- gettext
+- ncompress
+- sharutils
+- shellcheck
+- bash
+- dash
+- ksh
+- mksh
+- zsh
+
+To verify code coverage you'll need a recent version of [kcov](https://github.com/SimonKagstrom/kcov).
 
 
 Contributing
