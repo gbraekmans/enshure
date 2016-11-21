@@ -64,7 +64,9 @@ to run a full test:
 - mksh
 - zsh
 
-To verify code coverage you'll need a recent version of [kcov](https://github.com/SimonKagstrom/kcov).
+To verify code coverage you'll need a recent version of kcov_.
+
+.. _kcov: https://github.com/SimonKagstrom/kcov
 
 
 Contributing
