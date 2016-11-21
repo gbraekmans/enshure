@@ -19,7 +19,7 @@ die() {
 	_generic_msg="$(translate "Something unknown went terribly wrong...")"
 	# shellcheck disable=SC2034
 	_msg="${1:-$_generic_msg}"
-	printf '%s\n' "$(translate "CRITICAL FAILURE: \$_msg")" >&2
+	2>&1 printf '%s: %s\n' "$(translate "CRITICAL FAILURE")" "$_msg"
 	exit "$_err"
 }
 

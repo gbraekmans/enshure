@@ -127,7 +127,7 @@ test_run_unserialize() {
 
 	isSkipping && endSkipping
 
-	if ! command -v base64 > /dev/null; then
+	if ! command -v uudecode > /dev/null; then
 		startSkipping
 	fi
 
@@ -189,7 +189,7 @@ test_run_unserialize() {
 
 	isSkipping && endSkipping
 
-	isSkipping || RESULT=$(__run_unserialize "XZ|whatever==")
+	RESULT=$(__run_unserialize "XZ|whatever==")
 	assertFalse 17 "$?"
 	assertEquals 18 "ERROR: The header 'XZ' is unknown for unserialization." "$RESULT"
 

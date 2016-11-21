@@ -4,7 +4,7 @@ HELPER_DIR = helpers
 TEST_DIR = test
 KCOV_DIR = coverage
 
-.PHONY: help clean doc simpletest test timings testcoverage shellcheck dependencies i18n indexes
+.PHONY: help clean doc simpletest test timings testcoverage shellcheck dependencies i18n indexes permissions
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -47,7 +47,7 @@ doc: indexes
 $(TEST_DIR)/shunit2:
 	([ -e "/usr/share/shunit2/shunit2" ] && ln -s "/usr/share/shunit2/shunit2" $(TEST_DIR)/shunit2) || (cd $(TEST_DIR) && wget "https://github.com/kward/shunit2/raw/master/source/2.1/src/shunit2")
 
-test: shellcheck $(TEST_DIR)/shunit2 i18n
+test: shellcheck $(TEST_DIR)/shunit2 i18n permissions
 	bash $(TEST_DIR)/core.sh
 	dash $(TEST_DIR)/core.sh
 	ksh  $(TEST_DIR)/core.sh
@@ -64,12 +64,12 @@ test: shellcheck $(TEST_DIR)/shunit2 i18n
 	mksh $(TEST_DIR)/lib.sh
 	SHUNIT_PARENT="$(TEST_DIR)/lib.sh" zsh -y $(TEST_DIR)/lib.sh
 
-simpletest: $(TEST_DIR)/shunit2 i18n
+simpletest: $(TEST_DIR)/shunit2 i18n permissions
 	sh $(TEST_DIR)/core.sh
 	sh $(TEST_DIR)/modules.sh
 	sh $(TEST_DIR)/lib.sh
 
-testcoverage: $(TEST_DIR)/shunit2 i18n
+testcoverage: $(TEST_DIR)/shunit2 i18n permissions
 	rm -rf "$(KCOV_DIR)"
 	kcov --include-path=./src/core "./$(KCOV_DIR)" "$(TEST_DIR)/core.sh"
 	kcov --include-path=./src/modules "./$(KCOV_DIR)" "$(TEST_DIR)/modules.sh"
@@ -91,6 +91,11 @@ shellcheck:
 	shellcheck -s sh src/types/*.sh --exclude=SC2034
 	shellcheck -s sh src/modules/*.sh --exclude=SC2154,SC2016,SC2034
 	find $(TEST_DIR) -name '*.sh' | xargs shellcheck -s sh --exclude=SC1090
+
+permissions:
+	chmod +x "$(TEST_DIR)/core.sh"
+	chmod +x "$(TEST_DIR)/lib.sh"
+	chmod +x "$(TEST_DIR)/modules.sh"
 
 dependencies:
 	@strace -f -e execve test/core.sh 2>&1 | grep -o 'execve("[A-Z|a-z|/|0-9]*"' | cut -d'"' -f2 | sort | uniq
