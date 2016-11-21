@@ -1,0 +1,15 @@
+$ apt-get -yq remove zsh
+0
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Package 'zsh' is not installed, so not removed
+The following packages were automatically installed and are no longer required:
+  firebird2.5-common firebird2.5-common-doc firebird2.5-server-common
+  firebird3.0-common firebird3.0-common-doc gnome-packagekit
+  gnome-packagekit-data gnome-shell-extension-weather imagemagick-common
+  libboost-atomic1.61.0 libboost-chrono1.61.0 libboost-thread1.61.0
+  libfbclient2 libfbembed2.5 libmagick++-6.q16-5v5 libosinfo-db libtommath1
+  libx265-87 python-gobject zsh-common
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 16 not upgraded.

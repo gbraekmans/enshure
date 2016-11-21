@@ -1,0 +1,26 @@
+$ apt-get -yq install telnet
+0
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  firebird2.5-common firebird2.5-common-doc firebird2.5-server-common
+  firebird3.0-common firebird3.0-common-doc gnome-packagekit
+  gnome-packagekit-data gnome-shell-extension-weather imagemagick-common
+  libboost-atomic1.61.0 libboost-chrono1.61.0 libboost-thread1.61.0
+  libfbclient2 libfbembed2.5 libmagick++-6.q16-5v5 libosinfo-db libtommath1
+  libx265-87 python-gobject zsh-common
+Use 'sudo apt autoremove' to remove them.
+The following packages will be upgraded:
+  telnet
+1 upgraded, 0 newly installed, 0 to remove and 16 not upgraded.
+Need to get 72.0 kB of archives.
+After this operation, 6144 B of additional disk space will be used.
+Get:1 http://ftp.nluug.nl/pub/os/Linux/distr/debian stretch/main amd64 telnet amd64 0.17-41 [72.0 kB]
+apt-listchanges: Reading changelogs...
+Fetched 72.0 kB in 0s (200 kB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 153106 files and directories currently installed.)
+Preparing to unpack .../telnet_0.17-41_amd64.deb ...
+Unpacking telnet (0.17-41) over (0.17-40+b1) ...
+Setting up telnet (0.17-41) ...
+Processing triggers for man-db (2.7.5-1) ...
