@@ -2,7 +2,7 @@ module_type command
 module_description "$(translate "Executes a command.")"
 
 argument statement string identifier "$(translate "The statement to be executed.")" "\"touch /root/test\""
-argument creates_file string optional "$(translate "The path to a file, link or directory created by the command.")" "/root/test"
+argument creates_path string optional "$(translate "The path to a file, link or directory created by the command.")" "/root/test"
 
 # TODO add argument to check log if command ran
 
