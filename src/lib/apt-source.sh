@@ -1,4 +1,4 @@
-if [ "$_apt_sources_list_location" = "" ]; then
+if [ -z "$_apt_sources_list_location" ]; then
 	_apt_sources_list_location="/etc/apt/sources.list"
 fi
 
@@ -110,4 +110,3 @@ apt_source_add() {
 	fi
 	apt_source_generate "$type" "$url" "$distro" "$components" >> "$_apt_sources_list_location"
 }
-
