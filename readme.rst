@@ -2,6 +2,7 @@ enSHure
 =======
 
 Easy-extendable and dependencyless configuration management for Linux, BSD and OS X.
+It's written in portable shell script, and works in bash, dash, ksh, mksh and zsh.
 
 You should be using enSHure because it's:
 
