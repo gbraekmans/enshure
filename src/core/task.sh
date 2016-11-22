@@ -69,9 +69,11 @@ __task_begin() {
 		return "$_E_INVALID_TASK_NAME"
 	fi
 
+	# shellcheck disable=SC2034
 	_display_task="$1"
 	if __msg_pretty_print; then
 		# Replace '::' with ' → ' for pretty task names
+		# shellcheck disable=SC2034
 		_display_task=$(printf '%s' "$1" | sed 's/::/ → /g')
 	fi
 
@@ -94,6 +96,7 @@ __task_end() {
 	fi
 
 	# Pretty-print the task
+	# shellcheck disable=SC2034
 	_display_task="$_task"
 	if __msg_pretty_print; then
 		# Replace '::' with ' → ' for pretty task names

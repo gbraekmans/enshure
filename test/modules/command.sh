@@ -9,7 +9,7 @@ test_command() {
 	assertTrue 2 "$?"
 
 	TMP=$(mktemp)
-	enshure command "echo \"quoted test\"" creates_file "$TMP" > /dev/null 2>&1
+	enshure command "echo \"quoted test\"" creates_path "$TMP" > /dev/null 2>&1
 	assertTrue 3 "$?"
 
 	enshure command "exit 3" > /dev/null 2>&1

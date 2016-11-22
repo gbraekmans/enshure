@@ -109,6 +109,7 @@ test_msg_format_heading() {
 	unset -f tput
 }
 
+# shellcheck disable=SC2034
 test_msg() {
 	ENSHURE_VERBOSITY='DEBUG'
 	for tp in $(printf "OK CHANGE ERROR WARNING INFO DEBUG" | tr ' ' "\n"); do
@@ -171,6 +172,7 @@ test_msg_heading() {
 	assertEquals 2 "$VALID" "$RESULT"
 }
 
+# shellcheck disable=SC2034
 test_msg_meets_verbosity_level() {
 	ENSHURE_VERBOSITY="ERROR"
 	__msg_meets_verbosity_level ERROR

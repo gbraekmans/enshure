@@ -40,6 +40,7 @@ __main_query_task() {
 			__task_end
 			;;
 		*)
+			# shellcheck disable=SC2034
 			_arg="$1"
 			error "$(translate "Argument --task '\$_arg' is invalid: must be 'begin' or 'end'.")"
 			exit "$_E_INVALID_ENUM"

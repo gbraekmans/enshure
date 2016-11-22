@@ -130,7 +130,9 @@ test_translate() {
 	assertEquals 4 "Something unknown went terribly wrong..." "$RESULT"
 
 	# These tests are only run when using systemd and the NL-locale is available
-	if command -v localectl > /dev/null; then
+	if ! [ -e /etc/locale.gen ]; then
+		startSkipping
+	elif command -v localectl > /dev/null; then
 		if ! localectl list-locales | grep -q 'nl_NL.utf8'; then
 			startSkipping
 		fi

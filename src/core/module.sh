@@ -51,6 +51,7 @@ argument() {
 			;;
 		"enum"*)
 			if ! printf '%s' "$2" | grep -q '^enum(.*)$'; then
+				# shellcheck disable=SC2034
 				_value_type="$2"
 				error "$(translate "The enum '\$_value_type' is of the wrong format.")"
 				return "$_E_UNKNOWN_ARGUMENT"

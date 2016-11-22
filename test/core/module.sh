@@ -72,7 +72,7 @@ test_module_list() {
 
 	ENSHURE_MODULE_PATH="$TMP"
 
-	RESULT=$(__module_list 2>&1)
+	RESULT=$(__module_list 2>&1 | sort)
 	assertTrue 1 "$?"
 	assertEquals 2 "test-testing" "$(printf '%s' "$RESULT" | tr '\n' '-')"
 

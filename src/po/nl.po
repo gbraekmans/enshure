@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 21:06+0100\n"
+"POT-Creation-Date: 2016-11-22 15:36+0100\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -17,23 +17,283 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/core/base.sh:129
-#, sh-format
-msgid "$_module requires '$_prog' to be installed."
-msgstr "$_module heeft '$_prog' nodig om te werken."
+#: src/types/generic.sh:4
+msgid "present"
+msgstr ""
 
-#: src/core/base.sh:143
+#: src/types/generic.sh:4
+msgid "absent"
+msgstr ""
+
+#: src/types/command.sh:4
+msgid "executed"
+msgstr ""
+
+#: src/types/message.sh:4
+msgid "error"
+msgstr ""
+
+#: src/types/message.sh:4
+msgid "warning"
+msgstr ""
+
+#: src/types/message.sh:4
+msgid "info"
+msgstr ""
+
+#: src/types/message.sh:4
+msgid "debug"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "available"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "started"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "stopped"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "enabled"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "disabled"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "restarted"
+msgstr ""
+
+#: src/types/service.sh:4
+msgid "unavailable"
+msgstr ""
+
+#: src/types/package.sh:4
+msgid "latest"
+msgstr ""
+
+#: src/types/package.sh:4
+msgid "installed"
+msgstr ""
+
+#: src/types/package.sh:4
+msgid "removed"
+msgstr ""
+
+#: src/core/task.sh:65
 #, sh-format
 msgid ""
-"$_MODULE does not implement a function needed to set the state "
-"'$_REQUESTED_STATE'."
+"'$_task' is not a valid name for a task. Current task is '$_current_task'."
 msgstr ""
-"$_MODULE implementeert een functien die nodig is voor status "
-"'$_REQUESTED_STATE' niet."
+"'$_task' is een foute naam voor een taak. Huidige taak is '$_current_task'."
 
-#: src/core/base.sh:145
-msgid "This functionality is not yet implemented in the enSHure core."
-msgstr "Deze functionaliteit is nog niet geimplementeerd in the enSHure kern."
+#: src/core/task.sh:67
+#, sh-format
+msgid "'$_task' is not a valid name for a task."
+msgstr "'$_task' is een foute naam voor een taak."
+
+#: src/core/task.sh:82
+#, sh-format
+msgid "Subtask: $_display_task"
+msgstr "Subtaak: $_display_task"
+
+#: src/core/task.sh:84
+#, sh-format
+msgid "Task: $_display_task"
+msgstr "Taak: $_display_task"
+
+#: src/core/task.sh:94
+msgid "Not in a task right now."
+msgstr "Nu niet in een taak."
+
+#: src/core/task.sh:109 src/core/task.sh:111
+#, sh-format
+msgid "Done: $_display_task"
+msgstr "Gedaan: $_display_task"
+
+#: src/core/module.sh:24
+#, sh-format
+msgid "No such module-type: '$_module_type'"
+msgstr ""
+
+#: src/core/module.sh:41
+msgid "Can't add an argument before a module type is loaded"
+msgstr ""
+
+#: src/core/module.sh:56
+#, sh-format
+msgid "The enum '$_value_type' is of the wrong format."
+msgstr ""
+
+#: src/core/module.sh:63
+#, sh-format
+msgid "Argument has an invalid type for it's value: '$_value_type'."
+msgstr ""
+
+#: src/core/module.sh:75
+msgid "Argument identifier already defined."
+msgstr ""
+
+#: src/core/module.sh:82
+#, sh-format
+msgid "Argument has an invalid type: '$_argument_type'."
+msgstr ""
+
+#: src/core/module.sh:93 src/core/module.sh:230 src/core/module.sh:265
+#, sh-format
+msgid "The value '$_val' is not of type '$_valuetype'."
+msgstr ""
+
+#: src/core/module.sh:129
+#, fuzzy, sh-format
+msgid "Could not locate module '$_module'"
+msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
+
+#: src/core/module.sh:130
+#, sh-format
+msgid "Module path is '$_modpath'"
+msgstr ""
+
+#: src/core/module.sh:210
+#, sh-format
+msgid "Module '$_MODULE' does not define an identifier."
+msgstr ""
+
+#: src/core/module.sh:249
+#, fuzzy, sh-format
+msgid "No such argument: '$_name'"
+msgstr "Onbekend argument '$_arg'."
+
+#: src/core/module.sh:318
+#, sh-format
+msgid "The argument '$_name' is required, but not given."
+msgstr ""
+
+#: src/core/msg.sh:46
+#, sh-format
+msgid "Verbosity level '${_old_verbosity}' unknown, assuming 'INFO'."
+msgstr "Luidheidsniveau '${_old_verbosity}' onbekend, gaan uit van 'INFO'."
+
+#: src/core/main.sh:22
+msgid "No task specified. Add 'begin' or 'end'."
+msgstr "Geen taak gespecifieerd. Voeg 'begin' of 'end' toe."
+
+#: src/core/main.sh:30
+msgid "No name for the task specified."
+msgstr "Geen naam voor de taak gespecifieerd."
+
+#: src/core/main.sh:37
+msgid "A name for an ending task is given. This is not supported."
+msgstr "Een naam de einde-taak is gegeven. Dit wordt niet ondersteund."
+
+#: src/core/main.sh:45
+#, sh-format
+msgid "Argument --task '$_arg' is invalid: must be 'begin' or 'end'."
+msgstr "Argument --task '$_arg' is fout: moet 'begin' of 'end' zijn."
+
+#: src/core/main.sh:75
+#, sh-format
+msgid "Unknown argument '$_arg'."
+msgstr "Onbekend argument '$_arg'."
+
+#: src/core/main.sh:85
+msgid "A module and identifier must be specified."
+msgstr ""
+
+#: src/core/main.sh:100
+#, fuzzy, sh-format
+msgid "'$_STATE' is not a valid state for module '$_MODULE'."
+msgstr "'$_task' is een foute naam voor een taak."
+
+#: src/core/main.sh:115
+msgid "Not all requirements are met."
+msgstr ""
+
+#: src/core/main.sh:132 src/core/main.sh:133
+#, sh-format
+msgid "The module returned $_status."
+msgstr ""
+
+#: src/core/main.sh:156
+msgid "No arguments given. Use --help or -h for help."
+msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
+
+#: src/core/main.sh:162
+#, sh-format
+msgid "Logging to '$_logpath'"
+msgstr "Log naar '$_logpath'"
+
+#: src/core/run.sh:63
+#, sh-format
+msgid "Running '$_cmd'."
+msgstr "Aan het uitvoeren: '$_cmd'."
+
+#: src/core/run.sh:67 src/core/run.sh:69
+msgid "Could not create temporary file."
+msgstr "Kon geen tijdelijk bestand aanmaken"
+
+#: src/core/run.sh:128
+msgid "Could not find a supported compression command."
+msgstr "Kon geen ondersteund compressie-commando vinden."
+
+#: src/core/run.sh:143 src/core/run.sh:189
+msgid "Could not find a suitable base64 implementation."
+msgstr "Kon geen bruikbare base64 implementatie vinden."
+
+#: src/core/run.sh:175
+#, sh-format
+msgid "The header '$_header' is unknown for unserialization."
+msgstr "Het begin '$_header' is onbekend voor onserialisatie."
+
+#: src/core/query.sh:78
+msgid "No query specified. Use -h to get a list of all queries."
+msgstr ""
+"Geen query gespecifieerd. Gebruik -h om een lijst te zien van alle queries."
+
+#: src/core/query.sh:99
+#, sh-format
+msgid ""
+"Argument --query '$_arg' is invalid. Use -h to get a list of all queries."
+msgstr ""
+"Argument --query '$_arg' is fout. Gebruik -h om een lijst te zien van alle "
+"queries."
+
+#: src/core/error.sh:19
+msgid "Something unknown went terribly wrong..."
+msgstr "Iets onbekend ging helemaal fout..."
+
+#: src/core/error.sh:22
+#, fuzzy
+msgid "CRITICAL FAILURE"
+msgstr "KRITIEKE FOUT: $_msg"
+
+#: src/core/log.sh:40 src/core/log.sh:44
+#, sh-format
+msgid "Could not write to log file '$_logfile'."
+msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
+
+#: src/core/log.sh:62
+#, fuzzy, sh-format
+msgid "$_mod $_IDENTIFIER is now $_state."
+msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
+
+#: src/core/log.sh:72
+#, fuzzy, sh-format
+msgid "$_mod $_IDENTIFIER is already $_state."
+msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
+
+#: src/core/log.sh:77
+msgid "Can not signal 'CHANGE' when no module is loaded."
+msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
+
+#: src/core/log.sh:91
+msgid "Can not signal 'OK' when no module is loaded."
+msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
 
 #: src/core/help.sh:24
 #, sh-format
@@ -122,231 +382,87 @@ msgstr ""
 msgid "Or MODE is one of the following modules:"
 msgstr ""
 
-#: src/core/log.sh:40 src/core/log.sh:44
+#: src/core/base.sh:129
 #, sh-format
-msgid "Could not write to log file '$_logfile'."
-msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
+msgid "$_module requires '$_prog' to be installed."
+msgstr "$_module heeft '$_prog' nodig om te werken."
 
-#: src/core/log.sh:62
-#, fuzzy, sh-format
-msgid "$_mod $_IDENTIFIER is now $_state."
-msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
-
-#: src/core/log.sh:72
-#, fuzzy, sh-format
-msgid "$_mod $_IDENTIFIER is already $_state."
-msgstr "$_mod $_IDENTIFIER is $_REQUESTED_STATE."
-
-#: src/core/log.sh:77
-msgid "Can not signal 'CHANGE' when no module is loaded."
-msgstr "Kan geen 'CHANGE' siganliseren wanneer er geen module is geladen."
-
-#: src/core/log.sh:91
-msgid "Can not signal 'OK' when no module is loaded."
-msgstr "Kan geen 'OK' siganliseren wanneer er geen module is geladen."
-
-#: src/core/main.sh:22
-msgid "No task specified. Add 'begin' or 'end'."
-msgstr "Geen taak gespecifieerd. Voeg 'begin' of 'end' toe."
-
-#: src/core/main.sh:30
-msgid "No name for the task specified."
-msgstr "Geen naam voor de taak gespecifieerd."
-
-#: src/core/main.sh:37
-msgid "A name for an ending task is given. This is not supported."
-msgstr "Een naam de einde-taak is gegeven. Dit wordt niet ondersteund."
-
-#: src/core/main.sh:44
-#, sh-format
-msgid "Argument --task '$_arg' is invalid: must be 'begin' or 'end'."
-msgstr "Argument --task '$_arg' is fout: moet 'begin' of 'end' zijn."
-
-#: src/core/main.sh:74
-#, sh-format
-msgid "Unknown argument '$_arg'."
-msgstr "Onbekend argument '$_arg'."
-
-#: src/core/main.sh:84
-msgid "A module and identifier must be specified."
-msgstr ""
-
-#: src/core/main.sh:99
-#, fuzzy, sh-format
-msgid "'$_STATE' is not a valid state for module '$_MODULE'."
-msgstr "'$_task' is een foute naam voor een taak."
-
-#: src/core/main.sh:114
-msgid "Not all requirements are met."
-msgstr ""
-
-#: src/core/main.sh:131 src/core/main.sh:132
-#, sh-format
-msgid "The module returned $_status."
-msgstr ""
-
-#: src/core/main.sh:155
-msgid "No arguments given. Use --help or -h for help."
-msgstr "Geen argument gegeven. Gebruik --help of -h om hulp te zien."
-
-#: src/core/main.sh:161
-#, sh-format
-msgid "Logging to '$_logpath'"
-msgstr "Log naar '$_logpath'"
-
-#: src/core/module.sh:24
-#, sh-format
-msgid "No such module-type: '$_module_type'"
-msgstr ""
-
-#: src/core/module.sh:41
-msgid "Can't add an argument before a module type is loaded"
-msgstr ""
-
-#: src/core/module.sh:55
-#, sh-format
-msgid "The enum '$_value_type' is of the wrong format."
-msgstr ""
-
-#: src/core/module.sh:62
-#, sh-format
-msgid "Argument has an invalid type for it's value: '$_value_type'."
-msgstr ""
-
-#: src/core/module.sh:74
-msgid "Argument identifier already defined."
-msgstr ""
-
-#: src/core/module.sh:81
-#, sh-format
-msgid "Argument has an invalid type: '$_argument_type'."
-msgstr ""
-
-#: src/core/module.sh:92 src/core/module.sh:229 src/core/module.sh:264
-#, sh-format
-msgid "The value '$_val' is not of type '$_valuetype'."
-msgstr ""
-
-#: src/core/module.sh:128
-#, fuzzy, sh-format
-msgid "Could not locate module '$_module'"
-msgstr "Kon niet schrijven naar het logbestand '$_logfile'."
-
-#: src/core/module.sh:129
-#, sh-format
-msgid "Module path is '$_modpath'"
-msgstr ""
-
-#: src/core/module.sh:209
-#, sh-format
-msgid "Module '$_MODULE' does not define an identifier."
-msgstr ""
-
-#: src/core/module.sh:248
-#, fuzzy, sh-format
-msgid "No such argument: '$_name'"
-msgstr "Onbekend argument '$_arg'."
-
-#: src/core/module.sh:317
-#, sh-format
-msgid "The argument '$_name' is required, but not given."
-msgstr ""
-
-#: src/core/msg.sh:46
-#, sh-format
-msgid "Verbosity level '${_old_verbosity}' unknown, assuming 'INFO'."
-msgstr "Luidheidsniveau '${_old_verbosity}' onbekend, gaan uit van 'INFO'."
-
-#: src/core/query.sh:78
-msgid "No query specified. Use -h to get a list of all queries."
-msgstr ""
-"Geen query gespecifieerd. Gebruik -h om een lijst te zien van alle queries."
-
-#: src/core/query.sh:99
+#: src/core/base.sh:143
 #, sh-format
 msgid ""
-"Argument --query '$_arg' is invalid. Use -h to get a list of all queries."
+"$_MODULE does not implement a function needed to set the state "
+"'$_REQUESTED_STATE'."
 msgstr ""
-"Argument --query '$_arg' is fout. Gebruik -h om een lijst te zien van alle "
-"queries."
+"$_MODULE implementeert een functien die nodig is voor status "
+"'$_REQUESTED_STATE' niet."
 
-#: src/core/task.sh:65
-#, sh-format
-msgid ""
-"'$_task' is not a valid name for a task. Current task is '$_current_task'."
-msgstr ""
-"'$_task' is een foute naam voor een taak. Huidige taak is '$_current_task'."
+#: src/core/base.sh:145
+msgid "This functionality is not yet implemented in the enSHure core."
+msgstr "Deze functionaliteit is nog niet geimplementeerd in the enSHure kern."
 
-#: src/core/task.sh:67
-#, sh-format
-msgid "'$_task' is not a valid name for a task."
-msgstr "'$_task' is een foute naam voor een taak."
-
-#: src/core/task.sh:80
-#, sh-format
-msgid "Subtask: $_display_task"
-msgstr "Subtaak: $_display_task"
-
-#: src/core/task.sh:82
-#, sh-format
-msgid "Task: $_display_task"
-msgstr "Taak: $_display_task"
-
-#: src/core/task.sh:92
-msgid "Not in a task right now."
-msgstr "Nu niet in een taak."
-
-#: src/core/task.sh:106 src/core/task.sh:108
-#, sh-format
-msgid "Done: $_display_task"
-msgstr "Gedaan: $_display_task"
-
-#: src/core/run.sh:63
-#, sh-format
-msgid "Running '$_cmd'."
-msgstr "Aan het uitvoeren: '$_cmd'."
-
-#: src/core/run.sh:67 src/core/run.sh:69
-msgid "Could not create temporary file."
-msgstr "Kon geen tijdelijk bestand aanmaken"
-
-#: src/core/run.sh:128
-msgid "Could not find a supported compression command."
-msgstr "Kon geen ondersteund compressie-commando vinden."
-
-#: src/core/run.sh:143 src/core/run.sh:189
-msgid "Could not find a suitable base64 implementation."
-msgstr "Kon geen bruikbare base64 implementatie vinden."
-
-#: src/core/run.sh:175
-#, sh-format
-msgid "The header '$_header' is unknown for unserialization."
-msgstr "Het begin '$_header' is onbekend voor onserialisatie."
-
-#: src/core/error.sh:19
-msgid "Something unknown went terribly wrong..."
-msgstr "Iets onbekend ging helemaal fout..."
-
-#: src/core/error.sh:22
-#, fuzzy
-msgid "CRITICAL FAILURE"
-msgstr "KRITIEKE FOUT: $_msg"
-
-#: src/modules/command.sh:2
-msgid "Executes a command."
+#: src/modules/apt_source.sh:2
+msgid "Adds or removes an apt source"
 msgstr ""
 
-#: src/modules/command.sh:4
-msgid "The statement to be executed."
+#: src/modules/apt_source.sh:6
+msgid "The url to the repository."
 msgstr ""
 
-#: src/modules/command.sh:5
-msgid "The path to a file, link or directory created by the command."
+#: src/modules/apt_source.sh:7
+msgid "Name of the distribution"
 msgstr ""
 
-#: src/modules/command.sh:20
-#, sh-format
-msgid "The command '$statement' returned $retcode."
+#: src/modules/apt_source.sh:8
+msgid "Names of the components"
+msgstr ""
+
+#: src/modules/apt_source.sh:9
+msgid "Type of repository"
+msgstr ""
+
+#: src/modules/git_config.sh:2
+msgid "Sets values in the global git configuration file"
+msgstr ""
+
+#: src/modules/git_config.sh:6
+msgid "The username to set the gitconfig for."
+msgstr ""
+
+#: src/modules/git_config.sh:7
+msgid "The email of the user. Required for state present."
+msgstr ""
+
+#: src/modules/git_config.sh:8
+msgid "The name of the user. Required for state present."
+msgstr ""
+
+#: src/modules/git_config.sh:50
+msgid "Git configuration for user '%s' is now %s."
+msgstr ""
+
+#: src/modules/git_config.sh:55
+msgid "Git configuration for user '%s' is already %s."
+msgstr ""
+
+#: src/modules/mysql_user.sh:2
+msgid "Creates or removes MySQL users"
+msgstr ""
+
+#: src/modules/mysql_user.sh:4
+msgid "The name of the user."
+msgstr ""
+
+#: src/modules/mysql_user.sh:5 src/modules/mysql_grant.sh:5
+msgid "The host of the user."
+msgstr ""
+
+#: src/modules/mysql_user.sh:6
+msgid "The password of the user."
+msgstr ""
+
+#: src/modules/mysql_user.sh:7 src/modules/mysql_grant.sh:6
+#: src/modules/mysql_database.sh:5
+msgid "The name of the login user."
 msgstr ""
 
 #: src/modules/directory.sh:2
@@ -367,6 +483,23 @@ msgstr ""
 
 #: src/modules/directory.sh:7
 msgid "The permissions of the directory."
+msgstr ""
+
+#: src/modules/command.sh:2
+msgid "Executes a command."
+msgstr ""
+
+#: src/modules/command.sh:4
+msgid "The statement to be executed."
+msgstr ""
+
+#: src/modules/command.sh:5
+msgid "The path to a file, link or directory created by the command."
+msgstr ""
+
+#: src/modules/command.sh:20
+#, sh-format
+msgid "The command '$statement' returned $retcode."
 msgstr ""
 
 #: src/modules/file.sh:2
@@ -405,52 +538,6 @@ msgstr ""
 msgid "You can set only one of content, source_file or source_url"
 msgstr ""
 
-#: src/modules/git_config.sh:2
-msgid "Sets values in the global git configuration file"
-msgstr ""
-
-#: src/modules/git_config.sh:6
-msgid "The username to set the gitconfig for."
-msgstr ""
-
-#: src/modules/git_config.sh:7
-msgid "The email of the user. Required for state present."
-msgstr ""
-
-#: src/modules/git_config.sh:8
-msgid "The name of the user. Required for state present."
-msgstr ""
-
-#: src/modules/git_config.sh:50
-msgid "Git configuration for user '%s' is now %s."
-msgstr ""
-
-#: src/modules/git_config.sh:55
-msgid "Git configuration for user '%s' is already %s."
-msgstr ""
-
-#: src/modules/message.sh:2
-msgid "Displays a message to the user."
-msgstr ""
-
-#: src/modules/message.sh:4
-msgid "The message to be shown."
-msgstr ""
-
-#: src/modules/mysql_database.sh:2
-msgid "Creates or removes MySQL databases"
-msgstr ""
-
-#: src/modules/mysql_database.sh:4 src/modules/mysql_grant.sh:7
-#, fuzzy
-msgid "The name of the database."
-msgstr "Geen naam voor de taak gespecifieerd."
-
-#: src/modules/mysql_database.sh:5 src/modules/mysql_grant.sh:6
-#: src/modules/mysql_user.sh:7
-msgid "The name of the login user."
-msgstr ""
-
 #: src/modules/mysql_grant.sh:2
 msgid "Manages permissions for users on databases"
 msgstr ""
@@ -460,9 +547,10 @@ msgstr ""
 msgid "The name for the user."
 msgstr "Geen naam voor de taak gespecifieerd."
 
-#: src/modules/mysql_grant.sh:5 src/modules/mysql_user.sh:5
-msgid "The host of the user."
-msgstr ""
+#: src/modules/mysql_grant.sh:7 src/modules/mysql_database.sh:4
+#, fuzzy
+msgid "The name of the database."
+msgstr "Geen naam voor de taak gespecifieerd."
 
 #: src/modules/mysql_grant.sh:8
 msgid ""
@@ -474,28 +562,32 @@ msgstr ""
 msgid "If the user can grant other users the same privileges."
 msgstr ""
 
-#: src/modules/mysql_user.sh:2
-msgid "Creates or removes MySQL users"
+#: src/modules/message.sh:2
+msgid "Displays a message to the user."
 msgstr ""
 
-#: src/modules/mysql_user.sh:4
-msgid "The name of the user."
+#: src/modules/message.sh:4
+msgid "The message to be shown."
 msgstr ""
 
-#: src/modules/mysql_user.sh:6
-msgid "The password of the user."
+#: src/modules/symlink.sh:2
+msgid "Creates or removes a symlink."
 msgstr ""
 
-#: src/modules/pacman.sh:2
-msgid "Installs packages using 'pacman'."
+#: src/modules/symlink.sh:4
+msgid "The path to the symlink."
 msgstr ""
 
-#: src/modules/pacman.sh:6 src/modules/apt.sh:7
-msgid "The name of the package"
+#: src/modules/symlink.sh:5
+msgid "The owner of the symlink."
 msgstr ""
 
-#: src/modules/pacman.sh:7 src/modules/apt.sh:8
-msgid "If the repositories should be synced before testing for latest"
+#: src/modules/symlink.sh:6
+msgid "The group-ownership of the symlink."
+msgstr ""
+
+#: src/modules/symlink.sh:7
+msgid "The target of the symlink."
 msgstr ""
 
 #: src/modules/query.sh:2
@@ -535,24 +627,24 @@ msgstr ""
 msgid "Can only supply the task argument with a summary query"
 msgstr ""
 
-#: src/modules/symlink.sh:2
-msgid "Creates or removes a symlink."
+#: src/modules/pacman.sh:2
+msgid "Installs packages using 'pacman'."
 msgstr ""
 
-#: src/modules/symlink.sh:4
-msgid "The path to the symlink."
+#: src/modules/pacman.sh:6 src/modules/apt.sh:7
+msgid "The name of the package"
 msgstr ""
 
-#: src/modules/symlink.sh:5
-msgid "The owner of the symlink."
+#: src/modules/pacman.sh:7 src/modules/apt.sh:8
+msgid "If the repositories should be synced before testing for latest"
 msgstr ""
 
-#: src/modules/symlink.sh:6
-msgid "The group-ownership of the symlink."
+#: src/modules/apt.sh:2
+msgid "Installs packages using 'apt-get'."
 msgstr ""
 
-#: src/modules/symlink.sh:7
-msgid "The target of the symlink."
+#: src/modules/mysql_database.sh:2
+msgid "Creates or removes MySQL databases"
 msgstr ""
 
 #: src/modules/systemd.sh:2
@@ -561,98 +653,6 @@ msgstr ""
 
 #: src/modules/systemd.sh:4
 msgid "The service to be managed."
-msgstr ""
-
-#: src/modules/apt.sh:2
-msgid "Installs packages using 'apt-get'."
-msgstr ""
-
-#: src/modules/apt_source.sh:2
-msgid "Adds or removes an apt source"
-msgstr ""
-
-#: src/modules/apt_source.sh:6
-msgid "The url to the repository."
-msgstr ""
-
-#: src/modules/apt_source.sh:7
-msgid "Name of the distribution"
-msgstr ""
-
-#: src/modules/apt_source.sh:8
-msgid "Names of the components"
-msgstr ""
-
-#: src/modules/apt_source.sh:9
-msgid "Type of repository"
-msgstr ""
-
-#: src/types/command.sh:4
-msgid "executed"
-msgstr ""
-
-#: src/types/generic.sh:4
-msgid "present"
-msgstr ""
-
-#: src/types/generic.sh:4
-msgid "absent"
-msgstr ""
-
-#: src/types/message.sh:4
-msgid "error"
-msgstr ""
-
-#: src/types/message.sh:4
-msgid "warning"
-msgstr ""
-
-#: src/types/message.sh:4
-msgid "info"
-msgstr ""
-
-#: src/types/message.sh:4
-msgid "debug"
-msgstr ""
-
-#: src/types/package.sh:4
-msgid "latest"
-msgstr ""
-
-#: src/types/package.sh:4
-msgid "installed"
-msgstr ""
-
-#: src/types/package.sh:4
-msgid "removed"
-msgstr ""
-
-#: src/types/service.sh:4
-msgid "available"
-msgstr ""
-
-#: src/types/service.sh:4
-msgid "started"
-msgstr ""
-
-#: src/types/service.sh:4
-msgid "stopped"
-msgstr ""
-
-#: src/types/service.sh:4
-msgid "enabled"
-msgstr ""
-
-#: src/types/service.sh:4
-msgid "disabled"
-msgstr ""
-
-#: src/types/service.sh:4
-msgid "restarted"
-msgstr ""
-
-#: src/types/service.sh:4
-msgid "unavailable"
 msgstr ""
 
 #~ msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."

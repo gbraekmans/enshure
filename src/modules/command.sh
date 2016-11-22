@@ -7,7 +7,7 @@ argument creates_path string optional "$(translate "The path to a file, link or 
 # TODO add argument to check log if command ran
 
 is_state_executed() {
-	if [ -n "$creates_file" ] && [ -e "$creates_file" ]; then
+	if [ -n "$creates_path" ] && [ -e "$creates_path" ]; then
 		return 0
 	fi
 	return 1

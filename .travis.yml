@@ -1,0 +1,9 @@
+language: bash
+script: make test
+dist: trusty
+sudo: required
+before_install:
+    - echo "deb http://archive.ubuntu.com/ubuntu/ trusty-backports universe" | sudo tee -a /etc/apt/sources.list
+    - sudo apt-get update -q
+    - sudo apt-get install -t trusty-backports shellcheck -y
+    - sudo apt-get install bash dash mksh ksh zsh ncompress sharutils -y
