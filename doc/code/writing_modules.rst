@@ -153,3 +153,8 @@ Step 6: Start hacking!
 Open up an existing module and look around at how it works and what is used
 where. After reading a couple of more complex modules you should have enough
 information to start creating your own modules!
+
+The ``git_config`` module has a couple of interesting examples:
+
+- a ``verify_requirements`` function, for checking complex requirements
+- overriding the display functions so you can customize how the output is shown
