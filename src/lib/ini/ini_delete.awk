@@ -12,7 +12,7 @@ BEGIN {
 	if (section != current_section)	 {
 		print $0
 	}
-	else if ( ! match($0, "^"option)) {
+	else if ( ! match($0, "^" option " *=")) {
 		print $0
 	}
 }

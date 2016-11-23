@@ -22,7 +22,7 @@ BEGIN {
 	# If we're in the correct section
 	if (section == current_section) {
 		# And it's the correct option
-		where = match($0, option)
+		where = match($0, "^" option " *=")
 		if (where == 1) {
 			# Override the value
 			print option" = "value
@@ -40,7 +40,9 @@ BEGIN {
 END {
 	# If we didn't encounter the section add it, with the option
 	if (replaced == 0) {
-		print "[" section "]"
+		if (section != "") {
+			print "[" section "]"
+		}
 		print option" = "value
 	}
 }

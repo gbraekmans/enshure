@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 15:36+0100\n"
+"POT-Creation-Date: 2016-11-23 13:02+0100\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -263,11 +263,11 @@ msgstr ""
 "Argument --query '$_arg' is fout. Gebruik -h om een lijst te zien van alle "
 "queries."
 
-#: src/core/error.sh:19
+#: src/core/error.sh:17
 msgid "Something unknown went terribly wrong..."
 msgstr "Iets onbekend ging helemaal fout..."
 
-#: src/core/error.sh:22
+#: src/core/error.sh:20
 #, fuzzy
 msgid "CRITICAL FAILURE"
 msgstr "KRITIEKE FOUT: $_msg"
@@ -506,7 +506,7 @@ msgstr ""
 msgid "Creates or removes a file."
 msgstr ""
 
-#: src/modules/file.sh:5
+#: src/modules/file.sh:5 src/modules/ini_file.sh:6
 msgid "The path to the file."
 msgstr ""
 
@@ -653,6 +653,24 @@ msgstr ""
 
 #: src/modules/systemd.sh:4
 msgid "The service to be managed."
+msgstr ""
+
+#: src/modules/ini_file.sh:2
+msgid "Sets values in an ini-file"
+msgstr ""
+
+#: src/modules/ini_file.sh:7
+#, fuzzy
+msgid "The name of the config key."
+msgstr "Geen naam voor de taak gespecifieerd."
+
+#: src/modules/ini_file.sh:8
+#, fuzzy
+msgid "The value of the config key."
+msgstr "Geen naam voor de taak gespecifieerd."
+
+#: src/modules/ini_file.sh:9
+msgid "The section of the config key."
 msgstr ""
 
 #~ msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."

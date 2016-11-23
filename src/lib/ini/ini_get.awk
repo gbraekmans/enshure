@@ -10,7 +10,7 @@ BEGIN {
 
 {
 	if (section == current_section) {
-		if (match($0, "^"option) ) {
+		if (match($0, "^" option " *=") ) {
 			print $0
 		}
 	}
