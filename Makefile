@@ -9,7 +9,6 @@ KCOV_DIR = coverage
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  doc          to make HTML documentation in $(DOC_DIR)/_build/html"
-	@echo "  todo         to show a list of all todo's in the code"
 	@echo "  test         to run all tests in the code"
 	@echo "  simpletest   to run a quick test of the code"
 	@echo "  timings      to show how long each shell tests the code"
@@ -25,9 +24,6 @@ clean:
 	rm -rf src/po/enSHure.pot
 	rm -rf src/locale
 
-todo:
-	@find -name '*.sh' -o -name '*.rst' -o -name enshure | xargs grep TODO | awk -F: '{ gsub("*",""); printf "%s:%-35s %s\n", $$2, $$3, $$1}' | sed 's|^\s*#\s*||g'
-
 indexes:
 	mkdir -p  $(DOC_DIR)/_templates
 	mkdir -p  $(DOC_DIR)/_static
@@ -41,8 +37,8 @@ indexes:
 
 doc: indexes
 	$(DOC_BUILDCMD) -b html $(DOC_DIR) $(DOC_DIR)/_build/html
-	@echo
 	@echo "The HTML documentation is in $(DOC_DIR)/_build/html."
+	command -v xdg-open > /dev/null && xdg-open "$(DOC_DIR)/_build/html/index.html"
 
 $(TEST_DIR)/shunit2:
 	([ -e "/usr/share/shunit2/shunit2" ] && ln -s "/usr/share/shunit2/shunit2" $(TEST_DIR)/shunit2) || (cd $(TEST_DIR) && wget "https://github.com/kward/shunit2/raw/master/source/2.1/src/shunit2")
