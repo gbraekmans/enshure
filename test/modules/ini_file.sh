@@ -61,7 +61,7 @@ test_ini_file() {
 
 	RESULT=$(enshure ini_file "$TMP" absent option "NotAnOption")
 	assertTrue 7 "$?"
-	assertEquals 8 "CHANGE: Ini file "$TMP" is now absent." "$RESULT"
+	assertEquals 8 "CHANGE: Ini file $TMP is now absent." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" absent option "NotAnOption")
 	assertTrue 9 "$?"
