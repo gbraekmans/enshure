@@ -7,3 +7,19 @@ before_install:
     - sudo apt-get update -q
     - sudo apt-get install -t trusty-backports shellcheck -y
     - sudo apt-get install bash dash mksh ksh zsh ncompress sharutils -y
+after_success: |
+  sudo apt-get -y install libcurl4-openssl-dev libelf-dev libdw-dev cmake gcc binutils-dev libiberty-dev zlib1g-dev &&
+  wget https://github.com/SimonKagstrom/kcov/archive/v32.tar.gz &&
+  tar xzf v32.tar.gz &&
+  cd kcov-32 &&
+  mkdir build &&
+  cd build &&
+  cmake .. &&
+  make &&
+  sudo make install &&
+  cd ../.. &&
+  rm -rf kcov-32 &&
+  kcov --coveralls-id=$TRAVIS_JOB_ID --include-path=./src/core "./coverage" "test/core.sh" &&
+  kcov --coveralls-id=$TRAVIS_JOB_ID --include-path=./src/modules "./coverage" "test/modules.sh" &&
+  kcov --coveralls-id=$TRAVIS_JOB_ID  --include-path=./src/lib "./coverage" "test/lib.sh" &&
+  echo "Uploaded code coverage"

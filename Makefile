@@ -76,7 +76,6 @@ testcoverage: $(TEST_DIR)/shunit2 i18n permissions
 	kcov --include-path=./src/lib "./$(KCOV_DIR)" "$(TEST_DIR)/lib.sh"
 	command -v xdg-open > /dev/null && xdg-open "$(KCOV_DIR)/index.html"
 
-
 timings:
 	@/usr/bin/time -f "bash: %e seconds, CPU %P, MEM %Mkb" bash $(TEST_DIR)/core.sh > /dev/null
 	@/usr/bin/time -f "dash: %e seconds, CPU %P, MEM %Mkb" dash $(TEST_DIR)/core.sh > /dev/null

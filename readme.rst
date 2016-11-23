@@ -1,6 +1,13 @@
 enSHure
 =======
 
+.. image:: https://travis-ci.org/gbraekmans/enshure.svg?branch=master
+   :target: https://travis-ci.org/gbraekmans/enshure
+
+.. image:: https://coveralls.io/repos/github/gbraekmans/enshure/badge.svg?branch=coverage
+   :target: https://coveralls.io/github/gbraekmans/enshure?branch=coverage
+
+
 Easy-extendable and dependencyless configuration management for Linux, BSD and OS X.
 It's written in portable shell script, and works in bash, dash, ksh, mksh and zsh.
 
