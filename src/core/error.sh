@@ -1,5 +1,3 @@
-# NOTE: These should be readonly BUT zsh doesn't seem to like this.
-
 die() {
 	## What happens if we can't exit cleanly on an error. Be hesitant to use
 	## this function, see error().
@@ -25,6 +23,7 @@ die() {
 
 # shellcheck disable=SC2034
 # SC2034 = VARIABLE appears unused. Verify it or export it.
+# NOTE: These should be readonly BUT zsh doesn't seem to like this.
 {
 ##$_E_GENERIC A generic errorcode
 _E_GENERIC=1
