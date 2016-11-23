@@ -35,7 +35,7 @@ Because we know our module will be of the type "command", we open up
 The lines which matter to us are highlighted.
 
 .. literalinclude:: ../../src/types/command.sh
-   :emphasize-lines: 3,20,26
+   :emphasize-lines: 3,21,27
 
 The first highlighted line tells us that there's only **1 state** for this
 for this type: '**executed**'.
@@ -47,11 +47,11 @@ requested state.
 Now we can add these functions to the module::
 
   module_type 'command'
-  
+
   is_state_executed() {
   	true
   }
-	
+
   attain_state_executed() {
   	true
   }
@@ -76,13 +76,13 @@ we need to add an argument of the identifier type.
 ::
 
   module_type 'command'
-  
+
   argument statement string identifier "What needs to be executed." "echo test"
-  
+
   is_state_executed() {
   	true
   }
-	
+
   attain_state_executed() {
   	true
   }
@@ -136,13 +136,13 @@ self-explanatory::
 
   module_type 'command'
   module_description "$(translate "Executes a given command")"
-  
+
   argument statement string identifier "$(translate "What needs to be executed.")" "echo test"
-  
+
   is_state_executed() {
   	return 1
   }
-	
+
   attain_state_executed() {
   	run "$statement"
   }
