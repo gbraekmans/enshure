@@ -19,6 +19,6 @@ Arguments
 * | **statement**: String. Identifier.
   | The statement to be executed.
   | Example: ``"touch /root/test"``
-* | **creates_file**: String. Optional.
+* | **creates_path**: String. Optional.
   | The path to a file, link or directory created by the command.
   | Example: ``/root/test``

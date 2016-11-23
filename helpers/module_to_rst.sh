@@ -61,6 +61,10 @@ to_rst() {
 	done
 }
 
+require() {
+	return 0
+}
+
 for mod in $_BASEDIR/modules/*; do
 	mod=${mod#$_BASEDIR/modules/}
 	mod=${mod%.sh}
