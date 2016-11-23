@@ -11,15 +11,12 @@ enSHure
 Easy-extendable and dependencyless configuration management for Linux, BSD and OS X.
 It's written in portable shell script, and works in bash, dash, ksh, mksh and zsh.
 
-You should be using enSHure because it's:
-
-- Easy installable, just download the archive or clone this repository. Even the
-  most minimal systems are able to run enSHure without extra dependencies.
+- Easy installable, just download the archive or clone this repository.
+- No dependencies, even the most minimal systems can run it.
 - Portable, POSIX-compliance makes it work on any operating system.
-- Documented, First the documentation is written, then the tests and only then
-  the code.
-- Logging all it's operations and every modification can be traced through the
-  log file.
+- Well documented, from user to developer
+- Logs everything, so you can easily trace where the modification to the system
+  was made.
 
 Usage
 -----
@@ -35,21 +32,24 @@ setup script:
 	      /etc/gdm3/daemon.conf
   fi
 
-if you use enSHure it would look something like this:
+That's something pretty unreadable and you'd probably need to read some man
+pages and run some tests before you'd write something like this.
+If you'd use enSHure it would look something like this:
 
 .. code:: bash
 
-  enshure inifile "/etc/gdm3/daemon.conf" "present" \
+  enshure inifile "/etc/gdm3/daemon.conf" present \
                   section "daemon" \
                   option "AutomaticLoginEnable" \
                   value "true"
 
-  enshure inifile "/etc/gdm3/daemon.conf" "present" \
+  enshure inifile "/etc/gdm3/daemon.conf" present \
                   section "daemon" \
                   option "AutomaticLogin" \
                   value "root"
 
 Although it's more verbose, it also increases the readability of your script.
+It's much easier and faster to write this code.
 If you ever need to change the file again it's a lot easier to write some
 enSHure lines than think up a new sed/awk expression.
 
@@ -59,32 +59,17 @@ Installation
 This project can be installed by just cloning the git repositiory, and including
 the location in the PATH variable.
 
-On a **GNU/Linux** you should have the following the packages installed to be able
-to run a full test:
-
-- gettext
-- ncompress
-- sharutils
-- shellcheck
-- bash
-- dash
-- ksh
-- mksh
-- zsh
-
-To verify code coverage you'll need a recent version of kcov_.
-
-.. _kcov: https://github.com/SimonKagstrom/kcov
-
-
 Contributing
 ------------
 
 Every contribution is much appreciated from spelling errors, and making
 documentation more readable to huge pull requests.
 
-More information about why design choices were made can be found in DESIGN.RST
+Some of the things I'd like help with:
 
+- Packaging: deb, rpm, pacman, ...
+- Testing: enSHure is mainly tested on debian-based machines. Testing and
+  bugfixing on another OS (RedHat, BSD, OS X, ...) would be much appreciated.
 
 License
 -------
