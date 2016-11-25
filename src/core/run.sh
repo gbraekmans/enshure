@@ -195,5 +195,13 @@ __run_unserialize() {
 
 __run_current_shell() {
 	## Gets the current shell in which enSHure is being executed.
-	ps -p $$ -o args= | cut -d' ' -f1
+
+	# Check for ZSH, if so return the binary for zsh
+	# https://www.zsh.org/mla/workers/2014/msg00041.html
+
+	if [ -n "$ZSH_VERSION" ]; then
+		command -v zsh
+	else
+		ps -p $$ -o args= | cut -d' ' -f1
+	fi
 }

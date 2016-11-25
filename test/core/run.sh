@@ -205,8 +205,12 @@ test_run_unserialize() {
 
 test_run_current_shell() {
 	RESULT=$(__run_current_shell)
-	printf 'sh:bash:dash:ksh:mksh:zsh' | grep -q "${RESULT#/bin/}"
+	printf 'sh:bash:dash:ksh:mksh:zsh' | grep -q "${RESULT#/bin/}" || [ '/usr/bin/zsh' = "$RESULT" ]
 	assertTrue 1 "$?"
+
+	RESULT=$(ZSH_VERSION=tst __run_current_shell)
+	printf 'sh:bash:dash:ksh:mksh:zsh' | grep -q "${RESULT#/bin/}" || [ '/usr/bin/zsh' = "$RESULT" ]
+	assertTrue 2 "$?"
 }
 
 test_run() {
