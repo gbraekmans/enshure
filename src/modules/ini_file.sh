@@ -77,3 +77,13 @@ attain_state_absent() {
 	fi
 	# TODO: Remove empty section?
 }
+
+# shellcheck disable=SC2059
+message_change() {
+	printf "$(translate "In INI file '%s' option '%s' is now %s.")" "$inifile" "$option" "$(translated_state)"
+}
+
+# shellcheck disable=SC2059
+message_ok() {
+	printf "$(translate "In INI file '%s' option '%s' is already %s.")" "$inifile" "$option" "$(translated_state)"
+}

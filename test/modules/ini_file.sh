@@ -41,53 +41,53 @@ test_ini_file() {
 
 	RESULT=$(enshure ini_file "$TMP" option "AutomaticLoginEnable" value "true" section "daemon")
 	assertTrue 1 "$?"
-	assertEquals 2 "CHANGE: Ini file $TMP is now present." "$RESULT"
+	assertEquals 2 "CHANGE: In INI file '$TMP' option 'AutomaticLoginEnable' is now present." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" option "AutomaticLoginEnable" value "true" section "daemon")
 	assertTrue 3 "$?"
-	assertEquals 4 "OK: Ini file $TMP is already present." "$RESULT"
+	assertEquals 4 "OK: In INI file '$TMP' option 'AutomaticLoginEnable' is already present." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" option "AutomaticLogin" value "root" section "daemon")
 	assertTrue 5 "$?"
-	assertEquals 6 "CHANGE: Ini file $TMP is now present." "$RESULT"
+	assertEquals 6 "CHANGE: In INI file '$TMP' option 'AutomaticLogin' is now present." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" option "NotAnOption" value "delete_me")
 	assertTrue 7 "$?"
-	assertEquals 8 "CHANGE: Ini file $TMP is now present." "$RESULT"
+	assertEquals 8 "CHANGE: In INI file '$TMP' option 'NotAnOption' is now present." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" option "NotAnOption" value "delete_me")
 	assertTrue 11 "$?"
-	assertEquals 12 "OK: Ini file $TMP is already present." "$RESULT"
+	assertEquals 12 "OK: In INI file '$TMP' option 'NotAnOption' is already present." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" absent option "NotAnOption")
 	assertTrue 7 "$?"
-	assertEquals 8 "CHANGE: Ini file $TMP is now absent." "$RESULT"
+	assertEquals 8 "CHANGE: In INI file '$TMP' option 'NotAnOption' is now absent." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" absent option "NotAnOption")
 	assertTrue 9 "$?"
-	assertEquals 10 "OK: Ini file $TMP is already absent." "$RESULT"
+	assertEquals 10 "OK: In INI file '$TMP' option 'NotAnOption' is already absent." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" option "news" value "whatever" section "newsection")
 	assertTrue 13 "$?"
-	assertEquals 14 "CHANGE: Ini file $TMP is now present." "$RESULT"
+	assertEquals 14 "CHANGE: In INI file '$TMP' option 'news' is now present." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" absent option "news" section "newsection")
 	assertTrue 19 "$?"
-	assertEquals 20 "CHANGE: Ini file $TMP is now absent." "$RESULT"
+	assertEquals 20 "CHANGE: In INI file '$TMP' option 'news' is now absent." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" absent option "news" section "newsection")
 	assertTrue 21 "$?"
-	assertEquals 22 "OK: Ini file $TMP is already absent." "$RESULT"
+	assertEquals 22 "OK: In INI file '$TMP' option 'news' is already absent." "$RESULT"
 
 	rm -rf "$TMP"
 
 	RESULT=$(enshure ini_file "$TMP" absent option "NotAnOption")
 	assertTrue 15 "$?"
-	assertEquals 16 "OK: Ini file $TMP is already absent." "$RESULT"
+	assertEquals 16 "OK: In INI file '$TMP' option 'NotAnOption' is already absent." "$RESULT"
 
 	RESULT=$(enshure ini_file "$TMP" option "NotAnOption" value "delete_me")
 	assertTrue 17 "$?"
-	assertEquals 18 "CHANGE: Ini file $TMP is now present." "$RESULT"
+	assertEquals 18 "CHANGE: In INI file '$TMP' option 'NotAnOption' is now present." "$RESULT"
 
 	rm -rf "$TMP"
 }
