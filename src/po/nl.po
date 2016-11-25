@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-23 13:02+0100\n"
+"POT-Creation-Date: 2016-11-25 15:10+0100\n"
 "PO-Revision-Date: 2016-08-31 13:33+0000\n"
 "Last-Translator: Geert Braekmans <geert.braekmans@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -43,6 +43,14 @@ msgstr ""
 
 #: src/types/message.sh:4
 msgid "debug"
+msgstr ""
+
+#: src/types/archive.sh:4
+msgid "extracted"
+msgstr ""
+
+#: src/types/archive.sh:4
+msgid "compressed"
 msgstr ""
 
 #: src/types/service.sh:4
@@ -590,6 +598,19 @@ msgstr ""
 msgid "The target of the symlink."
 msgstr ""
 
+#: src/modules/archive.sh:2
+msgid "Extracts tar archives. Uses compression according to filename."
+msgstr ""
+
+#: src/modules/archive.sh:4
+#, fuzzy
+msgid "The path to the archive."
+msgstr "Geen naam voor de taak gespecifieerd."
+
+#: src/modules/archive.sh:5
+msgid "What should be compressed, or where to extract."
+msgstr ""
+
 #: src/modules/query.sh:2
 msgid "Displays the result of a query to the user."
 msgstr ""
@@ -671,6 +692,14 @@ msgstr "Geen naam voor de taak gespecifieerd."
 
 #: src/modules/ini_file.sh:9
 msgid "The section of the config key."
+msgstr ""
+
+#: src/modules/ini_file.sh:83
+msgid "In INI file '%s' option '%s' is now %s."
+msgstr ""
+
+#: src/modules/ini_file.sh:88
+msgid "In INI file '%s' option '%s' is already %s."
 msgstr ""
 
 #~ msgid "$_mod $_IDENTIFIER is $_REQUESTED_STATE, was $_ACTUAL_STATE."
