@@ -199,7 +199,7 @@ __run_current_shell() {
 	# Check for ZSH, if so return the binary for zsh
 	# https://www.zsh.org/mla/workers/2014/msg00041.html
 
-	if [ -n "$ZSH_VERSION" ]; then
+	if [ -n "${ZSH_VERSION:-}" ]; then
 		command -v zsh
 	else
 		ps -p $$ -o args= | cut -d' ' -f1
